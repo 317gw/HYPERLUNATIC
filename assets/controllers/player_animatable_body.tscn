@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj6bgiajlf4tk"]
+
+[ext_resource type="Script" path="res://assets/controllers/scripts/player_animatable_body.gd" id="1_ils05"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grcvt"]
+rough = true
+absorbent = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_ck6rj"]
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v1ogp"]
+radius = 0.44
+height = 1.9
+
+[node name="PlayerAnimatableBody" type="AnimatableBody3D"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 64
+collision_mask = 32
+input_ray_pickable = false
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_grcvt")
+script = ExtResource("1_ils05")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ck6rj")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("CapsuleShape3D_v1ogp")

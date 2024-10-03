@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bhmum0tlnqbac"
+path="res://.godot/imported/点 721514__baggonotes__points_tick2.wav-071f09f7b3968e5af6014c4536a87ff5.sample"
+
+[deps]
+
+source_file="res://assets/audio/点 721514__baggonotes__points_tick2.wav"
+dest_files=["res://.godot/imported/点 721514__baggonotes__points_tick2.wav-071f09f7b3968e5af6014c4536a87ff5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cdbla457u5ik0"
+path="res://.godot/imported/二踢脚 459973__florianreichelt__huge-explosion.mp3-072217e96f58357393aa99af7599fc7c.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/二踢脚 459973__florianreichelt__huge-explosion.mp3"
+dest_files=["res://.godot/imported/二踢脚 459973__florianreichelt__huge-explosion.mp3-072217e96f58357393aa99af7599fc7c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

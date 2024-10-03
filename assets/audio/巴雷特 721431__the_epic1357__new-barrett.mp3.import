@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cs6aqeydwcet2"
+path="res://.godot/imported/巴雷特 721431__the_epic1357__new-barrett.mp3-cebe8c872f535a290ae8796fe5cb391b.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/巴雷特 721431__the_epic1357__new-barrett.mp3"
+dest_files=["res://.godot/imported/巴雷特 721431__the_epic1357__new-barrett.mp3-cebe8c872f535a290ae8796fe5cb391b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

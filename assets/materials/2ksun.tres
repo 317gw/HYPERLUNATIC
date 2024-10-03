@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ci6c5xgspr87u"]
+
+[ext_resource type="Texture2D" uid="uid://vxunlrr7cf8p" path="res://assets/textures/2k_sun.jpg" id="1_8ig0n"]
+
+[resource]
+albedo_texture = ExtResource("1_8ig0n")
+emission_enabled = true
+emission_energy_multiplier = 4.0
+emission_texture = ExtResource("1_8ig0n")
+rim_tint = 1.0
+refraction_scale = 1.0
+texture_filter = 2

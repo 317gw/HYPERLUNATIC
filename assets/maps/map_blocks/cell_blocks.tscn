@@ -1,0 +1,149 @@
+[gd_scene load_steps=13 format=3 uid="uid://4uwnidatkscf"]
+
+[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="1_r3xp4"]
+
+[sub_resource type="Shader" id="Shader_io84i"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.1.dev4's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+varying vec3 uv1_triplanar_pos;
+uniform float uv1_blend_sharpness;
+varying vec3 uv1_power_normal;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	TANGENT = vec3(0.0,0.0,-1.0) * abs(NORMAL.x);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.y);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.z);
+	TANGENT = normalize(TANGENT);
+	BINORMAL = vec3(0.0,1.0,0.0) * abs(NORMAL.x);
+	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(NORMAL.y);
+	BINORMAL+= vec3(0.0,1.0,0.0) * abs(NORMAL.z);
+	BINORMAL = normalize(BINORMAL);
+	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
+	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+}
+
+vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
+	vec4 samp=vec4(0.0);
+	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
+	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
+	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
+}
+
+void fragment() {
+	vec4 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
+	ALBEDO = (albedo.rgb * albedo_tex.r) + albedo_tex.g + albedo_tex.b;
+	float metallic_tex = dot(triplanar_texture(texture_metallic,uv1_power_normal,uv1_triplanar_pos),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(triplanar_texture(texture_roughness,uv1_power_normal,uv1_triplanar_pos),roughness_texture_channel);
+	ROUGHNESS = (1.0 - albedo_tex.g) * roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jh8kv"]
+render_priority = 0
+shader = SubResource("Shader_io84i")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.5
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("1_r3xp4")
+shader_parameter/texture_roughness = ExtResource("1_r3xp4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_16pvb"]
+material = SubResource("ShaderMaterial_jh8kv")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_41x41"]
+data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_80iy8"]
+input_name = "model_matrix"
+
+[sub_resource type="VisualShaderNodeTransformDecompose" id="VisualShaderNodeTransformDecompose_iftli"]
+output_port_for_preview = 3
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_6kyyc"]
+output_port_for_preview = 0
+parameter_name = "ColorParameter"
+
+[sub_resource type="VisualShaderNodeVec3Parameter" id="VisualShaderNodeVec3Parameter_ngyuh"]
+parameter_name = "Position"
+
+[sub_resource type="VisualShader" id="VisualShader_dkwu0"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+"
+nodes/vertex/0/position = Vector2(400, 160)
+nodes/fragment/0/position = Vector2(400, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_80iy8")
+nodes/fragment/3/position = Vector2(-620, 200)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTransformDecompose_iftli")
+nodes/fragment/4/position = Vector2(-240, -40)
+nodes/fragment/5/node = SubResource("VisualShaderNodeColorParameter_6kyyc")
+nodes/fragment/5/position = Vector2(-1000, -60)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVec3Parameter_ngyuh")
+nodes/fragment/6/position = Vector2(-700, 340)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mxxvu"]
+render_priority = 0
+shader = SubResource("VisualShader_dkwu0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_i0lvv"]
+material = SubResource("ShaderMaterial_mxxvu")
+size = Vector3(2, 2, 2)
+
+[node name="CellBlocks" type="Node3D"]
+
+[node name="NormalCube" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_16pvb")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="AnimatableBody3D" parent="NormalCube"]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NormalCube/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_41x41")
+
+[node name="ColourlCube" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_i0lvv")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="AnimatableBody3D" parent="ColourlCube"]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ColourlCube/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_41x41")

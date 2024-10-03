@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2hccpum84ixw"]
+
+[ext_resource type="Script" path="res://addons/proton_trail-master/proton_trail.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b4rwjbpv8exeu" path="res://addons/proton_trail-master/demo/sword_trail.png" id="1_c5ldj"]
+[ext_resource type="Material" uid="uid://i5ito2mtcd6w" path="res://addons/proton_trail-master/demo/sword_trail.tres" id="3"]
+
+[sub_resource type="Animation" id="Animation_aiib5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-5.8965e-07, -2.64677, 1.8326)]
+}
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Swing"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -2.04095), Vector3(0, 0, 1.81731), Vector3(0, -2.89637, 1.81731)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fg6pu"]
+_data = {
+"RESET": SubResource("Animation_aiib5"),
+"Swing": SubResource("1")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_juxks"]
+albedo_texture = ExtResource("1_c5ldj")
+
+[sub_resource type="BoxMesh" id="2"]
+material = SubResource("StandardMaterial3D_juxks")
+size = Vector3(0.1, 1, 0.1)
+
+[node name="DemoTrail" type="Node3D"]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 1.77636e-15, -8.74228e-08, -2.26267e-08, 0.965926, 0.258819, 8.44439e-08, 0.258819, -0.965926, 0.000137925, 0.995728, -4.34288)
+
+[node name="RotationRoot" type="Node3D" parent="."]
+transform = Transform3D(0.227778, 0.850065, -0.474876, 0.965925, -0.258823, 5.8965e-07, -0.122908, -0.458694, -0.880053, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationRoot"]
+libraries = {
+"": SubResource("AnimationLibrary_fg6pu")
+}
+autoplay = "Swing"
+
+[node name="MeshInstance" type="MeshInstance3D" parent="RotationRoot"]
+transform = Transform3D(1, 1.11759e-08, 0, -7.45058e-09, 1, 2.98023e-08, -7.45058e-09, -2.98023e-08, 1, -0.0384894, 1.5, -0.101642)
+mesh = SubResource("2")
+
+[node name="Trail" type="Node3D" parent="RotationRoot/MeshInstance"]
+transform = Transform3D(1, -3.72529e-09, -7.45058e-09, -1.49012e-08, 1, 2.98023e-08, 7.45058e-09, 0, 1, -5.21541e-08, -1.61635, -2.23517e-08)
+script = ExtResource("1")
+material = ExtResource("3")
+resolution = 6.0
+life_time = 1.0
+
+[node name="Top" type="Marker3D" parent="RotationRoot/MeshInstance/Trail"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+
+[node name="Bottom" type="Marker3D" parent="RotationRoot/MeshInstance/Trail"]
+transform = Transform3D(1, -2.33147e-15, 0, -2.33147e-15, 1, -1.42109e-14, -3.55271e-15, 1.42109e-14, 1, 0.00757822, 1.12002, 0)

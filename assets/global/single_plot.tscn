@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxi5dr8l3ld6a"]
+
+[ext_resource type="Script" path="res://addons/godot4-graph2d-main/graph_2d/graph_2d.gd" id="2_fuswg"]
+[ext_resource type="Script" path="res://addons/godot4-graph2d-main/graph_2d/custom_nodes/legend.gd" id="3_jamoa"]
+[ext_resource type="Script" path="res://addons/godot4-graph2d-main/graph_2d/custom_nodes/coordinate.gd" id="4_w76e6"]
+[ext_resource type="Script" path="res://addons/godot4-graph2d-main/graph_2d/custom_nodes/axis.gd" id="5_xcw1a"]
+[ext_resource type="Script" path="res://addons/godot4-graph2d-main/graph_2d/custom_nodes/grid.gd" id="6_j7rmk"]
+
+[node name="SinglePlot" type="CanvasLayer"]
+
+[node name="Graph2D" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 571.0
+offset_bottom = 324.0
+script = ExtResource("2_fuswg")
+y_max = 20.0
+background_color = Color(0, 0, 0, 0.482353)
+grid_horizontal_visible = true
+grid_vertical_visible = true
+
+[node name="Background" type="ColorRect" parent="Graph2D"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.482353)
+
+[node name="PlotArea" type="Control" parent="Graph2D"]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 45.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+
+[node name="Legend" type="Control" parent="Graph2D/PlotArea"]
+anchors_preset = 0
+script = ExtResource("3_jamoa")
+
+[node name="_VBoxContainer_19632" type="VBoxContainer" parent="Graph2D/PlotArea/Legend"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 20.0
+offset_right = 10.0
+offset_bottom = 20.0
+
+[node name="Coordinate" type="Label" parent="Graph2D/PlotArea"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = -20.0
+grow_horizontal = 0
+text = "(0.0, 0.0)"
+script = ExtResource("4_w76e6")
+
+[node name="Axis" type="Control" parent="Graph2D"]
+anchors_preset = 0
+script = ExtResource("5_xcw1a")
+
+[node name="XLabel" type="Label" parent="Graph2D/Axis"]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 314.0
+offset_right = 300.0
+offset_bottom = 337.0
+
+[node name="YLabel" type="Label" parent="Graph2D/Axis"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 162.0
+offset_right = 6.0
+offset_bottom = 185.0
+rotation = -1.5708
+
+[node name="Grid" type="Control" parent="Graph2D"]
+anchors_preset = 0
+script = ExtResource("6_j7rmk")

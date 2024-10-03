@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://crr6c8dxhv47i"
+path="res://.godot/imported/步枪空扳机 427603__michorvath__rifle-clip-empty.wav-b5758b9f08006c4bfdbe2786a9fb3741.sample"
+
+[deps]
+
+source_file="res://assets/audio/步枪空扳机 427603__michorvath__rifle-clip-empty.wav"
+dest_files=["res://.godot/imported/步枪空扳机 427603__michorvath__rifle-clip-empty.wav-b5758b9f08006c4bfdbe2786a9fb3741.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

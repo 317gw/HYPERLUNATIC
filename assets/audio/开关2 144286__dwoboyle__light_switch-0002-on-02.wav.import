@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://da2l0v4jeeaer"
+path="res://.godot/imported/开关2 144286__dwoboyle__light_switch-0002-on-02.wav-271fc625398c12bb38b4d744587cca10.sample"
+
+[deps]
+
+source_file="res://assets/audio/开关2 144286__dwoboyle__light_switch-0002-on-02.wav"
+dest_files=["res://.godot/imported/开关2 144286__dwoboyle__light_switch-0002-on-02.wav-271fc625398c12bb38b4d744587cca10.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

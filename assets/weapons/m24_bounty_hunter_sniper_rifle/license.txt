@@ -1,0 +1,11 @@
+Model Information:
+* title:	M24 Bounty Hunter Sniper Rifle
+* source:	https://sketchfab.com/3d-models/m24-bounty-hunter-sniper-rifle-d40e74e2259549f5b025807163f1028c
+* author:	Naudaff3D (https://sketchfab.com/Naudaff3D)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "M24 Bounty Hunter Sniper Rifle" (https://sketchfab.com/3d-models/m24-bounty-hunter-sniper-rifle-d40e74e2259549f5b025807163f1028c) by Naudaff3D (https://sketchfab.com/Naudaff3D) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

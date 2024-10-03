@@ -1,0 +1,51 @@
+[gd_resource type="Shader" format=3 uid="uid://c2c7sknvw28nm"]
+
+[resource]
+code = "shader_type spatial;
+render_mode skip_vertex_transform;
+render_mode blend_add;
+render_mode unshaded;
+
+#include \"res://addons/godot-polyliner/shaders/include/polyliner_inc.gdshaderinc\"
+
+uniform float line_width = 0.0;
+uniform float glow_width = 0.4;
+uniform sampler2D width_curve : source_color, repeat_disable;
+uniform bool tangent_facing = false;
+uniform bool rounded = true;
+
+varying float is_end;
+varying float lw;
+varying float hider;
+void vertex(){
+	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
+	NORMAL = mat3(MODELVIEW_MATRIX) * NORMAL;
+	TANGENT = mat3(MODELVIEW_MATRIX) * TANGENT;
+	
+	float curve_multiplier = texture(width_curve, UV).r;
+	float line_width_curved = line_width * curve_multiplier;
+	
+	float lww = line_width_curved+glow_width;
+	hider = smoothstep(0.995,0.99,abs(dot(NORMAL,normalize(VERTEX))));
+	
+	quick_line(lww,rounded);
+	
+	lw = max(line_width_curved,0.0001)/max(lww,0.0001);
+	
+	UV.x *= UV2.x;
+}
+
+uniform vec4 color : source_color = vec4(vec3(0.0,0.4,1.0),1.0);
+uniform float glow_curve : hint_range(0.0,1.0) = 0.05;
+void fragment() {
+	float dist = getDistToLineCenter(UV,is_end);
+	float roundededge = 1.0-pow(smoothstep(lw,1.0,dist),glow_curve);
+	
+	
+	float softner = magic_aa(8e3/(line_width+glow_width),VERTEX,VIEWPORT_SIZE);
+	roundededge = max(roundededge,smoothstep(lw-softner,lw,dist));
+	
+	ALBEDO = mix(color.rgb,vec3(1.0),roundededge);
+	ALPHA = roundededge;
+//	ALPHA *= hider;
+}"

@@ -1,0 +1,228 @@
+[gd_scene load_steps=22 format=3 uid="uid://m2y1ntw2rfx3"]
+
+[ext_resource type="Material" uid="uid://3b7n54dfsnvo" path="res://assets/materials/cloud_ball.tres" id="1_oruoi"]
+[ext_resource type="Shader" uid="uid://bife4g36wb5h7" path="res://assets/shaders/cloud_particles.tres" id="2_w8fe2"]
+[ext_resource type="Texture2D" uid="uid://ev7uemgsdbf7" path="res://assets/textures/云3x4片512_2_export.png" id="3_prhfs"]
+[ext_resource type="PackedScene" uid="uid://nodfbtkaprwb" path="res://assets/special_effects/cloud_sprites.tscn" id="4_7rkm3"]
+[ext_resource type="PackedScene" uid="uid://dgl3ng1l80q71" path="res://assets/special_effects/shader_cloud.tscn" id="5_rgfc3"]
+[ext_resource type="Shader" path="res://assets/shaders/cloud_ball2.gdshader" id="6_pkaev"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_o0skb"]
+material = ExtResource("1_oruoi")
+radius = 100.0
+height = 200.0
+radial_segments = 12
+rings = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_we6um"]
+shader = ExtResource("2_w8fe2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8wix"]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("3_prhfs")
+texture_filter = 2
+billboard_mode = 3
+particles_anim_h_frames = 11
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_cxyj1"]
+material = SubResource("StandardMaterial3D_j8wix")
+size = Vector2(9.5, 5)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h65ud"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m4xvd"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_h65ud")
+
+[sub_resource type="Gradient" id="Gradient_s8hp8"]
+interpolation_color_space = 1
+colors = PackedColorArray(0.589903, 0.589903, 0.589903, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mh46c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oy1bv"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_s8hp8")
+noise = SubResource("FastNoiseLite_mh46c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fuybj"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_pkaev")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_power = 1.0
+shader_parameter/ex_power = 5.0
+shader_parameter/alpha_pow = 1.0
+shader_parameter/alpha_power = 0.95
+shader_parameter/albedo_clamp_max = 10.0
+shader_parameter/texture_cloud = ExtResource("3_prhfs")
+shader_parameter/particles_anim_h_frames = 3
+shader_parameter/particles_anim_v_frames = 4
+shader_parameter/frame = 0.0
+shader_parameter/particles_anim_loop = false
+shader_parameter/brightness = 0.9
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/mix_color = Color(1, 1, 1, 1)
+shader_parameter/noise_speed1 = 0.01
+shader_parameter/noise_max1 = 0.5
+shader_parameter/noise_mix1 = 0.0
+shader_parameter/color_noise = SubResource("NoiseTexture2D_oy1bv")
+shader_parameter/noise_speed2 = 0.01
+shader_parameter/noise_max2 = 0.5
+shader_parameter/noise_mix2 = 0.0
+shader_parameter/alpha_noise = SubResource("NoiseTexture2D_m4xvd")
+shader_parameter/roughness = 0.5
+shader_parameter/fresnel = 1.0
+shader_parameter/bsdf_back_clamp = -0.14
+shader_parameter/bsdf_clamp_min = -0.2
+shader_parameter/bsdf_clamp_max = 2.0
+shader_parameter/back_power = 0.8
+shader_parameter/back_color_pow = 1.0
+shader_parameter/bsdf_color = Color(1, 1, 1, 1)
+shader_parameter/enable_geometric_masking_functions = false
+shader_parameter/ues_fade_by_distance = true
+shader_parameter/fade_distance = 6.0
+shader_parameter/fade_power = 15.0
+shader_parameter/multi = 100.0
+shader_parameter/character_position = null
+
+[sub_resource type="QuadMesh" id="QuadMesh_spueh"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_fuybj")
+size = Vector2(1.9, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yq7d1"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_pkaev")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_power = 1.0
+shader_parameter/ex_power = 5.0
+shader_parameter/alpha_pow = 1.0
+shader_parameter/alpha_power = 0.95
+shader_parameter/albedo_clamp_max = 10.0
+shader_parameter/texture_cloud = ExtResource("3_prhfs")
+shader_parameter/particles_anim_h_frames = 3
+shader_parameter/particles_anim_v_frames = 4
+shader_parameter/frame = 0.0
+shader_parameter/particles_anim_loop = false
+shader_parameter/brightness = 0.9
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/mix_color = Color(1, 1, 1, 1)
+shader_parameter/noise_speed1 = 0.01
+shader_parameter/noise_max1 = 0.5
+shader_parameter/noise_mix1 = 0.0
+shader_parameter/color_noise = SubResource("NoiseTexture2D_oy1bv")
+shader_parameter/noise_speed2 = 0.01
+shader_parameter/noise_max2 = 0.5
+shader_parameter/noise_mix2 = 0.0
+shader_parameter/alpha_noise = SubResource("NoiseTexture2D_m4xvd")
+shader_parameter/roughness = 0.5
+shader_parameter/fresnel = 1.0
+shader_parameter/bsdf_back_clamp = -0.14
+shader_parameter/bsdf_clamp_min = -0.2
+shader_parameter/bsdf_clamp_max = 2.0
+shader_parameter/back_power = 0.8
+shader_parameter/back_color_pow = 1.0
+shader_parameter/bsdf_color = Color(1, 1, 1, 1)
+shader_parameter/enable_geometric_masking_functions = false
+shader_parameter/ues_fade_by_distance = false
+shader_parameter/fade_distance = 6.0
+shader_parameter/fade_power = 15.0
+shader_parameter/multi = 100.0
+shader_parameter/character_position = null
+
+[sub_resource type="QuadMesh" id="QuadMesh_qcvbb"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_yq7d1")
+size = Vector2(1.9, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fmk4f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_pkaev")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_power = 1.0
+shader_parameter/ex_power = 5.0
+shader_parameter/alpha_pow = 1.0
+shader_parameter/alpha_power = 0.95
+shader_parameter/albedo_clamp_max = 10.0
+shader_parameter/texture_cloud = ExtResource("3_prhfs")
+shader_parameter/particles_anim_h_frames = 3
+shader_parameter/particles_anim_v_frames = 4
+shader_parameter/frame = 0.0
+shader_parameter/particles_anim_loop = false
+shader_parameter/brightness = 0.9
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/mix_color = Color(1, 1, 1, 1)
+shader_parameter/noise_speed1 = 0.01
+shader_parameter/noise_max1 = 0.5
+shader_parameter/noise_mix1 = 0.0
+shader_parameter/color_noise = SubResource("NoiseTexture2D_oy1bv")
+shader_parameter/noise_speed2 = 0.01
+shader_parameter/noise_max2 = 0.5
+shader_parameter/noise_mix2 = 0.0
+shader_parameter/alpha_noise = SubResource("NoiseTexture2D_m4xvd")
+shader_parameter/roughness = 0.5
+shader_parameter/fresnel = 1.0
+shader_parameter/bsdf_back_clamp = -0.14
+shader_parameter/bsdf_clamp_min = -0.2
+shader_parameter/bsdf_clamp_max = 2.0
+shader_parameter/back_power = 0.8
+shader_parameter/back_color_pow = 1.0
+shader_parameter/bsdf_color = Color(1, 1, 1, 1)
+shader_parameter/enable_geometric_masking_functions = false
+shader_parameter/ues_fade_by_distance = false
+shader_parameter/fade_distance = 6.0
+shader_parameter/fade_power = 15.0
+shader_parameter/multi = 100.0
+shader_parameter/character_position = null
+
+[sub_resource type="QuadMesh" id="QuadMesh_buerx"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_fmk4f")
+size = Vector2(1.9, 1)
+
+[node name="DebugClouds" type="Node3D"]
+
+[node name="CloudBall" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("SphereMesh_o0skb")
+skeleton = NodePath("../../WorldEnvironment")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(2.515, 0, 0, 0, 2.515, 0, 0, 0, 2.515, 0, 6, 0)
+visible = false
+amount = 1
+lifetime = 999.0
+process_material = SubResource("ShaderMaterial_we6um")
+draw_pass_1 = SubResource("QuadMesh_cxyj1")
+
+[node name="CloudSprites" parent="." instance=ExtResource("4_7rkm3")]
+visible = false
+shaded = true
+double_sided = true
+
+[node name="ShaderCloud" parent="." instance=ExtResource("5_rgfc3")]
+transform = Transform3D(58.1483, -42.2735, -131.65, -3.06721, 142.388, -47.0763, 138.237, 20.9414, 54.3331, 659.639, 714.637, -510.758)
+mesh = SubResource("QuadMesh_spueh")
+
+[node name="ShaderCloud2" parent="." instance=ExtResource("5_rgfc3")]
+transform = Transform3D(54.4949, -20.5109, -138.238, 13.015, 148.476, -16.8993, 139.144, -5.85491, 55.7207, 561.493, 63.9144, -365.71)
+mesh = SubResource("QuadMesh_qcvbb")
+
+[node name="ShaderCloud3" parent="." instance=ExtResource("5_rgfc3")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 2, 0)
+mesh = SubResource("QuadMesh_buerx")

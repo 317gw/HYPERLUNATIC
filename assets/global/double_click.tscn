@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj86e8r4y1oav"]
+
+[ext_resource type="Script" path="res://assets/global/scripts/double_click.gd" id="1_3ijva"]
+
+[node name="DoubleClick" type="Node"]
+script = ExtResource("1_3ijva")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

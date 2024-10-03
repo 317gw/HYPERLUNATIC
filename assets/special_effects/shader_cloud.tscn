@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgl3ng1l80q71"]
+
+[ext_resource type="QuadMesh" uid="uid://pa0t7xpxdb15" path="res://assets/special_effects/shader_cloud.tres" id="1_2eanh"]
+
+[node name="ShaderCloud" type="MeshInstance3D" groups=["cloud"]]
+process_mode = 1
+layers = 2
+extra_cull_margin = 16384.0
+mesh = ExtResource("1_2eanh")
+skeleton = NodePath("../../WorldEnvironment")

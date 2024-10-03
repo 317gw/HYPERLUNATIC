@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cqu5f1b7bphrk"
+path="res://.godot/imported/叮 706536__that_finn__light-ceramic-cling.ogg-8d33881bb506a4a95744eab389e0f26e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/叮 706536__that_finn__light-ceramic-cling.ogg"
+dest_files=["res://.godot/imported/叮 706536__that_finn__light-ceramic-cling.ogg-8d33881bb506a4a95744eab389e0f26e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

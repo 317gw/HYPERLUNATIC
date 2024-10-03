@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GerstnerWave" load_steps=2 format=3 uid="uid://byfaqt1j16ysr"]
+
+[ext_resource type="Script" path="res://addons/boujie_water_shader/types/gerstner_wave.gd" id="1_bf80m"]
+
+[resource]
+script = ExtResource("1_bf80m")
+steepness = 0.8
+amplitude = 1.5
+direction_degrees = 77.0
+frequency = 0.001
+speed = 0.05
+phase_degrees = 0.0

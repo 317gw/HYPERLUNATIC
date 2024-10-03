@@ -1,0 +1,317 @@
+类：   Mesh
+继承：   Resource <   RefCounted <   Object
+派生：   ArrayMesh ,   ImmediateMesh ,   PlaceholderMesh ,   PrimitiveMesh
+
+一种包含基于顶点数组的几何资源。
+
+描述
+
+网格是一种包含了基于顶点数组的几何资源。网格被分为各种平面，每一个平面包含了一个完整的、单独的顶点数组和材质用来绘制它。通过明智的设计，一个由多个面组成的网格胜过单个面的，这是因为在3D编辑软件中，一个物体通常包含多种材质。每个网格的最大表面数是 RenderingServer.MAX_MESH_SURFACES。
+
+在线教程
+
+● 3D 材质测试演示
+● 3D 动力学角色演示
+● 3D 平台跳跃演示
+● 第三人称射击（TPS）演示
+
+属性
+
+Vector2ilightmap_size_hint[默认： Vector2i(0, 0)]
+
+方法
+
+AABB_get_aabb() virtual constint_get_blend_shape_count() virtual constStringName_get_blend_shape_name(index: int) virtual constint_get_surface_count() virtual constvoid_set_blend_shape_name(index: int, name: StringName) virtualint_surface_get_array_index_len(index: int) virtual constint_surface_get_array_len(index: int) virtual constArray_surface_get_arrays(index: int) virtual constArray[Array]_surface_get_blend_shape_arrays(index: int) virtual constint_surface_get_format(index: int) virtual constDictionary_surface_get_lods(index: int) virtual constMaterial_surface_get_material(index: int) virtual constint_surface_get_primitive_type(index: int) virtual constvoid_surface_set_material(index: int, material: Material) virtualConvexPolygonShape3Dcreate_convex_shape(clean: bool = true, simplify: bool = false) constMeshcreate_outline(margin: float) constResourcecreate_placeholder() constConcavePolygonShape3Dcreate_trimesh_shape() constTriangleMeshgenerate_triangle_mesh() constAABBget_aabb() constPackedVector3Arrayget_faces() constintget_surface_count() constArraysurface_get_arrays(surf_idx: int) constArray[Array]surface_get_blend_shape_arrays(surf_idx: int) constMaterialsurface_get_material(surf_idx: int) constvoidsurface_set_material(surf_idx: int, material: Material)
+
+枚举
+
+enum PrimitiveType:
+
+● PRIMITIVE_POINTS = 0
+将数组渲染为点（一个顶点对应一个点）。
+● PRIMITIVE_LINES = 1
+将数组渲染为线（每两个顶点创建一条连线）。
+● PRIMITIVE_LINE_STRIP = 2
+将数组渲染为线条。
+● PRIMITIVE_TRIANGLES = 3
+将数组渲染为三角形（每三个顶点创建一个三角形）。
+● PRIMITIVE_TRIANGLE_STRIP = 4
+将数组渲染为三角形条。
+
+enum ArrayType:
+
+● ARRAY_VERTEX = 0
+顶点位置的 PackedVector3Array、PackedVector2Array 或 Array。
+
+● ARRAY_NORMAL = 1
+顶点法线的 PackedVector3Array。
+
+注意：数组中存放的应当是归一化的向量，否则引擎会进行归一化，但可能造成显示上的差异。
+
+● ARRAY_TANGENT = 2
+顶点切线的 PackedFloat32Array。4 个浮点数为一组表示一个元素，前 3 个浮点数确定切线，最后一个是为 -1 或 1 的副法线方向。
+● ARRAY_COLOR = 3
+顶点颜色的 PackedColorArray。
+● ARRAY_TEX_UV = 4
+UV 坐标的 PackedVector2Array。
+● ARRAY_TEX_UV2 = 5
+第二 UV 坐标的 PackedVector2Array。
+● ARRAY_CUSTOM0 = 6
+包含自定义颜色通道 0。如果 (format >> Mesh.ARRAY_FORMAT_CUSTOM0_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK 为 ARRAY_CUSTOM_RGBA8_UNORM、ARRAY_CUSTOM_RGBA8_SNORM、ARRAY_CUSTOM_RG_HALF 或 ARRAY_CUSTOM_RGBA_HALF，则为 PackedByteArray。否则为 PackedFloat32Array。
+● ARRAY_CUSTOM1 = 7
+包含自定义颜色通道 1。如果 (format >> Mesh.ARRAY_FORMAT_CUSTOM1_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK 为 ARRAY_CUSTOM_RGBA8_UNORM、ARRAY_CUSTOM_RGBA8_SNORM、ARRAY_CUSTOM_RG_HALF 或 ARRAY_CUSTOM_RGBA_HALF，则为 PackedByteArray。否则为 PackedFloat32Array。
+● ARRAY_CUSTOM2 = 8
+包含自定义颜色通道 2。如果 (format >> Mesh.ARRAY_FORMAT_CUSTOM2_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK 为 ARRAY_CUSTOM_RGBA8_UNORM、ARRAY_CUSTOM_RGBA8_SNORM、ARRAY_CUSTOM_RG_HALF 或 ARRAY_CUSTOM_RGBA_HALF，则为 PackedByteArray。否则为 PackedFloat32Array。
+● ARRAY_CUSTOM3 = 9
+包含自定义颜色通道 3。如果 (format >> Mesh.ARRAY_FORMAT_CUSTOM3_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK 为 ARRAY_CUSTOM_RGBA8_UNORM、ARRAY_CUSTOM_RGBA8_SNORM、ARRAY_CUSTOM_RG_HALF 或 ARRAY_CUSTOM_RGBA_HALF，则为 PackedByteArray。否则为 PackedFloat32Array。
+● ARRAY_BONES = 10
+骨骼索引的 PackedFloat32Array 或 PackedInt32Array。每个顶点包含 4 个还是 8 个数字取决于是否存在 ARRAY_FLAG_USE_8_BONE_WEIGHTS 标志。
+● ARRAY_WEIGHTS = 11
+骨骼权重的 PackedFloat32Array 或 PackedInt32Array，取值范围为 0.0 到 1.0（闭区间）。每个顶点包含 4 个还是 8 个数字取决于是否存在 ARRAY_FLAG_USE_8_BONE_WEIGHTS 标志。
+
+● ARRAY_INDEX = 12
+整数的 PackedInt32Array，用作引用顶点、颜色、法线、切线和纹理的索引。所有这些数组必须具有与顶点数组相同数量的元素。任何索引都不能超过顶点数组的大小。当该索引数组存在时，它会将函数置于“索引模式”，其中索引选择第 i 个顶点、法线、切线、颜色、UV 等。这意味着，如果想要沿着一条边有不同的法线或颜色，则必须复制这些顶点。
+
+对于三角形，索引数组被解释为三元组，指代每个三角形的顶点。对于线条，索引数组成对表示每条线的开始和结束。
+
+● ARRAY_MAX = 13
+代表 ArrayType 枚举的大小。
+
+enum ArrayCustomFormat:
+
+● ARRAY_CUSTOM_RGBA8_UNORM = 0
+表示该自定义通道包含的是无符号归一化字节颜色，范围为 0 到 1，编码为 PackedByteArray。
+● ARRAY_CUSTOM_RGBA8_SNORM = 1
+表示该自定义通道包含的是有符号归一化字节颜色，范围为 -1 到 1，编码为 PackedByteArray。
+● ARRAY_CUSTOM_RG_HALF = 2
+表示该自定义通道包含的是半精度浮点数颜色，编码为 PackedByteArray。仅使用红、绿通道。
+● ARRAY_CUSTOM_RGBA_HALF = 3
+表示该自定义通道包含的是半精度浮点数颜色，编码为 PackedByteArray。
+● ARRAY_CUSTOM_R_FLOAT = 4
+表示该自定义通道包含的是全精度浮点数颜色，使用 PackedFloat32Array。仅使用红色通道。
+● ARRAY_CUSTOM_RG_FLOAT = 5
+表示该自定义通道包含的是全精度浮点数颜色，使用 PackedFloat32Array。仅使用红、绿通道。
+● ARRAY_CUSTOM_RGB_FLOAT = 6
+表示该自定义通道包含的是全精度浮点数颜色，使用 PackedFloat32Array。仅使用红、绿、蓝通道。
+● ARRAY_CUSTOM_RGBA_FLOAT = 7
+表示该自定义通道包含的是全精度浮点数颜色，使用 PackedFloat32Array。
+● ARRAY_CUSTOM_MAX = 8
+代表 ArrayCustomFormat 枚举的大小。
+
+flags ArrayFormat:
+
+● ARRAY_FORMAT_VERTEX = 1
+网格数组包含顶点。所有网格都需要有顶点数组，所以这应该始终存在。
+● ARRAY_FORMAT_NORMAL = 2
+网格数组包含法线。
+● ARRAY_FORMAT_TANGENT = 4
+网格数组包含切线。
+● ARRAY_FORMAT_COLOR = 8
+网格数组包含颜色。
+● ARRAY_FORMAT_TEX_UV = 16
+网格数组包含 UV。
+● ARRAY_FORMAT_TEX_UV2 = 32
+网格数组包含第二套 UV。
+● ARRAY_FORMAT_CUSTOM0 = 64
+网格数组包含自定义通道索引 0。
+● ARRAY_FORMAT_CUSTOM1 = 128
+网格数组包含自定义通道索引 1。
+● ARRAY_FORMAT_CUSTOM2 = 256
+网格数组包含自定义通道索引 2。
+● ARRAY_FORMAT_CUSTOM3 = 512
+网格数组包含自定义通道索引 3。
+● ARRAY_FORMAT_BONES = 1024
+网格数组包含骨骼。
+● ARRAY_FORMAT_WEIGHTS = 2048
+网格数组包含骨骼权重。
+● ARRAY_FORMAT_INDEX = 4096
+网格数组使用索引。
+● ARRAY_FORMAT_BLEND_SHAPE_MASK = 7
+混合形状中允许使用的网格通道的掩码。
+● ARRAY_FORMAT_CUSTOM_BASE = 13
+第一个自定义通道的移位量。
+● ARRAY_FORMAT_CUSTOM_BITS = 3
+每个自定义通道的格式位数。请参阅 ArrayCustomFormat。
+● ARRAY_FORMAT_CUSTOM0_SHIFT = 13
+自定义通道索引 0 需要对 ArrayCustomFormat 进行的按位移动量。
+● ARRAY_FORMAT_CUSTOM1_SHIFT = 16
+自定义通道索引 1 需要对 ArrayCustomFormat 进行的按位移动量。
+● ARRAY_FORMAT_CUSTOM2_SHIFT = 19
+自定义通道索引 2 需要对 ArrayCustomFormat 进行的按位移动量。
+● ARRAY_FORMAT_CUSTOM3_SHIFT = 22
+自定义通道索引 3 需要对 ArrayCustomFormat 进行的按位移动量。
+● ARRAY_FORMAT_CUSTOM_MASK = 7
+每个自定义通道的自定义格式位掩码。必须按 SHIFT 常量之一进行移位。请参阅 ArrayCustomFormat。
+● ARRAY_COMPRESS_FLAGS_BASE = 25
+第一个压缩标志的移位。压缩标志应该被传递给 ArrayMesh.add_surface_from_arrays() 和 SurfaceTool.commit()。
+● ARRAY_FLAG_USE_2D_VERTICES = 33554432
+用于标记包含 2D 顶点的数组的标志。
+● ARRAY_FLAG_USE_DYNAMIC_UPDATE = 67108864
+网格数据将在 GLES 上使用 GL_DYNAMIC_DRAW 的标记索引。在 Vulkan 上未被使用。
+● ARRAY_FLAG_USE_8_BONE_WEIGHTS = 134217728
+用于标记网格每个顶点最多包含 8 个骨骼影响的标志。该标志表示 ARRAY_BONES 和 ARRAY_WEIGHTS 元素将具有双倍长度。
+● ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY = 268435456
+用于标记网格有意不包含顶点数组的标志。
+● ARRAY_FLAG_COMPRESS_ATTRIBUTES = 536870912
+用于标记网格正在使用的压缩的属性（顶点、法线、切线、UV）的标志。启用这种形式的压缩后，顶点位置将被打包到 RGBA16UNORM 属性中，并在顶点着色器中进行缩放。法线和切线将被打包到表示一个轴的 RG16UNORM 中，并在顶点的 A 通道中存储一个 16 位浮点数。UV 将使用 16 位标准化浮点数而不是完整的 32 位有符号浮点数。使用该压缩模式时，必须使用顶点、法线和切线或仅使用顶点。你无法使用没有切线的法线。如果可以的话，导入器将自动启用这种压缩。
+
+enum BlendShapeMode:
+
+● BLEND_SHAPE_MODE_NORMALIZED = 0
+混合形状是被归一化了的。
+● BLEND_SHAPE_MODE_RELATIVE = 1
+混合形状是相对于基础的权重。
+
+
+属性说明
+
+
+● Vector2ilightmap_size_hint [默认： Vector2i(0, 0)]set_lightmap_size_hint(值) setterget_lightmap_size_hint() getter
+
+设置用于光照贴图分辨率的提示。
+
+
+方法说明
+
+
+● AABB _get_aabb() virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖 AABB。
+
+
+● int _get_blend_shape_count() virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖混合形状的数量。
+
+
+● StringName _get_blend_shape_name(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖混合形状名称的获取过程。
+
+
+● int _get_surface_count() virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面的数量。
+
+
+● void _set_blend_shape_name(index: int, name: StringName) virtual
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖混合形状的名称。
+
+
+● int _surface_get_array_index_len(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面数组索引的长度。
+
+
+● int _surface_get_array_len(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面数组的长度。
+
+
+● Array _surface_get_arrays(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面数组。
+
+
+● Array[Array] _surface_get_blend_shape_arrays(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖混合形状数组。
+
+
+● int _surface_get_format(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面格式。
+
+
+● Dictionary _surface_get_lods(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面 LOD。
+
+
+● Material _surface_get_material(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面材质。
+
+
+● int _surface_get_primitive_type(index: int) virtual const
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖表面图元类型。
+
+
+● void _surface_set_material(index: int, material: Material) virtual
+
+虚方法，能够为扩展自 Mesh 的自定义类覆盖索引为 index 的材质 material 的设置。
+
+
+● ConvexPolygonShape3D create_convex_shape(clean: bool = true, simplify: bool = false) const
+
+从网格计算 ConvexPolygonShape3D。
+
+如果 clean 为 true（默认值），则自动移除重复顶点和内部顶点。如果不需要如此的化话，可以将其设置为 false 以加快处理速度。
+
+如果 simplify 为 true，则可以进一步简化几何体以减少顶点数。默认情况下是禁用的。
+
+
+● Mesh create_outline(margin: float) const
+
+以一定的偏移量（边距)，计算出该网格的外轮廓。
+
+注意：这个方法实际上反序返回顶点（例如输入顺时针，返回逆时针）。
+
+
+● Resource create_placeholder() const
+
+创建该资源的占位符版本（PlaceholderMesh）。
+
+
+● ConcavePolygonShape3D create_trimesh_shape() const
+
+从该网格计算出 ConcavePolygonShape3D。
+
+
+● TriangleMesh generate_triangle_mesh() const
+
+从网格生成 TriangleMesh。仅考虑使用以下图元类型的表面：PRIMITIVE_TRIANGLES、PRIMITIVE_TRIANGLE_STRIP。
+
+
+● AABB get_aabb() const
+
+返回局部空间中包围这个网格的最小 AABB。不受 custom_aabb 的影响。
+
+注意：只针对 ArrayMesh 和 PrimitiveMesh 进行了实现。
+
+
+● PackedVector3Array get_faces() const
+
+返回网格中所有构成面的顶点。每三个顶点代表一个三角形。
+
+
+● int get_surface_count() const
+
+返回 Mesh 中存放的表面的数量。相当于 MeshInstance3D.get_surface_override_material_count()。
+
+
+● Array surface_get_arrays(surf_idx: int) const
+
+返回构成请求表面的顶点、法线、UV 等数组。（见 ArrayMesh.add_surface_from_arrays()）。
+
+
+● Array[Array] surface_get_blend_shape_arrays(surf_idx: int) const
+
+返回请求表面的混合形状数组。
+
+
+● Material surface_get_material(surf_idx: int) const
+
+返回给定表面中的 Material。表面是使用该材质渲染的。
+
+注意：这将返回 Mesh 资源中的材质，而不是与 MeshInstance3D 的表面材质覆盖属性关联的 Material。要获取与 MeshInstance3D 的表面材质覆盖属性关联的 Material，请改用 MeshInstance3D.get_surface_override_material()。
+
+
+● void surface_set_material(surf_idx: int, material: Material)
+
+为给定表面设置 Material。表面将使用该材质进行渲染。
+
+注意：这会分配 Mesh 资源中的材质，而不是与 MeshInstance3D 的表面材质覆盖属性关联的 Material。要设置与 MeshInstance3D 的表面材质覆盖属性关联的 Material，请改用 MeshInstance3D.set_surface_override_material()。
+

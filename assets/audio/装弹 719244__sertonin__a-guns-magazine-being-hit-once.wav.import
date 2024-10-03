@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cydgbuk3no6rn"
+path="res://.godot/imported/装弹 719244__sertonin__a-guns-magazine-being-hit-once.wav-dae81bb57ddc12417dd716e9e0de0413.sample"
+
+[deps]
+
+source_file="res://assets/audio/装弹 719244__sertonin__a-guns-magazine-being-hit-once.wav"
+dest_files=["res://.godot/imported/装弹 719244__sertonin__a-guns-magazine-being-hit-once.wav-dae81bb57ddc12417dd716e9e0de0413.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

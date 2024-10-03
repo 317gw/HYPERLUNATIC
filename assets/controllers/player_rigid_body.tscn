@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckpsxx6l7nhwf"]
+
+[ext_resource type="Script" path="res://assets/controllers/scripts/player_rigid_body.gd" id="1_51aik"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_08vtn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_chepb"]
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 3
+
+[sub_resource type="SphereMesh" id="SphereMesh_renm5"]
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xy2cj"]
+radius = 0.38
+height = 1.62
+
+[node name="PlayerRigidBody" type="RigidBody3D"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+top_level = true
+collision_layer = 64
+collision_mask = 32
+mass = 60.0
+physics_material_override = SubResource("PhysicsMaterial_08vtn")
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_51aik")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_chepb")
+
+[node name="Target" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_renm5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("CapsuleShape3D_xy2cj")
+
+[node name="Marker3D" type="Marker3D" parent="."]

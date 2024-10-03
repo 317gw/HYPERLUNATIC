@@ -1,0 +1,156 @@
+[gd_scene load_steps=18 format=3 uid="uid://cwx6o51d466wq"]
+
+[ext_resource type="Script" path="res://assets/weapons/scripts/explode.gd" id="1_3lniu"]
+[ext_resource type="AudioStream" uid="uid://c2jlqohrs0522" path="res://assets/audio/爆炸1 100773__cgeffex__impact-explosion.wav" id="2_pnhiv"]
+[ext_resource type="Texture2D" uid="uid://b3crtbvn0ikch" path="res://assets/textures/3烟64没尾巴.png" id="4_r2mfm"]
+[ext_resource type="Texture2D" uid="uid://b6mh4yhqbh84" path="res://assets/special_effects/衰减曲线.tres" id="6_ktnxl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lxgn7"]
+resource_local_to_scene = true
+
+[sub_resource type="Curve" id="Curve_gkogp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.903409, 0.984501), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_seewf"]
+curve = SubResource("Curve_gkogp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70urp"]
+particle_flag_align_y = true
+spread = 180.0
+scale_curve = SubResource("CurveTexture_seewf")
+alpha_curve = ExtResource("6_ktnxl")
+sub_emitter_mode = 1
+sub_emitter_frequency = 32.0
+sub_emitter_keep_velocity = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5spek"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.8, 0.8, 0.8, 0.752941)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lbgfh"]
+material = SubResource("StandardMaterial3D_5spek")
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yi6p5"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+alpha_curve = ExtResource("6_ktnxl")
+
+[sub_resource type="Curve" id="Curve_oe0uj"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4cqv"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.701961, 0.701961, 0.701961, 0.25098)
+use_particle_trails = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_cfpw2"]
+material = SubResource("StandardMaterial3D_g4cqv")
+radius = 0.04
+radial_steps = 4
+sections = 16
+section_length = 0.01
+section_rings = 2
+cap_top = false
+cap_bottom = false
+curve = SubResource("Curve_oe0uj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6aqmc"]
+lifetime_randomness = 0.1
+particle_flag_align_y = true
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 0.8
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.2
+damping_max = 0.2
+alpha_curve = ExtResource("6_ktnxl")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34tor"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.301961, 0.301961, 0.301961, 0.25098)
+albedo_texture = ExtResource("4_r2mfm")
+texture_filter = 2
+billboard_mode = 3
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_jlf58"]
+material = SubResource("StandardMaterial3D_34tor")
+
+[node name="Explode" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_3lniu")
+
+[node name="Area3D" type="Area3D" parent="."]
+process_mode = 1
+collision_layer = 256
+collision_mask = 229
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_lxgn7")
+
+[node name="Dot" type="GPUParticles3D" parent="."]
+process_mode = 1
+emitting = false
+amount = 32
+sub_emitter = NodePath("../Tail")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_70urp")
+draw_pass_1 = SubResource("SphereMesh_lbgfh")
+
+[node name="Tail" type="GPUParticles3D" parent="."]
+process_mode = 1
+emitting = false
+amount = 1024
+lifetime = 3.0
+one_shot = true
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_yi6p5")
+draw_pass_1 = SubResource("TubeTrailMesh_cfpw2")
+
+[node name="Smoke" type="GPUParticles3D" parent="."]
+process_mode = 1
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_6aqmc")
+draw_pass_1 = SubResource("QuadMesh_jlf58")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_pnhiv")
+
+[node name="DieTimer" type="Timer" parent="."]
+process_mode = 1
+process_callback = 0
+one_shot = true
+
+[node name="AreaTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="DieTimer" to="." method="_on_die_timer_timeout"]
+[connection signal="timeout" from="AreaTimer" to="." method="_on_area_timer_timeout"]

@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://clpe81wjv68f"]
+
+[node name="Effects" type="Node3D"]
+process_mode = 1

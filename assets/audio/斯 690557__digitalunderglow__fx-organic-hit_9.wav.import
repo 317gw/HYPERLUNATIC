@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fskj1stiltqk"
+path="res://.godot/imported/斯 690557__digitalunderglow__fx-organic-hit_9.wav-f19652362002a865bd111883a7294419.sample"
+
+[deps]
+
+source_file="res://assets/audio/斯 690557__digitalunderglow__fx-organic-hit_9.wav"
+dest_files=["res://.godot/imported/斯 690557__digitalunderglow__fx-organic-hit_9.wav-f19652362002a865bd111883a7294419.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

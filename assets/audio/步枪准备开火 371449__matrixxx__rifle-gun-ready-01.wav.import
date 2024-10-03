@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b052y6s4crjlg"
+path="res://.godot/imported/步枪准备开火 371449__matrixxx__rifle-gun-ready-01.wav-894590bc1d122494ebbca21a5703531b.sample"
+
+[deps]
+
+source_file="res://assets/audio/步枪准备开火 371449__matrixxx__rifle-gun-ready-01.wav"
+dest_files=["res://.godot/imported/步枪准备开火 371449__matrixxx__rifle-gun-ready-01.wav-894590bc1d122494ebbca21a5703531b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

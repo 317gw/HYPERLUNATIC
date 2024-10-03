@@ -1,0 +1,141 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg24r2642jpyw"]
+
+[ext_resource type="Script" path="res://assets/ui/menu/scripts/pause_menu.gd" id="1_slv7n"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_slv7n")
+
+[node name="BackGroundMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="BackGround" type="ColorRect" parent="BackGroundMarginContainer"]
+layout_mode = 2
+color = Color(0.286275, 0.286275, 0.286275, 0.737255)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+anchor_left = 0.335417
+anchor_top = 0.0266667
+anchor_right = 0.664063
+anchor_bottom = 0.1725
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 128
+text = "HYPERLUNATIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Title2" type="Label" parent="."]
+layout_mode = 2
+anchor_left = 0.0188235
+anchor_top = 0.391667
+anchor_right = 0.163529
+anchor_bottom = 0.885
+offset_top = -3.05176e-05
+offset_bottom = -27.9999
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/line_spacing = -6
+theme_override_font_sizes/font_size = 24
+text = "ESC 菜单
+F3 Debug菜单
+
+WASD移动
+Space 跳跃
+长按跳的更高
+鼠标下滚轮 小跳
+Shift 冲刺
+
+Q 转身
+Alt 回头
+
+左键 开枪
+
+F 捡起
+R 旋转物体
+鼠标滚轮 调整物体远近
+
+Z 视野缩放
+鼠标滚轮 调整缩放
+
+Ctrl 
+低速模式 静步 防止掉落 空中低速"
+metadata/_edit_use_anchors_ = true
+
+[node name="Title3" type="Label" parent="."]
+layout_mode = 2
+anchor_left = 0.163529
+anchor_top = 0.391667
+anchor_right = 0.373529
+anchor_bottom = 0.863333
+offset_top = -3.05176e-05
+offset_bottom = -27.9999
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/line_spacing = -6
+theme_override_font_sizes/font_size = 24
+text = "测试0.0.1c？ 
+自己做的游戏，啥也没有 
+3d fps 平台跳跃 
+把做的所有东西都放到一起了，所以没有设计完整的地图 
+纯pc 没有计划手机
+抱歉，注意导出缓存错误
+帧数可能好点
+制作了更好的水着色器，卡+10086"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(350, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.5
+offset_top = -100.0
+offset_right = 131.5
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 8
+
+[node name="Resume" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "RESUME"
+
+[node name="Restart" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "RESTART"
+
+[node name="Quit" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "QUIT"
+
+[connection signal="pressed" from="ButtonContainer/Resume" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="ButtonContainer/Quit" to="." method="_on_quit_button_pressed"]

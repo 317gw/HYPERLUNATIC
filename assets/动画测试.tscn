@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://4riup84tkbpo"]
+
+[ext_resource type="Texture2D" uid="uid://gp2khsog4o1e" path="res://assets/textures/etbreak.png" id="1_gfrvn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdrei"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g50cr"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc4up"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ba6te"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw77w"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk3ah"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akusx"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8akuh"]
+atlas = ExtResource("1_gfrvn")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j64bm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdrei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g50cr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jc4up")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ba6te")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vw77w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk3ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akusx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8akuh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="动画测试" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j64bm")
+frame = 3
+frame_progress = 0.280357

@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://bf1u7xjslyhmy"]
+
+[ext_resource type="Shader" path="res://assets/shaders/waters/soap_bubble.gdshader" id="1_c1l0b"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_642kb"]
+resource_local_to_scene = true
+noise_type = 3
+offset = Vector3(0, 0, 306.239)
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q82rd"]
+resource_local_to_scene = true
+width = 256
+height = 256
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 1.5
+noise = SubResource("FastNoiseLite_642kb")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_406jc"]
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ejml3"]
+width = 256
+height = 256
+in_3d_space = true
+seamless = true
+as_normal_map = true
+bump_strength = 2.0
+noise = SubResource("FastNoiseLite_406jc")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p08ay"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ci271"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_p08ay")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ah3vf"]
+frequency = 0.015
+fractal_lacunarity = 4.0
+fractal_weighted_strength = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4w8fl"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_ah3vf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7nf4"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_c1l0b")
+shader_parameter/albedo = Color(0.309804, 0.541176, 0.866667, 0.388235)
+shader_parameter/albedo2 = Color(0, 0, 0, 1)
+shader_parameter/saturation = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_ci271")
+shader_parameter/refraction = 0.5
+shader_parameter/refraction_texture_channel = Vector4(0.1, 0.1, 0.1, 0.1)
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_q82rd")
+shader_parameter/normal_scale = 2.0
+shader_parameter/texture_normal1 = SubResource("NoiseTexture2D_q82rd")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_ejml3")
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv2_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.04, 0.04, 0.04)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0.04, 0.04, 0.04)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/uv1_speed = Vector3(0.05, 0.05, 0.05)
+shader_parameter/uv2_speed = Vector3(0.01, 0.01, 0.01)
+shader_parameter/wave_speed = 0.01
+shader_parameter/wave_noise_scale = 10.0
+shader_parameter/wave_height_scale = 1.0
+shader_parameter/wave = SubResource("NoiseTexture2D_4w8fl")
+
+[sub_resource type="SphereMesh" id="SphereMesh_qtxpi"]
+material = SubResource("ShaderMaterial_p7nf4")
+radial_segments = 32
+rings = 16
+
+[node name="SoapBubble" type="MeshInstance3D"]
+process_mode = 1
+mesh = SubResource("SphereMesh_qtxpi")

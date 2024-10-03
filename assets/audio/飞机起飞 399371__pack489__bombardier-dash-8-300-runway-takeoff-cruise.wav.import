@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bcnndhuy8h88r"
+path="res://.godot/imported/飞机起飞 399371__pack489__bombardier-dash-8-300-runway-takeoff-cruise.wav-df1879167051a8dca96bfe5def080813.sample"
+
+[deps]
+
+source_file="res://assets/audio/飞机起飞 399371__pack489__bombardier-dash-8-300-runway-takeoff-cruise.wav"
+dest_files=["res://.godot/imported/飞机起飞 399371__pack489__bombardier-dash-8-300-runway-takeoff-cruise.wav-df1879167051a8dca96bfe5def080813.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

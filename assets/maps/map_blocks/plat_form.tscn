@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://q7v1ee3iuo4l"]
+
+[ext_resource type="Material" uid="uid://cn1gsy15bkaff" path="res://assets/materials/grid.tres" id="1_xplxk"]
+
+[sub_resource type="GDScript" id="GDScript_t3vw4"]
+script/source = "extends Node3D
+
+@onready var plat: AnimatableBody3D = $Plat
+@onready var pos_1: Node3D = $pos1
+@onready var pos_2: Node3D = $pos2
+
+
+
+func _ready() -> void:
+	plat.position = pos_1.position
+	var tween = create_tween()
+	tween.set_loops()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	tween.tween_property(plat, \"position\", pos_2.position, 5).set_delay(0.2)
+	tween.tween_property(plat, \"position\", pos_1.position, 5).set_delay(0.2)
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_yv353"]
+size = Vector3(4, 0.2, 4)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nuuyp"]
+data = PackedVector3Array(-2, 0.1, 2, 2, 0.1, 2, -2, -0.1, 2, 2, 0.1, 2, 2, -0.1, 2, -2, -0.1, 2, 2, 0.1, -2, -2, 0.1, -2, 2, -0.1, -2, -2, 0.1, -2, -2, -0.1, -2, 2, -0.1, -2, 2, 0.1, 2, 2, 0.1, -2, 2, -0.1, 2, 2, 0.1, -2, 2, -0.1, -2, 2, -0.1, 2, -2, 0.1, -2, -2, 0.1, 2, -2, -0.1, -2, -2, 0.1, 2, -2, -0.1, 2, -2, -0.1, -2, 2, 0.1, 2, -2, 0.1, 2, 2, 0.1, -2, -2, 0.1, 2, -2, 0.1, -2, 2, 0.1, -2, -2, -0.1, 2, 2, -0.1, 2, -2, -0.1, -2, 2, -0.1, 2, 2, -0.1, -2, -2, -0.1, -2)
+
+[node name="PlatForm" type="Node3D"]
+process_mode = 1
+script = SubResource("GDScript_t3vw4")
+
+[node name="Plat" type="AnimatableBody3D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plat"]
+mesh = SubResource("BoxMesh_yv353")
+surface_material_override/0 = ExtResource("1_xplxk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plat"]
+shape = SubResource("ConcavePolygonShape3D_nuuyp")
+
+[node name="pos1" type="Node3D" parent="."]
+
+[node name="pos2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24, 0)

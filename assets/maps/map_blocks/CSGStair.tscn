@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bak8ltrhbmlv5"]
+
+[ext_resource type="Script" path="res://assets/maps/map_blocks/scripts/CSGStair.tres.gd" id="1_ce5eq"]
+[ext_resource type="Shader" path="res://assets/shaders/other_author/grid.gdshader" id="1_wrumc"]
+[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="2_0vgkj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7u8t"]
+render_priority = 0
+shader = ExtResource("1_wrumc")
+shader_parameter/albedo = Color(1, 0.5, 0, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.8
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0.5)
+shader_parameter/scale = 0.01
+shader_parameter/texture_albedo = ExtResource("2_0vgkj")
+shader_parameter/texture_roughness = ExtResource("2_0vgkj")
+
+[node name="CSGStair" type="CSGBox3D"]
+snap = 0.01
+use_collision = true
+collision_layer = 2
+material = SubResource("ShaderMaterial_g7u8t")
+script = ExtResource("1_ce5eq")
+num_stairs = 4
+
+[node name="StairsSubtractCSG" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
+operation = 2
+snap = 0.01
+polygon = PackedVector2Array(0, 0.25, 0.25, 0.25, 0.25, 0.5, 0.5, 0.5, 0.5, 0.75, 0.75, 0.75, 0.75, 1, 0, 1)
+material = SubResource("ShaderMaterial_g7u8t")

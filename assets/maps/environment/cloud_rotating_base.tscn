@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dydgmg5sribn1"]
+
+[ext_resource type="Script" path="res://assets/maps/environment/CloudRotatingBase.gd" id="1_4aagb"]
+
+[node name="CloudRotatingBase" type="Node3D"]
+process_mode = 1
+editor_description = "不要往下面放东西！！"
+script = ExtResource("1_4aagb")
+cloud_count = 30
+cloud_speed = 0.01
+cloud_radius = 900.0
+cloud_height = 500.0
+cloud_scale = 100.0
+rotation_x_mix = 0.8
+speed_offset = 0.006
+r_offset = 300.0
+h_offset = 500.0
+scale_offset = 50.0
+r_offset_x_scale = 200.0

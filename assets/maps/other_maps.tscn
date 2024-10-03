@@ -1,0 +1,225 @@
+[gd_scene load_steps=20 format=3 uid="uid://yqkq8snvew0p"]
+
+[ext_resource type="Shader" path="res://assets/shaders/top_cloud.gdshader" id="1_rutse"]
+[ext_resource type="Shader" path="res://assets/shaders/bottom_cloud.gdshader" id="2_0i8ra"]
+[ext_resource type="Material" uid="uid://dgt8ovuurj2rt" path="res://assets/materials/sea2.tres" id="3_0udkl"]
+[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="4_5hxfp"]
+[ext_resource type="PackedScene" uid="uid://iwii2nshhfsm" path="res://assets/maps/levels/conway's_game_of_life.tscn" id="5_3vm7a"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vsrpy"]
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="Gradient" id="Gradient_m2loy"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cms74"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tmu1k"]
+seamless = true
+color_ramp = SubResource("Gradient_m2loy")
+noise = SubResource("FastNoiseLite_cms74")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_785t8"]
+render_priority = 0
+shader = ExtResource("1_rutse")
+shader_parameter/timeScale1 = 0.005
+shader_parameter/timeScale2 = 0.01
+shader_parameter/cloud1worldScale = 0.005
+shader_parameter/cloud2worldScale = 0.01
+shader_parameter/displacementStrength = 17.885
+shader_parameter/discardHeight = 500.0
+shader_parameter/Noise1 = SubResource("NoiseTexture2D_tmu1k")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5fja2"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pdm0j"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_5fja2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5j4h3"]
+render_priority = 0
+shader = ExtResource("2_0i8ra")
+shader_parameter/timeScale1 = 0.005
+shader_parameter/timeScale2 = 0.01
+shader_parameter/cloud1worldScale = 0.005
+shader_parameter/cloud2worldScale = 0.01
+shader_parameter/displacementStrength = 7.02
+shader_parameter/discardHeight = 500.0
+shader_parameter/Noise1 = SubResource("NoiseTexture2D_pdm0j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh4p7"]
+albedo_color = Color(1, 0.8, 0.4, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_letse"]
+size = Vector2(3000, 3000)
+subdivide_width = 500
+subdivide_depth = 500
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_acd8p"]
+size = Vector3(3000, 1, 3000)
+
+[sub_resource type="Shader" id="Shader_3rchd"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.1.dev4's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+varying vec3 uv1_triplanar_pos;
+uniform float uv1_blend_sharpness;
+varying vec3 uv1_power_normal;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	TANGENT = vec3(0.0,0.0,-1.0) * abs(NORMAL.x);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.y);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.z);
+	TANGENT = normalize(TANGENT);
+	BINORMAL = vec3(0.0,1.0,0.0) * abs(NORMAL.x);
+	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(NORMAL.y);
+	BINORMAL+= vec3(0.0,1.0,0.0) * abs(NORMAL.z);
+	BINORMAL = normalize(BINORMAL);
+	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
+	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+}
+
+vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
+	vec4 samp=vec4(0.0);
+	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
+	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
+	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
+}
+
+void fragment() {
+	vec4 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
+	ALBEDO = (albedo.rgb * albedo_tex.r) + albedo_tex.g + albedo_tex.b;
+	float metallic_tex = dot(triplanar_texture(texture_metallic,uv1_power_normal,uv1_triplanar_pos),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(triplanar_texture(texture_roughness,uv1_power_normal,uv1_triplanar_pos),roughness_texture_channel);
+	ROUGHNESS = (1.0 - albedo_tex.g) * roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cy81x"]
+render_priority = 0
+shader = SubResource("Shader_3rchd")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.5
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("4_5hxfp")
+shader_parameter/texture_roughness = ExtResource("4_5hxfp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_806ys"]
+cull_mode = 2
+
+[node name="OtherMaps" type="Node3D"]
+
+[node name="Cloud" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+
+[node name="TopCloud" type="MeshInstance3D" parent="Cloud"]
+mesh = SubResource("PlaneMesh_vsrpy")
+surface_material_override/0 = SubResource("ShaderMaterial_785t8")
+
+[node name="BottomCloud" type="MeshInstance3D" parent="Cloud"]
+mesh = SubResource("PlaneMesh_vsrpy")
+surface_material_override/0 = SubResource("ShaderMaterial_5j4h3")
+
+[node name="远景" type="Node3D" parent="."]
+
+[node name="圆锥" type="CSGCylinder3D" parent="远景"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 830, 350.6, -660)
+radius = 250.0
+height = 1000.0
+cone = true
+
+[node name="圆柱" type="CSGCylinder3D" parent="远景"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -800, 150, 650)
+radius = 100.0
+height = 500.0
+
+[node name="方块" type="CSGBox3D" parent="远景"]
+transform = Transform3D(0.892483, -0.449472, -0.0380513, 0.228073, 0.522424, -0.821618, 0.389173, 0.724602, 0.568768, 1117.42, 77.5875, -479.539)
+size = Vector3(300, 300, 300)
+
+[node name="甜甜圈" type="CSGTorus3D" parent="远景"]
+transform = Transform3D(0.735151, -0.593775, -0.327084, 0.676228, 0.676228, 0.292288, 0.04763, -0.43606, 0.898656, 620, 4, 190)
+inner_radius = 50.0
+outer_radius = 100.0
+sides = 12
+
+[node name="球" type="CSGSphere3D" parent="远景"]
+transform = Transform3D(0.939693, 0.0999684, -0.327084, 0, 0.95633, 0.292288, 0.34202, -0.274661, 0.898657, 627.39, -3.35074, 195.159)
+radius = 52.0
+
+[node name="太阳" type="CSGSphere3D" parent="远景"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -310, 720, 1040)
+visibility_range_fade_mode = 2
+radius = 100.0
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_qh4p7")
+
+[node name="Sea" type="Node3D" parent="."]
+
+[node name="Water" type="MeshInstance3D" parent="Sea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.5, 0)
+mesh = SubResource("PlaneMesh_letse")
+surface_material_override/0 = ExtResource("3_0udkl")
+
+[node name="地底" type="CSGBox3D" parent="Sea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+use_collision = true
+size = Vector3(3000, 1, 3000)
+
+[node name="Area3D" type="Area3D" parent="Sea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -27, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sea/Area3D"]
+shape = SubResource("BoxShape3D_acd8p")
+
+[node name="NormalCube" type="CSGBox3D" parent="."]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+use_collision = true
+collision_layer = 2
+size = Vector3(4, 4, 4)
+material = SubResource("ShaderMaterial_cy81x")
+
+[node name="Conway\'s Game of Life" parent="." instance=ExtResource("5_3vm7a")]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, -1, -65)
+
+[node name="SkyBall" type="CSGSphere3D" parent="."]
+transform = Transform3D(-12.2873, 0, 8.60365, 0, 15, 0, -8.60365, 0, -12.2873, 0, 0, 0)
+cast_shadow = 0
+radius = 100.0
+material = SubResource("StandardMaterial3D_806ys")

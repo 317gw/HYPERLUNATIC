@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://nodfbtkaprwb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_noj1d"]
+
+[node name="CloudSprites" type="AnimatedSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+pixel_size = 0.05
+double_sided = false
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_noj1d")

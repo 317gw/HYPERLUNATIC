@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhg1cfuc0tf3j"]
+
+[ext_resource type="Script" path="res://assets/ui/scripts/UI.gd" id="1_uwkun"]
+[ext_resource type="Texture2D" uid="uid://dpurc6nyhut8d" path="res://assets/textures/crosshair.png" id="2_hkwn4"]
+[ext_resource type="Script" path="res://assets/ui/scripts/Line2D.gd" id="3_730b6"]
+[ext_resource type="Script" path="res://assets/ui/scripts/DisplayInput.gd" id="4_lchcx"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_uwkun")
+
+[node name="Crosshair" type="TextureRect" parent="."]
+texture_filter = 3
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_hkwn4")
+
+[node name="Line2D" type="Line2D" parent="."]
+closed = true
+width = 2.0
+script = ExtResource("3_730b6")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="DisplayInput" type="RichTextLabel" parent="."]
+process_mode = 1
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 20
+text = "这是输入记录
+"
+scroll_following = true
+threaded = true
+script = ExtResource("4_lchcx")
+paragraph_cap = 7
+
+[node name="LineFeedTimer" type="Timer" parent="DisplayInput"]
+wait_time = 0.5
+one_shot = true
+
+[node name="ClearUpTimer" type="Timer" parent="DisplayInput"]
+wait_time = 30.0
+one_shot = true
+
+[connection signal="timeout" from="DisplayInput/LineFeedTimer" to="DisplayInput" method="_on_timer_timeout"]
+[connection signal="timeout" from="DisplayInput/LineFeedTimer" to="DisplayInput" method="_on_line_feed_timer_timeout"]
+[connection signal="timeout" from="DisplayInput/ClearUpTimer" to="DisplayInput" method="_on_clear_up_timer_timeout"]

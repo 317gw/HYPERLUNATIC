@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfxjb2pwltuev"]
+
+[ext_resource type="Shader" path="res://assets/shaders/other_author/grid.gdshader" id="1_42xx3"]
+[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="2_3vmsy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pclhv"]
+render_priority = 0
+shader = ExtResource("1_42xx3")
+shader_parameter/albedo = Color(1, 0.666667, 0, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.8
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/scale = 0.01
+shader_parameter/texture_albedo = ExtResource("2_3vmsy")
+shader_parameter/texture_roughness = ExtResource("2_3vmsy")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0jf20"]
+height = 0.2
+radius = 0.4
+
+[node name="Spring" type="CSGCylinder3D"]
+use_collision = true
+collision_layer = 2
+collision_mask = 37
+height = 0.1
+material = SubResource("ShaderMaterial_pclhv")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+collision_layer = 0
+collision_mask = 33
+gravity_space_override = 3
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+gravity = 800.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_0jf20")

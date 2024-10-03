@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://u1ij2mbme1o0"
+path="res://.godot/imported/步枪连 712702__harrisonlace__gun_shots_single_burst_parking_garage.wav-d0f55f6aab9fff2c6769ad2f0dd61653.sample"
+
+[deps]
+
+source_file="res://assets/audio/步枪连 712702__harrisonlace__gun_shots_single_burst_parking_garage.wav"
+dest_files=["res://.godot/imported/步枪连 712702__harrisonlace__gun_shots_single_burst_parking_garage.wav-d0f55f6aab9fff2c6769ad2f0dd61653.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

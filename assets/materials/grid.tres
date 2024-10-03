@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cn1gsy15bkaff"]
+
+[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="1_57ppx"]
+[ext_resource type="Shader" path="res://assets/shaders/other_author/grid.gdshader" id="1_cggi7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_cggi7")
+shader_parameter/albedo = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.8
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/scale = 0.01
+shader_parameter/texture_albedo = ExtResource("1_57ppx")
+shader_parameter/texture_roughness = ExtResource("1_57ppx")

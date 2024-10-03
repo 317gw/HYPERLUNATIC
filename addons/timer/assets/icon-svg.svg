@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="icon-svg.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#000000"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="1.5424102"
+     inkscape:cx="314.76711"
+     inkscape:cy="238.58763"
+     inkscape:window-width="2048"
+     inkscape:window-height="1083"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect2075"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,8,0,1 @ F,0,0,1,0,8,0,1 @ F,0,0,1,0,8,0,1 @ F,0,0,1,0,8,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="8"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect2073"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,8,0,1 @ F,0,0,1,0,8,0,1 @ F,0,0,1,0,8,0,1 @ F,0,0,1,0,8,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="8"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="offset"
+       id="path-effect1794"
+       is_visible="true"
+       lpeversion="1.2"
+       linejoin_type="miter"
+       unit="px"
+       offset="-16"
+       miter_limit="4"
+       attempt_force_join="false"
+       update_on_knot_move="true" />
+    <inkscape:path-effect
+       effect="offset"
+       id="path-effect1733"
+       is_visible="false"
+       lpeversion="1.2"
+       linejoin_type="miter"
+       unit="px"
+       offset="-16"
+       miter_limit="4"
+       attempt_force_join="false"
+       update_on_knot_move="true" />
+    <inkscape:path-effect
+       effect="offset"
+       id="path-effect1004"
+       is_visible="true"
+       lpeversion="1.2"
+       linejoin_type="miter"
+       unit="px"
+       offset="-41.104819"
+       miter_limit="4"
+       attempt_force_join="false"
+       update_on_knot_move="true" />
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter1920"
+       x="-0.019167148"
+       y="-0.10594165"
+       width="1.0543069"
+       height="1.300168">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood1910" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite1912" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="3"
+         result="blur"
+         id="feGaussianBlur1914" />
+      <feOffset
+         dx="6"
+         dy="6"
+         result="offset"
+         id="feOffset1916" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite1918" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:0.514832;fill:none;fill-opacity:0.182941;stroke:#ffffff;stroke-width:7.99991;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:0.33"
+       id="rect234"
+       width="452.80008"
+       height="107.2001"
+       x="29.599796"
+       y="202.39998"
+       inkscape:label="Rect"
+       inkscape:path-effect="#path-effect2075"
+       d="M 37.599796,202.39998 H 474.39988 a 8,8 45 0 1 8,8 l 0,91.2001 a 8,8 135 0 1 -8,8 H 37.599796 a 8,8 45 0 1 -8,-8 v -91.2001 a 8,8 135 0 1 8,-8 z" />
+    <path
+       style="opacity:0.514832;fill:#ffffff;fill-opacity:0.329412;stroke:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none"
+       id="rect1791"
+       width="230.39999"
+       height="115.2"
+       x="25.59984"
+       y="198.40002"
+       inkscape:path-effect="#path-effect1794;#path-effect2073"
+       d="M 49.599609,214.40039 H 232 a 8,8 45 0 1 8,8 v 67.19922 a 8,8 135 0 1 -8,8 H 49.599609 a 8,8 45 0 1 -8,-8 v -67.19922 a 8,8 135 0 1 8,-8 z"
+       inkscape:label="Progress"
+       sodipodi:type="rect" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:92.5912px;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;opacity:0.514832;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:44.0597;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;filter:url(#filter1920)"
+       x="61.882275"
+       y="289.05508"
+       id="text1789"
+       inkscape:label="Text"><tspan
+         sodipodi:role="line"
+         id="tspan1787"
+         x="61.882275"
+         y="289.05508"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:92.5912px;font-family:'Noto Sans Mono';-inkscape-font-specification:'Noto Sans Mono, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:44.0597;fill:#ffffff;fill-opacity:1">1:23:45</tspan></text>
+  </g>
+</svg>

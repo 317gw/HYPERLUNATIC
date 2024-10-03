@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhrv00rek3783"]
+
+[ext_resource type="Material" uid="uid://c6t0m2riv275" path="res://assets/materials/rain_particles.tres" id="1_xihll"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fhktv"]
+emission_shape_offset = Vector3(0, 40, 0)
+emission_shape_scale = Vector3(1, 0.2, 1)
+emission_shape = 2
+emission_sphere_radius = 40.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_max = 5.0
+anim_offset_max = 1.0
+collision_mode = 2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_rkodc"]
+material = ExtResource("1_xihll")
+size = Vector2(0.03, 0.4)
+
+[sub_resource type="Curve" id="Curve_q68cl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.13447, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i1gcw"]
+texture_mode = 1
+curve = SubResource("Curve_q68cl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gar81"]
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 1.5
+initial_velocity_max = 2.0
+scale_curve = SubResource("CurveTexture_i1gcw")
+anim_offset_max = 1.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.3
+
+[sub_resource type="QuadMesh" id="QuadMesh_iy8m8"]
+material = ExtResource("1_xihll")
+size = Vector2(0.03, 0.03)
+
+[node name="Rain&Collision" type="GPUParticlesCollisionHeightField3D"]
+size = Vector3(30, 1, 30)
+follow_camera_enabled = true
+
+[node name="RainParticles" type="GPUParticles3D" parent="."]
+process_mode = 1
+amount = 16384
+sub_emitter = NodePath("../SprayParticles")
+lifetime = 3.0
+preprocess = 2.0
+collision_base_size = 1.5
+process_material = SubResource("ParticleProcessMaterial_fhktv")
+draw_pass_1 = SubResource("QuadMesh_rkodc")
+
+[node name="SprayParticles" type="GPUParticles3D" parent="."]
+process_mode = 1
+emitting = false
+amount = 1024
+collision_base_size = 0.05
+process_material = SubResource("ParticleProcessMaterial_gar81")
+draw_pass_1 = SubResource("QuadMesh_iy8m8")

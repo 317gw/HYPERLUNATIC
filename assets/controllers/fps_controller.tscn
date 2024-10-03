@@ -1,0 +1,126 @@
+[gd_scene load_steps=14 format=3 uid="uid://c3ffql15mo0aj"]
+
+[ext_resource type="Script" path="res://assets/controllers/scripts/fps_controller.gd" id="1_pgc1p"]
+[ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://assets/materials/player.tres" id="2_gldw4"]
+[ext_resource type="Script" path="res://assets/controllers/scripts/Camera3D.gd" id="3_6jdnh"]
+[ext_resource type="Shader" path="res://assets/weapons/fps_controller.gdshader" id="3_cnrub"]
+[ext_resource type="PackedScene" uid="uid://bj86e8r4y1oav" path="res://assets/global/double_click.tscn" id="4_sarsy"]
+[ext_resource type="Script" path="res://assets/controllers/scripts/DebugLine.gd" id="5_fx8il"]
+[ext_resource type="AudioStream" uid="uid://cs6aqeydwcet2" path="res://assets/audio/巴雷特 721431__the_epic1357__new-barrett.mp3" id="6_f2ddr"]
+[ext_resource type="AudioStream" uid="uid://da2l0v4jeeaer" path="res://assets/audio/开关2 144286__dwoboyle__light_switch-0002-on-02.wav" id="7_8irvi"]
+[ext_resource type="AudioStream" uid="uid://t1e8auac52bx" path="res://assets/audio/开关1 725309__oldhiccup__light-switch.mp3" id="8_il10m"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6tv51"]
+material = ExtResource("2_gldw4")
+radius = 0.4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pyn6k"]
+radius = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3j8dm"]
+shader = ExtResource("3_cnrub")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t7xkq"]
+random_pitch = 1.2
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("7_8irvi")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_il10m")
+stream_1/weight = 1.0
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER", "ShootMarker3D")]
+collision_mask = 2
+floor_constant_speed = true
+script = ExtResource("1_pgc1p")
+CAMERA_CONTROLLER = NodePath("Head/Camera3D")
+ShootMarker3D = NodePath("Marker3D")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_6tv51")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_pyn6k")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+fov = 80.0
+script = ExtResource("3_6jdnh")
+MOUSE_SENSITIVITY = 0.35
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Head/Camera3D"]
+update_mode = 1
+enable_shadows = true
+
+[node name="RayCast3D" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -100)
+
+[node name="Collimator" type="ColorRect" parent="Head"]
+visible = false
+material = SubResource("ShaderMaterial_3j8dm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_force_pass_scroll_events = false
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="DebugLine" type="Node3D" parent="."]
+script = ExtResource("5_fx8il")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.08
+one_shot = true
+
+[node name="JumpRequestTimer" type="Timer" parent="Timers"]
+wait_time = 0.08
+one_shot = true
+
+[node name="TurnRoundTimer" type="Timer" parent="Timers"]
+wait_time = 0.8
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="Timers"]
+wait_time = 0.12
+one_shot = true
+
+[node name="DashCDTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Audios" type="Node3D" parent="."]
+
+[node name="DashAudio" type="AudioStreamPlayer" parent="Audios"]
+volume_db = 12.0
+pitch_scale = 0.06
+max_polyphony = 5
+
+[node name="GunAudio3D" type="AudioStreamPlayer3D" parent="Audios"]
+stream = ExtResource("6_f2ddr")
+volume_db = -25.0
+max_db = 1.0
+pitch_scale = 1.5
+max_polyphony = 10
+
+[node name="FallGroundAudio3D" type="AudioStreamPlayer3D" parent="Audios"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+stream = SubResource("AudioStreamRandomizer_t7xkq")
+pitch_scale = 0.35
+max_polyphony = 5
+
+[node name="DoubleClick" parent="." instance=ExtResource("4_sarsy")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28475, 1.44848, -0.821908)
+
+[connection signal="dash_start" from="." to="Head/Camera3D" method="_on_player_dash_start"]

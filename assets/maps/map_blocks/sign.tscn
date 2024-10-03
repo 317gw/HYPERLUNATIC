@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddvfv3jnldvx1"]
+
+[ext_resource type="Script" path="res://assets/maps/map_blocks/scripts/sign.gd" id="1_lhwlw"]
+[ext_resource type="Shader" path="res://assets/shaders/other_author/grid.gdshader" id="2_f0gpa"]
+[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="3_s3gu5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ydka7"]
+render_priority = 0
+shader = ExtResource("2_f0gpa")
+shader_parameter/albedo = Color(0.6, 0.5, 0.3, 1)
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0.5, 0.5, 0.5)
+shader_parameter/scale = 0.01
+shader_parameter/texture_albedo = ExtResource("3_s3gu5")
+shader_parameter/texture_roughness = ExtResource("3_s3gu5")
+
+[node name="Sign" type="Label3D"]
+editor_description = "最大写入5行"
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1, 0)
+shaded = true
+double_sided = false
+alpha_cut = 1
+text = "好"
+outline_size = 0
+autowrap_mode = 3
+width = 460.0
+script = ExtResource("1_lhwlw")
+
+[node name="Board" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.052)
+use_collision = true
+collision_layer = 16
+collision_mask = 0
+size = Vector3(2.4, 1.2, 0.1)
+material = SubResource("ShaderMaterial_ydka7")
+
+[node name="Stick" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3, -0.052)
+use_collision = true
+collision_layer = 16
+collision_mask = 0
+size = Vector3(0.1, 1.4, 0.1)
+material = SubResource("ShaderMaterial_ydka7")

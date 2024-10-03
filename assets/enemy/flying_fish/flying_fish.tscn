@@ -1,0 +1,250 @@
+[gd_scene load_steps=20 format=4 uid="uid://24tw178y6mry"]
+
+[ext_resource type="Script" path="res://assets/enemy/flying_fish/flying_fish.gd" id="1_l0iat"]
+[ext_resource type="Texture2D" uid="uid://moynljd8bcr5" path="res://assets/enemy/flying_fish/textures/飞鱼.png" id="2_ti4ad"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82kkc"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("2_ti4ad")
+roughness = 0.5
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_84g13"]
+resource_name = "飞鱼_Cube_001"
+_surfaces = [{
+"aabb": AABB(-7.81667, -1.69531, -4.45514, 15.6333, 3.39061, 8.876),
+"attribute_data": PackedByteArray("oBnoPQGjUT+gGeg9AaNRP6AZ6D0Bo1E/oBnoPQGjUT+gGeg9SMIcP6AZ6D1Iwhw/oBnoPUjCHD+gGeg9SMIcP4DwXjuuzVU/gPBeO67NVT+A8F47rs1VP4DwXjuuzVU/AAAAALhMGj8AAAAAuEwaPwAAAAC4TBo/AAAAALhMGj+6VGU+QlpVP7pUZT5CWlU/ulRlPkJaVT+6VGU+QlpVP8JUZz7MGxo/wlRnPswbGj/CVGc+zBsaP8JUZz7MGxo/oBnoPQAAgD+gGeg9AACAP6AZ6D0AAIA/oBnoPQAAgD+gGeg9MEPpPqAZ6D0wQ+k+AfqZPgDMdz4B+pk+AMx3Pmxejj3e5OQ+wQCFPpCheT5sXo493uTkPkLzrj6MoXk+0FkjPtrk5D5A864+kKF5PtBZIz7a5OQ+xACFPoyheT4B+pk+WNDEPgH6mT5Y0MQ+AfqZPljQxD4B+pk+WNDEPtJZIz7c5OQ+0lkjPtzk5D4gR+I+2uTkPiBH4j7a5OQ+IEfiPtzk5D4gR+I+3OTkPtBZIz7a5OQ+0FkjPtrk5D4B+pk+GGjUPgH6mT4YaNQ+AvqZPhpo1D4C+pk+GmjUPqAZ6D0Ao1E/oBnoPQCjUT+gGeg9AKNRP6AZ6D0Ao1E/oBnoPUXCHD+gGeg9RcIcP6AZ6D1Fwhw/oBnoPUXCHD+gGeg9MkPpPqAZ6D0yQ+k+AvqZPvzLdz4C+pk+/Mt3PgL6mT5W0MQ+AvqZPlbQxD4C+pk+VtDEPgL6mT5W0MQ+kPgmP/z/fz9QVVc/blnUPpD4Jj/8/38/gU9HP9IhYD9WcHc/QEcKP4FPRz/SIWA/uaUhP3RD1D65pSE/dEPUPrmlIT90Q9Q+mbtQP9Lz1D6Zu1A/0vPUPpm7UD/S89Q+x+lQP/7/fz9Mgh8/KnLUPrypIT+i+88++/9/PwAAgD9Z3VI/NFXVPpy/UD8IrNA+lPgmPwAAgD9LVVc/blnUPpT4Jj8AAIA/hE9HP9IhYD9TcHc/PEcKP4RPRz/SIWA/s6UhP3hD1D6zpSE/eEPUPrOlIT94Q9Q+lrtQP9Tz1D6Wu1A/1PPUPpa7UD/U89Q+takhP6j7zz7M6VA//v9/P0iCHz8yctQ+lr9QPwas0D4AAIA//f9/P1TdUj8yVdU+IEfiPtzk5D7QWSM+2uTkPg=="),
+"bone_aabbs": [AABB(-0.9, -1, -4.45514, 1.80001, 2, 6.48), AABB(-0.2, -1.69531, 3.72086, 0.40001, 3.39061, 0.7), AABB(0.816667, -0.05, -2.34743, 7.00001, 0.1, 2.2), AABB(-7.81667, -0.05, -2.34743, 7, 0.1, 2.2)],
+"format": 34359745559,
+"index_count": 144,
+"index_data": PackedByteArray("AQAZABAABgAJAAIABgANAAkAFQADABEAFQAHAAMACAAYAAAAJQArAB8AJQAxACsABAAgAAwABAAcACAAFAAdAAUAFAAkAB0AMAA0ACgAHgAtACEAHgAqAC0ANQAsACkAOQASABsAPgALAA8APgA6AAsAFwA7AD8AFwATADsACgA4ABoAJwBHADMAJwBDAEcAPAAiAEAAPAAOACIAFgBBACYAFgA9AEEAMgBEADYAQgAvAEYAQgAjAC8ANwBFAC4ASwBOAEgASwBRAE4ASQBXAEwASQBUAFcAVgBTAFkAVgBQAFMASgBPAFUAUgBNAFgAXQBhAGQAXQBaAGEAWwBqAGcAWwBeAGoAZgBjAGAAZgBpAGMAXABoAGIAZQBrAF8A"),
+"lods": [1.02735, PackedByteArray("BQAZABAAEAAdAAUAEAAkAB0ACAAYAAQABAAgAAgABAAcACAAJQBsAB4AHgBsACEAOQASABsAEgA5AEEAEgBBACYACgA4ABoAOAAKACIAOAAiAEAAJwBCAG0AQgAjAG0ASwBOAEgASwBRAE4ASQBXAEwASQBUAFcAVgBTAFkAVgBQAFMASgBPAFUAUgBNAFgAXQBhAGQAXQBaAGEAWwBqAGcAWwBeAGoAZgBjAGAAZgBpAGMAXABoAGIAZQBrAF8A")],
+"material": SubResource("StandardMaterial3D_82kkc"),
+"name": "Material.001",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAABAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAgAAAAAAAAD//wAAAAAAAAIAAAAAAAAA//8AAAAAAAACAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAQAAAAAAAAD//wAAAAAAAAEAAAAAAAAA//8AAAAAAAA="),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 110,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="Skin" id="Skin_lhres"]
+resource_name = "Skin"
+bind_count = 4
+bind/0/name = &"身子"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, -3.51176e-17, -3.51176e-17, 0, -1, 0, 1, 0, 7.10389e-17, 2.02289, 0)
+bind/1/name = &"尾巴"
+bind/1/bone = -1
+bind/1/pose = Transform3D(2.8213e-07, -1, -2.58493e-07, -1.36169e-07, -2.58493e-07, 1, -1, -2.8213e-07, -1.36169e-07, 5.22901e-07, -2.02289, 2.75455e-07)
+bind/2/name = &"右翅膀"
+bind/2/bone = -1
+bind/2/pose = Transform3D(1.94707e-07, -1, -2.38419e-07, 1, 1.55622e-07, -3.9085e-08, 3.90851e-08, -2.38419e-07, 1, 3.44312e-07, -0.8, 1.22723)
+bind/3/name = &"左翅膀"
+bind/3/bone = -1
+bind/3/pose = Transform3D(1.94707e-07, -1, -1.19209e-07, -1, -1.51714e-07, 1.95425e-07, -1.95425e-07, 1.19209e-07, -1, 9.46835e-09, -0.8, -1.22723)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e6b5b"]
+radius = 1.3
+height = 6.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5283h"]
+size = Vector3(0.1, 6.1, 1.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nhaig"]
+size = Vector3(0.1, 6.1, 1.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vbvfi"]
+size = Vector3(2, 2.35, 0.4)
+
+[sub_resource type="Animation" id="Animation_ut3da"]
+resource_name = "飞行"
+length = 1.25
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("骨架/Skeleton3D:尾巴")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.70682, 0.0201371, 0.70682, 0.0201373, 0.0333333, 1, -0.70682, 0.0201371, 0.70682, 0.0201373, 0.0666667, 1, -0.706888, 0.0176023, 0.706888, 0.0176024, 0.1, 1, -0.706969, 0.013945, 0.706969, 0.0139452, 0.133333, 1, -0.707037, 0.00991778, 0.707037, 0.00991794, 0.166667, 1, -0.707085, 0.0056128, 0.707084, 0.00561295, 0.233333, 1, -0.707099, -0.00336775, 0.707099, -0.0033676, 0.266667, 1, 0.707064, 0.00776539, -0.707064, 0.00776524, 0.3, 1, 0.707006, 0.0119777, -0.707005, 0.0119776, 0.333333, 1, 0.706928, 0.0159123, -0.706928, 0.0159122, 0.366667, 1, 0.706844, 0.0192923, -0.706843, 0.0192921, 0.4, 1, 0.706761, 0.0221182, -0.706761, 0.022118, 0.433333, 1, 0.706689, 0.0242984, -0.706689, 0.0242983, 0.466667, 1, 0.706638, 0.0257413, -0.706638, 0.0257411, 0.533333, 1, 0.706635, 0.0258186, -0.706635, 0.0258184, 0.566667, 1, 0.706681, 0.024552, -0.70668, 0.0245518, 0.6, 1, 0.706745, 0.0226297, -0.706745, 0.0226295, 0.633333, 1, 0.70682, 0.0201263, -0.70682, 0.0201261, 0.666667, 1, 0.7069, 0.0171163, -0.706899, 0.0171161, 0.7, 1, 0.706976, 0.0135804, -0.706976, 0.0135802, 0.733333, 1, 0.707039, 0.00976226, -0.707039, 0.00976205, 0.766667, 1, 0.707084, 0.0057371, -0.707083, 0.00573689, 0.8, 1, 0.707105, 0.00158012, -0.707105, 0.0015799, 0.833333, 1, -0.707102, 0.00263335, 0.707102, 0.00263357, 0.866667, 1, -0.707074, 0.0067715, 0.707074, 0.00677171, 0.9, 1, -0.707025, 0.0107402, 0.707025, 0.0107404, 0.933333, 1, -0.706959, 0.0144643, 0.706959, 0.0144645, 0.966667, 1, -0.706881, 0.0178687, 0.706881, 0.0178689, 1, 1, -0.706799, 0.0208786, 0.706798, 0.0208788, 1.03333, 1, -0.706726, 0.0232132, 0.706726, 0.0232134, 1.06667, 1, -0.706667, 0.0249294, 0.706667, 0.0249296, 1.1, 1, -0.70663, 0.0259527, 0.70663, 0.0259529, 1.16667, 1, -0.706644, 0.0255877, 0.706644, 0.0255879, 1.2, 1, -0.706704, 0.0238685, 0.706704, 0.0238687, 1.23333, 1, -0.706781, 0.0214578, 0.706781, 0.0214579, 1.25, 1, -0.70682, 0.0201371, 0.70682, 0.0201373)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("骨架/Skeleton3D:右翅膀")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.579228, 0.40558, -0.40558, 0.579228, 0.0333333, 1, 0.579228, 0.40558, -0.40558, 0.579228, 0.0666667, 1, 0.578011, 0.407312, -0.407312, 0.578011, 0.1, 1, 0.574898, 0.411695, -0.411695, 0.574898, 0.133333, 1, 0.569607, 0.418985, -0.418985, 0.569607, 0.166667, 1, 0.562267, 0.428785, -0.428785, 0.562266, 0.2, 1, 0.552568, 0.441212, -0.441212, 0.552568, 0.233333, 1, 0.541297, 0.45497, -0.45497, 0.541297, 0.266667, 1, 0.528628, 0.46963, -0.46963, 0.528628, 0.3, 1, 0.514777, 0.484773, -0.484773, 0.514777, 0.366667, 1, 0.484773, 0.514777, -0.514776, 0.484773, 0.4, 1, 0.46963, 0.528628, -0.528628, 0.46963, 0.433333, 1, 0.45497, 0.541297, -0.541296, 0.45497, 0.466667, 1, 0.441212, 0.552568, -0.552568, 0.441212, 0.5, 1, 0.428785, 0.562267, -0.562266, 0.428785, 0.533333, 1, 0.418985, 0.569607, -0.569606, 0.418985, 0.566667, 1, 0.411695, 0.574898, -0.574898, 0.411695, 0.6, 1, 0.407312, 0.578011, -0.578011, 0.407312, 0.633333, 1, 0.406085, 0.578874, -0.578874, 0.406085, 0.666667, 1, 0.408102, 0.577454, -0.577454, 0.408102, 0.7, 1, 0.413767, 0.573408, -0.573408, 0.413767, 0.733333, 1, 0.421714, 0.56759, -0.567589, 0.421713, 0.766667, 1, 0.431613, 0.560098, -0.560098, 0.431613, 0.8, 1, 0.443127, 0.551034, -0.551034, 0.443127, 0.833333, 1, 0.455911, 0.540505, -0.540505, 0.455911, 0.866667, 1, 0.469829, 0.528451, -0.528451, 0.469829, 0.9, 1, 0.484045, 0.515461, -0.515461, 0.484045, 0.966667, 1, 0.512105, 0.487595, -0.487594, 0.512105, 1, 1, 0.525381, 0.47326, -0.473259, 0.525381, 1.03333, 1, 0.537525, 0.45942, -0.45942, 0.537525, 1.06667, 1, 0.54843, 0.446346, -0.446346, 0.54843, 1.1, 1, 0.557952, 0.434384, -0.434384, 0.557952, 1.13333, 1, 0.565973, 0.42388, -0.42388, 0.565973, 1.16667, 1, 0.572388, 0.415177, -0.415177, 0.572388, 1.2, 1, 0.576448, 0.409522, -0.409522, 0.576448, 1.23333, 1, 0.57852, 0.40659, -0.40659, 0.57852, 1.25, 1, 0.579228, 0.40558, -0.40558, 0.579228)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("骨架/Skeleton3D:左翅膀")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, -0.40558, 0.579228, 0.579228, 0.40558, 0.0333333, 1, -0.40558, 0.579228, 0.579228, 0.40558, 0.0666667, 1, -0.407312, 0.578011, 0.578011, 0.407312, 0.1, 1, -0.411695, 0.574898, 0.574898, 0.411695, 0.133333, 1, -0.418985, 0.569606, 0.569607, 0.418985, 0.166667, 1, -0.428785, 0.562266, 0.562267, 0.428785, 0.2, 1, -0.441212, 0.552568, 0.552568, 0.441212, 0.233333, 1, -0.45497, 0.541296, 0.541297, 0.45497, 0.266667, 1, -0.46963, 0.528628, 0.528628, 0.46963, 0.3, 1, -0.484773, 0.514776, 0.514777, 0.484773, 0.366667, 1, -0.514777, 0.484773, 0.484773, 0.514777, 0.4, 1, -0.528628, 0.46963, 0.46963, 0.528628, 0.433333, 1, -0.541297, 0.45497, 0.45497, 0.541297, 0.466667, 1, -0.552568, 0.441212, 0.441212, 0.552568, 0.5, 1, -0.562267, 0.428785, 0.428785, 0.562267, 0.533333, 1, -0.569607, 0.418985, 0.418985, 0.569607, 0.566667, 1, -0.574898, 0.411695, 0.411695, 0.574898, 0.6, 1, -0.578011, 0.407312, 0.407312, 0.578011, 0.633333, 1, -0.578874, 0.406085, 0.406085, 0.578874, 0.666667, 1, -0.577454, 0.408102, 0.408102, 0.577454, 0.7, 1, -0.573408, 0.413767, 0.413767, 0.573408, 0.733333, 1, -0.56759, 0.421713, 0.421713, 0.56759, 0.766667, 1, -0.560098, 0.431613, 0.431613, 0.560098, 0.8, 1, -0.551034, 0.443127, 0.443127, 0.551034, 0.833333, 1, -0.540505, 0.455911, 0.455911, 0.540505, 0.866667, 1, -0.528451, 0.469829, 0.469829, 0.528451, 0.9, 1, -0.515461, 0.484045, 0.484045, 0.515461, 0.966667, 1, -0.487595, 0.512105, 0.512105, 0.487595, 1, 1, -0.47326, 0.525381, 0.525381, 0.47326, 1.03333, 1, -0.45942, 0.537525, 0.537525, 0.45942, 1.06667, 1, -0.446346, 0.54843, 0.54843, 0.446346, 1.1, 1, -0.434384, 0.557952, 0.557952, 0.434384, 1.13333, 1, -0.42388, 0.565973, 0.565973, 0.42388, 1.16667, 1, -0.415177, 0.572388, 0.572388, 0.415177, 1.2, 1, -0.409522, 0.576447, 0.576448, 0.409522, 1.23333, 1, -0.40659, 0.57852, 0.57852, 0.40659, 1.25, 1, -0.40558, 0.579228, 0.579228, 0.40558)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vf7bb"]
+_data = {
+"飞行": SubResource("Animation_ut3da")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_os6p2"]
+radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_thvtm"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c3otu"]
+animation = &"飞行"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lk7gu"]
+animation = &"飞行"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dv07u"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3k4jp"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f7t40"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hrig2"]
+"states/飞行/node" = SubResource("AnimationNodeAnimation_lk7gu")
+"states/飞行/position" = Vector2(369.8, 44.2)
+"states/飞行 2/node" = SubResource("AnimationNodeAnimation_c3otu")
+"states/飞行 2/position" = Vector2(529, 39.4)
+transitions = ["飞行", "飞行 2", SubResource("AnimationNodeStateMachineTransition_dv07u"), "飞行 2", "飞行", SubResource("AnimationNodeStateMachineTransition_3k4jp"), "Start", "飞行", SubResource("AnimationNodeStateMachineTransition_f7t40")]
+graph_offset = Vector2(5, -65)
+
+[node name="FlyingFish" type="CharacterBody3D" groups=["BodyBoneRoot", "CanAuxiliaryAiming", "FlyingFish"]]
+process_mode = 1
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+collision_layer = 4
+collision_mask = 615
+script = ExtResource("1_l0iat")
+
+[node name="飞鱼2" type="Node3D" parent="."]
+
+[node name="骨架" type="Node3D" parent="飞鱼2"]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="飞鱼2/骨架"]
+bones/0/name = "身子"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, -3.51176e-17, -1.65436e-24, 1.65436e-24, 0, 1, -3.51176e-17, -1, 0, 0, 0, 2.02289)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0, 2.02289)
+bones/0/rotation = Quaternion(-0.707107, 1.24159e-17, 1.24159e-17, 0.707107)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "尾巴"
+bones/1/parent = 0
+bones/1/rest = Transform3D(3.57628e-07, -1.36169e-07, -1, 2.58492e-07, -1, 1.36169e-07, -1, -2.58493e-07, -3.57628e-07, 4.03531e-25, -9.53674e-07, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(4.03531e-25, -9.53674e-07, 0)
+bones/1/rotation = Quaternion(0.706957, -0.0145707, -0.706957, -0.0145709)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "右翅膀"
+bones/2/parent = 0
+bones/2/rest = Transform3D(1.78814e-07, 1, 0, 2.08616e-07, 0, -1, -1, 2.08616e-07, -2.38419e-07, 0.8, 3.25012, 7.92673e-07)
+bones/2/enabled = true
+bones/2/position = Vector3(0.8, 3.25012, 7.92673e-07)
+bones/2/rotation = Quaternion(0.498708, 0.501289, -0.501288, 0.498708)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/name = "左翅膀"
+bones/3/parent = 0
+bones/3/rest = Transform3D(1.19209e-07, -1, -1.78814e-07, 1.78814e-07, -2.38419e-07, 1, -1, -1.78814e-07, 1.19209e-07, -0.8, 3.25012, 1.94316e-15)
+bones/3/enabled = true
+bones/3/position = Vector3(-0.8, 3.25012, 1.94316e-15)
+bones/3/rotation = Quaternion(-0.501289, 0.498708, 0.498708, 0.501289)
+bones/3/scale = Vector3(1, 1, 1)
+
+[node name="飞鱼" type="MeshInstance3D" parent="飞鱼2/骨架/Skeleton3D"]
+mesh = SubResource("ArrayMesh_84g13")
+skin = SubResource("Skin_lhres")
+
+[node name="身子" type="BoneAttachment3D" parent="飞鱼2/骨架/Skeleton3D"]
+transform = Transform3D(1, -3.51175e-17, 0, 0, 0, 1, -3.51175e-17, -1, 0, 0, 0, 2.02289)
+bone_name = "身子"
+bone_idx = 0
+
+[node name="Area3D" type="Area3D" parent="飞鱼2/骨架/Skeleton3D/身子" groups=["BodyBoneParts"]]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="飞鱼2/骨架/Skeleton3D/身子/Area3D"]
+transform = Transform3D(0.707107, -9.92617e-24, 0.707107, -7.10543e-15, 1, 7.10543e-15, -0.707107, 0, 0.707107, 0, 3, 0)
+shape = SubResource("CapsuleShape3D_e6b5b")
+
+[node name="左翅膀" type="BoneAttachment3D" parent="飞鱼2/骨架/Skeleton3D"]
+transform = Transform3D(0.00516111, -0.999987, 2.98023e-08, -0.999987, -0.00516114, 0, 2.98023e-08, 3.5117e-17, -1, -0.8, 1.94316e-15, -1.22723)
+bone_name = "左翅膀"
+bone_idx = 3
+
+[node name="AnimatableBody3D" type="Area3D" parent="飞鱼2/骨架/Skeleton3D/左翅膀" groups=["BodyBoneParts"]]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="飞鱼2/骨架/Skeleton3D/左翅膀/AnimatableBody3D"]
+transform = Transform3D(1, 3.5527e-15, 1.42109e-14, 3.38813e-21, 1, 2.84217e-14, 0, 0, 1, -1.49012e-08, 3.1, 1.19209e-07)
+shape = SubResource("BoxShape3D_5283h")
+
+[node name="右翅膀" type="BoneAttachment3D" parent="飞鱼2/骨架/Skeleton3D"]
+transform = Transform3D(-0.00516045, 0.999987, 5.36442e-07, -0.999987, -0.00516039, -5.96046e-07, -5.36442e-07, -4.76837e-07, 1, 0.8, 7.92673e-07, -1.22723)
+bone_name = "右翅膀"
+bone_idx = 2
+
+[node name="AnimatableBody3D" type="Area3D" parent="飞鱼2/骨架/Skeleton3D/右翅膀" groups=["BodyBoneParts"]]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="飞鱼2/骨架/Skeleton3D/右翅膀/AnimatableBody3D"]
+transform = Transform3D(1, 7.10543e-15, 0, -8.47033e-22, 1, -7.10543e-15, 1.42109e-14, 0, 1, 3.41061e-13, 3.1, 0)
+shape = SubResource("BoxShape3D_nhaig")
+
+[node name="尾巴" type="BoneAttachment3D" parent="飞鱼2/骨架/Skeleton3D"]
+transform = Transform3D(-9.94253e-24, -0.0412038, -0.999151, -1, -2.81259e-07, 0, -2.83122e-07, 0.999151, -0.0412038, 3.38941e-23, 0, 2.02289)
+bone_name = "尾巴"
+bone_idx = 1
+
+[node name="AnimatableBody3D" type="Area3D" parent="飞鱼2/骨架/Skeleton3D/尾巴" groups=["BodyBoneParts"]]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="飞鱼2/骨架/Skeleton3D/尾巴/AnimatableBody3D"]
+transform = Transform3D(1, -2.84217e-14, -2.16448e-14, -2.84217e-14, 1, 1.42109e-14, 6.77691e-15, 1.42109e-14, 1, 0, 1, 5.68434e-14)
+shape = SubResource("BoxShape3D_vbvfi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="飞鱼2"]
+libraries = {
+"": SubResource("AnimationLibrary_vf7bb")
+}
+
+[node name="触底轴心" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 0)
+shape = SubResource("SphereShape3D_os6p2")
+
+[node name="FlockView" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+priority = 1
+
+[node name="ViewRadius" type="CollisionShape3D" parent="FlockView"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_thvtm")
+
+[node name="HitBox" type="Area3D" parent="."]
+visible = false
+monitorable = false
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../飞鱼2")
+root_motion_track = NodePath("骨架/Skeleton3D:身子")
+tree_root = SubResource("AnimationNodeStateMachine_hrig2")
+anim_player = NodePath("../飞鱼2/AnimationPlayer")
+
+[connection signal="body_entered" from="FlockView" to="." method="_on_flock_view_body_entered"]
+[connection signal="body_exited" from="FlockView" to="." method="_on_flock_view_body_exited"]

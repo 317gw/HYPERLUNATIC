@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dedslvgl13fng"
+path="res://.godot/imported/冲刺 646166__atomic-potato__rocky-dash.wav-0b80e4f274fbdb944fc5dea11a4abda8.sample"
+
+[deps]
+
+source_file="res://assets/audio/冲刺 646166__atomic-potato__rocky-dash.wav"
+dest_files=["res://.godot/imported/冲刺 646166__atomic-potato__rocky-dash.wav-0b80e4f274fbdb944fc5dea11a4abda8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

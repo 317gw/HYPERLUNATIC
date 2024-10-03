@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgfw2ekkdclvk"]
+
+[ext_resource type="Script" path="res://assets/systems/water_physics/scripts/water_physics.gd" id="1_wkaqe"]
+[ext_resource type="Script" path="res://assets/controllers/state_scripts/StateMachine.gd" id="2_qylq1"]
+[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/out_water.gd" id="3_68qmd"]
+[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/probe_simulations.gd" id="4_xt212"]
+[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/simple_simulations.gd" id="5_xxf25"]
+[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/at_surface.gd" id="6_mg8q4"]
+[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/in_water_sleeping.gd" id="7_v1d5w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyd5j"]
+albedo_color = Color(0.6, 1, 0.5, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gpks3"]
+material = SubResource("StandardMaterial3D_uyd5j")
+radius = 0.3
+height = 0.6
+radial_segments = 12
+rings = 6
+
+[node name="WaterPhysics" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_wkaqe")
+angular_damp = 0.05
+Kd = 100.0
+
+[node name="BuoyancyProbe" type="Node3D" parent="."]
+editor_description = "浮力探针"
+
+[node name="ResistanceProbe" type="Node3D" parent="."]
+editor_description = "阻力探针"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+top_level = true
+mesh = SubResource("SphereMesh_gpks3")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+top_level = true
+enabled = false
+target_position = Vector3(0, -100, 0)
+collision_mask = 512
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="WaterPhysicsStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_qylq1")
+initial_state = NodePath("OutWater")
+
+[node name="OutWater" type="Node" parent="WaterPhysicsStateMachine"]
+script = ExtResource("3_68qmd")
+
+[node name="ProbeSimulations" type="Node" parent="WaterPhysicsStateMachine"]
+script = ExtResource("4_xt212")
+
+[node name="SimpleSimulations" type="Node" parent="WaterPhysicsStateMachine"]
+script = ExtResource("5_xxf25")
+
+[node name="AtSurface" type="Node" parent="WaterPhysicsStateMachine"]
+script = ExtResource("6_mg8q4")
+
+[node name="InWaterSleeping" type="Node" parent="WaterPhysicsStateMachine"]
+script = ExtResource("7_v1d5w")

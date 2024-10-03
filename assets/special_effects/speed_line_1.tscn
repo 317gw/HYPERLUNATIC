@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://0q6b86lt8kno"]
+
+[ext_resource type="Script" path="res://assets/controllers/scripts/SpeedLine1.gd" id="1_gi2g8"]
+[ext_resource type="Material" uid="uid://b43olvcbmj8a8" path="res://assets/materials/airflow.tres" id="2_u6mna"]
+
+[sub_resource type="Curve" id="Curve_qrk7e"]
+
+[sub_resource type="Curve" id="Curve_ds36b"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.148773, 0.993932), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ttkpr"]
+curve = SubResource("Curve_ds36b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_knkuw"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.5
+emission_ring_inner_radius = 1.0
+angle_max = 90.0
+direction = Vector3(0, 0, 1)
+spread = 2.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_ttkpr")
+
+[sub_resource type="QuadMesh" id="QuadMesh_l1iyw"]
+material = ExtResource("2_u6mna")
+size = Vector2(6, 0.05)
+center_offset = Vector3(0, 0, 1.5)
+orientation = 0
+
+[node name="SpeedLineDad" type="Node3D"]
+visible = false
+script = ExtResource("1_gi2g8")
+scale_curve = SubResource("Curve_qrk7e")
+
+[node name="SpeedLineParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
+amount = 64
+lifetime = 4.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_knkuw")
+draw_pass_1 = SubResource("QuadMesh_l1iyw")

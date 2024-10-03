@@ -1,0 +1,40 @@
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://b0c8dagjifwly"]
+
+[ext_resource type="Texture2D" uid="uid://nn0hnblihc8l" path="res://assets/textures/UE_grid/UnrealEditor_13UaG1Yipa.png" id="1_7sacq"]
+[ext_resource type="Texture2D" uid="uid://huhyuabiaucw" path="res://assets/textures/UE_grid/UnrealEditor_rfoqPUUfOS.png" id="2_bdngj"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_24ewc"]
+texture = ExtResource("1_7sacq")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_370t0"]
+texture = ExtResource("2_bdngj")
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_5ju0r"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_8dki0"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_6intt"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+"
+graph_offset = Vector2(-1489.77, -6.32334)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_24ewc")
+nodes/fragment/2/position = Vector2(-1540, 40)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_370t0")
+nodes/fragment/3/position = Vector2(-1540, 340)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorOp_5ju0r")
+nodes/fragment/4/position = Vector2(-1160, 120)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_8dki0")
+nodes/fragment/5/position = Vector2(-940, 160)
+nodes/fragment/6/node = SubResource("VisualShaderNodeIf_6intt")
+nodes/fragment/6/position = Vector2(-560, 280)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 4, 0, 5, 0, 3, 0, 5, 1)

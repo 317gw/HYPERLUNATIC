@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn3v37j4bojle"]
+
+[ext_resource type="Script" path="res://assets/enemy/scripts/random_flying_fishs.gd" id="1_hu1ny"]
+[ext_resource type="PackedScene" uid="uid://24tw178y6mry" path="res://assets/enemy/flying_fish/flying_fish.tscn" id="2_toxxh"]
+
+[node name="RandomFlyingFishs" type="Node3D"]
+script = ExtResource("1_hu1ny")
+Fish = ExtResource("2_toxxh")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1d5kx8oo1gak"]
+
+[ext_resource type="PlaneMesh" uid="uid://dqgf66ss63tom" path="res://assets/special_effects/impact_wave.tres" id="1_yg3cm"]
+
+[node name="ImpactWave" type="MeshInstance3D"]
+mesh = ExtResource("1_yg3cm")

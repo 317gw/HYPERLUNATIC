@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwjhsx6p3mxmw"
+path="res://.godot/imported/塑料散弹枪上膛 628640__el_boss__bug-a-salt-reload-plastic-shotgun.wav-b47abff6490d579d763ae01ac0f208b7.sample"
+
+[deps]
+
+source_file="res://assets/weapons/sounds/塑料散弹枪上膛 628640__el_boss__bug-a-salt-reload-plastic-shotgun.wav"
+dest_files=["res://.godot/imported/塑料散弹枪上膛 628640__el_boss__bug-a-salt-reload-plastic-shotgun.wav-b47abff6490d579d763ae01ac0f208b7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

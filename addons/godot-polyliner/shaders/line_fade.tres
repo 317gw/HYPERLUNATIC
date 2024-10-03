@@ -1,0 +1,39 @@
+[gd_resource type="Shader" format=3 uid="uid://bpkesrnyx2hr5"]
+
+[resource]
+code = "shader_type spatial;
+render_mode skip_vertex_transform, cull_disabled;
+render_mode unshaded;
+//render_mode blend_add;
+
+#include \"res://addons/godot-polyliner/shaders/include/polyliner_inc.gdshaderinc\"
+
+// Shader for swooshy sword effects.
+// Only really makes sense to use this
+// with Tangent Facing enabled
+
+uniform float line_width = 0.4;
+uniform sampler2D width_curve : source_color;
+uniform bool tangent_facing = true;
+uniform float tangent_offset = 0.5;
+
+void vertex() {
+	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
+	NORMAL = mat3(MODELVIEW_MATRIX) * NORMAL;
+	TANGENT = mat3(MODELVIEW_MATRIX) * TANGENT;
+	
+	float is_end;
+	quick_line(line_width,false);
+	
+	VERTEX += BINORMAL * tangent_offset;
+}
+
+uniform vec4 color : source_color = vec4(vec3(1.0),1.0);
+uniform float alpha_curve : hint_range(0.0,1.0,0.005) = 0.5;
+void fragment(){
+	NORMAL = FRONT_FACING ? NORMAL : -NORMAL;
+	float thing = smoothstep(1.0,0.0,UV.x);
+	thing = 1.0-pow(thing,alpha_curve);
+	ALPHA = thing;
+	ALBEDO = mix(color.rgb,vec3(1.0),thing);
+}"

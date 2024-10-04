@@ -220,6 +220,7 @@ jolt_3d/limits/max_angular_velocity=600.0
 [rendering]
 
 textures/canvas_textures/default_texture_filter=3
+lights_and_shadows/directional_shadow/size=8192
 reflections/sky_reflections/fast_filter_high_quality=true
 textures/decals/filter=4
 textures/light_projectors/filter=4

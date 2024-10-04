@@ -37,17 +37,17 @@ size = Vector3(10, 1, 10)
 subdivide_width = 10
 subdivide_depth = 10
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_02l0s"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xnk6"]
 resource_local_to_scene = true
 frequency = 0.005
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wjp05"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_prx7q"]
 resource_local_to_scene = true
 seamless = true
 as_normal_map = true
-noise = SubResource("FastNoiseLite_02l0s")
+noise = SubResource("FastNoiseLite_0xnk6")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kg6j"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd4r8"]
 resource_local_to_scene = true
 transparency = 1
 cull_mode = 2
@@ -55,9 +55,9 @@ depth_draw_mode = 1
 albedo_color = Color(0.309804, 0.541176, 0.866667, 0.388235)
 roughness = 0.0
 normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_wjp05")
+normal_texture = SubResource("NoiseTexture2D_prx7q")
 refraction_enabled = true
-refraction_texture = SubResource("NoiseTexture2D_wjp05")
+refraction_texture = SubResource("NoiseTexture2D_prx7q")
 uv1_scale = Vector3(0.04, 0.04, 0.04)
 uv1_triplanar = true
 uv1_world_triplanar = true
@@ -328,7 +328,7 @@ occluder = SubResource("BoxOccluder3D_kjtr1")
 [node name="WaterMaker3D" parent="." instance=ExtResource("4_yvlnf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, -6)
 mesh = SubResource("BoxMesh_4su60")
-material = SubResource("StandardMaterial3D_5kg6j")
+material = SubResource("StandardMaterial3D_fd4r8")
 
 [node name="WaterMaker3D4" parent="." instance=ExtResource("4_yvlnf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -12.5, -1)

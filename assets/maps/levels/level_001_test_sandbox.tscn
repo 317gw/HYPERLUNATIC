@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://b1yleqbb8tc7x"]
+[gd_scene load_steps=112 format=3 uid="uid://b1yleqbb8tc7x"]
 
 [ext_resource type="Shader" path="res://assets/shaders/top_cloud.gdshader" id="2_rqnax"]
 [ext_resource type="Material" uid="uid://cn1gsy15bkaff" path="res://assets/materials/grid.tres" id="2_x5xie"]
@@ -6,15 +6,19 @@
 [ext_resource type="Shader" path="res://assets/shaders/pixelated_shadows.gdshader" id="3_13vii"]
 [ext_resource type="Shader" path="res://assets/shaders/bottom_cloud.gdshader" id="3_ki07r"]
 [ext_resource type="PackedScene" uid="uid://cn3v37j4bojle" path="res://assets/enemy/flying_fish/random_flying_fishs.tscn" id="3_ncmpl"]
+[ext_resource type="PackedScene" uid="uid://du85v8jerwcaf" path="res://assets/maps/environment/sun_base.tscn" id="3_ulces"]
 [ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="3_yfwkt"]
 [ext_resource type="Environment" uid="uid://dsay4gdr8k6ur" path="res://assets/maps/environment/WE_test.tres" id="4_8itc7"]
 [ext_resource type="PackedScene" uid="uid://24tw178y6mry" path="res://assets/enemy/flying_fish/flying_fish.tscn" id="4_attlp"]
 [ext_resource type="PackedScene" uid="uid://b6dtopvb54qyu" path="res://assets/controllers/player_controller.tscn" id="4_efh88"]
+[ext_resource type="PackedScene" uid="uid://dydgmg5sribn1" path="res://assets/maps/environment/cloud_rotating_base.tscn" id="4_gb0jf"]
 [ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="5_aesjl"]
+[ext_resource type="PackedScene" uid="uid://bdka0m7dypt7t" path="res://assets/maps/大水测试.tscn" id="5_db3jv"]
 [ext_resource type="PackedScene" uid="uid://bw7bpxiao2prn" path="res://assets/maps/map_blocks/dynamite_barrel.tscn" id="6_6xlc4"]
 [ext_resource type="PackedScene" uid="uid://bg24r2642jpyw" path="res://assets/ui/menu/pause_menu.tscn" id="6_vjtwi"]
 [ext_resource type="Texture2D" uid="uid://dmslwed4yt5hr" path="res://assets/textures/industrial_sunset_puresky_512.png" id="7_xvu2l"]
 [ext_resource type="PackedScene" uid="uid://smrf1msp4uhn" path="res://assets/global/mobility_detection.tscn" id="8_ws0m0"]
+[ext_resource type="PackedScene" uid="uid://iwii2nshhfsm" path="res://assets/maps/levels/conway's_game_of_life.tscn" id="9_k4ugu"]
 [ext_resource type="PackedScene" uid="uid://q7v1ee3iuo4l" path="res://assets/maps/map_blocks/plat_form.tscn" id="9_uwmfc"]
 [ext_resource type="Shader" path="res://assets/shaders/Dashed Grid (The Best Darn Grid Shader (Yet)).gdshader" id="11_jig04"]
 [ext_resource type="PackedScene" uid="uid://dfxjb2pwltuev" path="res://assets/maps/map_blocks/spring.tscn" id="11_y7na0"]
@@ -774,7 +778,7 @@ transform = Transform3D(0.797584, 0.0431278, -0.601664, 0, 0.997441, 0.0714974, 
 light_color = Color(1, 0.983333, 0.9, 1)
 light_energy = 2.0
 light_angular_distance = 0.4
-light_cull_mask = 4294967294
+light_cull_mask = 4293918726
 shadow_enabled = true
 shadow_normal_bias = 3.5
 shadow_opacity = 0.8
@@ -791,11 +795,17 @@ editor_description = "透云光和近距离"
 transform = Transform3D(0.797584, 0.0431278, -0.601664, 1.58497e-09, 0.997441, 0.0714974, 0.603208, -0.0570252, 0.795543, 0, -100, 0)
 light_color = Color(1, 0.984314, 0.901961, 1)
 light_energy = 3.0
-light_cull_mask = 4294967289
+light_cull_mask = 4293918721
 shadow_enabled = true
 shadow_bias = 0.2
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 180.0
+
+[node name="SunBase" parent="." instance=ExtResource("3_ulces")]
+
+[node name="CloudRotatingBase" parent="." instance=ExtResource("4_gb0jf")]
+
+[node name="大水测试" parent="." instance=ExtResource("5_db3jv")]
 
 [node name="RandomFlyingFishs" parent="." instance=ExtResource("3_ncmpl")]
 fishs = 1
@@ -807,6 +817,9 @@ max_speed = 0.0
 
 [node name="Player" parent="." instance=ExtResource("4_efh88")]
 transform = Transform3D(-0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, -0.173648, -15.3513, 39.4232, 45.0129)
+
+[node name="Conway\'s Game of Life" parent="." instance=ExtResource("9_k4ugu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8162, 0, -101.985)
 
 [node name="OtherMaps" type="Node3D" parent="."]
 
@@ -858,12 +871,10 @@ radius = 52.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.25, 0)
 
 [node name="Water" type="MeshInstance3D" parent="OtherMaps/Sea"]
-visible = false
 mesh = SubResource("PlaneMesh_letse")
 
 [node name="地底" type="CSGBox3D" parent="OtherMaps/Sea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
-visible = false
 use_collision = true
 size = Vector3(3000, 1, 3000)
 
@@ -1427,6 +1438,7 @@ material = SubResource("ShaderMaterial_orbra")
 
 [node name="锁链3" type="Path3D" parent="Maps/练习图"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.868, 39.1745, 44.9781)
+visible = false
 curve = SubResource("Curve3D_bm6dd")
 script = ExtResource("12_v6l07")
 iter_add_last_point = false
@@ -1770,12 +1782,15 @@ process_mode = 1
 [node name="TestDispenser" type="MeshInstance3D" parent="弹幕"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 20, 50)
 material_override = ExtResource("26_5nawn")
+transparency = 0.5
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_ilsen")
 script = ExtResource("26_xshhw")
 only_reset_Dispenser_class = true
-time_for_reset = 0.1
-reset_delay_time = 0.1
+disk_count = 4
+disk_radius = 2.0
+stripe_count = 3
+stripe_range = 90.0
 spherical_count = 100.0
 bullet_lifetime = 20.0
 exceeding_the_cap_mode = 1

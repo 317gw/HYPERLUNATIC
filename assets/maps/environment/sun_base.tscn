@@ -79,7 +79,6 @@ skeleton = NodePath("../Sun")
 [node name="Sun" type="CSGSphere3D" parent="."]
 transform = Transform3D(1, 0, 0, 3.72529e-09, 1, 3.72529e-09, 0, 7.45058e-09, 1, 0, 0, 1400)
 cast_shadow = 0
-visibility_range_fade_mode = 2
 radius = 42.0
 rings = 8
 material = ExtResource("4_hua1m")

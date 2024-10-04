@@ -1,6 +1,13 @@
 # HYPERLUNATIC
 
-HYPERLUNATIC项目备份存档开源学习文件，由317gw制作，Godot Engine 4.3.stable开发。
+![太阳景色](/forREADME/godot.windows.opt.tools.64_GtXq4hUzeo.jpg)
+![弹幕](/forREADME/godot.windows.opt.tools.64_bKXhlvlfwd.jpg)
+![水下](/forREADME/godot.windows.opt.tools.64_WjNpwygEvz.jpg)
+
+HYPERLUNATIC游戏项目备份存档开源学习文件和文件夹，由317gw制作，Godot Engine 4.3.stable开发。
+
+
+#### 介绍：
 
 这是一款开源的3D游戏，融合动作、射击、平台跳跃、弹幕躲避等元素。
 
@@ -13,23 +20,44 @@ HYPERLUNATIC项目备份存档开源学习文件，由317gw制作，Godot Engine
 画面。采用低分辨率贴图，根据物体性质的选择性PBR材质，必要而简约的光照效果，较重要的着色器，总体制造一个给古老的游戏进行现代视觉优化之后的效果。
 
 玩法主要参考：
-ULTRAKILL、
-Celeste、
-Mirror’s Edge、
-Garry's Mod、
-Half-Life 2、
-Touhou Project、
-Minecraft、
-Touhou Luna Nights、
-沙雕之路、
-Antimatter Dimensions、
-NGU IDLE、
-等好玩的游戏。
+ULTRAKILL
+Celeste
+Mirror’s Edge
+Garry's Mod
+Half-Life 2
+Touhou Project
+Minecraft
+Touhou Luna Nights
+沙雕之路
+Antimatter Dimensions
+NGU IDLE
+……等好玩的游戏。
 
-以上构想均在制作中……
+还有，以上构想均在制作中
 
 
-##### 接下来要做的：
+#### 目前的进度：
+
+* 基本的移动系统
+* 奔跑
+* 冲刺，冲刺跳
+* 康威生命游戏的地图模块
+* 飞鱼
+* 简单的射击实现
+* 自瞄
+* 可以爆炸的油桶
+* 根据伤害变化的爆炸效果
+* 以不正常方式实现的单方面玩家物理碰撞
+* 基于射线检测的边缘攀爬系统
+* 一个非常简单测试地图
+* 低速模式与静步
+* 性能较差的浮力水
+* V键飞行
+* 一些“生活质量”操作优化
+* 一些场景装饰
+
+
+#### 接下来要做的：
 
 * 杂项：
   * 完善Github仓库，添加更多的说明和信息。
@@ -56,17 +84,22 @@ NGU IDLE、
     * 飞踢
     * 优化边缘静步不掉落判断
   * 武器：
-    * 钓鱼竿
+    * 钓鱼竿（mc同款）
     * MTs-3 Rekord（无后座高精度手枪）
-    * 重炮狙击枪
+    * 重炮狙击枪（超级大狙？）
     * 片短剑（插墙上可以站着）
-  * 交互
-    * V键调出可鼠标操作的gui
+  * 交互:
+    * gmod的C键调出可鼠标操作的gui
     * 显示所有RigidBody3D信息的gui
     * 按钮
     * 门
+  * 生活质量：
+    * 起源和gmod的提示气泡
+    * 起源引擎的对话与提示信息字幕
+    * mc的声音文字提示
 
-##### Q&A：
+
+#### Q&A：
 
 * 如何参与开发？
   * 参与贡献可以有很多方式，比如提交代码、报告Bug、提供建议、翻译文档等。
@@ -92,7 +125,8 @@ NGU IDLE、
 * Antimatter Dimensions和NGU IDLE是挂机、点击、idle游戏，和这游戏有啥关系？
   * 这俩游戏的流程设计非常好，其中的一些解谜部分非常有趣，偷了。
 
-##### 注意事项：
+
+#### 注意事项：
 
 项目根目录下，目前只有assets文件夹能确保为项目作者制作的主要原创部分。
 assets文件夹下的部分代码和资源文件、图像、音频来自网络，对其进行了修改，并尽可能的表明了出处。
@@ -103,8 +137,19 @@ assets文件夹下的部分代码和资源文件、图像、音频来自网络�
 addons文件夹下存放着Godot Engine的插件。
 插件的原作者并非项目作者，部分代码已根据项目需求进行了修改。
 
-![制作组logo](/logo/logo暗处变亮.png)
 
-> QQ讨论群：705304831
+> 欢迎加入QQ讨论群：705304831
+
+![远景](/forREADME/godot.windows.opt.tools.64_vnLDbKccJK.jpg)
+![水](/forREADME/godot.windows.opt.tools.64_8xybG45lHn.jpg)
+![海泡沫1](/forREADME/godot.windows.opt.tools.64_PwjpRzcOVt.jpg)
+![海泡沫2](/forREADME/godot.windows.opt.tools.64_d1uX4mJ7kA.jpg)
+![弹幕发射器1](/forREADME/godot.windows.opt.tools.64_W5910U7S1b.jpg)
+![弹幕发射器2](/forREADME/godot.windows.opt.tools.64_q3VD1p4X4Q.jpg)
+![弹幕发射器3](/forREADME/godot.windows.opt.tools.64_fJoZthogYL.jpg)
+![弹幕发射器4](/forREADME/godot.windows.opt.tools.64_KAdiUCbcte.jpg)
+![弹幕发射器5](/forREADME/godot.windows.opt.tools.64_zS6zkwZ24w.jpg)
+![弹幕发射器6](/forREADME/godot.windows.opt.tools.64_2IJ8CeczTi.jpg)
+![制作组logo](/logo/logo暗处变亮.png)
 
 ---

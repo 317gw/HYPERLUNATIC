@@ -341,7 +341,7 @@ func save_properties() -> void:
 	reset_data.erase("reset_data")
 	for key in reset_data.keys():
 		if key is String:
-			if "@" in key or key.begins_with("_") or "since_last" in key:
+			if "@" in key or key.begins_with("_") or "count_since_last_reset" in key:
 				reset_data.erase(key)
 
 	# 可选杀了继承的
@@ -379,7 +379,7 @@ func debug_display() -> void:
 			var point: Vector3 = spherical_targets[p] * display_radius
 			pointsA.append(point)
 			pointsB.append(spherical_targets[p].normalized() * 0.1)
-		draw_mesh_line_repet_relative(mesh, pointsA, pointsB, Color.RED, 4, 0)
+		draw_mesh_line_repet_relative(mesh, pointsA, pointsB, Color.RED, 10, 0)
 		return
 
 	if disk_debug_display and disk_positions.size() > 0:

@@ -8,6 +8,7 @@ const FRAME_RATE: float = 60.0 # 每秒发射周期数
 const SCALE_FACTOR: float = 100.0 # 设置比例因子为100.0
 const EPISILON: float = 0.00001 # 设置一个极小值
 const VERTICES_STRIP_ORDER: Array = [4, 5, 0, 1, 2, 5, 6, 4, 7, 0, 3, 2, 7, 6, 0]
+const GOLDEN_RATIO: float = 0.618033988749895 ## 黄金分割率
 
 enum ResetMode {
 	TIME,
@@ -60,14 +61,14 @@ enum CapMode {
 # 球面均匀分布 Spherical uniform distribution
 @export_group("Spherical")
 @export var ues_spherical: bool = false ## 使用球面均匀分布
-@export_range(1, 1000, 1) var spherical_count: float = 1 ## 球面发射数量
-@export var ratio: float = 0.618033988749895 ## 公比 黄金分割
+@export_range(1, 1000, 1) var spherical_count: float = 100 ## 球面发射数量
+@export var ratio: float = 1.0 ## 公比 黄金分割
 # 弹幕
 @export_group("Danmu")
 @export var bullet_scene: PackedScene = preload("res://assets/danmu/bullet/test_bullet.tscn") ## 类型 发射的弹幕预制体
 @export var bullet_mass: float = 1.0 ## 质量
 # 消除处理
-@export_range(0, 3000) var max_bullet: int = 2000 ## 下属的最大弹幕数量
+@export_range(0, 3000) var bullet_max_node: int = 2000 ## 下属的最大弹幕数量
 @export var bullet_lifetime: float = 10.0 ## 生存时间 秒
 @export var bullet_collision_enabled: bool = true ## 碰撞消除
 @export var exceeding_the_cap_mode: CapMode = CapMode.STOP_LAUNCHING ## 超出容量处理模式
@@ -77,7 +78,7 @@ enum CapMode {
 @export var bullet_rotation: Vector3 = Vector3.ZERO ## 弹幕旋转
 # 特效
 @export_color_no_alpha var bullet_color: Color = Color(1, 1, 1) ## 颜色
-@export var bullet_scale: Vector3 = Vector3.ZERO ## 缩放
+@export var bullet_scale: Vector3 = Vector3.ONE ## 缩放
 @export var bullet_blend_mode: int = 0 ## 混合模式
 @export var spawn_effect: PackedScene = null ## 生成特效
 @export var destroy_effect: PackedScene = null ## 消除特效
@@ -93,6 +94,7 @@ enum CapMode {
 var is_first_fire: bool = true ## 是否是第一帧
 var direction_vector: Vector3 ## 发射器朝向 方向向量
 var bullets: Array = [] ## 存储发射的弹幕
+var number_of_launches_in_this_frame: int = 0 ## 这一帧内的发射次数
 # 计时，计数
 var time_since_last_fire: float = 0.0 ## 自上次发射以来的时间
 var time_since_last_reset: float = 0.0 ## 自上次重置以来的时间
@@ -148,6 +150,8 @@ func _physics_process(delta: float) -> void:
 
 func process_in_geme(delta: float) -> void:
 	direction_vector = -self.transform.basis.z
+	velocity += acceleration * delta
+	self.global_position += velocity * delta
 
 	if firing:
 		in_firing(delta)
@@ -197,14 +201,13 @@ func in_firing(delta: float) -> void:
 			calculate_spherical_uniform_distribution()
 		else:
 			calculate_stripe_rotation()
-		debug_display()
-		# 发射弹幕
-		match exceeding_the_cap_mode:
+		debug_display() # debug显示
+		match exceeding_the_cap_mode: # 发射弹幕
 			CapMode.STOP_LAUNCHING:
-				if bullets.size() < max_bullet:
+				if get_child_count(true) < bullet_max_node: # bullets.size()
 					fire_bullet()
 			CapMode.DELETE_OLDEST:
-				#while bullets.size() > max_bullet:
+				#while bullets.size() > bullet_max_node:
 					#var bullet = bullets.front()
 					#bullets.erase(bullet)
 					#bullet.queue_free()
@@ -224,24 +227,24 @@ func move_bullet(delta: float) -> void:
 
 # 发射弹幕的函数
 func fire_bullet() -> void:
+	number_of_launches_in_this_frame = 0
 	if ues_spherical:
 		for i in range(1, int(spherical_count) + 1):
-			delete_out_cap_bullets()
-			#var fire_pos: Vector3 = spherical_targets[i-1]
 			var target: Vector3 = spherical_targets[i-1]
 			set_bullet(center_position, target)
 	else:
 		for i in stripe_targets.size():
-			delete_out_cap_bullets()
 			var fire_pos: Vector3 = stripe_fire_positions[i]
 			var target: Vector3 = stripe_targets[i]
 			set_bullet(fire_pos, target)
 
 
 func set_bullet(fire_pos: Vector3, target: Vector3) -> void:
+	delete_out_cap_bullet()
 	var bullet_instance: Bullet = bullet_scene.instantiate() # 实例化弹幕
 	add_child(bullet_instance)
 	bullets.append(bullet_instance) # 存储已发射的弹幕
+	number_of_launches_in_this_frame += 1
 
 	var bullet_target = target + self.global_position + fire_pos
 	if Vector3.UP.cross(bullet_target - bullet_instance.global_position) == Vector3.ZERO:
@@ -253,11 +256,31 @@ func set_bullet(fire_pos: Vector3, target: Vector3) -> void:
 	bullet_instance.speed = bullet_speed # 需要在弹幕脚本中定义speed属性
 	bullet_instance.lifetime = bullet_lifetime # 设定弹幕的生存时间
 	bullet_instance.scale = bullet_scale
+	# 设置颜色
+
+	if bullet_instance.has_method("set_albedo"):
+		bullet_instance.set_albedo(bullet_color)
+
+	#for child in bullet_instance.get_children(): # mesh_instance
+		#if child is MeshInstance3D:
+			#var material = child.get_material_override()
+			## 检查
+			#if not material:
+				#material = child.get_surface_override_material(0)
+			#if not material:
+				#continue
+			## 设置
+			#if material is ShaderMaterial:
+				#var shader_material: ShaderMaterial = material
+				#shader_material.set_shader_parameter("albedo", bullet_color)
+			#elif material is StandardMaterial3D:
+				#var standard_material: StandardMaterial3D = material
+				#standard_material.albedo_color = bullet_color
 
 
-func delete_out_cap_bullets() -> void:
+func delete_out_cap_bullet() -> void:
 	if exceeding_the_cap_mode == CapMode.DELETE_OLDEST:
-		while bullets.size() > max_bullet:
+		if get_child_count(true) > bullet_max_node and bullets.size() > 0:
 			var bullet = bullets.front()
 			bullets.erase(bullet)
 			bullet.queue_free()
@@ -315,7 +338,7 @@ func calculate_spherical_uniform_distribution() -> void:
 	for i in range(1, int(spherical_count) + 1):
 		var high: float = (2*i -1) / floor(spherical_count) - 1
 		var radius = sqrt(1-pow(high, 2))
-		var theta = TAU * i * ratio
+		var theta = TAU * i * pow(GOLDEN_RATIO, ratio)
 
 		var point: Vector3 = Vector3(
 			radius * cos(theta),

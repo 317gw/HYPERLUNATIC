@@ -13,3 +13,4 @@ cast_shadow = 0
 mesh = SubResource("ImmediateMesh_inxvo")
 script = ExtResource("1_kbf5k")
 fire_period = 1
+bullet_scale = Vector3(0, 0, 0)

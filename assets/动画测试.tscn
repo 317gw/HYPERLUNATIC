@@ -75,5 +75,5 @@ format = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j64bm")
-frame = 3
-frame_progress = 0.280357
+frame = 1
+frame_progress = 0.782849

@@ -1,9 +1,19 @@
 #class_name GlobalCode
 extends Node
 
-const explod_max_speed: float = 100.0 ## m
 
-#func _ready() -> void:
+const explod_max_speed: float = 100.0 ## m
+const EFFECTS = preload("res://assets/global/Effects.tscn")
+
+var effects: Node3D = null # Global.effects.add_child()
+
+func _ready() -> void:
+	effects = EFFECTS.instantiate()
+	self.add_child(effects)
+
+
+
+
 	#var from = 0.0
 	#var to = 100.0
 	#var target = from + 0.99 * (to - from)
@@ -101,6 +111,28 @@ func clamping_accuracy_vector3(vector3: Vector3, precision: int = 6) -> Vector3:
 	return vector3
 
 
+#递归查找节点下特定类型的子节点
+func find_child_node(node: Node, child_type: String) -> Node:
+	if node.get_class() == child_type:
+		return node
+	for i in range(node.get_child_count()):
+		var child_node = node.get_child(i)
+		var result = find_child_node(child_node, child_type)
+		if result:
+			return result
+	return null
+
+
+# 曲线救国创建碰撞
+# 废了
+func create_CollisionShape3D_from_mesh(collision_father: Node, source_mesh: Mesh, settings: MeshConvexDecompositionSettings = null) -> void:
+	var mesh_instance_3d: MeshInstance3D = MeshInstance3D.new()
+	collision_father.add_child(mesh_instance_3d)
+	mesh_instance_3d.set_mesh(source_mesh)
+	mesh_instance_3d.create_multiple_convex_collisions(settings)
+	var new_collision_shape_3d: CollisionShape3D = find_child_node(mesh_instance_3d, "CollisionShape3D").duplicate()
+	collision_father.add_child(new_collision_shape_3d, true)
+	mesh_instance_3d.queue_free()
 
 
 

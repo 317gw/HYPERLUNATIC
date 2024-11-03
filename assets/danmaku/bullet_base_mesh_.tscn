@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://40rgsqk8gqbi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81pag"]
+shading_mode = 0
+heightmap_scale = 1.632
+
+[sub_resource type="SphereMesh" id="SphereMesh_dxb2r"]
+radius = 0.25
+height = 0.5
+radial_segments = 16
+rings = 8
+
+[node name="BulletBaseMesh" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_81pag")
+visibility_range_end = 100.0
+mesh = SubResource("SphereMesh_dxb2r")

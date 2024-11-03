@@ -69,7 +69,7 @@ func _ready() -> void:
 	mesh_instance_3d.set_mesh(self.mesh)
 	mesh_instance_3d.create_multiple_convex_collisions()
 	# 递归查找mesh_instance_3d的子节点直到找到CollisionShape3D类型
-	var new_collision_shape_3d = find_child_node(mesh_instance_3d, "CollisionShape3D").duplicate()
+	var new_collision_shape_3d: CollisionShape3D = Global.find_child_node(mesh_instance_3d, "CollisionShape3D").duplicate()
 	swimmable_area_3d.add_child(new_collision_shape_3d, true)
 	mesh_instance_3d.queue_free()
 
@@ -213,18 +213,6 @@ func _on_swimmable_area_3d_body_exited(body: Node3D) -> void:
 		water_ripple_overlay.process_mode = Node.PROCESS_MODE_DISABLED
 		wrosp_trg = wrosp_in
 		in_water_material.set_shader_parameter("value_all", wrosp_ori)
-
-
-#递归查找节点下特定类型的子节点
-func find_child_node(node: Node, child_type: String) -> Node:
-	if node.get_class() == child_type:
-		return node
-	for i in range(node.get_child_count()):
-		var child_node = node.get_child(i)
-		var result = find_child_node(child_node, child_type)
-		if result:
-			return result
-	return null
 
 
 func _on_swimmable_area_3d_area_entered(area: Area3D) -> void:

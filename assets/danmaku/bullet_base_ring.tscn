@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgiw2x7lt575d"]
+
+[ext_resource type="Shader" path="res://assets/shaders/danmaku_ring.gdshader" id="1_wirwe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_si6yd"]
+render_priority = 0
+shader = ExtResource("1_wirwe")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/outer_radius = 0.8
+shader_parameter/inner_radius = 0.0
+shader_parameter/blur = 0.1
+shader_parameter/blur_blend_add = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ostv4"]
+
+[node name="BulletBaseRing" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_si6yd")
+mesh = SubResource("QuadMesh_ostv4")

@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwt5nuyklqjbu"]
+
+[ext_resource type="Script" path="res://assets/maps/map_blocks/scripts/ice.gd" id="1_i8rn5"]
+[ext_resource type="Shader" path="res://assets/shaders/ice.gdshader" id="2_gj4wk"]
+[ext_resource type="Texture2D" uid="uid://d0ljdqiffgghj" path="res://assets/textures/ice/Ice003_1K-PNG_Color2_export.png" id="3_ho0k8"]
+[ext_resource type="Texture2D" uid="uid://bxomikb111i14" path="res://assets/textures/ice/Ice003_1K-PNG_NormalDX.png" id="4_qa2o4"]
+[ext_resource type="Texture2D" uid="uid://ddyes5xgo3w8m" path="res://assets/textures/ice/Ice002_1K-PNG_Color3_export.png" id="5_jt1h8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ouk5x"]
+friction = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lpn34"]
+render_priority = 0
+shader = ExtResource("2_gj4wk")
+shader_parameter/top_color = Color(1, 1, 1, 1)
+shader_parameter/depth = 0.1
+shader_parameter/normal_depth = 1.0
+shader_parameter/roughness = 0.05
+shader_parameter/metallic = 0.7
+shader_parameter/refractive_index = 0.1
+shader_parameter/uv1_scale = Vector3(0.05, 0.05, 0.05)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/over_texture = ExtResource("3_ho0k8")
+shader_parameter/under_texture = ExtResource("5_jt1h8")
+shader_parameter/surface_normalmap = ExtResource("4_qa2o4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_yss76"]
+size = Vector3(20, 1, 20)
+
+[node name="Ice" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 2093
+physics_material_override = SubResource("PhysicsMaterial_ouk5x")
+script = ExtResource("1_i8rn5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_lpn34")
+mesh = SubResource("BoxMesh_yss76")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

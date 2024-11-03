@@ -1,6 +1,6 @@
 [gd_resource type="Environment" load_steps=4 format=3 uid="uid://dsay4gdr8k6ur"]
 
-[ext_resource type="Texture2D" uid="uid://bdu0dvfevgjpk" path="res://assets/textures/industrial_sunset_puresky_1k.hdr" id="1_r44ic"]
+[ext_resource type="Texture2D" uid="uid://bdu0dvfevgjpk" path="res://assets/textures/sky/industrial_sunset_puresky_1k.hdr" id="1_r44ic"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4uc64"]
 panorama = ExtResource("1_r44ic")
@@ -30,3 +30,4 @@ fog_light_color = Color(0.85, 0.9075, 1, 1)
 fog_density = 0.001
 fog_aerial_perspective = 0.2
 volumetric_fog_density = 0.0
+adjustment_brightness = 1.1

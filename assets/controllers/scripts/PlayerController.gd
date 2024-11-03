@@ -22,6 +22,7 @@ const SAFE_MARGIN = 0.001 # 碰撞安全距离
 @export_range(0.0, 1.0, 0.01) var auxiliary_aiming_radius: float = 0.07
 @export var mass: float = 60.0 # 2m->78kg  1.7m->60kg
 @export var slow_rigid_force: float = 10.0
+@export var max_current_speed: float = 40.0
 # 地面移动
 @export_group("Movement Parameters")
 @export var speed_slow: float = 2.0
@@ -138,6 +139,7 @@ var knockback_velocity: Vector3
 @onready var snap_stairs: SnapStairs = $SnapStairs
 # 其他
 @onready var trail_3d: Node3D = $Trail3D
+@onready var below_ray: RayCast3D = $BelowRay
 
 
 func _ready() -> void:
@@ -179,13 +181,21 @@ func _physics_process(_delta: float) -> void:
 
 
 func apply_velocity(do_move_and_slide: bool = true) -> void:
+	# 雷神之锤bug
+	#var current_speed = vel2d.dot(dir2d)
+
+	#var current_vel2d = vel2d * clamp(vel2d.length() / (current_speed + 0.001), 1, 1.2)
+
+
 	velocity.x = vel2d.x
 	velocity.z = vel2d.y
-	#if taking_damge:
-		#velocity += knockback_velocity
-		#knockback_velocity = Vector3.ZERO
-		#taking_damge = false
-	if is_on_floor(): snap_stairs.last_frame_was_on_floor = Engine.get_physics_frames()
+
+	# 临时的钳制，没有考虑垂直和水平
+	velocity = velocity.normalized() * clamp(velocity.length(), 0.0, max_current_speed)
+
+
+	if is_on_floor():
+		snap_stairs.last_frame_was_on_floor = Engine.get_physics_frames()
 	if do_move_and_slide:
 		move_and_slide() # 使用滑动移动方法应用速度和处理碰撞
 
@@ -219,22 +229,23 @@ func calculate_jump_distance() -> void: # 动态计算跳跃距离
 
 func calculate_air_speed(target_distance: float, target_time: float, is_normal_jump: bool=false) -> void: # 动态计算空中速度
 	var new_air_speed: float = target_distance / target_time
-	if is_normal_jump: # 正常跳跃
-		var normal_jump_air_speed_max = jump_distance_max / jump_time
-		if new_air_speed > normal_jump_air_speed_max: # 限制最大空中速度
-			air_speed = normal_jump_air_speed_max + (new_air_speed - normal_jump_air_speed_max) * normal_jump_air_speed_acc
-		else:
-			air_speed = new_air_speed
-		air_acc = air_speed / air_acc_time
+	if not is_normal_jump:
+		air_speed = new_air_speed
+		return
+
+	# 正常跳跃
+	var normal_jump_air_speed_max = jump_distance_max / jump_time
+	if new_air_speed > normal_jump_air_speed_max: # 限制最大空中速度
+		air_speed = normal_jump_air_speed_max + (new_air_speed - normal_jump_air_speed_max) * normal_jump_air_speed_acc
 	else:
 		air_speed = new_air_speed
+	air_acc = air_speed / air_acc_time
 
 
 func air_speed_clamp(_delta) -> void:
 	if air_speed > vel2d_speed and horizontal_acceleration < 0:
 		air_speed = lerp(air_speed, vel2d_speed, 0.2)
-	if air_speed < jump_distance_min / jump_time:
-		air_speed = jump_distance_min / jump_time
+	air_speed = clamp(air_speed, jump_distance_min / jump_time, max_current_speed)
 
 
 # func Calculate_dashjump_distance() -> void: # 动态计算冲刺跳跃距离
@@ -261,56 +272,7 @@ var stairs_below_edge_colliding_last_frame: bool = false
 func movement_floor(delta: float) -> void: # 有方向输入 地上
 	self.floor_stop_on_slope = false #  bugGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 	if Input.is_action_pressed("slow"):
-		self.floor_stop_on_slope = true
-		camera.slide_camera_smooth_back_to_origin_y_only = false
-		camera.save_camera_pos_for_smoothing()
-		if stairs_below_edge_colliding_last_frame:
-			vel2d = Global.exponential_decay(vel2d.length(), speed_slow, 0.1 * delta) * dir2d
-		else:
-			#vel2d = move_toward(vel2d.length(), speed_slow, acc_normal * delta * 0.5) * dir2d
-			vel2d = Global.exponential_decay(vel2d.length(), speed_slow, acc_normal * delta * 0.5) * dir2d
-		stairs_below_edge_colliding_last_frame = false
-
-		# ↓ 边缘检测
-		var current_position = self.global_position
-		var next_position = current_position + Vector3(vel2d.x, 0, vel2d.y) * delta * 2
-		# 检查下一个位置的地面高度
-		snap_stairs.stairs_below_ray.global_position = next_position
-		snap_stairs.stairs_below_ray.global_position.y = current_position.y
-		snap_stairs.stairs_below_ray.force_update_transform()
-		snap_stairs.stairs_below_ray.force_raycast_update()
-		# 如果高度差大于射线预设，阻止玩家移动
-		if not snap_stairs.stairs_below_ray.is_colliding():
-			snap_stairs.stairs_below_edge_ray.global_position = current_position + Vector3(dir2d.x, 0, dir2d.y)
-			snap_stairs.stairs_below_edge_ray.global_position.y = current_position.y - 0.05
-			#snap_stairs.stairs_below_edge_ray.look_at(current_position)
-			#snap_stairs.stairs_below_edge_ray.target_position = -Vector3(dir2d.x, 0, dir2d.y).normalized() * 2.0
-			# 修复不同输入角度的射线角度
-			snap_stairs.stairs_below_edge_ray.rotation.y = Vector3(camera._face_dir.x, 0, camera._face_dir.z).signed_angle_to(Vector3(input_direction.x, 0, input_direction.z), Vector3.UP)
-
-			#print(Vector3(input_direction.x, 0, input_direction.z))
-			snap_stairs.stairs_below_edge_ray.force_update_transform()
-			snap_stairs.stairs_below_edge_ray.force_raycast_update()
-
-			if snap_stairs.stairs_below_edge_ray.is_colliding():
-				#print("snap_stairs.stairs_below_edge_ray.is_colliding()")
-				var normalV2 = Vector2(snap_stairs.stairs_below_edge_ray.get_collision_normal().x, snap_stairs.stairs_below_edge_ray.get_collision_normal().z)
-				var taget_vel2d = vel2d - normalV2 * (1 + current_position.distance_to(snap_stairs.stairs_below_edge_ray.get_collision_point() ) * 3 )
-				vel2d = taget_vel2d
-				stairs_below_edge_colliding_last_frame = true
-
-				#* vel2d.normalized().dot(normalV2)
-				#print(vel2d)
-			else:
-				vel2d = Vector2.ZERO
-
-		stairs_below_edge_colliding = snap_stairs.stairs_below_edge_ray.is_colliding()
-		# 还原位置
-		if snap_stairs.stairs_below_ray.global_position != Vector3.ZERO:
-			snap_stairs.stairs_below_ray.global_position = Vector3.ZERO
-			snap_stairs.stairs_below_ray.force_update_transform()
-
-		vel2d = clamp(vel2d.length(), 0, 2) * vel2d.normalized()
+		slow_movement_on_floor(delta)
 		return
 	stairs_below_edge_colliding = false
 
@@ -321,49 +283,61 @@ func movement_floor(delta: float) -> void: # 有方向输入 地上
 		var ratio = 30 if vel2d_speed > speed_max else 1 # 速度比例
 		vel2d_speed = move_toward(vel2d_speed, speed_max, acc_max * ratio * delta)
 
+		# 正常限制
 		if is_equal_approx(vel2d_speed, speed_max):
 			vel2d_speed = speed_max
+
 		vel2d = vel2d_dir * vel2d_speed
 	else:
 		vel2d = vel2d.move_toward(dir2d * speed_normal, acc_normal * delta)
 
 
 func movement_air(delta: float, is_dashjump: bool = false) -> void: # 有方向输入 空中
-	if dir2d:
-		if vel2d_speed < air_speed and vel2d_speed < speed_max and not is_dashjump:
-			air_acc = vel2d_speed / air_acc_time
-		else:
-			air_acc = air_speed / air_acc_time
-		if vel2d_speed > air_speed_max:
-			air_acc = air_acc * air_speed_max / vel2d_speed / 4
+	if not dir2d:
+		return
 
-		air_acc *= dashjump_air_acc_multi if is_dashjump else 1.0 # 减慢冲刺跳加速
-		var air_acc_min = 20 if is_dashjump else 30
-		air_acc = clamp(air_acc, air_acc_min, 200) # 为了优化贴墙对着墙跳前移动
-		air_acc_target = move_toward(air_acc_target, air_acc, air_acc / 0.2 * delta)
+	if vel2d_speed < air_speed and vel2d_speed < speed_max and not is_dashjump:
+		air_acc = vel2d_speed / air_acc_time
+	else:
+		air_acc = air_speed / air_acc_time
+	if vel2d_speed > air_speed_max:
+		air_acc = air_acc * air_speed_max / vel2d_speed / 4
 
-		if is_on_ceiling(): # 磕头跳加速
-			var y = smoothstep((speed_max+speed_normal)/2, speed_max, air_speed)
-			var head_butt_speed = 0.5
-			air_speed += y * head_butt_speed
-		vel2d = vel2d.move_toward(dir2d * air_speed, air_acc_target * delta)
+	air_acc *= dashjump_air_acc_multi if is_dashjump else 1.0 # 减慢冲刺跳加速
+	var air_acc_min = 20 if is_dashjump else 30
+	air_acc = clamp(air_acc, air_acc_min, 200) # 为了优化贴墙对着墙跳前移动
+	air_acc_target = move_toward(air_acc_target, air_acc, air_acc / 0.2 * delta)
+
+	if is_on_ceiling(): # 磕头跳加速
+		var y = smoothstep((speed_max+speed_normal)/2, speed_max, air_speed)
+		var head_butt_speed = 0.5
+		air_speed += y * head_butt_speed
+	vel2d = vel2d.move_toward(dir2d * air_speed, air_acc_target * delta)
 
 
 func stop_movement(delta: float) -> void:
 	var t = 20 # 地面&空中
 	if is_on_floor():
-		#var t = 0.06
+		relative_movement_on_floor()
 		if is_slow():
-			t = 40
-		#vel2d = vel2d.move_toward(Vector2.ZERO, vel2d_speed / t * delta)
-		#vel2d = vel2d.lerp(Vector2.ZERO, 0.1)
+			t *= 2
 		vel2d = Global.exponential_decay(vel2d.length(), 0, t * delta) * vel2d.normalized()
+
 	if not is_on_floor() and is_slow():
-		#var t = 0.06
-		#vel2d = vel2d.move_toward(Vector2.ZERO, vel2d_speed / t * delta)
 		vel2d = Global.exponential_decay(vel2d.length(), 0, t * delta) * vel2d.normalized()
 
 	#velocity.y = move_toward(velocity.y, 0.0, 1.2 * delta)
+
+
+# 防止跳到移动物体上的滑步，移动时保证流畅不触发
+func relative_movement_on_floor() -> void:
+	if input_dir:
+		return
+	var slide_collision = below_ray.get_collider()
+	if slide_collision is AnimatableBody3D or slide_collision is CharacterBody3D:
+		velocity.x = 0
+		velocity.z = 0
+		vel2d = Vector2.ZERO
 
 
 func jump_ready(jumpVEL: float) -> void: # 处理跳跃
@@ -400,12 +374,14 @@ func dash_on_floor() -> void: # 冲刺启动
 
 func dash_on_air() -> void: # 调整冲刺方向
 	dash_dir3d = CAMERA._face_dir #-transform.basis.z # 视角滞后  不对
-	if is_on_floor():
-		var CameraRot = CAMERA._mouse_rotation.x
-		if CameraRot < deg_to_rad(91) and CameraRot > deg_to_rad(67): # 动鼠标垂直冲刺的优化？
-			dash_dir3d = Vector3(0, 1, 0)
-		elif CameraRot < deg_to_rad( - 70) and CameraRot > deg_to_rad( - 91):
-			dash_dir3d = Vector3(0, 0, 0)
+	if not is_on_floor():
+		return
+
+	var CameraRot = CAMERA._mouse_rotation.x
+	if CameraRot < deg_to_rad(91) and CameraRot > deg_to_rad(67): # 动鼠标垂直冲刺的优化？
+		dash_dir3d = Vector3(0, 1, 0)
+	elif CameraRot < deg_to_rad( - 70) and CameraRot > deg_to_rad( - 91):
+		dash_dir3d = Vector3(0, 0, 0)
 
 
 func dash_ready() -> void:
@@ -441,14 +417,16 @@ func dashing_on_air() -> void:
 
 # 4
 func dash_on_wall(delta: float) -> void: # 调整冲刺到墙壁的速度
-	if is_on_wall() and get_last_slide_collision(): # 检测是否冲刺到墙壁
-		var wall_normal = get_last_slide_collision().get_normal()
-		# var angle = velocity.angle_to(wall_normal)
-		if wall_normal != Vector3.ZERO and wall_normal != Vector3.UP: # 如果冲刺到墙壁，减小速度
-			var slide_speed_reduction = dash_dir3d.normalized().dot(wall_normal) + 1
-			slide_speed_reduction = clamp(slide_speed_reduction, 0, 1)
-			dash_speed = move_toward(dash_speed, dash_speed * slide_speed_reduction, delta * 100)
-			velocity.y = (velocity.normalized() * speed_normal).y
+	if not (is_on_wall() and get_last_slide_collision() ): # 检测是否冲刺到墙壁
+		return
+
+	var wall_normal = get_last_slide_collision().get_normal()
+	# var angle = velocity.angle_to(wall_normal)
+	if wall_normal != Vector3.ZERO and wall_normal != Vector3.UP: # 如果冲刺到墙壁，减小速度
+		var slide_speed_reduction = dash_dir3d.normalized().dot(wall_normal) + 1
+		slide_speed_reduction = clamp(slide_speed_reduction, 0, 1)
+		dash_speed = move_toward(dash_speed, dash_speed * slide_speed_reduction, delta * 100)
+		velocity.y = (velocity.normalized() * speed_normal).y
 
 
 # 5
@@ -504,24 +482,27 @@ func calculate_acceleration_in_physics_process(delta: float) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body == self:
-		print("掉了")
-		position = Vector3(0, 2, 0)
-		air_speed = 0
-		dir2d = Vector2.ZERO
-		vel2d = Vector2.ZERO
-		velocity = Vector3.ZERO
-		#movement_state_machine.current_state.Transitioned.emit(self, "Idle")
-		rotation = Vector3.FORWARD
-		head.rotation = Vector3.FORWARD
-		player_rigid_body.global_position = self.global_position
+	if not body == self:
+		return
 
-		#camera._player_rotation = Vector3.FORWARD
-		#camera._camera_rotation = Vector3.FORWARD
-		#camera._mouse_rotation = Vector3.FORWARD
-		#camera.face_DIR = Vector3.FORWARD
-		#camera.target_player_rotation = Vector3.FORWARD
-		#camera.player_rotation_speed =0
+	print("掉了")
+	position = Vector3(0, 2, 0)
+	air_speed = 0
+	dir2d = Vector2.ZERO
+	vel2d = Vector2.ZERO
+	velocity = Vector3.ZERO
+	#movement_state_machine.current_state.Transitioned.emit(self, "Idle")
+	rotation = Vector3.FORWARD
+	head.rotation = Vector3.FORWARD
+	player_rigid_body.global_position = self.global_position
+	player_rigid_body.integral = Vector3.ZERO
+
+	#camera._player_rotation = Vector3.FORWARD
+	#camera._camera_rotation = Vector3.FORWARD
+	#camera._mouse_rotation = Vector3.FORWARD
+	#camera.face_DIR = Vector3.FORWARD
+	#camera.target_player_rotation = Vector3.FORWARD
+	#camera.player_rotation_speed =0
 
 
 #func damaged(damage: float) -> void:
@@ -562,6 +543,60 @@ func free_view_move(delta: float) -> void:
 	var speed: float = speed_max if Input.is_action_pressed("shift") else speed_normal
 	velocity = (face_dir + up_down).normalized() * speed * 2
 	self.global_position += velocity * delta
+
+
+func slow_movement_on_floor(delta: float) -> void:
+	self.floor_stop_on_slope = true
+	camera.slide_camera_smooth_back_to_origin_y_only = false
+	camera.save_camera_pos_for_smoothing()
+
+	var speed = 0.1 if stairs_below_edge_colliding_last_frame else 0.5 * acc_normal
+	speed *= delta
+	vel2d = Global.exponential_decay(vel2d.length(), speed_slow, speed) * dir2d
+
+	stairs_below_edge_colliding_last_frame = false
+
+	# ↓ 边缘检测
+	var current_position = self.global_position
+	var next_position = current_position + Vector3(vel2d.x, 0, vel2d.y) * delta * 2
+	# 检查下一个位置的地面高度
+	snap_stairs.stairs_below_ray.global_position = next_position
+	snap_stairs.stairs_below_ray.global_position.y = current_position.y
+	snap_stairs.stairs_below_ray.force_update_transform()
+	snap_stairs.stairs_below_ray.force_raycast_update()
+
+	# 如果高度差大于射线预设，阻止玩家移动
+	if not snap_stairs.stairs_below_ray.is_colliding():
+		snap_stairs.stairs_below_edge_ray.global_position = current_position + Vector3(dir2d.x, 0, dir2d.y)
+		snap_stairs.stairs_below_edge_ray.global_position.y = current_position.y - 0.05
+		# 修复不同输入角度的射线角度
+		snap_stairs.stairs_below_edge_ray.rotation.y = Vector3(camera._face_dir.x, 0, camera._face_dir.z).signed_angle_to(Vector3(input_direction.x, 0, input_direction.z), Vector3.UP)
+
+		snap_stairs.stairs_below_edge_ray.force_update_transform()
+		snap_stairs.stairs_below_edge_ray.force_raycast_update()
+
+		if snap_stairs.stairs_below_edge_ray.is_colliding():
+			var normalV2 = Vector2(snap_stairs.stairs_below_edge_ray.get_collision_normal().x, snap_stairs.stairs_below_edge_ray.get_collision_normal().z)
+			var taget_vel2d = vel2d - normalV2 * (1 + current_position.distance_to(snap_stairs.stairs_below_edge_ray.get_collision_point() ) * 3 )
+			vel2d = taget_vel2d
+			stairs_below_edge_colliding_last_frame = true
+		else:
+			vel2d = Vector2.ZERO
+
+	stairs_below_edge_colliding = snap_stairs.stairs_below_edge_ray.is_colliding()
+	# 还原位置
+	if snap_stairs.stairs_below_ray.global_position != Vector3.ZERO:
+		snap_stairs.stairs_below_ray.global_position = Vector3.ZERO
+		snap_stairs.stairs_below_ray.force_update_transform()
+
+	vel2d = clamp(vel2d.length(), 0, 2) * vel2d.normalized()
+
+
+
+"""
+下面都是bool bool bool
+"""
+
 
 
 func can_jump() -> bool: # 地面上 威力狼跳 时间预输入 小跳有问题

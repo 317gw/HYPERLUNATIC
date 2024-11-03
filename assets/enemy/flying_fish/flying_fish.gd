@@ -21,6 +21,7 @@ var frame_skiper: FrameSkiper
 @onready var view_radius = $FlockView/ViewRadius
 @onready var animation_player = $"飞鱼2/AnimationPlayer"
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var stand_box: CollisionShape3D = $StandBox
 
 
 func _ready() -> void:

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://8m6fiqy40wtq"]
+
+[ext_resource type="Shader" path="res://assets/shaders/danmaku_ring.gdshader" id="1_j6x5k"]
+[ext_resource type="Script" path="res://assets/danmaku/scripts/just_ring.gd" id="2_umltd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_si6yd"]
+render_priority = 0
+shader = ExtResource("1_j6x5k")
+shader_parameter/albedo = Color(0, 0, 1, 1)
+shader_parameter/outer_radius = 0.8
+shader_parameter/inner_radius = 0.0
+shader_parameter/blur = 0.1
+shader_parameter/blur_blend_add = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ostv4"]
+material = SubResource("ShaderMaterial_si6yd")
+
+[node name="JustRing" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_ostv4")
+script = ExtResource("2_umltd")

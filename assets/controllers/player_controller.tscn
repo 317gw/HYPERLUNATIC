@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://b6dtopvb54qyu"]
+[gd_scene load_steps=62 format=3 uid="uid://b6dtopvb54qyu"]
 
 [ext_resource type="Script" path="res://assets/controllers/scripts/PlayerController.gd" id="1_0ynvo"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://assets/materials/player.tres" id="2_8r2m2"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://assets/controllers/scripts/DebugLine.gd" id="5_x1m35"]
 [ext_resource type="AudioStream" uid="uid://cs6aqeydwcet2" path="res://assets/audio/巴雷特 721431__the_epic1357__new-barrett.mp3" id="6_5d5tw"]
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerIdle.gd" id="6_6erok"]
+[ext_resource type="Script" path="res://assets/controllers/scripts/stand_on_head.gd" id="6_s6i6a"]
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerJump.gd" id="7_cjesm"]
 [ext_resource type="AudioStream" uid="uid://da2l0v4jeeaer" path="res://assets/audio/开关2 144286__dwoboyle__light_switch-0002-on-02.wav" id="7_e4fg3"]
 [ext_resource type="PackedScene" uid="uid://0q6b86lt8kno" path="res://assets/special_effects/speed_line_1.tscn" id="7_p56ye"]
@@ -76,6 +77,16 @@ rings = 1
 material = SubResource("StandardMaterial3D_ktole")
 radial_segments = 4
 rings = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s0f3v"]
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_maadx"]
+height = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_160lq"]
+height = 1.0
+radius = 0.1
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_klrk4"]
 radial_segments = 16
@@ -175,10 +186,10 @@ size = Vector2(2, 2)
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA") groups=["Player"]]
 process_mode = 1
-collision_mask = 34
+collision_mask = 4130
 floor_stop_on_slope = false
 floor_snap_length = 0.2
-platform_floor_layers = 4294966274
+platform_floor_layers = 4294905858
 platform_wall_layers = 2
 script = ExtResource("1_0ynvo")
 CAMERA = NodePath("Head/Camera3D")
@@ -197,6 +208,9 @@ shape = SubResource("CapsuleShape3D_4bbek")
 player = NodePath("..")
 
 [node name="PlayerTransformMarker" type="Marker3D" parent="."]
+
+[node name="BelowRay" type="RayCast3D" parent="."]
+collision_mask = 4134
 
 [node name="SnapStairs" type="Node3D" parent="."]
 script = ExtResource("3_breom")
@@ -288,6 +302,36 @@ mesh = SubResource("SphereMesh_o0k6g")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.1, 1.4, -2)
 top_level = true
 mesh = SubResource("SphereMesh_l5ln1")
+
+[node name="StandOnHead" type="Node3D" parent="."]
+script = ExtResource("6_s6i6a")
+
+[node name="StandBody" type="AnimatableBody3D" parent="StandOnHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+top_level = true
+collision_layer = 4096
+
+[node name="StandCollision" type="CollisionShape3D" parent="StandOnHead/StandBody"]
+shape = SubResource("CylinderShape3D_s0f3v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StandOnHead/StandBody"]
+transparency = 0.5
+mesh = SubResource("CylinderMesh_maadx")
+
+[node name="StandArea" type="Area3D" parent="StandOnHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
+collision_layer = 0
+collision_mask = 2052
+
+[node name="StandAreaCollision" type="CollisionShape3D" parent="StandOnHead/StandArea"]
+shape = SubResource("CylinderShape3D_160lq")
+
+[node name="RayCast3D" type="RayCast3D" parent="StandOnHead"]
+top_level = true
+enabled = false
+target_position = Vector3(0, -2, 0)
+collision_mask = 2052
+collide_with_areas = true
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
@@ -527,5 +571,9 @@ mesh = SubResource("QuadMesh_j2kfo")
 skeleton = NodePath("../Head/Camera3D")
 
 [connection signal="weapon_shoot" from="." to="Head/Rifle" method="_on_player_weapon_shoot"]
+[connection signal="area_entered" from="StandOnHead/StandArea" to="StandOnHead" method="_on_stand_area_area_entered"]
+[connection signal="area_exited" from="StandOnHead/StandArea" to="StandOnHead" method="_on_stand_area_area_exited"]
+[connection signal="body_entered" from="StandOnHead/StandArea" to="StandOnHead" method="_on_stand_area_body_entered"]
+[connection signal="body_exited" from="StandOnHead/StandArea" to="StandOnHead" method="_on_stand_area_body_exited"]
 [connection signal="body_entered" from="Head/Camera3D/EyeArea" to="Head/Camera3D" method="_on_eye_area_body_entered"]
 [connection signal="body_exited" from="Head/Camera3D/EyeArea" to="Head/Camera3D" method="_on_eye_area_body_exited"]

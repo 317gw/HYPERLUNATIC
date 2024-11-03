@@ -60,7 +60,7 @@ func snap_down_to_stairs_check(check_stairs_second_ray: bool = false) -> void:
 
 			# 是否启用射线检测，过去是否在台阶上
 			if check_stairs_second_ray and not (snapped_to_stairs_last_several_frame_count() > 3):
-				print(not snapped_to_stairs_last_several_frame.all(func(i): return i))
+				#print(not snapped_to_stairs_last_several_frame.all(func(i): return i))
 				var vel2d_v3 = player.velocity*Vector3(1,0,1) + player.input_direction
 				stair_ray_2.global_position = body_test_result.get_position() + vel2d_v3.normalized() * step_length
 				stair_ray_3.global_position = body_test_result.get_position() + vel2d_v3.normalized() * step_length * 2
@@ -73,7 +73,7 @@ func snap_down_to_stairs_check(check_stairs_second_ray: bool = false) -> void:
 					var is_continuous_stair = y_stair2_to_3 > 0.1
 
 					#  = abs(stair_ray_2.get_collision_point().y - body_test_result.get_position().y)
-					prints(y_result_to_stair2, y_stair2_to_3, is_continuous_stair)
+					#prints(y_result_to_stair2, y_stair2_to_3, is_continuous_stair)
 
 					#translate_y = lerp(translate_y, translate_y * (1 - y_result_to_stair2/max_step_height), 0.5)
 					# lerp(translate_y, translate_y * (1 - dd/max_step_height), 0.5)
@@ -92,43 +92,39 @@ func snap_down_to_stairs_check(check_stairs_second_ray: bool = false) -> void:
 	snapped_to_stairs_last_several_frame.append(snapped_to_stairs_last_frame)
 
 
+
+
 func snap_up_stairs_check(delta: float) -> bool:
 	if not player.is_on_floor() and not snapped_to_stairs_last_frame:
-		#print("false1")
 		return false
 
 	var vel2d_v3 = player.velocity*Vector3(1,0,1) + player.input_direction
 	if vel2d_v3.length() == 0:
-		#print("false2")
 		return false
 
 	var expected_move_motion = vel2d_v3 * delta
 	var step_pos_with_clearance = player.global_transform.translated(expected_move_motion + Vector3(0, max_step_height*2, 0))
 	var down_check_result = KinematicCollision3D.new()
 	var self_test_move = player.test_move(step_pos_with_clearance, Vector3(0, -max_step_height*2.1, 0), down_check_result)
+	if down_check_result.get_collision_count() == 0:
+		return false
 
-	if (self_test_move and (down_check_result.get_collider().is_class("StaticBody3D") or down_check_result.get_collider().is_class("CSGShape3D"))):
-		var step_height = (step_pos_with_clearance.origin - player.global_position + down_check_result.get_travel()).y
+	var collider = down_check_result.get_collider()
+	if not (self_test_move and (collider is StaticBody3D or collider is CSGShape3D) ):
+		return false
 
-		if step_height > max_step_height or step_height <= 0.01 or (down_check_result.get_position() - player.global_position).y > max_step_height:
-			#prints(
-				#step_height > max_step_height,
-				#step_height <= 0.01,
-				#(down_check_result.get_position() - player.global_position).y > max_step_height)
-			#print(step_height)
-			#print("false3")
-			return false
+	var step_height = (step_pos_with_clearance.origin - player.global_position + down_check_result.get_travel()).y
+	if step_height > max_step_height or step_height <= 0.01 or (down_check_result.get_position() - player.global_position).y > max_step_height:
+		return false
 
-		stairs_ahead_ray.global_position = down_check_result.get_position() + Vector3(0,max_step_height,0) + expected_move_motion.normalized() * 0.1
-		stairs_ahead_ray.force_raycast_update()
+	stairs_ahead_ray.global_position = down_check_result.get_position() + Vector3(0,max_step_height,0) + expected_move_motion.normalized() * 0.1
+	stairs_ahead_ray.force_raycast_update()
+	if stairs_ahead_ray.is_colliding() and not is_surface_too_steep(stairs_ahead_ray.get_collision_normal(), player.floor_max_angle/3):
+		camera.slide_camera_smooth_back_to_origin_y_only = false
+		camera.save_camera_pos_for_smoothing()
+		player.global_position = step_pos_with_clearance.origin + down_check_result.get_travel() # ***
+		player.apply_floor_snap()
+		snapped_to_stairs_last_frame = true
+		return true
 
-		if stairs_ahead_ray.is_colliding() and not is_surface_too_steep(stairs_ahead_ray.get_collision_normal(), player.floor_max_angle/3):
-			camera.slide_camera_smooth_back_to_origin_y_only = false
-			camera.save_camera_pos_for_smoothing()
-			player.global_position = step_pos_with_clearance.origin + down_check_result.get_travel() # ***
-			player.apply_floor_snap()
-			snapped_to_stairs_last_frame = true
-			#print("true1")
-			return true
-	#print("false4")
 	return false

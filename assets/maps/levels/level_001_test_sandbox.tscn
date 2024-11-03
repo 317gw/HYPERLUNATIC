@@ -1,19 +1,19 @@
-[gd_scene load_steps=109 format=3 uid="uid://b1yleqbb8tc7x"]
+[gd_scene load_steps=127 format=3 uid="uid://b1yleqbb8tc7x"]
 
+[ext_resource type="LightmapGIData" uid="uid://sbpg1jdftldf" path="res://assets/bake/level_001_test_sandbox.lmbake" id="1_pptil"]
 [ext_resource type="Shader" path="res://assets/shaders/top_cloud.gdshader" id="2_rqnax"]
 [ext_resource type="Material" uid="uid://cn1gsy15bkaff" path="res://assets/materials/grid.tres" id="2_x5xie"]
 [ext_resource type="Shader" path="res://assets/shaders/other_author/fade_by_distance.gdshader" id="3_2hx4s"]
 [ext_resource type="Shader" path="res://assets/shaders/pixelated_shadows.gdshader" id="3_13vii"]
 [ext_resource type="Shader" path="res://assets/shaders/bottom_cloud.gdshader" id="3_ki07r"]
 [ext_resource type="PackedScene" uid="uid://cn3v37j4bojle" path="res://assets/enemy/flying_fish/random_flying_fishs.tscn" id="3_ncmpl"]
-[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="3_yfwkt"]
 [ext_resource type="Environment" uid="uid://dsay4gdr8k6ur" path="res://assets/maps/environment/WE_test.tres" id="4_8itc7"]
 [ext_resource type="PackedScene" uid="uid://24tw178y6mry" path="res://assets/enemy/flying_fish/flying_fish.tscn" id="4_attlp"]
 [ext_resource type="PackedScene" uid="uid://b6dtopvb54qyu" path="res://assets/controllers/player_controller.tscn" id="4_efh88"]
 [ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="5_aesjl"]
 [ext_resource type="PackedScene" uid="uid://bw7bpxiao2prn" path="res://assets/maps/map_blocks/dynamite_barrel.tscn" id="6_6xlc4"]
 [ext_resource type="PackedScene" uid="uid://bg24r2642jpyw" path="res://assets/ui/menu/pause_menu.tscn" id="6_vjtwi"]
-[ext_resource type="Texture2D" uid="uid://dmslwed4yt5hr" path="res://assets/textures/industrial_sunset_puresky_512.png" id="7_xvu2l"]
+[ext_resource type="Texture2D" uid="uid://dmslwed4yt5hr" path="res://assets/textures/sky/industrial_sunset_puresky_512.png" id="7_xvu2l"]
 [ext_resource type="PackedScene" uid="uid://smrf1msp4uhn" path="res://assets/global/mobility_detection.tscn" id="8_ws0m0"]
 [ext_resource type="PackedScene" uid="uid://q7v1ee3iuo4l" path="res://assets/maps/map_blocks/plat_form.tscn" id="9_uwmfc"]
 [ext_resource type="Shader" path="res://assets/shaders/Dashed Grid (The Best Darn Grid Shader (Yet)).gdshader" id="11_jig04"]
@@ -22,7 +22,9 @@
 [ext_resource type="Shader" path="res://addons/godot-polyliner/shaders/parallax/raymarch_chain.gdshader" id="13_h4urs"]
 [ext_resource type="PackedScene" uid="uid://b1ovqgjwms7u4" path="res://SimpleFPSController-main/ladder.tscn" id="13_imfje"]
 [ext_resource type="PackedScene" uid="uid://dhg1cfuc0tf3j" path="res://assets/ui/ui.tscn" id="13_pc741"]
+[ext_resource type="Shader" path="res://assets/shaders/grid202410.gdshader" id="14_cnsua"]
 [ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://assets/maps/map_blocks/CSGStair.tscn" id="15_6web6"]
+[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/textures/grid2.png" id="15_8iq8i"]
 [ext_resource type="PackedScene" uid="uid://ddvfv3jnldvx1" path="res://assets/maps/map_blocks/sign.tscn" id="15_m7iq1"]
 [ext_resource type="Shader" path="res://assets/shaders/other_author/grid.gdshader" id="17_4iek7"]
 [ext_resource type="Shader" path="res://assets/shaders/world coordinates grid b&w.gdshader" id="17_vbqfu"]
@@ -31,10 +33,11 @@
 [ext_resource type="Shader" path="res://assets/shaders/waters/water3d202409.gdshader" id="23_nqyk7"]
 [ext_resource type="Texture2D" uid="uid://c17swbjodnlcl" path="res://assets/textures/water/spume_normal_512.png" id="24_i4g85"]
 [ext_resource type="Texture2D" uid="uid://bye687yl2sesr" path="res://assets/textures/water/spume_mask_512.png" id="25_joppk"]
-[ext_resource type="Material" uid="uid://is0nttijciy8" path="res://assets/danmu/dispenser_debug_display.material" id="26_5nawn"]
+[ext_resource type="Material" uid="uid://is0nttijciy8" path="res://assets/danmaku/dispenser_debug_display.material" id="26_5nawn"]
 [ext_resource type="Texture2D" uid="uid://dmsyagyieahoy" path="res://assets/textures/water/Ocean_normal_512.png" id="26_w1iw0"]
-[ext_resource type="Script" path="res://assets/danmu/test_dispenser.gd" id="26_xshhw"]
-[ext_resource type="PackedScene" uid="uid://beflirj640wgt" path="res://assets/danmu/bullet/pellet.tscn" id="28_8vude"]
+[ext_resource type="Script" path="res://assets/danmaku/scripts/test_dispenser.gd" id="26_xshhw"]
+[ext_resource type="PackedScene" uid="uid://bwt5nuyklqjbu" path="res://assets/maps/map_blocks/ice.tscn" id="28_wxta1"]
+[ext_resource type="PackedScene" uid="uid://34f26nn5pmjo" path="res://assets/danmaku/bullet/texture_pellet.tscn" id="31_5ol08"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8c02n"]
 transparency = 1
@@ -89,6 +92,43 @@ shader_parameter/cloud2worldScale = 0.01
 shader_parameter/displacementStrength = 7.02
 shader_parameter/discardHeight = 500.0
 shader_parameter/Noise1 = SubResource("NoiseTexture2D_pdm0j")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lx4ou"]
+lightmap_size_hint = Vector2i(787, 754)
+add_uv2 = true
+top_radius = 0.0
+bottom_radius = 25.0
+height = 100.0
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4rynf"]
+lightmap_size_hint = Vector2i(316, 354)
+add_uv2 = true
+top_radius = 10.0
+bottom_radius = 10.0
+height = 50.0
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_fv7uo"]
+lightmap_size_hint = Vector2i(304, 456)
+add_uv2 = true
+size = Vector3(30, 30, 30)
+
+[sub_resource type="TorusMesh" id="TorusMesh_3gw3h"]
+lightmap_size_hint = Vector2i(33, 9)
+add_uv2 = true
+inner_radius = 50.0
+outer_radius = 100.0
+rings = 12
+ring_segments = 16
+
+[sub_resource type="SphereMesh" id="SphereMesh_0smfs"]
+lightmap_size_hint = Vector2i(1635, 818)
+add_uv2 = true
+radius = 52.0
+height = 104.0
+radial_segments = 12
+rings = 6
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_k6yyt"]
 frequency = 0.03
@@ -248,6 +288,8 @@ void fragment() {
 }
 "
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wa6ew"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cy81x"]
 render_priority = 0
 shader = SubResource("Shader_3rchd")
@@ -262,46 +304,39 @@ shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_wa6ew")
+shader_parameter/texture_roughness = SubResource("CompressedTexture2D_wa6ew")
 
 [sub_resource type="BoxOccluder3D" id="BoxOccluder3D_37puh"]
 size = Vector3(112, 0.5, 200)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xi2kq"]
-render_priority = 0
-shader = ExtResource("17_4iek7")
-shader_parameter/albedo = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.8
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
-
 [sub_resource type="BoxOccluder3D" id="BoxOccluder3D_umekk"]
 size = Vector3(112, 0.5, 108)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0v180"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ramyb"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q1asd"]
+width = 250
+height = 250
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_ramyb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahwaw"]
 render_priority = 0
-shader = ExtResource("17_4iek7")
-shader_parameter/albedo = Color(0.933333, 1, 0, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="GDScript" id="GDScript_t3vw4"]
 script/source = "extends Node3D
@@ -328,6 +363,66 @@ size = Vector3(4, 0.2, 4)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nuuyp"]
 data = PackedVector3Array(-2, 0.1, 2, 2, 0.1, 2, -2, -0.1, 2, 2, 0.1, 2, 2, -0.1, 2, -2, -0.1, 2, 2, 0.1, -2, -2, 0.1, -2, 2, -0.1, -2, -2, 0.1, -2, -2, -0.1, -2, 2, -0.1, -2, 2, 0.1, 2, 2, 0.1, -2, 2, -0.1, 2, 2, 0.1, -2, 2, -0.1, -2, 2, -0.1, 2, -2, 0.1, -2, -2, 0.1, 2, -2, -0.1, -2, -2, 0.1, 2, -2, -0.1, 2, -2, -0.1, -2, 2, 0.1, 2, -2, 0.1, 2, 2, 0.1, -2, -2, 0.1, 2, -2, 0.1, -2, 2, 0.1, -2, -2, -0.1, 2, 2, -0.1, 2, -2, -0.1, -2, 2, -0.1, 2, 2, -0.1, -2, -2, -0.1, -2)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvji7"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wc3ks"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ftwt"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0v180"]
+render_priority = 0
+shader = ExtResource("17_4iek7")
+shader_parameter/albedo = Color(0.933333, 1, 0, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.5
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_wa6ew")
+shader_parameter/texture_roughness = SubResource("CompressedTexture2D_wa6ew")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8d2lu"]
 render_priority = 0
 shader = ExtResource("17_4iek7")
@@ -340,9 +435,8 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_wa6ew")
+shader_parameter/texture_roughness = SubResource("CompressedTexture2D_wa6ew")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cinp4"]
 render_priority = 0
@@ -356,9 +450,53 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_wa6ew")
+shader_parameter/texture_roughness = SubResource("CompressedTexture2D_wa6ew")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8mmvp"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7282"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(0, 0.45, 0.9, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6gxrb"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(0, 0.45, 0.9, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1v4f4"]
 render_priority = 0
@@ -372,25 +510,8 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lcrxy"]
-render_priority = 0
-shader = ExtResource("17_4iek7")
-shader_parameter/albedo = Color(0, 0.666667, 1, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_wa6ew")
+shader_parameter/texture_roughness = SubResource("CompressedTexture2D_wa6ew")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hidu3"]
 render_priority = 0
@@ -404,9 +525,8 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/texture_albedo = SubResource("CompressedTexture2D_wa6ew")
+shader_parameter/texture_roughness = SubResource("CompressedTexture2D_wa6ew")
 
 [sub_resource type="Curve3D" id="Curve3D_bm6dd"]
 bake_interval = 0.1
@@ -429,6 +549,21 @@ shader_parameter/repeat_size_b = 0.1
 shader_parameter/roughness = 0.25
 shader_parameter/metallic = 1.0
 shader_parameter/color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0hbg"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jes75"]
 render_priority = 0
@@ -471,21 +606,50 @@ size = Vector2(2, 2)
 render_priority = 0
 shader = ExtResource("19_yc15v")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mhfec"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_df0vc"]
 render_priority = 0
-shader = ExtResource("17_4iek7")
-shader_parameter/albedo = Color(0, 0.39, 0.9, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oeg12"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxx0k"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(0, 0.45, 0.9, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gm676"]
 render_priority = 0
@@ -511,156 +675,88 @@ shader_parameter/in_dashed_scale_y = 0.3
 shader_parameter/in_dashed_count_x = 6.0
 shader_parameter/in_dashed_count_y = 6.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_22g77"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bcslk"]
 render_priority = 0
-shader = ExtResource("17_4iek7")
-shader_parameter/albedo = Color(0.937255, 1, 0, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
-shader_parameter/uv1_offset = Vector3(0.5, 0.5, 0.5)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="BoxMesh" id="BoxMesh_xc4gq"]
-material = SubResource("ShaderMaterial_22g77")
+material = SubResource("ShaderMaterial_bcslk")
 size = Vector3(2, 2, 2)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vp4dy"]
 data = PackedVector3Array(-1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1)
 
-[sub_resource type="Shader" id="Shader_fdyqa"]
-code = "// NOTE: Shader automatically converted from Godot Engine 4.1.dev4's StandardMaterial3D.
-
-shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
-uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
-uniform float point_size : hint_range(0,128);
-uniform float roughness : hint_range(0,1);
-uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
-uniform float specular;
-uniform float metallic;
-varying vec3 uv1_triplanar_pos;
-uniform float uv1_blend_sharpness;
-varying vec3 uv1_power_normal;
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-
-void vertex() {
-	TANGENT = vec3(0.0,0.0,-1.0) * abs(NORMAL.x);
-	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.y);
-	TANGENT+= vec3(1.0,0.0,0.0) * abs(NORMAL.z);
-	TANGENT = normalize(TANGENT);
-	BINORMAL = vec3(0.0,1.0,0.0) * abs(NORMAL.x);
-	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(NORMAL.y);
-	BINORMAL+= vec3(0.0,1.0,0.0) * abs(NORMAL.z);
-	BINORMAL = normalize(BINORMAL);
-	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
-	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
-	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
-	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
-}
-
-vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
-	vec4 samp=vec4(0.0);
-	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
-	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
-	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
-	return samp;
-}
-
-void fragment() {
-	vec4 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
-	ALBEDO = (albedo.rgb * albedo_tex.r) + albedo_tex.g + albedo_tex.b;
-	float metallic_tex = dot(triplanar_texture(texture_metallic,uv1_power_normal,uv1_triplanar_pos),metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
-	float roughness_tex = dot(triplanar_texture(texture_roughness,uv1_power_normal,uv1_triplanar_pos),roughness_texture_channel);
-	ROUGHNESS = (1.0 - albedo_tex.g) * roughness;
-	SPECULAR = specular;
-}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cj3uy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftep0"]
 render_priority = 0
-shader = SubResource("Shader_fdyqa")
-shader_parameter/albedo = Color(0, 0.517647, 1, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
-shader_parameter/metallic_texture_channel = null
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(0, 0.45, 0.9, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
-shader_parameter/uv1_offset = Vector3(0.5, 0.5, 0.5)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="BoxMesh" id="BoxMesh_nea1i"]
-material = SubResource("ShaderMaterial_cj3uy")
+material = SubResource("ShaderMaterial_ftep0")
 size = Vector3(6, 2, 2)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nkfwh"]
 data = PackedVector3Array(-3, 1, 1, 3, 1, 1, -3, -1, 1, 3, 1, 1, 3, -1, 1, -3, -1, 1, 3, 1, -1, -3, 1, -1, 3, -1, -1, -3, 1, -1, -3, -1, -1, 3, -1, -1, 3, 1, 1, 3, 1, -1, 3, -1, 1, 3, 1, -1, 3, -1, -1, 3, -1, 1, -3, 1, -1, -3, 1, 1, -3, -1, -1, -3, 1, 1, -3, -1, 1, -3, -1, -1, 3, 1, 1, -3, 1, 1, 3, 1, -1, -3, 1, 1, -3, 1, -1, 3, 1, -1, -3, -1, 1, 3, -1, 1, -3, -1, -1, 3, -1, 1, 3, -1, -1, -3, -1, -1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_62u37"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2xq25"]
 render_priority = 0
-shader = ExtResource("17_4iek7")
-shader_parameter/albedo = Color(0, 0.67451, 0, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(0, 0.7, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
-shader_parameter/uv1_offset = Vector3(1, 0.5, 0.5)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = ExtResource("3_yfwkt")
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="PrismMesh" id="PrismMesh_rutao"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_62u37")
+material = SubResource("ShaderMaterial_2xq25")
 left_to_right = 0.0
 size = Vector3(16, 4, 2)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_aenmq"]
 points = PackedVector3Array(-8, 2, 1, 8, -2, 1, -8, 2, -1, -8, -2, 1, 8, -2, -1, -8, -2, -1)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50qw0"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ggyb6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xsswv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxibv"]
 render_priority = 0
-shader = ExtResource("17_4iek7")
-shader_parameter/albedo = Color(0.933333, 1, 0, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(0, 0.45, 0.9, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = SubResource("CompressedTexture2D_50qw0")
-shader_parameter/texture_metallic = ExtResource("3_yfwkt")
-shader_parameter/texture_roughness = SubResource("CompressedTexture2D_ggyb6")
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bwxd1"]
 render_priority = 0
@@ -668,6 +764,21 @@ shader = ExtResource("3_2hx4s")
 shader_parameter/character_position = Vector3(0, 0, 0)
 shader_parameter/fade_distance = 4.0
 shader_parameter/fade_power = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdmw7"]
+render_priority = 0
+shader = ExtResource("14_cnsua")
+shader_parameter/back_colour = Color(1, 1, 0, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
+shader_parameter/specular = 0.5
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_grid = ExtResource("15_8iq8i")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [sub_resource type="BoxMesh" id="BoxMesh_u4i0g"]
 
@@ -707,6 +818,8 @@ rings = 1
 material = SubResource("StandardMaterial3D_vyjmu")
 radial_segments = 4
 rings = 1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gfy3v"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_ilsen"]
 
@@ -757,6 +870,11 @@ size = Vector2(2, 2)
 [node name="TestMap" type="Node3D" groups=["NowScene"]]
 process_mode = 3
 
+[node name="LightmapGI" type="LightmapGI" parent="."]
+layers = 7
+use_texture_for_bounces = false
+light_data = ExtResource("1_pptil")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 process_mode = 1
 environment = ExtResource("4_8itc7")
@@ -772,9 +890,11 @@ material = SubResource("StandardMaterial3D_8c02n")
 [node name="DistantShadowsAndClouds" type="DirectionalLight3D" parent="WorldEnvironment"]
 editor_description = "远距离阴影和云"
 transform = Transform3D(0.797584, 0.0431278, -0.601664, 0, 0.997441, 0.0714974, 0.603208, -0.0570252, 0.795543, 0, -100, 0)
+visible = false
 light_color = Color(1, 0.983333, 0.9, 1)
 light_energy = 2.0
 light_angular_distance = 0.4
+light_bake_mode = 1
 light_cull_mask = 4293918726
 shadow_enabled = true
 shadow_normal_bias = 3.5
@@ -794,7 +914,7 @@ light_color = Color(1, 0.984314, 0.901961, 1)
 light_energy = 3.0
 light_cull_mask = 4293918721
 shadow_enabled = true
-shadow_bias = 0.2
+shadow_bias = 0.02
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 180.0
 
@@ -807,7 +927,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -4.99894, 2.5321, -8.33
 max_speed = 0.0
 
 [node name="Player" parent="." instance=ExtResource("4_efh88")]
-transform = Transform3D(-0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, -0.173648, -15.3513, 39.4232, 45.0129)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="OtherMaps" type="Node3D" parent="."]
 
@@ -825,35 +945,30 @@ surface_material_override/0 = SubResource("ShaderMaterial_5j4h3")
 
 [node name="远景" type="Node3D" parent="OtherMaps"]
 
-[node name="圆锥" type="CSGCylinder3D" parent="OtherMaps/远景"]
+[node name="圆锥" type="MeshInstance3D" parent="OtherMaps/远景"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 800, 350, -600)
 layers = 4
-radius = 25.0
-height = 100.0
-cone = true
+mesh = SubResource("CylinderMesh_lx4ou")
 
-[node name="圆柱" type="CSGCylinder3D" parent="OtherMaps/远景"]
+[node name="圆柱" type="MeshInstance3D" parent="OtherMaps/远景"]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -800, 150, 650)
 layers = 4
-radius = 10.0
-height = 50.0
+mesh = SubResource("CylinderMesh_4rynf")
 
-[node name="方块" type="CSGBox3D" parent="OtherMaps/远景"]
+[node name="方块" type="MeshInstance3D" parent="OtherMaps/远景"]
 transform = Transform3D(8.95936, -4.42378, -0.400107, 2.24114, 5.2798, -8.19152, 3.835, 7.24941, 5.72179, 1100, 77, -450)
 layers = 4
-size = Vector3(30, 30, 30)
+mesh = SubResource("BoxMesh_fv7uo")
 
-[node name="甜甜圈" type="CSGTorus3D" parent="OtherMaps/远景"]
+[node name="甜甜圈" type="MeshInstance3D" parent="OtherMaps/远景"]
 transform = Transform3D(0.735151, -0.593775, -0.327084, 0.676228, 0.676228, 0.292288, 0.04763, -0.43606, 0.898656, 620, 4, 190)
 layers = 4
-inner_radius = 50.0
-outer_radius = 100.0
-sides = 12
+mesh = SubResource("TorusMesh_3gw3h")
 
-[node name="球" type="CSGSphere3D" parent="OtherMaps/远景"]
+[node name="球" type="MeshInstance3D" parent="OtherMaps/远景"]
 transform = Transform3D(0.939693, 0.0999684, -0.327084, 0, 0.95633, 0.292288, 0.34202, -0.274661, 0.898657, 627.39, -3.35074, 195.159)
 layers = 4
-radius = 52.0
+mesh = SubResource("SphereMesh_0smfs")
 
 [node name="Sea" type="Node3D" parent="OtherMaps"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.25, 0)
@@ -887,7 +1002,7 @@ process_mode = 1
 
 [node name="Floor" type="CSGBox3D" parent="Maps"]
 process_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.0285, 2.38419e-07, 4.17233e-07)
 use_collision = true
 collision_layer = 2
 size = Vector3(112, 0.5, 200)
@@ -902,7 +1017,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68, -25, 46)
 use_collision = true
 collision_layer = 2
 size = Vector3(112, 0.5, 108)
-material = SubResource("ShaderMaterial_xi2kq")
+material = ExtResource("2_x5xie")
 
 [node name="OccluderInstance3D2" type="OccluderInstance3D" parent="Maps/Floor2"]
 occluder = SubResource("BoxOccluder3D_umekk")
@@ -915,7 +1030,7 @@ collision_layer = 2
 radius = 2.0
 height = 0.5
 smooth_faces = false
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_ahwaw")
 
 [node name="圆盘2" type="CSGCylinder3D" parent="Maps"]
 process_mode = 1
@@ -925,7 +1040,7 @@ collision_layer = 2
 radius = 2.0
 height = 0.5
 sides = 64
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_ahwaw")
 
 [node name="PlatForm" parent="Maps" instance=ExtResource("9_uwmfc")]
 transform = Transform3D(2.98023e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, 2.98023e-08, 14, -0.1, 2)
@@ -959,7 +1074,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -40, 5
 use_collision = true
 collision_layer = 2
 size = Vector3(4, 1, 4)
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_kvji7")
 
 [node name="浮空跳2" type="CSGBox3D" parent="Maps/练习图"]
 process_mode = 1
@@ -967,7 +1082,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -40, 8
 use_collision = true
 collision_layer = 2
 size = Vector3(4, 1, 4)
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_kvji7")
 
 [node name="浮空跳3" type="CSGBox3D" parent="Maps/练习图"]
 process_mode = 1
@@ -975,7 +1090,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -27, 1
 use_collision = true
 collision_layer = 2
 size = Vector3(4, 1, 2)
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_wc3ks")
 
 [node name="浮空跳4" type="CSGBox3D" parent="Maps/练习图"]
 process_mode = 1
@@ -983,7 +1098,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -19, 1
 use_collision = true
 collision_layer = 2
 size = Vector3(2, 1, 3)
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_5ftwt")
 
 [node name="浮空跳5" type="CSGBox3D" parent="Maps/练习图"]
 process_mode = 1
@@ -1061,7 +1176,7 @@ collision_layer = 2
 radius = 6.1
 height = 0.2
 smooth_faces = false
-material = SubResource("ShaderMaterial_cinp4")
+material = SubResource("ShaderMaterial_8mmvp")
 
 [node name="CSGBox3D4" type="CSGCylinder3D" parent="Maps/练习图/塔爬爬2"]
 operation = 2
@@ -1373,7 +1488,7 @@ transform = Transform3D(0.924046, 0, -0.382752, 0, 1.00018, 0, 0.382752, 0, 0.92
 use_collision = true
 collision_layer = 2
 size = Vector3(3, 0.5, 3)
-material = SubResource("ShaderMaterial_1v4f4")
+material = SubResource("ShaderMaterial_y7282")
 
 [node name="塔" type="CSGCylinder3D" parent="Maps/练习图"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 25, 34)
@@ -1382,7 +1497,7 @@ collision_layer = 2
 radius = 6.0
 height = 50.0
 smooth_faces = false
-material = SubResource("ShaderMaterial_lcrxy")
+material = SubResource("ShaderMaterial_6gxrb")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Maps/练习图/塔"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -22, -1)
@@ -1453,7 +1568,7 @@ use_collision = true
 collision_layer = 2
 polygon = PackedVector2Array(0, 0, 1, 3, 1, 0)
 depth = 2.0
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_a0hbg")
 
 [node name="斜坡3" type="CSGPolygon3D" parent="Maps/斜坡网格着色器测试"]
 process_mode = 1
@@ -1521,7 +1636,7 @@ transform = Transform3D(1.31134e-07, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-
 use_collision = true
 collision_layer = 2
 size = Vector3(4, 26, 1)
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_df0vc")
 
 [node name="跳墙右" type="CSGBox3D" parent="Maps/大多数"]
 process_mode = 1
@@ -1529,16 +1644,16 @@ transform = Transform3D(1.31134e-07, -4.37114e-08, 1, -4.37114e-08, 1, 4.37114e-
 use_collision = true
 collision_layer = 2
 size = Vector3(4, 26, 1)
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_oeg12")
 
 [node name="斜坡2" type="CSGPolygon3D" parent="Maps/大多数"]
 process_mode = 1
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -14, 0, -2)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -14, 0.25, -2)
 use_collision = true
 collision_layer = 2
 polygon = PackedVector2Array(0, 0, 4, 4, 4, 0)
 depth = 20.0
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_kvji7")
 
 [node name="滑翔" type="CSGPolygon3D" parent="Maps/大多数"]
 process_mode = 1
@@ -1547,7 +1662,7 @@ use_collision = true
 collision_layer = 2
 polygon = PackedVector2Array(0, -1, 7, 7, 7, -1)
 depth = 100.0
-material = SubResource("ShaderMaterial_mhfec")
+material = SubResource("ShaderMaterial_jxx0k")
 
 [node name="终点" type="CSGBox3D" parent="Maps/大多数"]
 process_mode = 1
@@ -1634,7 +1749,7 @@ transform = Transform3D(-1.0058, 0, 8.79303e-08, 0, 1.0058, 0, -8.79303e-08, 0, 
 use_collision = true
 collision_layer = 2
 size = Vector3(2, 2, 2)
-material = SubResource("ShaderMaterial_xsswv")
+material = SubResource("ShaderMaterial_wxibv")
 
 [node name="跳墙左3" type="CSGBox3D" parent="Maps/大多数"]
 process_mode = 1
@@ -1642,7 +1757,7 @@ transform = Transform3D(-1.0058, 0, 8.79303e-08, 0, 1.0058, 0, -8.79303e-08, 0, 
 use_collision = true
 collision_layer = 2
 size = Vector3(2, 2, 15)
-material = SubResource("ShaderMaterial_0v180")
+material = ExtResource("2_x5xie")
 
 [node name="FadeWall" type="CSGBox3D" parent="Maps"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, 30.4281)
@@ -1679,7 +1794,7 @@ material = ExtResource("2_x5xie")
 
 [node name="墙2" type="CSGBox3D" parent="Maps/黑房"]
 process_mode = 1
-transform = Transform3D(-4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 1, -4.37114e-08, -4.37114e-08, -5, 4, -5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5, 4, -5)
 use_collision = true
 collision_layer = 2
 size = Vector3(10, 8, 0.5)
@@ -1698,7 +1813,7 @@ process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 use_collision = true
 collision_layer = 2
-size = Vector3(10, 0.5, 10)
+size = Vector3(10, 1, 10)
 material = ExtResource("2_x5xie")
 
 [node name="墙5" type="CSGBox3D" parent="Maps/黑房"]
@@ -1716,7 +1831,7 @@ use_collision = true
 collision_layer = 2
 polygon = PackedVector2Array(0, 0, 0, 7, 1, 3, 1, 0)
 depth = 10.0
-material = SubResource("ShaderMaterial_0v180")
+material = SubResource("ShaderMaterial_pdmw7")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Maps"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.67433, 0.882864, -4.7079)
@@ -1741,7 +1856,7 @@ mesh = SubResource("CylinderMesh_nka2l")
 shape = SubResource("ConvexPolygonShape3D_bb7ar")
 
 [node name="RigidBody3D3" type="RigidBody3D" parent="Maps"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.1996, 3.08889, -15.072)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9395, 2.3133, -27.8292)
 collision_layer = 32
 collision_mask = 110
 
@@ -1766,26 +1881,40 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -24, 7.75, -24.75)
 top_level = true
 mesh = SubResource("SphereMesh_8f35w")
 
+[node name="Ice" parent="Maps" instance=ExtResource("28_wxta1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, -36)
+
+[node name="RigidBody3D4" type="RigidBody3D" parent="Maps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.8899, 1.46234, -27.6815)
+collision_layer = 32
+collision_mask = 110
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Maps/RigidBody3D4"]
+mesh = SubResource("BoxMesh_u4i0g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maps/RigidBody3D4"]
+shape = SubResource("BoxShape3D_clm57")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Maps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.20322, 0)
+sprite_frames = SubResource("SpriteFrames_gfy3v")
+
 [node name="弹幕" type="Node3D" parent="."]
 process_mode = 1
 
 [node name="TestDispenser" type="MeshInstance3D" parent="弹幕"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 20, 50)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
 material_override = ExtResource("26_5nawn")
 transparency = 0.5
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_ilsen")
 script = ExtResource("26_xshhw")
 only_reset_Dispenser_class = true
-disk_count = 4
-disk_radius = 2.0
-stripe_count = 3
-stripe_range = 90.0
+stripe_angle = 90.0
+stripe_range = 30.0
 ues_spherical = true
 spherical_count = 20.0
-bullet_scene = ExtResource("28_8vude")
-bullet_max_node = 1000
-bullet_lifetime = 20.0
+bullet_scene = ExtResource("31_5ol08")
 exceeding_the_cap_mode = 1
 bullet_speed = 8.0
 bullet_color = Color(0, 0, 1, 1)

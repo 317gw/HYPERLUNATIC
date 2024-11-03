@@ -163,8 +163,6 @@ func _physics_process(delta: float) -> void:
 	aiming_aidable_objects_in_out()
 	auxiliary_aiming()
 
-
-
 	#var current_position = self.global_position
 	#var position_change = current_position - previous_position
 	#var position_change_magnitude = position_change.length()
@@ -181,7 +179,7 @@ func _update_camera(delta) -> void: # 更新摄像机位置
 	_mouse_rotation.y += _rotation_input * delta # 更新摄像机的y轴旋转
 
 	var transform_marker = Vector3(0.0, _mouse_rotation.y + PLAYER.turn_round_rotation, 0.0)
-	var last_player_rotation = _player_rotation
+	#var last_player_rotation = _player_rotation
 	# 模型旋转平滑 删除这行↑ 头的运动将进行迭代导致左右摇摆
 	#_player_rotation.y = Global.exponential_decay(last_player_rotation.y, transform_marker.y, 6 * delta) # 6.155
 	_player_rotation.y = transform_marker.y
@@ -204,7 +202,7 @@ func _update_camera(delta) -> void: # 更新摄像机位置
 	head.rotation.z = 0.0 # 重置摄像机的z轴旋转
 	_rotation_input = 0.0 # 重置旋转输入
 	_tilt_input = 0.0 # 重置倾斜输入
-	#_camera_rotation.z = 0.0
+
 
 
 func headbob(time: float) -> Vector3:

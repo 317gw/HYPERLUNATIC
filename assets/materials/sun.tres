@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://chil6k0jf85by"]
 
 [ext_resource type="Shader" path="res://assets/shaders/sun.gdshader" id="1_kkb0u"]
-[ext_resource type="Texture2D" uid="uid://exxg2iqmxogm" path="res://assets/textures/512_sun.png" id="2_3atr5"]
+[ext_resource type="Texture2D" uid="uid://exxg2iqmxogm" path="res://assets/textures/sun/512_sun.png" id="2_3atr5"]
 [ext_resource type="Gradient" uid="uid://dhnfmwb85ltaf" path="res://assets/arts_resources/sun_gradient.tres" id="3_xnqnq"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_h52s6"]

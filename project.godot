@@ -13,7 +13,7 @@ config_version=5
 config/name="HYPERLUNATIC"
 config/version="0.01"
 run/main_scene="res://assets/maps/levels/level_001_test_sandbox.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [audio]
@@ -31,7 +31,6 @@ DebugDraw="*res://assets/global/debug_draw.tscn"
 FreezeTickManager="*res://assets/global/scripts/FreezeTickManager.gd"
 BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
-Effects="*res://assets/global/Effects.tscn"
 Global="*res://assets/global/scripts/Global.gd"
 
 [display]
@@ -39,6 +38,10 @@ Global="*res://assets/global/scripts/Global.gd"
 window/size/viewport_width=1700
 window/size/viewport_height=1200
 window/vsync/vsync_mode=0
+
+[dotnet]
+
+project/assembly_name="HYPERLUNATIC"
 
 [editor_plugins]
 
@@ -69,6 +72,23 @@ folder_colors={
 "res://test_scenario/": "gray",
 "res://导出/": "gray",
 "res://文档/": "gray"
+}
+
+[global_group]
+
+BeStandCharacter=""
+BeStandDanmaku=""
+
+[importer_defaults]
+
+3d_texture={
+"compress/mode": 3
+}
+texture={
+"compress/mode": 3
+}
+2d_array_texture={
+"compress/mode": 3
 }
 
 [input]
@@ -205,6 +225,8 @@ free_view_mode={
 3d_physics/layer_9="Explode"
 3d_physics/layer_10="Water"
 3d_physics/layer_11="Probe"
+3d_physics/layer_12="Danmaku"
+3d_physics/layer_13="StandOnHead"
 
 [physics]
 

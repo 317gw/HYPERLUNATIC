@@ -1,20 +1,29 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cn1gsy15bkaff"]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://cn1gsy15bkaff"]
 
-[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="1_57ppx"]
-[ext_resource type="Shader" path="res://assets/shaders/other_author/grid.gdshader" id="1_cggi7"]
+[ext_resource type="Shader" path="res://assets/shaders/grid202410.gdshader" id="1_mhns4"]
+[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/textures/grid2.png" id="2_sbure"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ramyb"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q1asd"]
+width = 250
+height = 250
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_ramyb")
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_cggi7")
-shader_parameter/albedo = Color(0.3, 0.3, 0.3, 1)
-shader_parameter/point_size = 1.0
+shader = ExtResource("1_mhns4")
+shader_parameter/back_colour = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/line1_colour = Color(1, 1, 1, 1)
+shader_parameter/line2_colour = Color(0.8, 0.8, 0.8, 1)
 shader_parameter/roughness = 0.8
+shader_parameter/texture_roughness_mix = 0.9
 shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
-shader_parameter/texture_albedo = ExtResource("1_57ppx")
-shader_parameter/texture_roughness = ExtResource("1_57ppx")
+shader_parameter/texture_grid = ExtResource("2_sbure")
+shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")

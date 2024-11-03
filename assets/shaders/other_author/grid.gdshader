@@ -13,7 +13,6 @@ uniform vec4 metallic_texture_channel;
 uniform float uv1_blend_sharpness;
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
-uniform float scale : hint_range(0,2) = 0.01;
 
 varying vec3 uv1_triplanar_pos;
 varying vec3 uv1_power_normal;
@@ -22,19 +21,6 @@ uniform sampler2D texture_albedo : source_color,filter_nearest_mipmap,repeat_ena
 uniform sampler2D texture_metallic : hint_default_white,filter_nearest_mipmap,repeat_enable;
 uniform sampler2D texture_roughness : hint_roughness_r,filter_nearest_mipmap,repeat_enable;
 
-
-// TRIPLANAR FUNCTION 三平面函数
-vec4 triplanar_texture2(vec3 position, vec3 normal, vec2 offset, sampler2D noise) {
-	vec4 colX = texture(noise, position.xy * scale + offset);
-	vec4 colY = texture(noise, position.xz * scale + offset);
-	vec4 colZ = texture(noise, position.zy * scale + offset);
-
-	vec3 blendWeight = abs(normal);
-	blendWeight = vec3(pow(blendWeight.x, uv1_blend_sharpness), pow(blendWeight.y, uv1_blend_sharpness), pow(blendWeight.z, uv1_blend_sharpness));
-	blendWeight /= (blendWeight.x + blendWeight.y + blendWeight.z);
-
-	return colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
-}
 
 vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
 	vec4 samp=vec4(0.0);
@@ -64,6 +50,7 @@ void vertex() {
 void fragment() {
 	vec4 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv1_triplanar_pos);
 	ALBEDO = (albedo.rgb * albedo_tex.r) + albedo_tex.g + albedo_tex.b;
+
 	float metallic_tex = dot(triplanar_texture(texture_metallic,uv1_power_normal,uv1_triplanar_pos),metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
 	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);

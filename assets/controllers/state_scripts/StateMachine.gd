@@ -6,6 +6,7 @@ extends Node
 
 var last_state: State
 var current_state: State # 当前状态
+var _current: String
 var states: Dictionary = {}
 var is_first_tick: bool = false
 
@@ -57,5 +58,6 @@ func on_child_transition(state: State, new_state_name: String):
 		print("in: %s" %new_state)
 	last_state = state
 	current_state = new_state
+	_current = current_state.name
 
 	is_first_tick = true

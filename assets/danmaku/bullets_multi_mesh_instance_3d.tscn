@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cujpxirhfwiuc"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_cw2vi"]
+resource_local_to_scene = true
+transform_format = 1
+
+[node name="BulletsMultiMeshInstance3D" type="MultiMeshInstance3D"]
+top_level = true
+visibility_range_end = 100.0
+multimesh = SubResource("MultiMesh_cw2vi")

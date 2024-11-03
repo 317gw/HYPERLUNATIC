@@ -44,7 +44,7 @@ func damaged(damage: float) -> void:
 
 func dead() -> void:
 	var expl = EXPLODE.instantiate()
-	get_node("/root/Effects").add_child(expl)
+	Global.effects.add_child(expl)
 	expl.global_position = global_position
 	expl.explode(explode_damage, explode_radius, explode_force)
 	expl.died_time = explode_time

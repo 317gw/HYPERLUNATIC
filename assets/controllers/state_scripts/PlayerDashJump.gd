@@ -1,7 +1,7 @@
 class_name PlayerDashJump
 extends State
 
-@onready var PLAYER: Player = $"../.."
+@onready var PLAYER: HL.Controller.Player = $"../.."
 @onready var climb: Climb = $"../../Climb"
 
 

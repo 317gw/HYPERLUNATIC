@@ -45,7 +45,7 @@ project/assembly_name="HYPERLUNATIC"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Basic FPS Player/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/godot4-graph2d-main/graph_2d/plugin.cfg", "res://addons/proton_trail-master/plugin.cfg", "res://addons/timer/plugin.cfg")
+enabled=PackedStringArray("res://addons/Basic FPS Player/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/godot4-graph2d-main/graph_2d/plugin.cfg", "res://addons/proton_trail-master/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg", "res://addons/timer/plugin.cfg")
 
 [file_customization]
 

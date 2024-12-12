@@ -1,9 +1,8 @@
-[gd_scene load_steps=62 format=3 uid="uid://b6dtopvb54qyu"]
+[gd_scene load_steps=70 format=3 uid="uid://b6dtopvb54qyu"]
 
 [ext_resource type="Script" path="res://assets/controllers/scripts/PlayerController.gd" id="1_0ynvo"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://assets/materials/player.tres" id="2_8r2m2"]
 [ext_resource type="Script" path="res://assets/controllers/scripts/snap_stairs.gd" id="3_breom"]
-[ext_resource type="PackedScene" uid="uid://boandfdhseyio" path="res://assets/weapons/rifle/rifle.tscn" id="3_peoqt"]
 [ext_resource type="Script" path="res://assets/controllers/scripts/Camera3D.gd" id="3_riu41"]
 [ext_resource type="Shader" path="res://assets/shaders/moebius.gdshader" id="4_c2g46"]
 [ext_resource type="Script" path="res://assets/controllers/scripts/climb.gd" id="4_ks7pu"]
@@ -25,6 +24,8 @@
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerDashJump.gd" id="11_tud07"]
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/CameraIdle.gd" id="11_uc086"]
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/CameraLookBack.gd" id="12_b1wsi"]
+[ext_resource type="Script" path="res://assets/weapons/scripts/weapon_manager.gd" id="12_kdq0o"]
+[ext_resource type="PackedScene" uid="uid://boandfdhseyio" path="res://assets/weapons/rifle/rifle.tscn" id="13_6wl66"]
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/CameraTurnRound.gd" id="13_7scuy"]
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerFreeViewMode.gd" id="14_a4jom"]
 [ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerClimb.gd" id="18_u1swj"]
@@ -32,6 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://ckpsxx6l7nhwf" path="res://assets/controllers/player_rigid_body.tscn" id="22_xhf1x"]
 [ext_resource type="Shader" path="res://assets/shaders/player_trail3D.gdshader" id="24_8fqh3"]
 [ext_resource type="Script" path="res://assets/controllers/scripts/grab.gd" id="26_x16s4"]
+[ext_resource type="Shader" path="res://assets/shaders/radial_blur.gdshader" id="33_2vxe7"]
+[ext_resource type="Script" path="res://assets/controllers/scripts/radial_blur.gd" id="34_xjmox"]
+[ext_resource type="Texture2D" uid="uid://bmkktpgboa6us" path="res://icon.svg" id="35_igf36"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6tv51"]
 material = ExtResource("2_8r2m2")
@@ -41,6 +45,7 @@ radial_segments = 16
 rings = 4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4bbek"]
+margin = 0.1
 radius = 0.35
 height = 1.7
 
@@ -184,6 +189,49 @@ material = SubResource("ShaderMaterial_lm17m")
 flip_faces = true
 size = Vector2(2, 2)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0a7j1"]
+resource_local_to_scene = true
+shader = ExtResource("33_2vxe7")
+shader_parameter/blur_center = Vector2(0.5, 0.5)
+shader_parameter/un_blur_radius_min = 0.15
+shader_parameter/un_blur_radius_max = 0.2
+shader_parameter/blur_power = 0.01
+shader_parameter/sampling_count = 6
+shader_parameter/lod = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_4hsx5"]
+lightmap_size_hint = Vector2i(12, 12)
+material = SubResource("ShaderMaterial_0a7j1")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqh4s"]
+resource_local_to_scene = true
+shader = ExtResource("33_2vxe7")
+shader_parameter/blur_center = Vector2(0.5, 0.5)
+shader_parameter/un_blur_radius_min = 0.2
+shader_parameter/un_blur_radius_max = 0.5
+shader_parameter/blur_power = 0.01
+shader_parameter/sampling_count = 8
+shader_parameter/lod = 0.5
+
+[sub_resource type="GDScript" id="GDScript_8y3ji"]
+script/source = "extends SubViewport
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	size.x = ProjectSettings.get_setting(\"display/window/size/viewport_width\")
+	size.y = ProjectSettings.get_setting(\"display/window/size/viewport_height\")
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	size = get_window().size
+	pass
+"
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA") groups=["Player"]]
 process_mode = 1
 collision_mask = 4130
@@ -206,6 +254,7 @@ shape = SubResource("CapsuleShape3D_4bbek")
 
 [node name="PlayerRigidBody" parent="." node_paths=PackedStringArray("player") instance=ExtResource("22_xhf1x")]
 player = NodePath("..")
+ues_player_rigid_body = false
 
 [node name="PlayerTransformMarker" type="Marker3D" parent="."]
 
@@ -384,6 +433,9 @@ skeleton = NodePath("../../..")
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Head/Camera3D"]
 visible = false
 
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Camera3D"]
+remote_path = NodePath("../../../SubViewport/Camera3D")
+
 [node name="Hand" type="Node3D" parent="Head"]
 script = ExtResource("26_x16s4")
 
@@ -423,10 +475,6 @@ mouse_force_pass_scroll_events = false
 color = Color(1, 1, 1, 0)
 metadata/_edit_use_anchors_ = true
 
-[node name="Rifle" parent="Head" instance=ExtResource("3_peoqt")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.13, -0.14, -0.24)
-visible = false
-
 [node name="CSGBox3D" type="CSGBox3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.82)
 visible = false
@@ -446,6 +494,17 @@ amount = 64
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_n5psr")
 draw_pass_1 = SubResource("SphereMesh_mo1ai")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head"]
+remote_path = NodePath("../../WeaponManager")
+
+[node name="WeaponManager" type="Node3D" parent="." node_paths=PackedStringArray("initial_weapon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+script = ExtResource("12_kdq0o")
+initial_weapon = NodePath("Rifle")
+
+[node name="Rifle" parent="WeaponManager" instance=ExtResource("13_6wl66")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24, -0.1, -0.35)
 
 [node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_0pah7")
@@ -570,7 +629,48 @@ visible = false
 mesh = SubResource("QuadMesh_j2kfo")
 skeleton = NodePath("../Head/Camera3D")
 
-[connection signal="weapon_shoot" from="." to="Head/Rifle" method="_on_player_weapon_shoot"]
+[node name="RadialBlur1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.8)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_4hsx5")
+
+[node name="RadialBlur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_aqh4s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+script = ExtResource("34_xjmox")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="RadialBlur"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("35_igf36")
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+use_hdr_2d = true
+render_target_update_mode = 0
+script = SubResource("GDScript_8y3ji")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+doppler_tracking = 2
+
+[connection signal="weapon_main_action" from="." to="WeaponManager" method="_on_main_action"]
+[connection signal="weapon_sub_action" from="." to="WeaponManager" method="_on_sub_action"]
 [connection signal="area_entered" from="StandOnHead/StandArea" to="StandOnHead" method="_on_stand_area_area_entered"]
 [connection signal="area_exited" from="StandOnHead/StandArea" to="StandOnHead" method="_on_stand_area_area_exited"]
 [connection signal="body_entered" from="StandOnHead/StandArea" to="StandOnHead" method="_on_stand_area_body_entered"]

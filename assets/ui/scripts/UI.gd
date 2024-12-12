@@ -10,7 +10,7 @@ var screen_center: Vector2
 
 @onready var crosshair: TextureRect = $Crosshair
 @onready var pause_menu: Control = $"../PauseMenu"
-@onready var player: Player = $"../Player"
+@onready var player: HL.Controller.Player = $"../Player"
 
 func _ready() -> void:
 	crosshair.scale = Vector2(crosshair_size, crosshair_size) / crosshair.size

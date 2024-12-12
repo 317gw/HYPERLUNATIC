@@ -8,7 +8,7 @@ var standed_bodys: Array = []
 
 var player_platform_on_leave_original: CharacterBody3D.PlatformOnLeave
 
-@onready var player: Player = $".."
+@onready var player: HL.Controller.Player = $".."
 @onready var stand_body: AnimatableBody3D = $StandBody
 @onready var stand_collision: CollisionShape3D = $StandBody/StandCollision
 @onready var stand_area: Area3D = $StandArea
@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 
 	# 筛选距离player最近的body
 	var state = player.movement_state_machine.current_state.name
-	if not (state == "Idle" or state == "Run") and player.direction.dot(Vector3.DOWN) > 0.1:
+	if not (state == "Idle" or state == "Run") and player.velocity.normalized().dot(Vector3.DOWN) > 0.1:
 		find_nearest_stand_body()
 	if stand_body_now == null:
 		no_stand_body()

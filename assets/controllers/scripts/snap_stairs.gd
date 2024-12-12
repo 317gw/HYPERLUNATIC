@@ -14,8 +14,8 @@ var translate_y: float
 var snapped_to_stairs_last_frame := false
 var last_frame_was_on_floor = -INF
 
-@onready var player: Player = $".."
-@onready var camera: PlayerCamera = $"../Head/Camera3D"
+@onready var player: HL.Controller.Player = $".."
+@onready var camera: HL.Controller.Camera = $"../Head/Camera3D"
 @onready var stairs_ahead_ray: RayCast3D = $StairsAheadRay
 @onready var stairs_below_ray: RayCast3D = $StairsBelowRay
 @onready var stairs_below_edge_ray: RayCast3D = $StairsBelowEdgeRay

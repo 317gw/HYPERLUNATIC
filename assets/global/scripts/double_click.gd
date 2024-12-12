@@ -1,6 +1,5 @@
 extends Node
-
-class_name DoubleClick
+#class_name DoubleClick
 
 @onready var timer = $Timer
 @onready var timer_2 = $Timer2

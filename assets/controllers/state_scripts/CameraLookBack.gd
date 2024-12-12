@@ -1,9 +1,9 @@
 extends State
 class_name CameraLookBack
 
-@onready var PLAYER: Player = $"../.."
+@onready var PLAYER: HL.Controller.Player = $"../.."
 @onready var Head: Node3D = $"../../Head"
-@onready var Camera: PlayerCamera = $"../../Head/Camera3D"
+@onready var Camera: HL.Controller.Camera = $"../../Head/Camera3D"
 
 
 func Enter():
@@ -26,4 +26,4 @@ func Handle_Input(_event: InputEvent) -> void:
 		Transitioned.emit(self, "CameraIdle")
 		Camera._mouse_rotation.y += Camera.look_back_rotation
 		Camera.look_back_rotation = 0.0
-		Camera.mouse_tilt = abs(Camera.mouse_tilt)
+		Camera.mouse_tilt_angle = abs(Camera.mouse_tilt_angle)

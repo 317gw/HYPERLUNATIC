@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 		dead()
 
 
-func be_hit(attack: Attack) -> void:
+func be_hit(attack: HL.Attack) -> void:
 	damaged(attack.damage)
 	#var dir = attack.position.direction_to(global_position)
 	#var force = dir * attack.knockback_force * attack.position.distance_to(global_position) / attack.radius

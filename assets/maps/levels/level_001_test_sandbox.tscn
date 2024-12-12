@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://b1yleqbb8tc7x"]
+[gd_scene load_steps=128 format=3 uid="uid://b1yleqbb8tc7x"]
 
 [ext_resource type="LightmapGIData" uid="uid://sbpg1jdftldf" path="res://assets/bake/level_001_test_sandbox.lmbake" id="1_pptil"]
 [ext_resource type="Shader" path="res://assets/shaders/top_cloud.gdshader" id="2_rqnax"]
@@ -38,6 +38,9 @@
 [ext_resource type="Script" path="res://assets/danmaku/scripts/test_dispenser.gd" id="26_xshhw"]
 [ext_resource type="PackedScene" uid="uid://bwt5nuyklqjbu" path="res://assets/maps/map_blocks/ice.tscn" id="28_wxta1"]
 [ext_resource type="PackedScene" uid="uid://34f26nn5pmjo" path="res://assets/danmaku/bullet/texture_pellet.tscn" id="31_5ol08"]
+
+[sub_resource type="Compositor" id="Compositor_x50qc"]
+compositor_effects = Array[CompositorEffect]([null])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8c02n"]
 transparency = 1
@@ -878,6 +881,7 @@ light_data = ExtResource("1_pptil")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 process_mode = 1
 environment = ExtResource("4_8itc7")
+compositor = SubResource("Compositor_x50qc")
 
 [node name="SkyBall" type="CSGSphere3D" parent="WorldEnvironment"]
 transform = Transform3D(-15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
@@ -919,8 +923,7 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 180.0
 
 [node name="RandomFlyingFishs" parent="." instance=ExtResource("3_ncmpl")]
-fishs = 1
-sice = 1.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 
 [node name="FlyingFish" parent="." instance=ExtResource("4_attlp")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -4.99894, 2.5321, -8.33342)
@@ -1837,6 +1840,7 @@ material = SubResource("ShaderMaterial_pdmw7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.67433, 0.882864, -4.7079)
 collision_layer = 32
 collision_mask = 110
+mass = 5.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Maps/RigidBody3D"]
 mesh = SubResource("BoxMesh_u4i0g")
@@ -1848,11 +1852,24 @@ shape = SubResource("BoxShape3D_clm57")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09898, 1.24898, -5.52234)
 collision_layer = 32
 collision_mask = 110
+mass = 8.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Maps/RigidBody3D2"]
 mesh = SubResource("CylinderMesh_nka2l")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Maps/RigidBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_bb7ar")
+
+[node name="RigidBody3D5" type="RigidBody3D" parent="Maps"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09898, 1.24898, -5.52234)
+collision_layer = 32
+collision_mask = 110
+mass = 8.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Maps/RigidBody3D5"]
+mesh = SubResource("CylinderMesh_nka2l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maps/RigidBody3D5"]
 shape = SubResource("ConvexPolygonShape3D_bb7ar")
 
 [node name="RigidBody3D3" type="RigidBody3D" parent="Maps"]
@@ -1909,14 +1926,12 @@ transparency = 0.5
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_ilsen")
 script = ExtResource("26_xshhw")
+firing = false
 only_reset_Dispenser_class = true
-stripe_angle = 90.0
-stripe_range = 30.0
 ues_spherical = true
 spherical_count = 20.0
 bullet_scene = ExtResource("31_5ol08")
 exceeding_the_cap_mode = 1
-bullet_speed = 8.0
 bullet_color = Color(0, 0, 1, 1)
 
 [node name="告示牌" type="Node3D" parent="."]

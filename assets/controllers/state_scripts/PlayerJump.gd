@@ -1,9 +1,10 @@
 class_name PlayerJump
 extends State
 
-@onready var PLAYER: Player = $"../.."
+@onready var PLAYER: HL.Controller.Player = $"../.."
 @onready var climb: Climb = $"../../Climb"
 @onready var dash: PlayerDash = $"../Dash"
+@onready var climb_state: PlayerClimb = $"../Climb"
 
 
 func Enter():
@@ -31,7 +32,8 @@ func Physics_Update(_delta: float) -> void:
 	if PLAYER.velocity.y <= 0: # 如果玩家正在正在下落
 		Transitioned.emit(self, "Fall")
 	# 如果玩家松开了跳跃键
-	if not Input.is_action_pressed("jump") and PLAYER.velocity.y > PLAYER.jump_vel / 2:
+	if (not Input.is_action_pressed("jump") or climb_state.is_climb_jump) and PLAYER.velocity.y > PLAYER.jump_vel / 2:
+		climb_state.is_climb_jump = false
 		PLAYER.velocity.y = PLAYER.jump_vel / 2
 		Transitioned.emit(self, "Fall")
 	if PLAYER.can_dash():

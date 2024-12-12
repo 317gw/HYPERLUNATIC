@@ -1,5 +1,5 @@
-class_name FrameSkiper
 extends Node
+#class_name FrameSkiper
 
 """
 *in _physics_process()*

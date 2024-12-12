@@ -1,12 +1,13 @@
-# https://github.com/LunaticReisen/GodotSourceMovement
 class_name GrabFuction
 extends Node
+# 感谢 https://github.com/LunaticReisen/GodotSourceMovement
+# 抓取状态不能疾跑，会根据重量减速
 
 @export_group("Grab")
 @export var grab_power      :float = 8.0
 @export var rotation_power  :float = 0.1
 @export var throw_power     :float = 3
-@export var push_power	    :float = 1
+@export var push_power      :float = 1
 @export var distance_power  :float = 0.25
 @export var distance_min    :float = 1
 @export var distance_max    :float = 4
@@ -18,9 +19,9 @@ var picked_object :RigidBody3D
 var picked_up: bool = false
 var view_lock: bool = false
 
-@onready var player :Player = $"../.."
+@onready var player : HL.Controller.Player = $"../.."
 @onready var player_transform_marker: Marker3D = $"../../PlayerTransformMarker"
-@onready var camera_3d: PlayerCamera = $"../Camera3D"
+@onready var camera_3d: HL.Controller.Camera = $"../Camera3D"
 @onready var hand :Marker3D = $Marker3D
 
 @onready var interaction :RayCast3D = $Interaction
@@ -34,7 +35,6 @@ func _ready() -> void:
 
 
 func _unhandled_input(event) -> void:
-
 	if event.is_action_pressed("pick_up") and not player.movement_state_machine.current_state.name == "Climb": # f
 		if picked_up:
 			dropping_object()
@@ -64,6 +64,8 @@ func _physics_process(_delta):
 		picked_object.linear_velocity = (hand_position - picked_obj_position) * grab_power
 		hand_to_obj_dis = self.global_position.distance_to(picked_object.global_position)
 
+		player.acc_decelerate = picked_object.mass * 0.6 # 施加玩家减速   todo多个减速效果时添加减速列表功能
+
 
 func pick_object() -> void:
 	var collider
@@ -89,6 +91,8 @@ func dropping_object() -> void:
 	picked_up = false
 	hand.position = hand_original_position
 	staticbody.rotation = Vector3.ZERO
+
+	player.acc_decelerate = 0
 
 
 func throwing_object() -> void:

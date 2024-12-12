@@ -5,8 +5,9 @@ var player_pos_temp: Vector3
 var player_target_pos: Vector3
 var climb_target_pos: Vector3
 var target_normal: Vector3
+var is_climb_jump: bool = false
 
-@onready var PLAYER: Player = $"../.."
+@onready var PLAYER: HL.Controller.Player = $"../.."
 @onready var climb: Climb = $"../../Climb"
 @onready var climb_timer: Timer = $"../../Timers/ClimbTimer"
 
@@ -104,6 +105,7 @@ func Handle_Input(_event: InputEvent) -> void:
 	if _event.is_action_pressed("free_view_mode"):
 		Transitioned.emit(self, "FreeViewMode")
 	if _event.is_action_pressed("jump") or _event.is_action_pressed("mouse_wheel_jump"):
+		is_climb_jump = true
 		Transitioned.emit(self, "Jump")
 	if _event.is_action_pressed("slow"):
 		Transitioned.emit(self, "Fall")

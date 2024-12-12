@@ -1,5 +1,5 @@
-class_name Rifle
-extends Node3D
+#class_name Rifle
+extends HL.Weapon
 
 const BULLET_DECAL = preload ("res://assets/weapons/bullet_decal.tscn")
 const FIRE_LINE = preload ("res://assets/weapons/fire_line.tscn")
@@ -9,12 +9,11 @@ const FIRE_LINE = preload ("res://assets/weapons/fire_line.tscn")
 @export var damage: float = 1.5
 @export var knockback_force: float = 0.5
 
-var PLAYER: Player
-var state_machine: AnimationNodeStateMachinePlayback
-# var target_lerp: Vector3 = Vector3.ZERO
+
+var animation_state_machine: AnimationNodeStateMachinePlayback
 var target_rotation: Vector3 = Vector3.ZERO
 var wall_limit: float = 0.0
-var self_position_origin: Vector3 = Vector3.ZERO
+
 
 @onready var gun_ray_cast: RayCast3D = $MuzzleMarker/GunRayCast
 @onready var wall_limit_marker: Marker3D = $WallLimitMarker
@@ -25,10 +24,8 @@ var self_position_origin: Vector3 = Vector3.ZERO
 @onready var target_ball: MeshInstance3D = $TargetBall
 
 
-func _ready() -> void: # 节点准备好时执行
-	await owner.ready
-	PLAYER = owner
-	state_machine = animation_tree["parameters/playback"]
+func Ready() -> void: # 节点准备好时执行
+	animation_state_machine = animation_tree["parameters/playback"]
 	gun_ray_cast.target_position.z = -firing_range
 	normal_target_marker.position.z = -firing_range
 	target_rotation = self.rotation
@@ -36,13 +33,13 @@ func _ready() -> void: # 节点准备好时执行
 	self_position_origin = self.position
 
 
-func _physics_process(delta: float) -> void:
+func Physics_Update(_delta: float) -> void:
 	if fire_mark.visible == true:
-		await get_tree().create_timer(delta).timeout
+		await get_tree().create_timer(_delta).timeout
 		fire_mark.visible = false
 
 	var look_at_target: Vector3 = PLAYER.eye_ray_cast.get_collision_point() if PLAYER.eye_ray_cast.is_colliding() else PLAYER.normal_target_marker.global_position
-	var speed = 20 * delta
+	var speed = 20 * _delta
 	var self_rotation_before = self.rotation
 	self.look_at(look_at_target)
 	target_rotation.x = Global.exponential_decay(self_rotation_before.x, self.rotation.x, speed)
@@ -61,9 +58,9 @@ func _physics_process(delta: float) -> void:
 	# print("look_at_target:", look_at_target)
 
 
-func _on_player_weapon_shoot() -> void:
-	if state_machine.get_current_node() != "大开火加退弹":
-		state_machine.start("大开火加退弹", true)
+func Main_Action() -> void:
+	if animation_state_machine.get_current_node() != "大开火加退弹":
+		animation_state_machine.start("大开火加退弹", true)
 
 		fire_mark.visible = true
 		fire_mark.rotation.z = (randf() - 0.5)*PI*0.3
@@ -81,7 +78,7 @@ func _on_player_weapon_shoot() -> void:
 			if body.is_in_group("BodyBoneParts"):
 				body = get_BodyBoneRoot(body.get_parent()) # 递归寻找身体根节点
 			if body.has_method("be_hit"): # 击中敌人
-				var attack = Attack.new()
+				var attack = HL.Attack.new()
 				attack.damage = damage
 				attack.knockback_force = knockback_force
 				attack.position = global_position

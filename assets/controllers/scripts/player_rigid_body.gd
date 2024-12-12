@@ -1,7 +1,7 @@
 class_name PlayerRigidBody3D
 extends RigidBody3D
 
-@export var player: Player
+@export var player: HL.Controller.Player
 @export var ues_player_rigid_body: bool = true ## 是否使用
 @export var point_visible: bool = false ## 是否显示轨迹点
 @export var trace_force: float = 100 ## 轨迹的力大小,废弃
@@ -28,7 +28,7 @@ var collision: CollisionShape3D
 
 var knockback_velocity: Vector3 = Vector3.ZERO
 
-#@onready var player: Player = $"../Player"
+#@onready var player: HL.Controller.Player = $"../Player"
 @onready var marker_3d: Marker3D = $Marker3D
 @onready var placeholder_mesh: MeshInstance3D = $PlaceholderMesh
 @onready var target: MeshInstance3D = $Target
@@ -108,7 +108,7 @@ func update_pid(target_position: Vector3, current_position: Vector3, delta: floa
 	return force * Kall * k_amend
 
 
-func be_hit(attack: Attack) -> void:
+func be_hit(attack: HL.Attack) -> void:
 	#damaged(attack.damage)
 	var force = attack.position.direction_to(global_position) * attack.knockback_force * attack.position.distance_to(global_position) / attack.radius
 	knockback_velocity = force / mass

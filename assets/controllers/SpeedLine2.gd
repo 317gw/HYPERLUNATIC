@@ -6,7 +6,7 @@ var process_material
 var draw_pass_1
 var threshold: float = 0.0
 
-@onready var player: Player = $"../.."
+@onready var player: HL.Controller.Player = $"../.."
 @onready var particles: GPUParticles3D = $SpeedLineParticles
 
 func _ready() -> void:
@@ -19,11 +19,12 @@ func _physics_process(_delta: float) -> void:
 	#var curve_y = scale_curve.sample(velocity)
 
 	#var target = velocity
-	var Deadlocks = player.direction == Vector3.UP or player.direction == Vector3.DOWN
+	var p_dir = player.velocity.normalized()
+	var Deadlocks = p_dir == Vector3.UP or p_dir == Vector3.DOWN
 	if player.velocity and player.velocity.length() > threshold:
 		self.visible = true
 		if Deadlocks:
-			self.global_rotation = player.direction.y * Vector3.RIGHT * PI / 2
+			self.global_rotation = p_dir.y * Vector3.RIGHT * PI / 2
 		#else :
 			#self.look_at(player.velocity + self.global_position)
 	else :

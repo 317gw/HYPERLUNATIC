@@ -7,9 +7,9 @@ var rotate_type = null
 var Limit_Angle: float = 67
 enum Rotate_Type {BACK, UP, DOWN,}
 
-@onready var PLAYER: Player = $"../.."
+@onready var PLAYER: HL.Controller.Player = $"../.."
 @onready var Head: Node3D = $"../../Head"
-@onready var Camera: PlayerCamera = $"../../Head/Camera3D"
+@onready var Camera: HL.Controller.Camera = $"../../Head/Camera3D"
 
 
 func Enter():

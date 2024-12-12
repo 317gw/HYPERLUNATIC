@@ -1,4 +1,4 @@
-#class_name GlobalCode
+#class_name Global Code
 extends Node
 
 
@@ -133,6 +133,27 @@ func create_CollisionShape3D_from_mesh(collision_father: Node, source_mesh: Mesh
 	var new_collision_shape_3d: CollisionShape3D = find_child_node(mesh_instance_3d, "CollisionShape3D").duplicate()
 	collision_father.add_child(new_collision_shape_3d, true)
 	mesh_instance_3d.queue_free()
+
+
+# 弹性碰撞的那个
+func impact_velocity(m1:float, m2:float, v1:float, v2:float) -> float:
+	return (m1-m2)/(m1+m2)*v1 + 2*m2/(m1+m2)*v2
+
+
+#func 
+
+
+
+
+
+
+func get_delta_time() -> float:
+	if Engine.is_in_physics_frame():
+		return get_physics_process_delta_time()
+	return get_process_delta_time()
+
+
+
 
 
 

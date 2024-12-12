@@ -2,8 +2,9 @@ class_name State
 extends Node
 
 signal Transitioned
+
 var state_machine: StateMachine = null
-#var PLAYER: Player
+#var PLAYER: HL.Controller.Player
 
 
 func _ready() -> void:

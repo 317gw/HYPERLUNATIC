@@ -17,7 +17,7 @@ extends CSGMesh3D
 var uv1_offset: Vector3 = Vector3.ZERO
 var uv2_offset: Vector3 = Vector3.ZERO
 #var collision_shape
-var frame_skiper: FrameSkiper
+var frame_skiper: HL.FrameSkiper
 var underwater_objects: Array = [] # 在水中的物体
 # var objects_volume: Array = [] # 物体体积
 var in_water_material: ShaderMaterial
@@ -57,7 +57,7 @@ func _ready() -> void:
 	_gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector").normalized()
 	#self.process_priority = 999 # Call _process last to update move after any camera movement
 	# 跳帧
-	frame_skiper = FrameSkiper.new()
+	frame_skiper = HL.FrameSkiper.new()
 	self.add_child(frame_skiper)
 	frame_skiper.ready(60)
 
@@ -189,7 +189,7 @@ func _on_swimmable_area_3d_body_entered(body: Node3D) -> void:
 					child.water_area.append(self)
 				break
 
-	if body is Player:
+	if body is HL.Controller.Player:
 		check_camera_underwater = true
 
 
@@ -207,7 +207,7 @@ func _on_swimmable_area_3d_body_exited(body: Node3D) -> void:
 				break
 		underwater_objects.erase(body)
 
-	if body is Player:
+	if body is HL.Controller.Player:
 		check_camera_underwater = false
 		water_ripple_overlay.visible = false
 		water_ripple_overlay.process_mode = Node.PROCESS_MODE_DISABLED

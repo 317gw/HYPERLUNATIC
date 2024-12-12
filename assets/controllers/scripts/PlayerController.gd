@@ -1,4 +1,4 @@
-class_name Player
+#class_name Player
 extends CharacterBody3D
 
 # @@      @ @      @@
@@ -8,14 +8,16 @@ extends CharacterBody3D
 #         @ @
 #          @
 
-signal weapon_shoot(ray_cast_3d: RayCast3D)
+#signal weapon_shoot(ray_cast_3d: RayCast3D)
+signal weapon_main_action
+signal weapon_sub_action
 
 const SAFE_MARGIN = 0.001 # 碰撞安全距离
 # # 子弹
 # const BULLET = preload ("res://assets/weapons/bullet.tscn")
 # const BULLET_DECAL = preload ("res://assets/weapons/bullet_decal.tscn")
 
-@export var CAMERA: PlayerCamera
+@export var CAMERA: HL.Controller.Camera
 @export var ShootMarker3D: Marker3D ## 武器位置
 @export var visible_range: float = 1000.0
 @export var auxiliary_aiming_distance: float = 20.0
@@ -53,6 +55,9 @@ const SAFE_MARGIN = 0.001 # 碰撞安全距离
 @export var dashjump_height: float = 1.25 ## 冲刺跳跃高度
 @export var dashjump_distance: float = 15.0 ## 冲刺跳跃距离
 
+@export var push_power: float = 9
+@export var jerk_decelerate: float = 50
+
 # 跳跃
 var jump_time = jump_peak_time + jump_fall_time # 跳跃总时间
 var jump_distance: float
@@ -65,9 +70,8 @@ var jumping_height_temp: float = 0.0
 # 空中
 var air_speed: float = 0.0
 var air_acc: float = 0.0 # 空中加速度 60.0
-var air_acc_time: float = 0.1 # 空中加速度 60.0
+var air_acc_time: float = 0.08 # 空中加速度 
 var air_acc_target: float = 0.0 # 目标空中加速度
-var acceleration: Vector3 # 实时加速度
 var speed_temp: Vector3 # 速度暂存
 var horizontal_acceleration: float = 0.0 # 实时水平加速度
 var horizontal_speed_temp: float = 0.0 # 水平速度暂存
@@ -77,17 +81,14 @@ var gravity_fall: float = 0.0 # 下降重力
 # 加速度
 var acc_normal: float
 var acc_max: float
-# 方向向量
+# 方向相关
 var vel2d: Vector2 # VEL -> Velocity
-var vel2d_dir: Vector2
 var vel2d_speed: float
 var input_dir: Vector2
 var input_direction: Vector3
-var direction: Vector3
 var dir2d: Vector2 # horizontal
 var velocity_last_frame: Vector3
 var global_position_last_frame: Vector3
-
 # 冲刺
 var dash_number: int
 var dash_speed: float # 冲刺速度
@@ -105,11 +106,20 @@ var landing: bool = false
 # 挨打
 var taking_damge: bool = false
 var knockback_velocity: Vector3
+# 额外减速
+var acc_decelerate: float
+# 台阶
+var stairs_below_edge_colliding: bool = false
+var stairs_below_edge_colliding_last_frame: bool = false
+# 摩擦
+var friction: float = 1.0
+# 其他
+var acceleration: Vector3 # 实时的加速度，方便给外面调用
 
 
 # 身体
 @onready var head: Node3D = $Head
-@onready var camera: PlayerCamera = $Head/Camera3D
+@onready var camera: HL.Controller.Camera = $Head/Camera3D
 @onready var hand: GrabFuction = $Head/Hand
 @onready var player_transform_marker: Node3D = $PlayerTransformMarker
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
@@ -132,7 +142,7 @@ var knockback_velocity: Vector3
 #@onready var ray_cast_3d: RayCast3D = $Head/Rifle/低多边步枪/MuzzleMarker/RayCast3D
 @onready var eye_ray_cast: RayCast3D = $Head/Camera3D/EyeRayCast
 @onready var normal_target_marker: Marker3D = $Head/Camera3D/NormalTargetMarker
-@onready var rifle: Node3D = $Head/Rifle
+@onready var rifle: Node3D = $WeaponManager/Rifle
 #@onready var eye_shape_cast: ShapeCast3D = $Head/Camera3D/EyeShapeCast
 @onready var ui: CanvasLayer = $"../UI"
 # 楼梯检测
@@ -141,11 +151,13 @@ var knockback_velocity: Vector3
 @onready var trail_3d: Node3D = $Trail3D
 @onready var below_ray: RayCast3D = $BelowRay
 
+@onready var default_gravity: Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+@onready var physics_ticks_per_second = ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 
 func _ready() -> void:
-	calculate_movement_parameters()
-	calculate_jump_parameters()
 	safe_margin = SAFE_MARGIN
+	dash_timer.wait_time = dash_time
+	dash_number = dash_number_max
 	player_rigid_body.mass = self.mass
 
 
@@ -157,7 +169,8 @@ func _input(event) -> void:
 	if event.is_action_pressed("mouse_wheel_jump") and not hand.picked_up and not camera.is_zoom:
 		jump_request_timer.start()
 	if event.is_action_pressed("shoot_left") and not hand.picked_up:
-		weapon_shoot.emit()
+		#weapon_shoot.emit()
+		weapon_main_action.emit()
 
 
 func _process(_delta: float) -> void:
@@ -168,44 +181,121 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	trail_3d.process_mode = PROCESS_MODE_DISABLED if is_player_not_moving() else PROCESS_MODE_PAUSABLE
 	get_DIR2D_VEL2D()
+
+	additional_slowdown()
+	handle_friction()
+	calculate_movement_parameters()
+	calculate_jump_parameters()
+
 	calculate_acceleration_in_physics_process(_delta)
 	velocity_last_frame = velocity
 	global_position_last_frame = global_position
 
-	if is_slow(): # 低速模式加重
-		player_rigid_body.mass = self.mass * slow_rigid_force
-		player_rigid_body.k_amend = slow_rigid_force
-	elif player_rigid_body.mass != self.mass or player_rigid_body.k_amend != 1:
-		player_rigid_body.mass = self.mass
-		player_rigid_body.k_amend = 1
+	#if is_slow(): # 低速模式加重
+		#player_rigid_body.mass = self.mass * slow_rigid_force
+		#player_rigid_body.k_amend = slow_rigid_force
+	#elif player_rigid_body.mass != self.mass or player_rigid_body.k_amend != 1:
+		#player_rigid_body.mass = self.mass
+		#player_rigid_body.k_amend = 1
 
 
 func apply_velocity(do_move_and_slide: bool = true) -> void:
-	# 雷神之锤bug
-	#var current_speed = vel2d.dot(dir2d)
-
-	#var current_vel2d = vel2d * clamp(vel2d.length() / (current_speed + 0.001), 1, 1.2)
-
+	#additional_slowdown()
 
 	velocity.x = vel2d.x
 	velocity.z = vel2d.y
-
-	# 临时的钳制，没有考虑垂直和水平
-	velocity = velocity.normalized() * clamp(velocity.length(), 0.0, max_current_speed)
-
+	velocity = velocity.normalized() * clamp(velocity.length(), 0.0, max_current_speed) # 临时的钳制，没有考虑垂直和水平
 
 	if is_on_floor():
 		snap_stairs.last_frame_was_on_floor = Engine.get_physics_frames()
+
 	if do_move_and_slide:
 		move_and_slide() # 使用滑动移动方法应用速度和处理碰撞
 
+	if Input.is_action_pressed("slow"):
+		push_rigidbody3D(velocity, push_power * 0.5, 1)
+	else:
+		push_rigidbody3D()
+
+
+#玩家碰撞
+func push_rigidbody3D(v: Vector3 = velocity, power: float = push_power, velocity_attenuation: float = 0.7, push_angle: float = 45) -> bool: # 0.7 is good
+	var motion = v * Global.get_delta_time()
+	for step in max_slides:
+		var test: KinematicCollision3D = is_player_collision_into_rigidbody3D(motion, input_direction)
+		if test == null:
+			return false
+
+		var RigidBody: RigidBody3D = test.get_collider()
+		var push_velocity: float = max(mass/(mass+RigidBody.mass), 0.75) * v.length()
+
+		var i_dir: Vector3 = -test.get_normal()
+		var i_length: float = max(push_velocity, RigidBody.mass ** 0.82, 0) * power * Global.get_delta_time() # 0.82 is good
+		var apply_pos: Vector3 = test.get_position() - RigidBody.global_position
+
+		# ↓对地面上推动物体的方向进行优化，最大额外向下30度推动，期望按倒地上不起跳
+		if is_on_floor():
+			var A = test.get_position()
+			var B = RigidBody.global_position + RigidBody.center_of_mass
+			var d: float = (B - A).dot(default_gravity.normalized()) # 重心到碰撞点的差，带正负
+			var angle: float = smoothstep(0, 1, d) * push_angle
+			i_dir = i_dir.rotated(self.basis.x, deg_to_rad(-angle))
+			#DebugDraw.draw_mesh_line(A, B, 5, Color.RED)
+			var d2 = (test.get_position() - self.global_position).dot(default_gravity.normalized())
+			apply_pos += default_gravity.normalized() * smoothstep(0.85, -0.85, d2) * 0.1 # 身高1.7m
+
+		var i: Vector3 = i_dir * i_length
+		RigidBody.apply_impulse(i, apply_pos)
+		#DebugDraw.draw_mesh_line_relative(test.get_position(), i, 5, Color.BLUE)
+
+		velocity = velocity.lerp(v.limit_length(push_velocity), velocity_attenuation)
+		vel2d_speed = velocity.length()
+		#prints("push_velocity", push_velocity, "i_length", i_length, "mass/(mass+RigidBody.mass)", mass/(mass+RigidBody.mass))
+	return true
+
+
+func is_player_collision_into_rigidbody3D(motion: Vector3, input_direction: Vector3) -> KinematicCollision3D:
+	var collision: KinematicCollision3D = move_and_collide(motion, true)
+	if not collision:
+		#prints("1", motion)
+		collision = move_and_collide(input_direction * 0.05, true)
+		if not collision:
+			#prints("2", motion.length())
+			return null
+
+	if not collision.get_collider() is RigidBody3D:
+		return null
+
+	return collision
+
+
+func additional_slowdown() -> void:
+	if is_zero_approx(acc_decelerate):
+		acc_decelerate = 0
+		return
+	#velocity = velocity.normalized() * move_toward(velocity.length(), 0, acc_decelerate * Global.get_delta_time())
+	#vel2d_speed = move_toward(vel2d_speed, 0, acc_decelerate * Global.get_delta_time())
+	#vel2d = vel2d.normalized() * move_toward(vel2d.length(), 0, acc_decelerate * Global.get_delta_time())
+	acc_decelerate = move_toward(acc_decelerate, 0, jerk_decelerate * Global.get_delta_time())
+
+
+func handle_friction() -> void:
+	if not below_ray.is_colliding():
+		return
+	if below_ray.get_collider().has_method("get_physics_material_override"):
+		var obj = below_ray.get_collider()
+		if obj.physics_material_override == null:
+			return
+		friction = obj.get_physics_material_override().friction
+	else:
+		friction = 1.0
+
+
 
 func calculate_movement_parameters() -> void:
-	acc_normal = speed_normal / acc_normal_t
-	acc_max = speed_max / acc_max_t
+	acc_normal = max(speed_normal / acc_normal_t * friction - acc_decelerate * 0.5, 0)
+	acc_max = max(speed_max / acc_max_t * friction - acc_decelerate, 0)
 	dash_speed = dash_distance / dash_time
-	dash_timer.wait_time = dash_time
-	dash_number = dash_number_max
 
 
 func calculate_jump_parameters() -> void:
@@ -260,15 +350,11 @@ func air_speed_clamp(_delta) -> void:
 func get_DIR2D_VEL2D():
 	input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward") # 获取输入方向
 	input_direction = (player_transform_marker.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized() # 计算移动方向
-	direction = velocity.normalized() # 计算方向向量
 	dir2d = Vector2(input_direction.x, input_direction.z) # 归一化的
 	vel2d = Vector2(velocity.x, velocity.z) # 水平速度
-	vel2d_dir = vel2d.normalized()
 	vel2d_speed = vel2d.length()
 
 
-var stairs_below_edge_colliding: bool = false
-var stairs_below_edge_colliding_last_frame: bool = false
 func movement_floor(delta: float) -> void: # 有方向输入 地上
 	self.floor_stop_on_slope = false #  bugGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 	if Input.is_action_pressed("slow"):
@@ -277,19 +363,16 @@ func movement_floor(delta: float) -> void: # 有方向输入 地上
 	stairs_below_edge_colliding = false
 
 
-	if vel2d_speed >= speed_normal - 0.01 and Input.is_action_pressed("move_forward"): # 加速跑
-		vel2d_dir = vel2d_dir.lerp(dir2d, acc_max * 0.2) # 方向向量
-
-		var ratio = 30 if vel2d_speed > speed_max else 1 # 速度比例
+	if vel2d_speed >= speed_normal - 0.005 and Input.is_action_pressed("move_forward"): # 加速跑
+		var ratio = 30 if vel2d_speed > speed_max else 1 # 速度比例, 如果超速会快减速
 		vel2d_speed = move_toward(vel2d_speed, speed_max, acc_max * ratio * delta)
+		vel2d = vel2d_speed * Global.exponential_decay_vec2(vel2d.normalized(), dir2d, speed_max / acc_max_t * 0.1)
 
-		# 正常限制
-		if is_equal_approx(vel2d_speed, speed_max):
-			vel2d_speed = speed_max
-
-		vel2d = vel2d_dir * vel2d_speed
 	else:
-		vel2d = vel2d.move_toward(dir2d * speed_normal, acc_normal * delta)
+		var _current_speed: float = max(speed_normal - acc_decelerate * delta, 0)
+		vel2d = vel2d.move_toward(dir2d * _current_speed, acc_normal * delta)
+		vel2d_speed = vel2d.length()
+
 
 
 func movement_air(delta: float, is_dashjump: bool = false) -> void: # 有方向输入 空中
@@ -316,7 +399,7 @@ func movement_air(delta: float, is_dashjump: bool = false) -> void: # 有方向�
 
 
 func stop_movement(delta: float) -> void:
-	var t = 20 # 地面&空中
+	var t = 20 * friction # 地面&空中
 	if is_on_floor():
 		relative_movement_on_floor()
 		if is_slow():
@@ -349,7 +432,6 @@ func jump_ready(jumpVEL: float) -> void: # 处理跳跃
 
 
 func apply_gravity(gravity: float, delta: float) -> void: # 添加重力效果
-	var default_gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 	if get_gravity() == default_gravity:
 		velocity.y -= gravity * delta # 应用重力
 	else:
@@ -394,6 +476,7 @@ func dash_ready() -> void:
 	dash_audio.play()
 	safe_margin = 0.025
 	FreezeTickManager.tick_freeze_short()
+	#camera.smooth_target_pos = Vector3.ZERO
 
 
 # 冲刺次数
@@ -418,6 +501,15 @@ func dashing_on_air() -> void:
 # 4
 func dash_on_wall(delta: float) -> void: # 调整冲刺到墙壁的速度
 	if not (is_on_wall() and get_last_slide_collision() ): # 检测是否冲刺到墙壁
+		return
+
+	var v: Vector3
+	v.x = vel2d.x
+	v.z = vel2d.y
+	if Input.is_action_pressed("slow"):
+		if push_rigidbody3D(v, push_power * 3, 1):
+			return
+	if push_rigidbody3D(v):
 		return
 
 	var wall_normal = get_last_slide_collision().get_normal()
@@ -517,7 +609,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	#taking_damge = true
 
 
-func be_hit(attack: Attack) -> void:
+func be_hit(attack: HL.Attack) -> void:
 	#damaged(attack.damage)
 	var force = attack.position.direction_to(global_position) * attack.knockback_force * attack.position.distance_to(global_position) / attack.radius
 	knockback_velocity = force / mass

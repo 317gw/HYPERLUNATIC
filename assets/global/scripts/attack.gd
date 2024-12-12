@@ -1,5 +1,5 @@
 # extends Node
-class_name Attack
+#class_name Attack
 
 var damage: float = 1
 var knockback_force: float = 1

@@ -55,8 +55,7 @@ func draw_line_relative(pointA: Vector3, pointB: Vector3, color: Color=Color.RED
 	draw_line(pointA, pointA + pointB, color) # 调用画线函数，起点为pointA，终点为pointA+pointB
 
 
-func draw_mesh_line_relative(pointA: Vector3, pointB: Vector3, thickness: float=2.0, color: Color=Color.BLACK, pointyEnd: float=1.0): # 网格线，均匀
-	pointB = pointA + pointB # 计算线条终点
+func draw_mesh_line(pointA: Vector3, pointB: Vector3, thickness: float=2.0, color: Color=Color.BLACK, pointyEnd: float=1.0): # 网格线，均匀
 	if not use_debug_draw or pointA.is_equal_approx(pointB):
 		return
 	if draw_debug_mesh is ImmediateMesh:
@@ -78,3 +77,8 @@ func draw_mesh_line_relative(pointA: Vector3, pointB: Vector3, thickness: float=
 			final_vert += pointA # 将顶点移动到正确的位置
 			draw_debug_mesh.surface_add_vertex(final_vert) # 添加顶点到表面
 		draw_debug_mesh.surface_end() # 结束绘制三角形条带
+
+
+func draw_mesh_line_relative(pointA: Vector3, pointB: Vector3, thickness: float=2.0, color: Color=Color.BLACK, pointyEnd: float=1.0): # 网格线，均匀
+	pointB = pointA + pointB # 计算线条终点
+	draw_mesh_line(pointA, pointB, thickness, color, pointyEnd)

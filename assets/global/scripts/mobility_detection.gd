@@ -1,6 +1,6 @@
 extends CanvasLayer # 继承自CanvasLayer
 
-@onready var player: Player = $"../Player" # 3D角色体的引用
+@onready var player: HL.Controller.Player = $"../Player" # 3D角色体的引用
 
 @onready var speed_graph: Panel = $DebugMenu/VBoxContainer/Graphs/SpeedGraph/Graph # 速度图表的引用
 @onready var acceleration_graph: Panel = $DebugMenu/VBoxContainer/Graphs/AccelerationGraph/Graph

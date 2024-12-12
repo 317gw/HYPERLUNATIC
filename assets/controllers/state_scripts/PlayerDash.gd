@@ -7,7 +7,7 @@ var is_vertical_dash: bool = false # 没用
 var dash_type = null
 enum Dash_Type {DASH2D, DASH3D}
 
-@onready var PLAYER: Player = $"../.."
+@onready var PLAYER: HL.Controller.Player = $"../.."
 
 
 func Enter():
@@ -42,8 +42,10 @@ func Physics_Update(_delta: float) -> void:
 			PLAYER.dashing_on_floor()
 		Dash_Type.DASH3D:
 			PLAYER.dashing_on_air()
+	
 	PLAYER.dash_on_wall(_delta)
 	PLAYER.dash_velocity_clamp()
+	#PLAYER.reset_dash_number()
 
 	PLAYER.apply_velocity()
 

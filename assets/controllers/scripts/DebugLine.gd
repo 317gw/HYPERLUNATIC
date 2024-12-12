@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var PLAYER: Player = $".."
+@onready var PLAYER: HL.Controller.Player = $".."
 @onready var player_transform_marker: Node3D = $"../PlayerTransformMarker"
 
 func _ready():

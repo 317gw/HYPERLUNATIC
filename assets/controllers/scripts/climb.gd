@@ -4,6 +4,7 @@ extends Node3D
 
 @export var auto_climb:bool = true
 @export var climb_on_dash_jump:bool = false
+@export var climb_on_rigidbody3d:bool = false
 @export var down_to_floor_ray_edge_size:float = 0.05
 @export var player_to_wall:float = 0.4
 @export var ray_target_position: Vector3 = Vector3(0, 0, -1)
@@ -31,10 +32,10 @@ var climb_object_to_player: Vector3 = Vector3(0,0,0)
 var climb_object_pos_last: Vector3 = Vector3(0,0,0)
 var climb_object_velocity: Vector3 = Vector3(0,0,0)
 
-@onready var player: Player = $".."
+@onready var player: HL.Controller.Player = $".."
 @onready var head: Node3D = $"../Head"
 @onready var hand: GrabFuction = $"../Head/Hand"
-@onready var camera_3d: PlayerCamera = $"../Head/Camera3D"
+@onready var camera_3d: HL.Controller.Camera = $"../Head/Camera3D"
 
 # 判定
 @onready var strike_head_area: Area3D = $StrikeHeadArea
@@ -99,9 +100,16 @@ func can_climb_edge() -> bool:
 func can_climb() -> bool:
 	#if player.velocity.length() < player.speed_max:
 	#print("   ")
+	if Input.is_action_pressed("slow"):
+		return false
+	
 	if climb_timer.is_stopped() and can_climb_input() and not hand.picked_up:
 		#print("1")
 		update_raycasts() # false
+
+		if climb_object is RigidBody3D and not climb_on_rigidbody3d:
+			return false
+
 		#update_edge_global_position()
 		if can_climb_edge() and have_gap():
 			#print("2")
@@ -135,6 +143,7 @@ func update_raycasts() -> void: # is_edge_pos_lerp:bool = true
 	down_to_floor_ray.force_raycast_update()
 	hit_down_to_floor = down_to_floor_ray.is_colliding()
 	climb_object = down_to_floor_ray.get_collider()
+
 	if climb_object and climb_object != climb_object_last:
 		climb_object_pos_last = climb_object.global_position
 

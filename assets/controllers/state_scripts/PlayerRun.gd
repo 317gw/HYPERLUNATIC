@@ -1,8 +1,8 @@
 class_name PlayerRun
 extends State
 
-@onready var PLAYER: Player = $"../.."
-@onready var camera: PlayerCamera = $"../../Head/Camera3D"
+@onready var PLAYER: HL.Controller.Player = $"../.."
+@onready var camera: HL.Controller.Camera = $"../../Head/Camera3D"
 @onready var snap_stairs: SnapStairs = $"../../SnapStairs"
 
 

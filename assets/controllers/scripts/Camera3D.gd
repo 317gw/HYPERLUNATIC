@@ -1,4 +1,4 @@
-class_name PlayerCamera
+#class_name PlayerCamera
 extends Camera3D
 
 const TILT_LOWER_LIMIT := deg_to_rad(-89.7) # 将下倾限制转换为弧度
@@ -11,7 +11,7 @@ const FOV_CHANGE: float = 1.5
 
 # 左右歪头
 @export var MOUSE_SENSITIVITY: float = 0.35 # 导出变量，可以在编辑器中设置鼠标灵敏度
-@export var PLAYER: Player
+@export var PLAYER: HL.Controller.Player
 @export var tilt_head_to_body_angle: float = 10.0
 @export var tilt_head_to_body_clamp: float = 75.0
 @export_range(0, 180) var tilt_angle: float = 1.0
@@ -70,7 +70,7 @@ var _camera_rotation: Vector3 # 私有变量，用于存储摄像机旋转值
 #var previous_position: Vector3 = Vector3.ZERO
 #var position_change_threshold: float = 0.1  # 你可以根据实际情况调整这个阈值
 
-@onready var player: Player = $"../.."
+@onready var player: HL.Controller.Player = $"../.."
 @onready var head: Node3D = $".."
 @onready var camera_smooth: Node3D = $".."
 @onready var hand: GrabFuction = $"../Hand"
@@ -214,16 +214,17 @@ func headbob(time: float) -> Vector3:
 
 
 func fov_change(_delta) -> void: # FOV
-	var velocity_clamped = clamp(PLAYER.vel2d_speed - PLAYER.speed_normal, 0.0, PLAYER.speed_max)
+	# 计算速度的FOV变化
+	var velocity_clamped = clamp(PLAYER.vel2d.length() - PLAYER.speed_normal, 0.0, PLAYER.speed_max)
 	var plaFaceDir = Vector2(_face_dir.x, _face_dir.z).normalized()
-	var dot = PLAYER.vel2d_dir.dot(plaFaceDir)
+	var dot = PLAYER.vel2d.normalized().dot(plaFaceDir)
 
 	var lerp_weight = fov_lerp if is_zoom else 0.0
-	var target_fov_base: float = lerp(fov_base, fov_zoom, lerp_weight)
+	var target_fov_base: float = Global.exponential_decay(fov_base, fov_zoom, lerp_weight)
 	var target_fov: float = target_fov_base
-	target_fov += FOV_CHANGE * velocity_clamped * dot
+	target_fov += FOV_CHANGE# * velocity_clamped * dot
 	target_fov = clamp(target_fov, target_fov_base, fov_base * fov_clamp_max)
-	fov = lerp(fov, target_fov, fov_lerp_speed)
+	fov = Global.exponential_decay(fov, target_fov, fov_lerp_speed)
 
 
 func fov_lerp_change():
@@ -248,7 +249,7 @@ func tilt_head(_delta) -> void:
 	target_tilt = deg_to_rad(tilt_angle) * lr_tilt # 重置目标倾斜角度
 	if movement_state_machine.current_state is PlayerDash: # 冲刺状态下不歪头
 		target_tilt = deg_to_rad(tilt_angle) * left_right_tilt_desh * 3
-	targetZ = lerp(targetZ, target_tilt, lr_tilt_speed) # 计算目标摄像机的z轴旋转
+	targetZ = Global.exponential_decay(targetZ, target_tilt, lr_tilt_speed) # 计算目标摄像机的z轴旋转
 	rotation.z = targetZ + deg_to_rad(mouse_tilt_angle)
 
 
@@ -336,38 +337,46 @@ var saved_camera_global_pos = null
 func save_camera_pos_for_smoothing() -> void:
 	if saved_camera_global_pos == null:
 		saved_camera_global_pos = head.global_position
+		slide_camera_smooth_back_to_origin_ready = true
 
 
 var smooth_target_pos
 const CROUCH_TRANSLATE = 0.2
 const CROUCH_TRANSLATE_XZ = 0.2  # 新增常量，用于x和z坐标的平移量
 var slide_camera_smooth_back_to_origin_y_only: bool = false
+var slide_camera_smooth_back_to_origin_ready: bool = false
 func slide_camera_smooth_back_to_origin(delta: float, y_only: bool = false) -> void:
-	if saved_camera_global_pos == null: return
+	if saved_camera_global_pos == null: 
+		return
+		
 	if y_only:
 		head.global_position.y = saved_camera_global_pos.y
 	else:
 		head.global_position = saved_camera_global_pos
+	
+	if slide_camera_smooth_back_to_origin_ready:
+		smooth_target_pos = head.position
+		slide_camera_smooth_back_to_origin_ready = false
+		
 	# Clamp incase teleported
-	smooth_target_pos = head.position
 	smooth_target_pos.y = clampf(smooth_target_pos.y, -CROUCH_TRANSLATE, CROUCH_TRANSLATE)
 	if not y_only:
 		smooth_target_pos.x = clampf(smooth_target_pos.x, -CROUCH_TRANSLATE_XZ, CROUCH_TRANSLATE_XZ)  # 新增x坐标限制
 		smooth_target_pos.z = clampf(smooth_target_pos.z, -CROUCH_TRANSLATE_XZ, CROUCH_TRANSLATE_XZ)  # 新增z坐标限制
 
 	var move_amount = max(player.velocity.length(), player.speed_normal) * delta * 10
-	smooth_target_pos.y = lerpf(smooth_target_pos.y, 0.0, move_amount)
+	smooth_target_pos.y = Global.exponential_decay(smooth_target_pos.y, 0.0, move_amount*4.6)
 	if not y_only:
-		smooth_target_pos.x = lerpf(smooth_target_pos.x, 0.0, move_amount)  # 新增x坐标平滑
-		smooth_target_pos.z = lerpf(smooth_target_pos.z, 0.0, move_amount)  # 新增z坐标平滑
-	#position = smooth_target_pos
-	head.position = head.position.lerp(smooth_target_pos, 0.5) + head_pos_original*0.463
+		smooth_target_pos.x = Global.exponential_decay(smooth_target_pos.x, 0.0, move_amount*4.6)  # 新增x坐标平滑
+		smooth_target_pos.z = Global.exponential_decay(smooth_target_pos.z, 0.0, move_amount*4.6)  # 新增z坐标平滑
+
+	head.position =  head.position.lerp(smooth_target_pos + head_pos_original, 0.5)
 	#prints("head smooth_", head.position)
 	saved_camera_global_pos = head.global_position
 
 	if y_only:
-		if smooth_target_pos.y == 0:
+		if is_zero_approx(smooth_target_pos.y):
 			saved_camera_global_pos = null # Stop smoothing camera
 	else:
-		if smooth_target_pos.y == 0 and smooth_target_pos.x == 0 and smooth_target_pos.z == 0:
+		if smooth_target_pos.is_zero_approx():
 			saved_camera_global_pos = null # Stop smoothing camera

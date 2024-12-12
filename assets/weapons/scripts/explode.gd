@@ -100,7 +100,7 @@ func explode(in_damage: float=3, in_radius: float=2.5, in_force: float=2) -> voi
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body not in entered_body:
 		if body.has_method("be_hit"): # 击中敌人
-			var attack = Attack.new()
+			var attack = HL.Attack.new()
 			attack.damage = damage
 			attack.knockback_force = force
 			attack.position = global_position

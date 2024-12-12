@@ -16,5 +16,5 @@ var bullet_radius: float = 0.25 : # m
 func set_albedo(_albedo: Color) -> void:
 	pass
 
-func set_radius(radius) -> void:
+func set_radius(_radius) -> void:
 	pass

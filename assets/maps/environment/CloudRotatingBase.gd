@@ -31,7 +31,7 @@ var clouds = []
 #@export var CLOUD_SPRITES: AnimatedSprite3D
 const CLOUD_SPRITES = preload("res://assets/special_effects/shader_cloud.tscn")
 
-@onready var player: Player = $"../Player"
+@onready var player: HL.Controller.Player = $"../Player"
 
 func _ready() -> void:
 	randomize()

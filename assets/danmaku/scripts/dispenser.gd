@@ -244,7 +244,7 @@ func move_bullet(delta: float) -> void:
 		bullet.global_position += -bullet.global_transform.basis.z * bullet.speed * delta # 更新弹幕位置
 
 
-func draw_bullet(delta: float) -> void:
+func draw_bullet(_delta: float) -> void:
 	for i in bullet_multi_meshs.size():
 		var multi_mesh: MultiMesh = bullet_multi_meshs[i]
 		if multi_mesh.mesh == null:

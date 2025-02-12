@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://l1mr3iu53wd4"]
+
+[ext_resource type="Shader" uid="uid://c8bfikaeyp2dw" path="res://assets/arts_graphic/shaders/world_border.gdshader" id="1_yuwlp"]
+[ext_resource type="Script" uid="uid://dni5s1s814cyo" path="res://assets/maps/map_blocks/scripts/world_border.gd" id="2_b50ax"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b50ax"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fo0aj"]
+render_priority = 0
+shader = ExtResource("1_yuwlp")
+shader_parameter/freq = 1.0
+shader_parameter/speed = 0.5
+shader_parameter/cutoff = 0.5
+shader_parameter/color = Color(0, 0.5, 1, 1)
+shader_parameter/near_fade_min = 40.0
+shader_parameter/near_fade_max = 50.0
+
+[node name="WorldBorder" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_b50ax")
+surface_material_override/0 = SubResource("ShaderMaterial_fo0aj")
+script = ExtResource("2_b50ax")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 33

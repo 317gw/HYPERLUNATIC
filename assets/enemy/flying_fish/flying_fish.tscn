@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=4 uid="uid://24tw178y6mry"]
 
-[ext_resource type="Script" path="res://assets/enemy/flying_fish/flying_fish.gd" id="1_l0iat"]
+[ext_resource type="Script" uid="uid://qimhmiwuf83j" path="res://assets/enemy/flying_fish/flying_fish.gd" id="1_l0iat"]
 [ext_resource type="Texture2D" uid="uid://moynljd8bcr5" path="res://assets/enemy/flying_fish/textures/飞鱼.png" id="2_ti4ad"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82kkc"]
@@ -86,7 +86,7 @@ tracks/2/keys = PackedFloat32Array(0, 1, -0.40558, 0.579228, 0.579228, 0.40558, 
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vf7bb"]
 _data = {
-"飞行": SubResource("Animation_ut3da")
+&"飞行": SubResource("Animation_ut3da")
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_os6p2"]
@@ -129,6 +129,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 collision_layer = 4
 collision_mask = 615
 script = ExtResource("1_l0iat")
+max_speed = 4.0
 
 [node name="飞鱼2" type="Node3D" parent="."]
 
@@ -148,21 +149,21 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(3.57628e-07, -1.36169e-07, -1, 2.58492e-07, -1, 1.36169e-07, -1, -2.58493e-07, -3.57628e-07, 4.03531e-25, -9.53674e-07, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(4.03531e-25, -9.53674e-07, 0)
-bones/1/rotation = Quaternion(0.706961, 0.0143435, -0.706961, 0.0143433)
+bones/1/rotation = Quaternion(0.707031, 0.0103381, -0.707031, 0.0103379)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "右翅膀"
 bones/2/parent = 0
 bones/2/rest = Transform3D(1.78814e-07, 1, 0, 2.08616e-07, 0, -1, -1, 2.08616e-07, -2.38419e-07, 0.8, 3.25012, 7.92673e-07)
 bones/2/enabled = true
 bones/2/position = Vector3(0.8, 3.25012, 7.92673e-07)
-bones/2/rotation = Quaternion(0.412548, 0.574286, -0.574286, 0.412548)
+bones/2/rotation = Quaternion(0.420521, 0.568475, -0.568474, 0.42052)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "左翅膀"
 bones/3/parent = 0
 bones/3/rest = Transform3D(1.19209e-07, -1, -1.78814e-07, 1.78814e-07, -2.38419e-07, 1, -1, -1.78814e-07, 1.19209e-07, -0.8, 3.25012, 1.94316e-15)
 bones/3/enabled = true
 bones/3/position = Vector3(-0.8, 3.25012, 1.94316e-15)
-bones/3/rotation = Quaternion(-0.574286, 0.412548, 0.412548, 0.574286)
+bones/3/rotation = Quaternion(-0.568474, 0.42052, 0.42052, 0.568474)
 bones/3/scale = Vector3(1, 1, 1)
 
 [node name="飞鱼" type="MeshInstance3D" parent="飞鱼2/骨架/Skeleton3D"]
@@ -183,7 +184,7 @@ transform = Transform3D(0.707107, -9.92617e-24, 0.707107, -7.10543e-15, 1, 7.105
 shape = SubResource("CapsuleShape3D_e6b5b")
 
 [node name="左翅膀" type="BoneAttachment3D" parent="飞鱼2/骨架/Skeleton3D"]
-transform = Transform3D(0.319217, -0.947682, -2.98023e-08, -0.947682, -0.319217, 0, -2.98023e-08, 3.32802e-17, -1, -0.8, 1.94316e-15, -1.22723)
+transform = Transform3D(0.292652, -0.956219, -2.98023e-08, -0.956219, -0.292653, 0, -2.98023e-08, 1.19209e-07, -1, -0.8, 1.94316e-15, -1.22723)
 bone_name = "左翅膀"
 bone_idx = 3
 
@@ -196,7 +197,7 @@ transform = Transform3D(1, 3.5527e-15, 1.42109e-14, 3.38813e-21, 1, 2.84217e-14,
 shape = SubResource("BoxShape3D_5283h")
 
 [node name="右翅膀" type="BoneAttachment3D" parent="飞鱼2/骨架/Skeleton3D"]
-transform = Transform3D(-0.319217, 0.947682, -5.96046e-08, -0.947682, -0.319217, 0, 5.96046e-08, 1.19209e-07, 1, 0.8, 7.92673e-07, -1.22723)
+transform = Transform3D(-0.292651, 0.956219, -2.08616e-07, -0.956219, -0.292651, -1.90735e-06, -1.81794e-06, -3.57628e-07, 1, 0.8, 7.92673e-07, -1.22723)
 bone_name = "右翅膀"
 bone_idx = 2
 
@@ -209,7 +210,7 @@ transform = Transform3D(1, 7.10543e-15, 0, -8.47033e-22, 1, -7.10543e-15, 1.4210
 shape = SubResource("BoxShape3D_nhaig")
 
 [node name="尾巴" type="BoneAttachment3D" parent="飞鱼2/骨架/Skeleton3D"]
-transform = Transform3D(4.17233e-07, 0.040561, -0.999177, -1, -2.73809e-07, -3.57628e-07, -2.8871e-07, 0.999177, 0.040561, 3.38941e-23, 0, 2.02289)
+transform = Transform3D(-1.19209e-07, 0.0292372, -0.999573, -1, -2.95229e-07, -1.19209e-07, -2.95229e-07, 0.999573, 0.0292372, 3.38941e-23, 0, 2.02289)
 bone_name = "尾巴"
 bone_idx = 1
 
@@ -223,7 +224,7 @@ shape = SubResource("BoxShape3D_vbvfi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="飞鱼2"]
 libraries = {
-"": SubResource("AnimationLibrary_vf7bb")
+&"": SubResource("AnimationLibrary_vf7bb")
 }
 
 [node name="触底轴心" type="CollisionShape3D" parent="."]
@@ -247,6 +248,7 @@ monitorable = false
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../飞鱼2")
 root_motion_track = NodePath("骨架/Skeleton3D:身子")
+root_motion_local = false
 tree_root = SubResource("AnimationNodeStateMachine_hrig2")
 anim_player = NodePath("../飞鱼2/AnimationPlayer")
 

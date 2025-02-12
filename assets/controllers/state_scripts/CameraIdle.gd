@@ -1,9 +1,9 @@
 extends State
 class_name CameraIdle
 
-@onready var PLAYER: HL.Controller.Player = $"../.."
+@onready var PLAYER: HL.Player = $"../.."
 @onready var Head: Node3D = $"../../Head"
-@onready var Camera: HL.Controller.Camera = $"../../Head/Camera3D"
+@onready var Camera: HL.Camera = $"../../Head/Camera3D"
 
 
 func Enter():

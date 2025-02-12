@@ -1,4 +1,4 @@
-extends Node
+#extends Node
 
 	
 # 	#Movement(delta)
@@ -521,7 +521,7 @@ extends Node
 			#print("Continue")
 			#continue
 		#transform3d.origin += step_height
-		#motion = Vector3(vel2d.x, 0, vel2d.y) * delta
+		#motion = Vector3(vel_hor.x, 0, vel_hor.y) * delta
 		#is_player_collided = test_player_collided(test_motion_params, transform3d, motion, test_motion_result)
 #
 		#if not is_player_collided:
@@ -533,7 +533,7 @@ extends Node
 			#print("step_up2")
 			#var wall_collision_normal: Vector3 = test_motion_result.get_collision_normal()
 			#transform3d.origin += wall_collision_normal * WALL_MARGIN
-			#motion = (Vector3(vel2d.x, 0, vel2d.y) * delta).slide(wall_collision_normal)
+			#motion = (Vector3(vel_hor.x, 0, vel_hor.y) * delta).slide(wall_collision_normal)
 			#is_player_collided = test_player_collided(test_motion_params, transform3d, motion, test_motion_result)
 			#if not is_player_collided:
 				#print("step_up3")
@@ -549,7 +549,7 @@ extends Node
 	#var test_motion_result:= PhysicsTestMotionResult3D.new()
 	#var test_motion_params:= PhysicsTestMotionParameters3D.new()
 	#var transform3d: Transform3D = global_transform
-	#var motion: Vector3 = Vector3(vel2d.x, 0, vel2d.y) * delta
+	#var motion: Vector3 = Vector3(vel_hor.x, 0, vel_hor.y) * delta
 #
 	#test_motion_params.recovery_as_collision = true
 #
@@ -562,7 +562,7 @@ extends Node
 		#print("step_down2")
 		#var wall_collision_normal: Vector3 = test_motion_result.get_collision_normal()
 		#transform3d.origin += wall_collision_normal * WALL_MARGIN
-		#motion = (Vector3(vel2d.x, 0, vel2d.y) * delta).slide(wall_collision_normal)
+		#motion = (Vector3(vel_hor.x, 0, vel_hor.y) * delta).slide(wall_collision_normal)
 		#is_player_collided = test_player_collided(test_motion_params, transform3d, motion, test_motion_result)
 		#if not is_player_collided:
 			#print("step_down3")
@@ -809,9 +809,9 @@ Roughness: 0.50028812448435
 
 				#mesh_instance_3d.global_position.x = global_position.x
 				#mesh_instance_3d.global_position.z = global_position.z
-				#mesh_instance_3d.global_position.y = Global.exponential_decay(mesh_instance_3d.global_position.y, global_position.y, delta)
+				#mesh_instance_3d.global_position.y = HL.exponential_decay(mesh_instance_3d.global_position.y, global_position.y, delta)
 				#mesh_instance_3d.global_position = lerp(global_position, mesh_instance_3d.global_position, high_diff_0_1)
-				#mesh_instance_3d.global_rotation = Global.exponential_decay_vec3(mesh_instance_3d.global_rotation, global_rotation, delta)
+				#mesh_instance_3d.global_rotation = HL.exponential_decay_vec3(mesh_instance_3d.global_rotation, global_rotation, delta)
 				#mesh_instance_3d.global_rotation = lerp(global_rotation, mesh_instance_3d.global_rotation, high_diff_0_1)
 				#var current_error = mesh_instance_3d.global_position - global_position
 				#var derivative: Vector3 = (current_error - last_error) / delta # 微分项是误差变化率
@@ -956,3 +956,465 @@ func load_exported_properties() -> void:
 			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
 			vec4(0.0, 0.0, 0.0, 1.0));
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+
+
+func is_point_inside_mesh_axis(space_state: PhysicsDirectSpaceState3D, point: Vector3) -> bool:
+	var ray_direction: Array = [Vector3.LEFT, Vector3.RIGHT, Vector3.FORWARD, Vector3.BACK, Vector3.UP, Vector3.DOWN]
+	var ray_length = 10
+
+	var ray_params:PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.new()
+	ray_params.from = point
+	ray_params.hit_from_inside = true  # 允许从内部开始检测
+
+	for i in range(6):
+		ray_params.to = point + ray_direction[i] * ray_length# * _parent_rigid_body.global_basis.orthonormalized()
+		var result = space_state.intersect_ray(ray_params)
+		if not result:
+			return false
+		
+		if not result.collider == _parent_rigid_body:
+			return false
+	
+	return true
+
+
+
+//uniform sampler2D texture_normal_noise1: source_color, filter_linear_mipmap, repeat_enable;
+//uniform sampler2D texture_normal_noise2: source_color, filter_linear_mipmap, repeat_enable;
+
+	// Normal Map
+	float normal_noise1 = triplanar_texture_linear(
+		texture_normal_noise1,
+		uv_normal,
+		uv1_triplanar_pos * normal_noise_scale).r;
+	float normal_noise2 = triplanar_textureLod_linear(
+		texture_normal_noise1,
+		uv_normal,
+		uv1_triplanar_pos * normal_noise_scale + normal_noise1 * 0.5,
+		normal_noise_lod).r;
+	vec3 normal_blend = mix(
+		triplanar_texture_linear_rotated(texture_normal, uv_normal, uv1_triplanar_pos * normal_uv_scale, PI*0.4).rgb,
+		triplanar_texture_linear_rotated(texture_normal, uv_normal, uv2_triplanar_pos * normal_uv_scale, 0.0).rgb,
+		normal_noise2);
+
+	//ref_ofs *= combined_depth * 0.5;
+	//EMISSION = mix(EMISSION, spume_texture, spume_mask);
+
+
+
+	#var from = 0.0
+	#var to = 100.0
+	#var target = from + 0.99 * (to - from)
+	#var delta = 1.0/120.0  # 根据需要调整
+	#var required_time = time_to_reach(target, from, to, 2.0*delta)
+	#print("从0到99%的目标值所需帧数:", required_time)
+
+#func time_to_reach(target: float, from: float, to: float, delta: float) -> int:
+	#var current_value = from
+	#var time = 0
+	#while current_value < target:
+		#current_value = exponential_decay(current_value, to, delta)
+		#time += 1  # 每次迭代代表一帧
+	#return time
+
+#static func exponential_decay(from: float, to: float, delta: float) -> float:
+	#if from == to:
+		#return to
+	#var diff: float = to - from
+	#var x0: float = log(abs(diff) )
+	#return to - exp(x0 - delta) * sign(diff)
+
+var x0 = log(abs(to - from) )
+return to - exp(x0 - delta) * sign(to - from)
+
+var diff = to - from
+if diff == 0:
+	return to
+var x0 = log(abs(diff))
+var exp_val = exp(x0 - delta)
+return to - exp_val * sign(diff)
+
+
+
+
+
+	#camera._player_rotation = Vector3.FORWARD
+	#camera._camera_rotation = Vector3.FORWARD
+	#camera._mouse_rotation = Vector3.FORWARD
+	#camera.face_DIR = Vector3.FORWARD
+	#camera.target_player_rotation = Vector3.FORWARD
+	#camera.player_rotation_speed =0
+
+
+#func damaged(damage: float) -> void:
+	#health -= damage
+	#if health <= 0:
+		#var expl = EXPLODE.instantiate()
+		#expl.global_position = global_position
+		#expl.explode(explode_damage, explode_radius, explode_force)
+		#expl.died_time = 0.4
+		#get_node("/root/TestMap").add_child(expl)
+		#queue_free()
+	#taking_damge = true
+
+
+
+
+
+#class FM_Probe:
+	#var _belong: HL.FluidMechanics
+	#var _type: String # buoy   slice
+	#var _id: int  # 顺序
+#
+	#func _init(belong: HL.FluidMechanics, type: String, id: int) -> void:
+		#_belong = belong
+		#_type = type
+		#_id = id
+
+
+
+
+
+
+# 用一个区域跟踪当前摄像机，以便我们检查它是否在水中
+func should_draw_camera_underwater_effect() -> bool:
+	var camera := get_viewport().get_camera_3d() if get_viewport() else null
+	if not camera:
+		#print("not camera")
+		return false
+
+	# 不要同时绘制多个叠加图，以防 2 个水体重叠
+	if last_frame_drew_underwater_effect == Engine.get_process_frames():
+		#print("not last_frame_drew_underwater_effect == Engine.get_process_frames()")
+		return false
+
+	camera_pos_shape_cast_3d.global_position = camera.global_position
+	camera_pos_shape_cast_3d.force_update_transform()
+	camera_pos_shape_cast_3d.force_shapecast_update()
+	for i in camera_pos_shape_cast_3d.get_collision_count():
+		if camera_pos_shape_cast_3d.get_collider(i) == swimmable_area_3d:
+			return true
+	camera_pos_shape_cast_3d.global_position = self.global_position
+	#print("not not not camera")
+	return false
+
+
+
+
+
+#func _save() -> void:
+	#var data = SceneData.new()
+	#
+	#data.player_position = player.global_position
+	#data.is_facing_left = player.get_child(0).flip_h
+	#
+	#var boxes = get_tree().get_nodes_in_group("Box")
+	#for box in boxes:
+		#var box_scene = PackedScene.new()
+		#box_scene.pack(box)
+		#data.box_array.append(box_scene)
+	#
+	#ResourceSaver.save(data, "user://scene_data.tres")
+	#print("saved!")
+#
+#
+#func _load() -> void:
+	#var data = ResourceLoader.load("user://scene_data.tres") as SceneData
+	#
+	#player.global_position = data.player_position
+	#player.get_child(0).flip_h = data.is_facing_left
+	#
+	#for box in get_tree().get_nodes_in_group("Box"):
+		#box.queue_free()
+	#
+	#for box in data.box_array:
+		#var box_node = box.instantiate()
+		#get_tree().current_scene.add_child(box_node)
+		#box_node.freeze = true
+	#
+	#await get_tree().create_timer(0.1).timeout
+	#for box in get_tree().get_nodes_in_group("Box"):
+		#box.freeze = false
+	#
+	#print("loaded!")
+
+
+
+
+# 优化后的体素网格类（分块+预计算索引）
+class VoxelGridOptimized:
+	var chunks: Dictionary = {}
+	var all_chunk_pos: Array
+	var resolution: int
+	var chunk_size: int
+
+	func _init(res: int, chunk_size: int):
+		self.resolution = res
+		self.chunk_size = chunk_size
+		for z in resolution:
+			for y in resolution:
+				for x in resolution:
+					self.all_chunk_pos.append(Vector3i(x, y, z))
+
+	func read(x: int, y: int, z: int) -> float:
+		var chunk_pos = Vector3i(
+			x / chunk_size,
+			y / chunk_size,
+			z / chunk_size
+		)
+		var local_pos = Vector3i(
+			x % chunk_size,
+			y % chunk_size,
+			z % chunk_size
+		)
+		# 延迟初始化分块
+		if not chunks.has(chunk_pos):
+			return 1.0  # 默认值
+		return chunks[chunk_pos].data[
+			local_pos.x + local_pos.y * chunk_size + local_pos.z * chunk_size * chunk_size
+		]
+
+	func write(x: int, y: int, z: int, value: float):
+		var chunk_pos = Vector3i(
+			x / chunk_size,
+			y / chunk_size,
+			z / chunk_size
+		)
+		var local_pos = Vector3i(
+			x % chunk_size,
+			y % chunk_size,
+			z % chunk_size
+		)
+		# 仅当值非默认时存储（稀疏优化）
+		if value != 1.0:
+			if not chunks.has(chunk_pos):
+				chunks[chunk_pos] = VoxelChunk.new(chunk_size)
+			chunks[chunk_pos].data[
+				local_pos.x + local_pos.y * chunk_size + local_pos.z * chunk_size * chunk_size
+				] = value
+
+# 分块数据容器
+class VoxelChunk:
+	var data: PackedFloat32Array
+	func _init(size: int):
+		data.resize(size * size * size)
+		data.fill(1.0)
+
+	
+	if data is Callable:
+		# 按分块遍历优化
+		#for chunk_pos in voxel_grid.chunks.keys():
+		for chunk_pos in voxel_grid.all_chunk_pos:
+			#var chunk = voxel_grid.chunks[chunk_pos]
+			for z in CHUNK_SIZE:
+				for y in CHUNK_SIZE:
+					for x in CHUNK_SIZE:
+						var global_x = chunk_pos.x * CHUNK_SIZE + x
+						var global_y = chunk_pos.y * CHUNK_SIZE + y
+						var global_z = chunk_pos.z * CHUNK_SIZE + z
+						# 跳过边界外的体素
+						if global_x >= RESOLUTION or global_y >= RESOLUTION or global_z >= RESOLUTION:
+							continue
+						#voxel_grid.write(global_x, global_y, global_z, data.call(global_x, global_y, global_z))
+						voxel_grid.write(x, y, z, data.call(x, y, z))
+		
+		# Marching Cubes 分块处理
+		for chunk_pos in voxel_grid.chunks.keys():
+			var chunk = voxel_grid.chunks[chunk_pos]
+			for z in CHUNK_SIZE-1:
+				for y in CHUNK_SIZE-1:
+					for x in CHUNK_SIZE-1:
+						var global_x = chunk_pos.x * CHUNK_SIZE + x
+						var global_y = chunk_pos.y * CHUNK_SIZE + y
+						var global_z = chunk_pos.z * CHUNK_SIZE + z
+						#_march_cube(global_x, global_y, global_z, voxel_grid, vertices)
+						_march_cube(x, y, z, voxel_grid, vertices)
+	
+
+
+
+
+
+
+
+
+
+
+
+
+func generate_mesh(field_points: Dictionary) -> ArrayMesh:
+	var vertices = PackedVector3Array()
+	# 遍历所有密度立方体
+	for cell in field_points:
+		var cube_index = 0b00000000
+		var cell_density = []
+		
+		# 计算8个顶点的密度值
+		for i in range(8):
+			var sample_pos = cell + MarchingTable.POINTS[i]
+			var density = field_points.get(sample_pos, 0)
+			cell_density.append(density)
+			if density > threshold:
+				cube_index |= (1 << (i))
+		print(cell_density)
+		# 获取三角化配置
+		var tri_config = MarchingTable.TRIANGULATIONS[cube_index]
+		for edge in tri_config:
+			if edge == -1: break
+			var point_indices = MarchingTable.EDGES[edge]
+			var e1 = point_indices[0]
+			var e2 = point_indices[1]
+			var p1 = Vector3(MarchingTable.POINTS[e1] + cell)
+			var p2 = Vector3(MarchingTable.POINTS[e2] + cell)
+			var val_a = cell_density[e1]
+			var val_b = cell_density[e2]
+			var t = clamp((threshold - val_a) / (val_b - val_a), 0.0, 1.0)
+			var pos = p1.lerp(p2, t)# * resolution
+			#p1+(threshold - val_a)*(p2-p1)/(val_b-val_a)
+			#vertices.append(pos)
+			#vertices.append(LinearInterp(p1, p2, threshold))
+			vertices.append(p1+p2)
+	
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_smooth_group(-1)
+	for vert in vertices:
+		st.add_vertex(vert)
+	#for i in range(0, vertices.size(), 3):
+		#if i + 2 < vertices.size():
+			#st.add_vertex(vertices[i])
+			#st.add_vertex(vertices[i + 1])
+			#st.add_vertex(vertices[i + 2])
+	st.generate_normals()
+	return st.commit()
+
+
+func LinearInterp(p1: Vector3, p2: Vector3, value: float ) -> Vector3:
+	if p2 < p1:
+		var temp
+		temp = p1
+		p1 = p2
+		p2 = temp
+
+	var p: Vector3
+	if(absf(p1.length() - p2.length()) > 0.00001):
+		p = p1 + (p2 - p1)/(p2.length() - p1.length())*(value - p1.length())
+	else:
+		p = p1
+	return p
+
+
+
+
+func update_chunks():
+	var chunks_to_load = {}
+	
+	var max_chunks_in_view: int = floori(view_distance / chunk_size)
+	
+	for x in range(-max_chunks_in_view, max_chunks_in_view + 1):
+		for y in range(-max_chunks_in_view, max_chunks_in_view + 1):
+			for z in range(-max_chunks_in_view, max_chunks_in_view + 1):
+				var chunk_pos = player_chunk_pos + Vector3(x, y, z)
+				chunks_to_load[chunk_pos] = true
+				if chunk_pos in loaded_chunks:
+					continue
+				loaded_chunks[chunk_pos] = true
+				
+				#if chunk_exists_on_disk(chunk_pos):
+					#load_chunk(chunk_pos)
+				#else:
+					#create_chunk(chunk_pos)
+	
+	for chunk_pos in loaded_chunks.keys():
+		if not chunk_pos in chunks_to_load:
+			loaded_chunks.erase(chunk_pos)
+			#unload_chunk(chunk_pos)
+
+
+#func chunk_process():
+	#for chunk in loaded_chunks:
+		#pass
+#
+#
+#func chunk_exists_on_disk(chunk_pos):
+	#var file_path = get_chunk_path(chunk_pos)
+	#return ResourceLoader.exists(file_path)
+
+
+# SaveLoadManager.save_node()
+#func load_chunk(chunk_pos):
+	#var file_path = get_chunk_path(chunk_pos)
+	#var chunk = SaveLoadManager.load_node(str(chunk_pos), file_path).instantiate()
+	#add_child(chunk)
+	#chunk.global_position = chunk_pos * chunk_size
+	#loaded_chunks[chunk_pos] = chunk
+	#chunk_states[chunk_pos] = "loaded"
+#
+#
+#func create_chunk(chunk_pos):
+	#var chunk = Node3D.new()
+	#chunk.name = "Chunk_" + str(chunk_pos)
+	#add_child(chunk)
+	#chunk.global_position = chunk_pos * chunk_size
+	#loaded_chunks[chunk_pos] = chunk
+	#chunk_states[chunk_pos] = "created"
+	#
+	#var fog_chunk:= FOG_CHUNK.instantiate()
+	#chunk.add_child(fog_chunk)
+	#chunk.set_meta("fog_chunk", fog_chunk)
+#
+#
+#func unload_chunk(chunk_pos):
+	#var chunk = loaded_chunks[chunk_pos]
+	#var file_path = get_chunk_path(chunk_pos)
+	#SaveLoadManager.save_node(chunk, str(chunk_pos), file_path)
+	#chunk.queue_free()
+	#loaded_chunks.erase(chunk_pos)
+	#chunk_states.erase(chunk_pos)
+#
+#
+#func set_chunk_state(chunk_pos, state):
+	#if chunk_pos in chunk_states:
+		#chunk_states[chunk_pos] = state
+	#else:
+		#print("Error: Chunk position not found in chunk_states.")
+
+
+func apply_lod(chunk_pos):
+	# 根据玩家与区块的距离，调整区块的细节级别
+	var distance = player.global_position.distance_to(chunk_pos * chunk_size)
+	var lod_level = int(distance / chunk_size)
+	# 这里可以添加根据LOD级别调整区块细节的代码
+	# ...
+
+
+	var chunk_center = chunk_pos * chunk_size + chunk_size_v3 / 2
+	var half_size = chunk_size_v3 / 2
+
+	if not camera:
+		return false
+	var frustum_planes:= camera.get_frustum()
+	for plane in frustum_planes:
+		var p0 = chunk_center + half_size * plane.normal
+		var p1 = chunk_center - half_size * plane.normal
+		if plane.distance_to(p0) < 0 and plane.distance_to(p1) < 0:
+			return false
+
+func _draw_loaded_chunks():
+	#DebugDraw.draw_statical.clear_surfaces()
+	var transforms: Array[Transform3D]
+	for chunk in loaded_chunks:
+		#var tran = loaded_chunks[chunk].global_transform.scaled_local(chunk_size_v3)
+		var tran = Transform3D(Basis.IDENTITY * chunk_size, chunk * chunk_size)
+		transforms.append(tran)
+		#if chunk == player_chunk_pos:
+		#DebugDraw.draw_line_cube(tran)
+			#DebugDraw.draw_line_cube_canvas(tran, Color.WEB_MAROON, 3)
+		#else:
+			#DebugDraw.draw_line_cube_canvas(tran, Color.LIGHT_SKY_BLUE)
+		
+	#DebugDraw.draw_chunks(loaded_chunks, chunk_size)
+	DebugDraw.draw_multi_line_cube(transforms)
+
+
+"""

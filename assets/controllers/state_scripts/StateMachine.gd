@@ -10,6 +10,8 @@ var _current: String
 var states: Dictionary = {}
 var is_first_tick: bool = false
 
+@onready var player: CharacterBody3D = $".."
+
 
 func _ready() -> void:
 	await owner.ready
@@ -52,7 +54,8 @@ func on_child_transition(state: State, new_state_name: String):
 		current_state.Exit()
 		if print_transition:
 			print("out: %s\n" %current_state)
-
+	
+	await player.physics_process
 	new_state.Enter()
 	if print_transition:
 		print("in: %s" %new_state)

@@ -11,7 +11,7 @@ const FOV_CHANGE: float = 1.5
 
 # 左右歪头
 @export var MOUSE_SENSITIVITY: float = 0.35 # 导出变量，可以在编辑器中设置鼠标灵敏度
-@export var PLAYER: HL.Controller.Player
+@export var PLAYER: HL.Player
 @export var tilt_head_to_body_angle: float = 10.0
 @export var tilt_head_to_body_clamp: float = 75.0
 @export_range(0, 180) var tilt_angle: float = 1.0
@@ -21,7 +21,7 @@ const FOV_CHANGE: float = 1.5
 
 @export_group("FOV&Zoom")
 @export var fov_base: float = 75.0
-@export var fov_zoom: float = 10.0
+@export var fov_zoom: float = 5.0
 @export var fov_clamp_max: float = 1.2
 @export_range(0, 1) var fov_sensitivity : float = 0.1
 @export_range(0, 1) var fov_lerp_speed: float = 0.2
@@ -66,11 +66,10 @@ var _face_dir: Vector3 # 面对方向
 var _player_rotation: Vector3 # 私有变量，用于存储玩家旋转值
 var _camera_rotation: Vector3 # 私有变量，用于存储摄像机旋转值
 
-
 #var previous_position: Vector3 = Vector3.ZERO
 #var position_change_threshold: float = 0.1  # 你可以根据实际情况调整这个阈值
 
-@onready var player: HL.Controller.Player = $"../.."
+@onready var player: HL.Player = $"../.."
 @onready var head: Node3D = $".."
 @onready var camera_smooth: Node3D = $".."
 @onready var hand: GrabFuction = $"../Hand"
@@ -79,6 +78,7 @@ var _camera_rotation: Vector3 # 私有变量，用于存储摄像机旋转值
 # 获取状态机
 @onready var movement_state_machine: StateMachine = $"../../MovementStateMachine"
 @onready var camera_state_machine: StateMachine = $"../../CameraStateMachine"
+@onready var weapon_manager: Node3D = $"../../WeaponManager"
 # 瞄准
 @onready var eye_ray_cast: RayCast3D = $EyeRayCast
 @onready var eye_area: Area3D = $EyeArea
@@ -87,6 +87,7 @@ var _camera_rotation: Vector3 # 私有变量，用于存储摄像机旋转值
 @onready var auxiliary_end_marker: Marker3D = $AuxiliaryEndMarker
 @onready var cylinder_xx: MeshInstance3D = $EyeArea/CylinderXX
 @onready var auxiliary_aiming_ball: MeshInstance3D = $AuxiliaryAimingBall
+
 
 
 func _ready() -> void: # 节点准备好时执行
@@ -98,6 +99,7 @@ func _ready() -> void: # 节点准备好时执行
 	normal_target_marker.position.z = -PLAYER.visible_range
 	var edge: Vector3 = project_position(Vector2(get_viewport().get_size().x / 2, 0), PLAYER.auxiliary_aiming_distance)
 	auxiliary_end_marker.position.z = -PLAYER.auxiliary_aiming_distance
+	
 	# 距离设置
 	enemy_area_radius = auxiliary_end_marker.position.distance_to(edge)
 	eye_area_collision_shape.shape.radius = enemy_area_radius
@@ -110,6 +112,7 @@ func _ready() -> void: # 节点准备好时执行
 	enemy_area_body.clear()
 	aiming_aidable_objects.clear()
 	head_pos_original = head.position
+	
 	# 初始化摄像旋转
 	_mouse_rotation = self.global_rotation
 	_camera_rotation = self.global_rotation
@@ -127,12 +130,13 @@ func _unhandled_input(event: InputEvent) -> void: # 处理未处理的输入事�
 		var mouse_motion: InputEventMouseMotion = event
 		sensitivity = MOUSE_SENSITIVITY
 		if is_zoom:
-			sensitivity *= lerp(fov_base, fov_zoom, fov_lerp) / fov_base
+			sensitivity *= clampf(lerp(fov_base, fov_zoom, fov_lerp) / fov_base, 0.15, 1)
 		_rotation_input = -mouse_motion.screen_relative.x * sensitivity # 计算旋转输入
 		_tilt_input = -mouse_motion.screen_relative.y * sensitivity # 计算倾斜输入
 	if event.is_action_pressed("zoom") and not hand.picked_up:
 		is_zoom = !is_zoom
-		fov_lerp = 0.7
+		weapon_manager.visible = !weapon_manager.visible
+		fov_lerp = 0.6
 	if is_zoom:
 		fov_lerp_change()
 
@@ -145,7 +149,7 @@ func _physics_process(delta: float) -> void:
 	calculate_player_rotation_speed(delta)
 
 	# Head bob
-	if PLAYER.velocity.length() < 1 or not PLAYER.is_on_floor() or movement_state_machine.current_state is PlayerDash:
+	if PLAYER.velocity.length() < 1 or not PLAYER.is_on_floor() or movement_state_machine.current_state is PlayerDash or movement_state_machine.current_state is FreeViewMode:
 		head_bob_pos = head_bob_pos.lerp(Vector3.ZERO, 0.08)
 	else:
 		bob_time += delta * PLAYER.velocity.length() * float(PLAYER.is_on_floor())
@@ -181,7 +185,7 @@ func _update_camera(delta) -> void: # 更新摄像机位置
 	var transform_marker = Vector3(0.0, _mouse_rotation.y + PLAYER.turn_round_rotation, 0.0)
 	#var last_player_rotation = _player_rotation
 	# 模型旋转平滑 删除这行↑ 头的运动将进行迭代导致左右摇摆
-	#_player_rotation.y = Global.exponential_decay(last_player_rotation.y, transform_marker.y, 6 * delta) # 6.155
+	#_player_rotation.y = HL.exponential_decay(last_player_rotation.y, transform_marker.y, 6 * delta) # 6.155
 	_player_rotation.y = transform_marker.y
 	_player_rotation.x = 0.0
 	_player_rotation.z = 0.0
@@ -192,8 +196,9 @@ func _update_camera(delta) -> void: # 更新摄像机位置
 	_camera_rotation.y = look_back_rotation + difference
 	# 脖子角度左右旋转极限为80度
 	#var yy = smoothstep(deg_to_rad(80), deg_to_rad(180), abs(_camera_rotation.y))
-	#_player_rotation.y = Global.exponential_decay(last_player_rotation.y, transform_marker.y, (yy*4 + 6) * delta)
+	#_player_rotation.y = HL.exponential_decay(last_player_rotation.y, transform_marker.y, (yy*4 + 6) * delta)
 	_camera_rotation.y = clamp(_camera_rotation.y, -deg_to_rad(180), deg_to_rad(180))
+	
 	# 应用
 	head.transform.basis = Basis.from_euler(_camera_rotation) # 应用摄头部旋转
 	PLAYER.global_transform.basis = Basis.from_euler(_player_rotation) # 应用玩家模型旋转
@@ -215,16 +220,16 @@ func headbob(time: float) -> Vector3:
 
 func fov_change(_delta) -> void: # FOV
 	# 计算速度的FOV变化
-	var velocity_clamped = clamp(PLAYER.vel2d.length() - PLAYER.speed_normal, 0.0, PLAYER.speed_max)
+	#var velocity_clamped = clamp(PLAYER.vel_hor.length() - PLAYER.speed_normal, 0.0, PLAYER.speed_max)
 	var plaFaceDir = Vector2(_face_dir.x, _face_dir.z).normalized()
-	var dot = PLAYER.vel2d.normalized().dot(plaFaceDir)
+	#var dot = PLAYER.vel_hor.normalized().dot(plaFaceDir)
 
 	var lerp_weight = fov_lerp if is_zoom else 0.0
-	var target_fov_base: float = Global.exponential_decay(fov_base, fov_zoom, lerp_weight)
+	var target_fov_base: float = HL.exponential_decay(fov_base, fov_zoom, lerp_weight)
 	var target_fov: float = target_fov_base
 	target_fov += FOV_CHANGE# * velocity_clamped * dot
 	target_fov = clamp(target_fov, target_fov_base, fov_base * fov_clamp_max)
-	fov = Global.exponential_decay(fov, target_fov, fov_lerp_speed)
+	fov = HL.exponential_decay(fov, target_fov, fov_lerp_speed)
 
 
 func fov_lerp_change():
@@ -249,7 +254,7 @@ func tilt_head(_delta) -> void:
 	target_tilt = deg_to_rad(tilt_angle) * lr_tilt # 重置目标倾斜角度
 	if movement_state_machine.current_state is PlayerDash: # 冲刺状态下不歪头
 		target_tilt = deg_to_rad(tilt_angle) * left_right_tilt_desh * 3
-	targetZ = Global.exponential_decay(targetZ, target_tilt, lr_tilt_speed) # 计算目标摄像机的z轴旋转
+	targetZ = HL.exponential_decay(targetZ, target_tilt, lr_tilt_speed) # 计算目标摄像机的z轴旋转
 	rotation.z = targetZ + deg_to_rad(mouse_tilt_angle)
 
 
@@ -365,10 +370,10 @@ func slide_camera_smooth_back_to_origin(delta: float, y_only: bool = false) -> v
 		smooth_target_pos.z = clampf(smooth_target_pos.z, -CROUCH_TRANSLATE_XZ, CROUCH_TRANSLATE_XZ)  # 新增z坐标限制
 
 	var move_amount = max(player.velocity.length(), player.speed_normal) * delta * 10
-	smooth_target_pos.y = Global.exponential_decay(smooth_target_pos.y, 0.0, move_amount*4.6)
+	smooth_target_pos.y = HL.exponential_decay(smooth_target_pos.y, 0.0, move_amount*4.6)
 	if not y_only:
-		smooth_target_pos.x = Global.exponential_decay(smooth_target_pos.x, 0.0, move_amount*4.6)  # 新增x坐标平滑
-		smooth_target_pos.z = Global.exponential_decay(smooth_target_pos.z, 0.0, move_amount*4.6)  # 新增z坐标平滑
+		smooth_target_pos.x = HL.exponential_decay(smooth_target_pos.x, 0.0, move_amount*4.6)  # 新增x坐标平滑
+		smooth_target_pos.z = HL.exponential_decay(smooth_target_pos.z, 0.0, move_amount*4.6)  # 新增z坐标平滑
 
 	head.position =  head.position.lerp(smooth_target_pos + head_pos_original, 0.5)
 	#prints("head smooth_", head.position)

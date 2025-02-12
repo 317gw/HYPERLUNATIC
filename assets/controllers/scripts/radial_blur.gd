@@ -1,17 +1,23 @@
 extends ColorRect
 
+
 var radial_blur: ShaderMaterial
 
-@onready var player: HL.Controller.Player = $".."
-@onready var camera_3d: HL.Controller.Camera = $"../Head/Camera3D"
-@onready var texture_rect: TextureRect = $TextureRect
+var player: HL.Player = null
+var camera_3d: HL.Camera = null
 
 var current_blur_center: Vector2 = Vector2.ZERO
 var current_blur_power: float = 0.0
 var current_lod: float = 0.0
 
+@onready var texture_rect: TextureRect = $TextureRect
+
+
 
 func _ready() -> void:
+	#await Global.main_player_ready
+	player = Global.main_player
+	camera_3d = player.camera
 	radial_blur = material
 
 

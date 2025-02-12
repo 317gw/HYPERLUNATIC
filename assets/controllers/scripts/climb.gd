@@ -32,10 +32,10 @@ var climb_object_to_player: Vector3 = Vector3(0,0,0)
 var climb_object_pos_last: Vector3 = Vector3(0,0,0)
 var climb_object_velocity: Vector3 = Vector3(0,0,0)
 
-@onready var player: HL.Controller.Player = $".."
+@onready var player: HL.Player = $".."
 @onready var head: Node3D = $"../Head"
 @onready var hand: GrabFuction = $"../Head/Hand"
-@onready var camera_3d: HL.Controller.Camera = $"../Head/Camera3D"
+@onready var camera_3d: HL.Camera = $"../Head/Camera3D"
 
 # 判定
 @onready var strike_head_area: Area3D = $StrikeHeadArea

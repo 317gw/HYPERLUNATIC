@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://0q6b86lt8kno"]
 
-[ext_resource type="Script" path="res://assets/controllers/scripts/SpeedLine1.gd" id="1_gi2g8"]
-[ext_resource type="Material" uid="uid://b43olvcbmj8a8" path="res://assets/materials/airflow.tres" id="2_u6mna"]
+[ext_resource type="Script" uid="uid://ds8ma6lnq65kl" path="res://assets/controllers/scripts/SpeedLine1.gd" id="1_gi2g8"]
+[ext_resource type="Material" uid="uid://b43olvcbmj8a8" path="res://assets/arts_graphic/materials/airflow.tres" id="2_u6mna"]
 
 [sub_resource type="Curve" id="Curve_qrk7e"]
 
@@ -18,6 +18,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 1.5
 emission_ring_inner_radius = 1.0
+emission_ring_cone_angle = 90.0
 angle_max = 90.0
 direction = Vector3(0, 0, 1)
 spread = 2.0

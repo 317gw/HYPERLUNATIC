@@ -1,41 +1,39 @@
-[gd_scene load_steps=70 format=3 uid="uid://b6dtopvb54qyu"]
+[gd_scene load_steps=61 format=3 uid="uid://b6dtopvb54qyu"]
 
-[ext_resource type="Script" path="res://assets/controllers/scripts/PlayerController.gd" id="1_0ynvo"]
-[ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://assets/materials/player.tres" id="2_8r2m2"]
-[ext_resource type="Script" path="res://assets/controllers/scripts/snap_stairs.gd" id="3_breom"]
-[ext_resource type="Script" path="res://assets/controllers/scripts/Camera3D.gd" id="3_riu41"]
-[ext_resource type="Shader" path="res://assets/shaders/moebius.gdshader" id="4_c2g46"]
-[ext_resource type="Script" path="res://assets/controllers/scripts/climb.gd" id="4_ks7pu"]
-[ext_resource type="Shader" path="res://assets/weapons/fps_controller.gdshader" id="4_ownym"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/StateMachine.gd" id="5_0pah7"]
-[ext_resource type="Script" path="res://assets/controllers/scripts/DebugLine.gd" id="5_x1m35"]
+[ext_resource type="Script" uid="uid://bpmti2w3wvxh4" path="res://assets/controllers/scripts/PlayerController.gd" id="1_0ynvo"]
+[ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://assets/arts_graphic/materials/player.tres" id="2_8r2m2"]
+[ext_resource type="Script" uid="uid://d1e4bictcfka5" path="res://assets/controllers/scripts/snap_stairs.gd" id="3_breom"]
+[ext_resource type="Script" uid="uid://bycoomtf7jdg5" path="res://assets/controllers/scripts/Camera3D.gd" id="3_riu41"]
+[ext_resource type="Script" uid="uid://b2jn2w44w405a" path="res://assets/controllers/scripts/climb.gd" id="4_ks7pu"]
+[ext_resource type="Script" uid="uid://d4l4548jq2mqk" path="res://assets/controllers/state_scripts/StateMachine.gd" id="5_0pah7"]
+[ext_resource type="Script" uid="uid://dbc8nn37q5yqe" path="res://assets/controllers/scripts/DebugLine.gd" id="5_x1m35"]
 [ext_resource type="AudioStream" uid="uid://cs6aqeydwcet2" path="res://assets/audio/巴雷特 721431__the_epic1357__new-barrett.mp3" id="6_5d5tw"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerIdle.gd" id="6_6erok"]
-[ext_resource type="Script" path="res://assets/controllers/scripts/stand_on_head.gd" id="6_s6i6a"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerJump.gd" id="7_cjesm"]
+[ext_resource type="Script" uid="uid://dnfdd1ewfch4m" path="res://assets/controllers/state_scripts/PlayerIdle.gd" id="6_6erok"]
+[ext_resource type="Script" uid="uid://baj5o2r17oyhs" path="res://assets/controllers/scripts/stand_on_head.gd" id="6_s6i6a"]
+[ext_resource type="Script" uid="uid://cnfgksopdolrb" path="res://assets/controllers/state_scripts/PlayerJump.gd" id="7_cjesm"]
 [ext_resource type="AudioStream" uid="uid://da2l0v4jeeaer" path="res://assets/audio/开关2 144286__dwoboyle__light_switch-0002-on-02.wav" id="7_e4fg3"]
 [ext_resource type="PackedScene" uid="uid://0q6b86lt8kno" path="res://assets/special_effects/speed_line_1.tscn" id="7_p56ye"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerRun.gd" id="7_vuvif"]
-[ext_resource type="Script" path="res://assets/controllers/SpeedLine2.gd" id="8_4ymki"]
+[ext_resource type="Script" uid="uid://d021x32igkymt" path="res://assets/controllers/state_scripts/PlayerRun.gd" id="7_vuvif"]
+[ext_resource type="Script" uid="uid://bo2aljq48gptw" path="res://addons/goat/helper_scenes/RayCast3D.gd" id="7_xnagn"]
+[ext_resource type="Script" uid="uid://b882j1ss1y0wu" path="res://assets/controllers/SpeedLine2.gd" id="8_4ymki"]
 [ext_resource type="AudioStream" uid="uid://t1e8auac52bx" path="res://assets/audio/开关1 725309__oldhiccup__light-switch.mp3" id="8_mjdxn"]
 [ext_resource type="PackedScene" uid="uid://bj86e8r4y1oav" path="res://assets/global/double_click.tscn" id="9_8mfoq"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerFall.gd" id="9_xk5q4"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerDash.gd" id="10_nqmol"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerDashJump.gd" id="11_tud07"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/CameraIdle.gd" id="11_uc086"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/CameraLookBack.gd" id="12_b1wsi"]
-[ext_resource type="Script" path="res://assets/weapons/scripts/weapon_manager.gd" id="12_kdq0o"]
+[ext_resource type="Script" uid="uid://c8ts8baxi0ehw" path="res://assets/controllers/state_scripts/PlayerFall.gd" id="9_xk5q4"]
+[ext_resource type="Script" uid="uid://b5nfy80intmtd" path="res://assets/controllers/state_scripts/PlayerDash.gd" id="10_nqmol"]
+[ext_resource type="Script" uid="uid://brwerdnh4vf1v" path="res://assets/controllers/state_scripts/PlayerDashJump.gd" id="11_tud07"]
+[ext_resource type="Script" uid="uid://b0tbjcbmqtj0a" path="res://assets/controllers/state_scripts/CameraIdle.gd" id="11_uc086"]
+[ext_resource type="Script" uid="uid://45oqi7hqe82f" path="res://assets/controllers/state_scripts/CameraLookBack.gd" id="12_b1wsi"]
+[ext_resource type="Script" uid="uid://dukk6u14bab4g" path="res://assets/weapons/scripts/weapon_manager.gd" id="12_kdq0o"]
 [ext_resource type="PackedScene" uid="uid://boandfdhseyio" path="res://assets/weapons/rifle/rifle.tscn" id="13_6wl66"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/CameraTurnRound.gd" id="13_7scuy"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerFreeViewMode.gd" id="14_a4jom"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/PlayerClimb.gd" id="18_u1swj"]
-[ext_resource type="Script" path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" id="21_iqf47"]
-[ext_resource type="PackedScene" uid="uid://ckpsxx6l7nhwf" path="res://assets/controllers/player_rigid_body.tscn" id="22_xhf1x"]
-[ext_resource type="Shader" path="res://assets/shaders/player_trail3D.gdshader" id="24_8fqh3"]
-[ext_resource type="Script" path="res://assets/controllers/scripts/grab.gd" id="26_x16s4"]
-[ext_resource type="Shader" path="res://assets/shaders/radial_blur.gdshader" id="33_2vxe7"]
-[ext_resource type="Script" path="res://assets/controllers/scripts/radial_blur.gd" id="34_xjmox"]
-[ext_resource type="Texture2D" uid="uid://bmkktpgboa6us" path="res://icon.svg" id="35_igf36"]
+[ext_resource type="Script" uid="uid://cj255py8fpbxj" path="res://assets/controllers/state_scripts/CameraTurnRound.gd" id="13_7scuy"]
+[ext_resource type="Script" uid="uid://btv7kedgi1gjv" path="res://assets/controllers/state_scripts/PlayerFreeViewMode.gd" id="14_a4jom"]
+[ext_resource type="PackedScene" uid="uid://chaj18oke8vcl" path="res://assets/weapons/holy_fisher/holy_fisher.tscn" id="14_i2bq6"]
+[ext_resource type="Script" uid="uid://bycoufvi0fw6x" path="res://assets/controllers/state_scripts/PlayerClimb.gd" id="18_u1swj"]
+[ext_resource type="Script" uid="uid://b0ft4sjpo0rpa" path="res://assets/controllers/state_scripts/PlayerSwim.gd" id="20_xnagn"]
+[ext_resource type="Script" uid="uid://1nfjybprpn4n" path="res://assets/controllers/state_scripts/State.gd" id="21_i2bq6"]
+[ext_resource type="Script" uid="uid://geqat1drmaex" path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" id="21_iqf47"]
+[ext_resource type="Shader" uid="uid://bjuytb3x7vsl" path="res://assets/arts_graphic/shaders/player_trail3D.gdshader" id="24_8fqh3"]
+[ext_resource type="Script" uid="uid://bhdwqsyosr3d5" path="res://assets/controllers/scripts/grab.gd" id="26_x16s4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6tv51"]
 material = ExtResource("2_8r2m2")
@@ -110,9 +108,6 @@ material = SubResource("StandardMaterial3D_1evpt")
 radial_segments = 4
 rings = 1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3j8dm"]
-shader = ExtResource("4_ownym")
-
 [sub_resource type="Curve" id="Curve_m4hxw"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.148773, 0.993932), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -126,6 +121,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 1.5
 emission_ring_inner_radius = 1.0
+emission_ring_cone_angle = 90.0
 angle_max = 90.0
 direction = Vector3(0, 0, 1)
 spread = 2.0
@@ -172,75 +168,15 @@ shader_parameter/tex_stretch = true
 shader_parameter/fade_distance = 2.0
 shader_parameter/fade_power = 0.6
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lm17m"]
-render_priority = 0
-shader = ExtResource("4_c2g46")
-shader_parameter/zNear = 0.05
-shader_parameter/zFar = 0.12
-shader_parameter/outlineThickness = 1.0
-shader_parameter/outlineColor = Color(0, 0, 0, 1)
-shader_parameter/wiggleFrequency = 0.04
-shader_parameter/wiggleAmplitude = 5.0
-shader_parameter/edgeDepthPower = 0.0
-shader_parameter/edgeNormalPower = 1.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_j2kfo"]
-material = SubResource("ShaderMaterial_lm17m")
-flip_faces = true
-size = Vector2(2, 2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0a7j1"]
-resource_local_to_scene = true
-shader = ExtResource("33_2vxe7")
-shader_parameter/blur_center = Vector2(0.5, 0.5)
-shader_parameter/un_blur_radius_min = 0.15
-shader_parameter/un_blur_radius_max = 0.2
-shader_parameter/blur_power = 0.01
-shader_parameter/sampling_count = 6
-shader_parameter/lod = 0.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_4hsx5"]
-lightmap_size_hint = Vector2i(12, 12)
-material = SubResource("ShaderMaterial_0a7j1")
-flip_faces = true
-size = Vector2(2, 2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqh4s"]
-resource_local_to_scene = true
-shader = ExtResource("33_2vxe7")
-shader_parameter/blur_center = Vector2(0.5, 0.5)
-shader_parameter/un_blur_radius_min = 0.2
-shader_parameter/un_blur_radius_max = 0.5
-shader_parameter/blur_power = 0.01
-shader_parameter/sampling_count = 8
-shader_parameter/lod = 0.5
-
-[sub_resource type="GDScript" id="GDScript_8y3ji"]
-script/source = "extends SubViewport
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	size.x = ProjectSettings.get_setting(\"display/window/size/viewport_width\")
-	size.y = ProjectSettings.get_setting(\"display/window/size/viewport_height\")
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	size = get_window().size
-	pass
-"
-
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA") groups=["Player"]]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 process_mode = 1
+physics_interpolation_mode = 1
 collision_mask = 4130
 floor_stop_on_slope = false
 floor_snap_length = 0.2
 platform_floor_layers = 4294905858
 platform_wall_layers = 2
 script = ExtResource("1_0ynvo")
-CAMERA = NodePath("Head/Camera3D")
 mass = 50.0
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
@@ -252,10 +188,6 @@ skeleton = NodePath("../CollisionShape3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_4bbek")
 
-[node name="PlayerRigidBody" parent="." node_paths=PackedStringArray("player") instance=ExtResource("22_xhf1x")]
-player = NodePath("..")
-ues_player_rigid_body = false
-
 [node name="PlayerTransformMarker" type="Marker3D" parent="."]
 
 [node name="BelowRay" type="RayCast3D" parent="."]
@@ -263,6 +195,8 @@ collision_mask = 4134
 
 [node name="SnapStairs" type="Node3D" parent="."]
 script = ExtResource("3_breom")
+max_step_height = null
+step_length = null
 
 [node name="StairsAheadRay" type="RayCast3D" parent="SnapStairs"]
 target_position = Vector3(0, -0.6, 0)
@@ -287,7 +221,15 @@ collision_mask = 34
 
 [node name="Climb" type="Node3D" parent="."]
 script = ExtResource("4_ks7pu")
+auto_climb = null
+climb_on_dash_jump = null
+climb_on_rigidbody3d = null
+down_to_floor_ray_edge_size = null
+player_to_wall = null
 ray_target_position = Vector3(0, 0, -1.2)
+gap_check_high = null
+gap_limit = null
+gap_max_angle = null
 
 [node name="StrikeHeadArea" type="Area3D" parent="Climb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 0)
@@ -388,20 +330,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 [node name="Camera3D" type="Camera3D" parent="Head" node_paths=PackedStringArray("PLAYER")]
 doppler_tracking = 2
 script = ExtResource("3_riu41")
+MOUSE_SENSITIVITY = 0.33
 PLAYER = NodePath("../..")
 tilt_head_to_body_angle = 20.0
+tilt_head_to_body_clamp = null
 tilt_angle = 2.0
 lr_tilt_speed = 0.05
+player_rotation_smooth = null
+tilt_target_angle_multiply = null
 fov_base = 80.0
-
-[node name="ReflectionProbe" type="ReflectionProbe" parent="Head/Camera3D"]
-visible = false
-origin_offset = Vector3(9.99, 9.99, 9.99)
-enable_shadows = true
+fov_zoom = null
+fov_clamp_max = null
+fov_sensitivity = null
+fov_lerp_speed = null
+camera_extension = null
 
 [node name="EyeRayCast" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, 0)
 collision_mask = 54
 collide_with_areas = true
+
+[node name="InteractiveRayCast" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+script = ExtResource("7_xnagn")
+category = "environment"
 
 [node name="EyeArea" type="Area3D" parent="Head/Camera3D"]
 collision_layer = 0
@@ -434,10 +387,16 @@ skeleton = NodePath("../../..")
 visible = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Camera3D"]
-remote_path = NodePath("../../../SubViewport/Camera3D")
 
 [node name="Hand" type="Node3D" parent="Head"]
 script = ExtResource("26_x16s4")
+grab_power = null
+rotation_power = null
+throw_power = null
+push_power = null
+distance_power = null
+distance_min = null
+distance_max = null
 
 [node name="Marker3D" type="Marker3D" parent="Head/Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
@@ -462,24 +421,6 @@ process_callback = 0
 wait_time = 0.2
 one_shot = true
 
-[node name="Collimator" type="ColorRect" parent="Head"]
-visible = false
-material = SubResource("ShaderMaterial_3j8dm")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-mouse_force_pass_scroll_events = false
-color = Color(1, 1, 1, 0)
-metadata/_edit_use_anchors_ = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.82)
-visible = false
-size = Vector3(1.13, 0.1, 1.13)
-
 [node name="SpeedLine1" parent="Head" instance=ExtResource("7_p56ye")]
 
 [node name="SpeedLine2" type="Node3D" parent="Head"]
@@ -498,13 +439,19 @@ draw_pass_1 = SubResource("SphereMesh_mo1ai")
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head"]
 remote_path = NodePath("../../WeaponManager")
 
-[node name="WeaponManager" type="Node3D" parent="." node_paths=PackedStringArray("initial_weapon")]
+[node name="WeaponManager" type="Node3D" parent="." node_paths=PackedStringArray("PLAYER", "CAMERA", "initial_weapon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 script = ExtResource("12_kdq0o")
+PLAYER = NodePath("..")
+CAMERA = NodePath("../Head/Camera3D")
 initial_weapon = NodePath("Rifle")
+print_transition = true
 
 [node name="Rifle" parent="WeaponManager" instance=ExtResource("13_6wl66")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24, -0.1, -0.35)
+
+[node name="HolyFisher" parent="WeaponManager" instance=ExtResource("14_i2bq6")]
+transform = Transform3D(0.801252, -0.170312, -0.573576, 0.207912, 0.978148, 7.25249e-08, 0.561042, -0.119253, 0.819152, 0.35, -0.3, -0.3)
 
 [node name="MovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_0pah7")
@@ -522,8 +469,17 @@ script = ExtResource("7_cjesm")
 [node name="Fall" type="Node" parent="MovementStateMachine"]
 script = ExtResource("9_xk5q4")
 
+[node name="Swim" type="Node" parent="MovementStateMachine"]
+script = ExtResource("20_xnagn")
+metadata/_custom_type_script = ExtResource("21_i2bq6")
+
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("10_nqmol")
+dash_number_max = null
+dash_distance = null
+dash_time = null
+dashjump_height = null
+dashjump_distance = null
 
 [node name="DashJump" type="Node" parent="MovementStateMachine"]
 script = ExtResource("11_tud07")
@@ -533,6 +489,7 @@ script = ExtResource("18_u1swj")
 
 [node name="FreeViewMode" type="Node" parent="MovementStateMachine"]
 script = ExtResource("14_a4jom")
+free_view_speed_sensitivity = null
 
 [node name="CameraStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_0pah7")
@@ -617,57 +574,10 @@ script = ExtResource("5_x1m35")
 [node name="Trail3D" type="Node3D" parent="."]
 process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-visible = false
 script = ExtResource("21_iqf47")
 sampling_mode = 1
 max_points = 400
 material = SubResource("ShaderMaterial_2sxo4")
-
-[node name="Filters" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -1)
-visible = false
-mesh = SubResource("QuadMesh_j2kfo")
-skeleton = NodePath("../Head/Camera3D")
-
-[node name="RadialBlur1" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.8)
-visible = false
-cast_shadow = 0
-mesh = SubResource("QuadMesh_4hsx5")
-
-[node name="RadialBlur" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_aqh4s")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 1
-script = ExtResource("34_xjmox")
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="RadialBlur"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-scale = Vector2(0.5, 0.5)
-pivot_offset = Vector2(64, 64)
-texture = ExtResource("35_igf36")
-metadata/_edit_use_anchors_ = true
-
-[node name="SubViewport" type="SubViewport" parent="."]
-use_hdr_2d = true
-render_target_update_mode = 0
-script = SubResource("GDScript_8y3ji")
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
-doppler_tracking = 2
 
 [connection signal="weapon_main_action" from="." to="WeaponManager" method="_on_main_action"]
 [connection signal="weapon_sub_action" from="." to="WeaponManager" method="_on_sub_action"]

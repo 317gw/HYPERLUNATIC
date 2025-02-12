@@ -707,5 +707,3 @@ if头顶是天花板and水平速度>8：
 12.10
 添加awaits_block脚本用于方便使用多线程
 使用命名空间技巧调整了Player Rifle Camera类的位置
-
-

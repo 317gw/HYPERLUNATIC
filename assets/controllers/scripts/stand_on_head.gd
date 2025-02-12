@@ -8,7 +8,7 @@ var standed_bodys: Array = []
 
 var player_platform_on_leave_original: CharacterBody3D.PlatformOnLeave
 
-@onready var player: HL.Controller.Player = $".."
+@onready var player: HL.Player = $".."
 @onready var stand_body: AnimatableBody3D = $StandBody
 @onready var stand_collision: CollisionShape3D = $StandBody/StandCollision
 @onready var stand_area: Area3D = $StandArea

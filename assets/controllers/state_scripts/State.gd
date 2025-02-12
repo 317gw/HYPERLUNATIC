@@ -4,7 +4,7 @@ extends Node
 signal Transitioned
 
 var state_machine: StateMachine = null
-#var PLAYER: HL.Controller.Player
+#var PLAYER: HL.Player
 
 
 func _ready() -> void:

@@ -1,4 +1,5 @@
-class_name HL
+class_name HL 
+extends NAMESPACE
 # NameSpace daze⭐
 
 const DoubleClick = preload("res://assets/global/scripts/double_click.gd")
@@ -7,12 +8,149 @@ const FrameSkiper = preload("res://assets/global/scripts/frame_skiper.gd")
 const Attack = preload("res://assets/global/scripts/attack.gd")
 const Weapon = preload("res://assets/weapons/scripts/weapon.gd")
 
-class Controller:
-	const Player = preload("res://assets/controllers/scripts/PlayerController.gd")
-	const Camera = preload("res://assets/controllers/scripts/Camera3D.gd")
-	const WeaponManager = preload("res://assets/weapons/scripts/weapon_manager.gd")
-	
+const ForceControlCharacterBody3D = preload("res://assets/global/scripts/force_control_character_body3d.gd")
 
-class Weapons:
-	const Rifle = preload("res://assets/weapons/rifle/rifle.gd")
-	const HolyFisher = preload("res://assets/weapons/holy_fisher/holy_fisher.gd")
+# Controller
+const Player = preload("res://assets/controllers/scripts/PlayerController.gd")
+const Camera = preload("res://assets/controllers/scripts/Camera3D.gd")
+const WeaponManager = preload("res://assets/weapons/scripts/weapon_manager.gd")
+
+# Weapons
+const Rifle = preload("res://assets/weapons/rifle/rifle.gd")
+const HolyFisher = preload("res://assets/weapons/holy_fisher/holy_fisher.gd")
+
+# Physics
+const FluidMechanics = preload("res://assets/systems/water_physics/scripts/fluid_mechanics.gd")
+const FluidMechanicsManager = preload("res://assets/systems/water_physics/scripts/fluid_mechanics_manager.gd")
+const WaterMesh = preload("res://assets/systems/water_physics/scripts/water_mesh.gd")
+
+# Route
+const Route = preload("res://assets/maps/map_blocks/scripts/route.gd")
+const RouteTerminal = preload("res://assets/maps/map_blocks/terminal/route_terminal.gd")
+
+const MarchingCubes = preload("res://assets/systems/marching_cubes/marching_cubes.gd")
+const ChunkManager = preload("res://assets/systems/chunk/chunk_manager.gd")
+
+# 常数
+class Viscositys:
+	const AIR: float = 0.0000178
+	const WATER: float = 0.001
+	const QUICKSILVER: float = 0.00155  
+
+const E: float = 2.718281828459045
+
+
+
+# ↓常用复用静态函数
+static func _pass(value): return value
+static func _true(value) -> bool: return true
+static func _nop(_arg = null): pass
+
+
+# 用于代替lerp在 _process 等中每帧调用平滑数据  4.6秒到达99%  x乘delta缩短x倍时间 __By 317GW 2024 8 31 半夜
+static func exponential_decay(from: float, to: float, delta: float) -> float:
+	var x0 = log(abs(to - from) )
+	return to - exp(x0 - delta) * sign(to - from)
+
+
+static func exponential_decay_vec2(from: Vector2, to: Vector2, delta: float) -> Vector2:
+	return Vector2(
+		exponential_decay(from.x, to.x, delta),
+		exponential_decay(from.y, to.y, delta)
+		)
+
+static func exponential_decay_vec3(from: Vector3, to: Vector3, delta: float) -> Vector3:
+	return Vector3(
+		exponential_decay(from.x, to.x, delta),
+		exponential_decay(from.y, to.y, delta),
+		exponential_decay(from.z, to.z, delta)
+		)
+
+
+static func sigmoid(value: float) -> float:
+	return 1 / (1 + pow(E, -value))
+
+
+#class GenerateLattice
+const LATTICE_VECTORS = [
+	Vector3(0, 0, 0),
+	Vector3(0.5, 0.5, 0),
+	Vector3(0.5, 0, 0.5),
+	Vector3(0, 0.5, 0.5)
+]
+# FCC晶格的四个基础向量  FCC lattice
+static func generate_FCC_lattice(_range: int = 2, process: Callable = _pass, condition: Callable = _true) -> PackedVector3Array:
+	var arr: PackedVector3Array
+	_range = max(_range, 1)
+	for x in range(_range):
+		for y in range(_range):
+			for z in range(_range):
+				for offset in LATTICE_VECTORS:
+					var point = Vector3(x + offset.x, y + offset.y, z + offset.z) # Vector3(x, y, z)
+					point = process.call(point)
+					if condition.call(point) and not arr.has(point):
+						arr.append(point)
+	return arr
+
+
+static func generate_cubic_lattice(_range: int = 2, process: Callable = _pass, condition: Callable = _true) -> PackedVector3Array:
+	var arr: PackedVector3Array
+	_range = max(_range, 1)
+	for x in range(_range):
+		for y in range(_range):
+			for z in range(_range):
+				var point = Vector3(x, y, z) # Vector3(x, y, z)
+				point = process.call(point)
+				if condition.call(point) and not arr.has(point):
+					arr.append(point)
+	return arr
+
+
+	#var _min_edge: float = min(_aabb.size.x, _aabb.size.y, _aabb.size.z)
+	#var _distance: float = voxel_point_distance * max(_min_edge*0.5, 1)  # 限制比例到0.5
+# 自适应立方晶格
+static func generate_adaption_cubic_lattice(_distance: float = 1.0, _aabb: AABB = AABB(), process: Callable = _pass, condition: Callable = _true) -> PackedVector3Array:
+	var _range := Vector3i(_aabb.size / _distance/2)
+	var rx := range(-_range.x, _range.x +1) if _range.x % 2 == 0 else range(-_range.x-1, _range.x+1)
+	var ry := range(-_range.y, _range.y +1) if _range.y % 2 == 0 else range(-_range.y-1, _range.y+1)
+	var rz := range(-_range.z, _range.z +1) if _range.z % 2 == 0 else range(-_range.z-1, _range.z+1)
+	
+	var offset = Vector3(
+		float(_range.x % 2 != 0),
+		float(_range.y % 2 != 0),
+		float(_range.z % 2 != 0)
+	)/2
+	
+	var arr: PackedVector3Array
+	for x in rx:
+		for y in ry:
+			for z in rz:
+				var point = (Vector3(x, y, z) + offset) * _distance
+				point = process.call(point)
+				if condition.call(point) and not arr.has(point):
+					arr.append(point)
+	return arr
+
+
+static func drag_force(Cd: float, density: float, velocity: Vector3, area: float) -> Vector3:
+	return 0.5 * Cd * density * area * velocity.normalized() * velocity.length()**2
+
+
+static func reynold(density: float, velocity: float, length: float, viscosity: float) -> float:
+	return density * velocity * length / viscosity
+
+
+# https://pages.mtu.edu/~fmorriso/DataCorrelationForSphereDrag2016.pdf
+# Use beyond Re=106 is not recommended; for Re<2 equation 1 follows the creeping-flow result (CD=24/Re). 
+static func sphere_Cd_by_reynold(reynold: float) -> float:  # Sphere_oooo
+	reynold = clampf(reynold, 0.01, 1e7)
+	if reynold < 2:
+		return 24/reynold
+	var Re5: float = reynold/5.0
+	var Re_105: float = reynold/2.63/1e5
+	var Re_106: float = reynold/1e6
+	var _a: float = 24 / reynold
+	var _b: float = 2.6*Re5 / (1 + Re5**1.52)
+	var _c: float = 0.411*Re_105**-7.94 / (1 + Re_105**-8)
+	var _d: float = 0.25*Re_106 / (1 + Re_106)
+	return _a+_b+_c+_d

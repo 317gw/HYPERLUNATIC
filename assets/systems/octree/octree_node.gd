@@ -119,7 +119,7 @@ static func _get_octant_index(position: Vector3, center: Vector3) -> int:
 ## Create child Nodes for this Octree Node, produces 8 octant child Nodes.
 func _create_octant_nodes() -> void:
 	var n_size = _half_size
-	var n_hsize = n_size * 0.5
+	#var n_hsize = n_size * 0.5
 #
 	for i in range(0, 8):
 		var n_center = _center

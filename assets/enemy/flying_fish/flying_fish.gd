@@ -1,7 +1,7 @@
-extends CharacterBody3D
+extends HL.ForceControlCharacterBody3D
 # https://github.com/kyrick/godot-boids
 
-@export var max_speed: float = 4.0 # 最大速度
+#@export var max_speed: float = 4.0 # 最大速度
 #@export var mouse_follow_force: = 0.05  # 鼠标跟随力
 
 @export var cohesion_force: float = 5 # 凝聚力
@@ -35,9 +35,8 @@ func _ready() -> void:
 	randomize()
 	thread_queue = ThreadQueue.new()
 
-	frame_skiper = HL.FrameSkiper.new()
+	frame_skiper = HL.FrameSkiper.new(30, 6)
 	self.add_child(frame_skiper)
-	frame_skiper.ready(30, 6)
 
 	_velocity = Vector3(randf_range( - 1, 1), randf_range( - 1, 1), randf_range( - 1, 1)).normalized() * max_speed
 	view_radius.shape.radius = view_distance
@@ -61,14 +60,16 @@ func _physics_process(_delta: float) -> void:
 		var align_vector = vectors[1] * algin_force
 		var separation_vector = vectors[2] * separation_force
 		
+		# 防止逃出范围
 		var self_to_center = activity_center - self.global_position
 		var to_activity_center_vector = Vector3.ZERO
 		var d = self_to_center.length() - activity_range
 		if d > 0:
 			to_activity_center_vector = self_to_center.normalized() * d# * 0.5
 		
-		var acceleration = cohesion_vector + align_vector + separation_vector + to_activity_center_vector
-		_velocity = (_velocity + acceleration).limit_length(max_speed)
+		var acc = [cohesion_vector, align_vector, separation_vector, to_activity_center_vector]
+		_velocity = calculate_velocity(_velocity, acc)
+		#(_velocity + acc).limit_length(max_speed)
 
 
 	if is_on_floor() and _velocity.y < 0:
@@ -87,9 +88,9 @@ func _physics_process(_delta: float) -> void:
 	animation_player.speed_scale = velocity.length() / max_speed # 移动速度管理动画速度
 
 
-func get_flock_status(flock: Array, self_pos: Vector3):
-	var center_vector := Vector3() # 中心向量
+func get_flock_status(flock: Array, self_pos: Vector3) -> Array[Vector3]:
 	var flock_center := Vector3() # 鸟群中心
+	var center_vector := Vector3() # 中心向量
 	var align_vector := Vector3() # 对齐向量
 	var avoid_vector := Vector3() # 避开向量
 	

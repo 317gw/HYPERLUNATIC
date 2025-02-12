@@ -4,34 +4,34 @@ extends Node
 # 抓取状态不能疾跑，会根据重量减速
 
 @export_group("Grab")
-@export var grab_power      :float = 8.0
-@export var rotation_power  :float = 0.1
-@export var throw_power     :float = 3
-@export var push_power      :float = 1
-@export var distance_power  :float = 0.25
-@export var distance_min    :float = 1
-@export var distance_max    :float = 4
+@export var grab_power      :float = 8.0  # 抓取力量
+@export var rotation_power  :float = 0.1  # 旋转力量
+@export var throw_power     :float = 10   # 投掷力量
+@export var push_power      :float = 1    # 推力量
+@export var distance_power  :float = 0.25 # 距离调整力量
+@export var distance_min    :float = 1    # 最小距离
+@export var distance_max    :float = 4    # 最大距离
 
-var hand_to_obj_dis: float
-var hand_to_obj_dir: float
-var hand_original_position: Vector3
-var picked_object :RigidBody3D
-var picked_up: bool = false
-var view_lock: bool = false
+var hand_to_obj_dis: float              # 手到物体的距离
+var hand_to_obj_dir: float              # 手到物体的方向
+var hand_original_position: Vector3     # 手的原始位置
+var picked_object :RigidBody3D          # 被抓取的物体
+var picked_up: bool = false             # 是否已经抓取
+var view_lock: bool = false             # 视角是否锁定
 
-@onready var player : HL.Controller.Player = $"../.."
-@onready var player_transform_marker: Marker3D = $"../../PlayerTransformMarker"
-@onready var camera_3d: HL.Controller.Camera = $"../Camera3D"
-@onready var hand :Marker3D = $Marker3D
+@onready var player : HL.Player = $"../.."                           # 玩家控制器
+@onready var player_transform_marker: Marker3D = $"../../PlayerTransformMarker" # 玩家变换标记
+@onready var camera_3d: HL.Camera = $"../Camera3D"                   # 摄像机
+@onready var hand :Marker3D = $Marker3D                                         # 手的标记
 
-@onready var interaction :RayCast3D = $Interaction
-@onready var joint :Generic6DOFJoint3D = $Joint
-@onready var staticbody :StaticBody3D = $GrabStaticBody
-@onready var righting_timer: Timer = $RightingTimer
+@onready var interaction :RayCast3D = $Interaction          # 交互射线
+@onready var joint :Generic6DOFJoint3D = $Joint             # 通用6自由度关节
+@onready var staticbody :StaticBody3D = $GrabStaticBody     # 静态物体
+@onready var righting_timer: Timer = $RightingTimer         # 校正定时器
 
 
 func _ready() -> void:
-	hand_original_position = hand.position
+	hand_original_position = hand.position  # 初始化手的原始位置
 
 
 func _unhandled_input(event) -> void:
@@ -64,11 +64,13 @@ func _physics_process(_delta):
 		picked_object.linear_velocity = (hand_position - picked_obj_position) * grab_power
 		hand_to_obj_dis = self.global_position.distance_to(picked_object.global_position)
 
-		player.acc_decelerate = picked_object.mass * 0.6 # 施加玩家减速   todo多个减速效果时添加减速列表功能
+		var _decelerate: float = remap(picked_object.mass, 0, 2000, 0, 0.5)
+		_decelerate = clampf(_decelerate, 0, 0.5)
+		player.decelerate_list.append(_decelerate) # 施加玩家减速
 
 
 func pick_object() -> void:
-	var collider
+	var collider: Node3D
 	if interaction.is_colliding():
 		collider = interaction.get_collider()
 	if collider != null and collider is RigidBody3D:
@@ -79,20 +81,23 @@ func pick_object() -> void:
 		# 过远吸过来 近距离只抬起
 		hand_to_obj_dis = self.global_position.distance_to(picked_object.global_position)
 		hand.position.z = -min(hand_to_obj_dis, abs(hand_original_position.z))
+		if collider.has_meta("be_picked_up"):
+			collider.set_meta("be_picked_up", true)
 
 
 func dropping_object() -> void:
 	# TODO 制作相关游戏机制 TODO
 	# ↓ 防止物体完全静止触发睡眠
 	picked_object.apply_central_impulse(Vector3.DOWN * 0.1)
+	
+	if picked_object.has_meta("be_picked_up"):
+		picked_object.set_meta("be_picked_up", false)
 
 	picked_object = null
 	joint.node_b = NodePath("")
 	picked_up = false
 	hand.position = hand_original_position
 	staticbody.rotation = Vector3.ZERO
-
-	player.acc_decelerate = 0
 
 
 func throwing_object() -> void:

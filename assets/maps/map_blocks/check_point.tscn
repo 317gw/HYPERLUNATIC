@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnucec4uq6taa"]
+
+[ext_resource type="Script" uid="uid://c7uwmymvekynt" path="res://assets/maps/map_blocks/scripts/check_point.gd" id="1_kiyw5"]
+[ext_resource type="Shader" uid="uid://dlfdo6rm7201o" path="res://assets/arts_graphic/shaders/check_point.gdshader" id="2_v3le7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_34ka2"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xmmfv"]
+width = 64
+height = 64
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_34ka2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4cc1t"]
+render_priority = 0
+shader = ExtResource("2_v3le7")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_xmmfv")
+shader_parameter/noise_speed = 0.1
+shader_parameter/noise_range = 0.3
+shader_parameter/color = Color(1, 0.75, 0, 1)
+shader_parameter/round_scale = 10.75
+shader_parameter/uv_scale = Vector2(1, 1.5)
+shader_parameter/uv_offset = Vector2(0, 0.025)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kyuf3"]
+top_radius = 1.2
+bottom_radius = 1.2
+radial_segments = 16
+rings = 8
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kiyw5"]
+radius = 1.2
+
+[node name="CheckPoint" type="Area3D"]
+collision_layer = 0
+script = ExtResource("1_kiyw5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("ShaderMaterial_4cc1t")
+mesh = SubResource("CylinderMesh_kyuf3")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_kiyw5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

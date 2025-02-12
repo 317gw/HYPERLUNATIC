@@ -5,11 +5,11 @@ var player_pos_temp: Vector3
 var player_target_pos: Vector3
 var climb_target_pos: Vector3
 var target_normal: Vector3
-var is_climb_jump: bool = false
 
-@onready var PLAYER: HL.Controller.Player = $"../.."
+@onready var PLAYER: HL.Player = $"../.."
 @onready var climb: Climb = $"../../Climb"
 @onready var climb_timer: Timer = $"../../Timers/ClimbTimer"
+@onready var jump: PlayerJump = $"../Jump"
 
 
 func Enter() -> void:
@@ -53,6 +53,7 @@ func Physics_Update(_delta: float) -> void:
 		#climb.global_position = climb.climb_object.global_position + climb.climb_object_to_rays
 	if not climb.edge_cast.is_colliding() and not climb.hit_down_to_floor and not climb.hit_wall:
 		Transitioned.emit(self, "Fall")
+		return
 
 	target_normal = target_normal.lerp(climb.wall_ray.get_collision_normal(), 0.1)
 	climb.align_z_with_normal(target_normal, true)
@@ -73,9 +74,9 @@ func Physics_Update(_delta: float) -> void:
 		#dot = PLAYER.velocity.normalized().dot(climb.wall_ray.get_collision_normal())
 	#dot = dot ** 3
 	#dot = smoothstep(0, -1, dot)
-	#PLAYER.vel2d *= (1 - abs(dot))
+	#PLAYER.vel_hor *= (1 - abs(dot))
 
-	PLAYER.vel2d = PLAYER.vel2d.normalized() * clamp(PLAYER.vel2d.length(), 0.0, PLAYER.speed_normal)
+	PLAYER.vel_hor = PLAYER.vel_hor.limit_length(PLAYER.speed_normal)
 	PLAYER.apply_velocity(false)
 
 
@@ -104,8 +105,12 @@ func Physics_Update(_delta: float) -> void:
 func Handle_Input(_event: InputEvent) -> void:
 	if _event.is_action_pressed("free_view_mode"):
 		Transitioned.emit(self, "FreeViewMode")
-	if _event.is_action_pressed("jump") or _event.is_action_pressed("mouse_wheel_jump"):
-		is_climb_jump = true
+		return
+	if _event.is_action_pressed("jump") or PLAYER.can_wheel_jump():
+		jump.is_wheel_jump = true
+		PLAYER.calculate_jump(PLAYER.mouse_wheel_jump_height, PLAYER.mouse_wheel_jump_time)
 		Transitioned.emit(self, "Jump")
+		return
 	if _event.is_action_pressed("slow"):
 		Transitioned.emit(self, "Fall")
+		return

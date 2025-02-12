@@ -1,14 +1,12 @@
 [gd_scene load_steps=52 format=3 uid="uid://bdka0m7dypt7t"]
 
-[ext_resource type="PackedScene" uid="uid://dxeeplslbn0xc" path="res://assets/systems/water_physics/water_physics_adder.tscn" id="1_ifj8q"]
-[ext_resource type="Shader" path="res://assets/shaders/other_author/grid.gdshader" id="2_iy06u"]
-[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="3_g6fev"]
-[ext_resource type="PackedScene" uid="uid://ca0wevg1lb4rx" path="res://assets/maps/map_blocks/WaterMaker3D/WaterMaker3D.tscn" id="4_yvlnf"]
-[ext_resource type="Shader" path="res://assets/shaders/waters/water3d202409.gdshader" id="5_rxyyn"]
-[ext_resource type="Texture2D" uid="uid://c17swbjodnlcl" path="res://assets/textures/water/spume_normal_512.png" id="6_hnudy"]
-[ext_resource type="Texture2D" uid="uid://dmsyagyieahoy" path="res://assets/textures/water/Ocean_normal_512.png" id="7_1gmxb"]
-[ext_resource type="Texture2D" uid="uid://bye687yl2sesr" path="res://assets/textures/water/spume_mask_512.png" id="8_y4uwr"]
-[ext_resource type="PackedScene" uid="uid://bf1u7xjslyhmy" path="res://assets/special_effects/soap_bubble.tscn" id="9_04oo4"]
+[ext_resource type="Shader" uid="uid://cnh5arjt2hia4" path="res://assets/arts_graphic/shaders/other_author/grid.gdshader" id="2_iy06u"]
+[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/arts_graphic/textures/grid2.png" id="3_g6fev"]
+[ext_resource type="PackedScene" uid="uid://dsk5sq4ihcw7r" path="res://assets/maps/map_blocks/water/water_mesh_3d.tscn" id="4_wh6y3"]
+[ext_resource type="Shader" uid="uid://cnhxxxmoqfip4" path="res://assets/arts_graphic/shaders/waters/water3d202409.gdshader" id="5_rxyyn"]
+[ext_resource type="Texture2D" uid="uid://c17swbjodnlcl" path="res://assets/arts_graphic/textures/water/spume_normal_512.png" id="6_hnudy"]
+[ext_resource type="Texture2D" uid="uid://dmsyagyieahoy" path="res://assets/arts_graphic/textures/water/Ocean_normal_512.png" id="7_1gmxb"]
+[ext_resource type="Texture2D" uid="uid://bye687yl2sesr" path="res://assets/arts_graphic/textures/water/spume_mask_512.png" id="8_y4uwr"]
 [ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://assets/maps/map_blocks/CSGStair.tscn" id="10_nbqy2"]
 [ext_resource type="PackedScene" uid="uid://bw7bpxiao2prn" path="res://assets/maps/map_blocks/dynamite_barrel.tscn" id="11_0n463"]
 
@@ -24,50 +22,16 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
 shader_parameter/texture_albedo = ExtResource("3_g6fev")
 shader_parameter/texture_roughness = ExtResource("3_g6fev")
 
 [sub_resource type="BoxOccluder3D" id="BoxOccluder3D_kjtr1"]
 size = Vector3(30, 0.5, 18)
 
-[sub_resource type="BoxMesh" id="BoxMesh_4su60"]
-resource_local_to_scene = true
-size = Vector3(10, 1, 10)
-subdivide_width = 10
-subdivide_depth = 10
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xnk6"]
-resource_local_to_scene = true
-frequency = 0.005
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_prx7q"]
-resource_local_to_scene = true
-seamless = true
-as_normal_map = true
-noise = SubResource("FastNoiseLite_0xnk6")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd4r8"]
-resource_local_to_scene = true
-transparency = 1
-cull_mode = 2
-depth_draw_mode = 1
-albedo_color = Color(0.309804, 0.541176, 0.866667, 0.388235)
-roughness = 0.0
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_prx7q")
-refraction_enabled = true
-refraction_texture = SubResource("NoiseTexture2D_prx7q")
-uv1_scale = Vector3(0.04, 0.04, 0.04)
-uv1_triplanar = true
-uv1_world_triplanar = true
-texture_filter = 4
-
-[sub_resource type="BoxMesh" id="BoxMesh_16jpx"]
-size = Vector3(20, 27, 20)
-subdivide_width = 100
-subdivide_height = 100
-subdivide_depth = 100
+[sub_resource type="BoxMesh" id="BoxMesh_2w1di"]
+size = Vector3(20, 27, 40)
+subdivide_width = 50
+subdivide_depth = 50
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_k6yyt"]
 frequency = 0.03
@@ -76,19 +40,11 @@ frequency = 0.03
 seamless = true
 noise = SubResource("FastNoiseLite_k6yyt")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_3wsdx"]
-frequency = 0.0011
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_skxl6"]
-width = 64
-height = 64
-seamless = true
-seamless_blend_skirt = 1.0
-noise = SubResource("FastNoiseLite_3wsdx")
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_h8wdc"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fewrn"]
+width = 256
+height = 256
 seamless = true
 noise = SubResource("FastNoiseLite_h8wdc")
 
@@ -101,34 +57,91 @@ fractal_type = 2
 seamless = true
 noise = SubResource("FastNoiseLite_ah3vf")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_01miy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtrbo"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_rxyyn")
 shader_parameter/color_surface = Color(0.2, 1, 1, 1)
 shader_parameter/color_shallow = Color(0.5, 0.916667, 1, 1)
 shader_parameter/color_deep = Color(0.27, 0.585, 0.9, 1)
-shader_parameter/roughness = 0.04
-shader_parameter/specular = 0.4
-shader_parameter/refraction = 0.3
-shader_parameter/refraction_lod = 2.5
+shader_parameter/roughness = 0.1
+shader_parameter/specular = 0.7
+shader_parameter/refraction = 0.5
+shader_parameter/refraction_lod = 0.5
 shader_parameter/refraction_texture_channel = Vector4(0.01, 0.01, 0.01, 0.01)
 shader_parameter/texture_refraction = SubResource("NoiseTexture2D_fewrn")
-shader_parameter/normal_scale = 0.5
-shader_parameter/normal_uv_scale = 0.3
+shader_parameter/normal_scale = 0.6
+shader_parameter/normal_uv_scale = 0.4
 shader_parameter/normal_noise_scale = 1.0
 shader_parameter/normal_noise_lod = 4.0
 shader_parameter/normal_noise_angle = 3.14159
 shader_parameter/texture_normal = ExtResource("7_1gmxb")
-shader_parameter/texture_normal_noise1 = SubResource("NoiseTexture2D_skxl6")
-shader_parameter/texture_normal_noise2 = SubResource("NoiseTexture2D_skxl6")
 shader_parameter/uv1_scale = Vector3(0.1, 0.1, 0.1)
 shader_parameter/uv2_scale = Vector3(0.01, 0.01, 0.01)
 shader_parameter/uv1_speed = Vector3(0.01, 0.01, 0.01)
 shader_parameter/uv2_speed = Vector3(0.002, 0.005, 0.01)
 shader_parameter/wave_speed = 0.01
 shader_parameter/wave_noise_scale = 30.0
-shader_parameter/wave_height_scale = 0.1
+shader_parameter/wave_height_scale = 0.5
+shader_parameter/wave = SubResource("NoiseTexture2D_4w8fl")
+shader_parameter/surface_beers_law = 0.4
+shader_parameter/surface_depth_offset = -0.75
+shader_parameter/beers_law = 0.4
+shader_parameter/depth_offset = -1.5
+shader_parameter/surface_scale = 0.0
+shader_parameter/depth_multi = 6.0
+shader_parameter/depth_blend_powor = 0.5
+shader_parameter/depth_lod = 1.0
+shader_parameter/depth_color_add = 0.2
+shader_parameter/depth_color_mix = 0.2
+shader_parameter/spume_color = Color(1, 1, 1, 1)
+shader_parameter/spume_scale = 1.0
+shader_parameter/spume_uv_scale = Vector3(0.25, 0.25, 0.25)
+shader_parameter/spume_uv_speed = Vector3(0.01, 0.01, 0.01)
+shader_parameter/spume_lod = 6.0
+shader_parameter/spume_fade_lod_min = 5.0
+shader_parameter/spume_fade_lod_max = 200.0
+shader_parameter/spume_ues_depth = false
+shader_parameter/texture_edge_noise = SubResource("NoiseTexture2D_uowjy")
+shader_parameter/texture_spume = ExtResource("8_y4uwr")
+shader_parameter/normal_spume = ExtResource("6_hnudy")
+shader_parameter/distance_fade_min = 2000.0
+shader_parameter/distance_fade_max = 3000.0
+shader_parameter/ues_near_fade = false
+shader_parameter/near_fade_min = 0.2
+shader_parameter/near_fade_max = 0.22
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6jcys"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jcys"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_rxyyn")
+shader_parameter/color_surface = Color(0.2, 1, 1, 1)
+shader_parameter/color_shallow = Color(0.5, 0.916667, 1, 1)
+shader_parameter/color_deep = Color(0.27, 0.585, 0.9, 1)
+shader_parameter/roughness = 0.1
+shader_parameter/specular = 0.8
+shader_parameter/refraction = 0.3
+shader_parameter/refraction_lod = 2.5
+shader_parameter/refraction_texture_channel = Vector4(0.01, 0.01, 0.01, 0.01)
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_fewrn")
+shader_parameter/normal_scale = 0.6
+shader_parameter/normal_uv_scale = 0.4
+shader_parameter/normal_noise_scale = 1.0
+shader_parameter/normal_noise_lod = 4.0
+shader_parameter/normal_noise_angle = 3.14159
+shader_parameter/texture_normal = ExtResource("7_1gmxb")
+shader_parameter/uv1_scale = Vector3(0.1, 0.1, 0.1)
+shader_parameter/uv2_scale = Vector3(0.01, 0.01, 0.01)
+shader_parameter/uv1_speed = Vector3(0.01, 0.01, 0.01)
+shader_parameter/uv2_speed = Vector3(0.002, 0.005, 0.01)
+shader_parameter/wave_speed = 0.01
+shader_parameter/wave_noise_scale = 30.0
+shader_parameter/wave_height_scale = 0.5
 shader_parameter/wave = SubResource("NoiseTexture2D_4w8fl")
 shader_parameter/surface_beers_law = 0.4
 shader_parameter/surface_depth_offset = -0.75
@@ -157,38 +170,36 @@ shader_parameter/ues_near_fade = false
 shader_parameter/near_fade_min = 0.2
 shader_parameter/near_fade_max = 0.22
 
-[sub_resource type="TorusMesh" id="TorusMesh_ci80q"]
-inner_radius = 3.0
-outer_radius = 5.0
-rings = 32
-ring_segments = 16
+[sub_resource type="TorusMesh" id="TorusMesh_wh6y3"]
+inner_radius = 2.0
+outer_radius = 4.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycqhb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wh6y3"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_rxyyn")
 shader_parameter/color_surface = Color(0.2, 1, 1, 1)
 shader_parameter/color_shallow = Color(0.5, 0.916667, 1, 1)
 shader_parameter/color_deep = Color(0.27, 0.585, 0.9, 1)
-shader_parameter/roughness = 0.04
-shader_parameter/specular = 0.4
+shader_parameter/roughness = 0.1
+shader_parameter/specular = 0.8
 shader_parameter/refraction = 0.3
 shader_parameter/refraction_lod = 2.5
 shader_parameter/refraction_texture_channel = Vector4(0.01, 0.01, 0.01, 0.01)
 shader_parameter/texture_refraction = SubResource("NoiseTexture2D_fewrn")
-shader_parameter/normal_scale = 0.600001
-shader_parameter/normal_uv_scale = null
+shader_parameter/normal_scale = 0.6
+shader_parameter/normal_uv_scale = 0.4
 shader_parameter/normal_noise_scale = 1.0
 shader_parameter/normal_noise_lod = 4.0
 shader_parameter/normal_noise_angle = 3.14159
 shader_parameter/texture_normal = ExtResource("7_1gmxb")
 shader_parameter/uv1_scale = Vector3(0.1, 0.1, 0.1)
 shader_parameter/uv2_scale = Vector3(0.01, 0.01, 0.01)
-shader_parameter/uv1_speed = Vector3(0.005, 0.005, 0.005)
-shader_parameter/uv2_speed = Vector3(0.001, 0.004, 0.007)
+shader_parameter/uv1_speed = Vector3(0.01, 0.01, 0.01)
+shader_parameter/uv2_speed = Vector3(0.002, 0.005, 0.01)
 shader_parameter/wave_speed = 0.01
-shader_parameter/wave_noise_scale = 20.0
-shader_parameter/wave_height_scale = 1.0
+shader_parameter/wave_noise_scale = 30.0
+shader_parameter/wave_height_scale = 0.5
 shader_parameter/wave = SubResource("NoiseTexture2D_4w8fl")
 shader_parameter/surface_beers_law = 0.4
 shader_parameter/surface_depth_offset = -0.75
@@ -204,10 +215,69 @@ shader_parameter/spume_color = Color(1, 1, 1, 1)
 shader_parameter/spume_scale = 0.6
 shader_parameter/spume_uv_scale = Vector3(0.25, 0.25, 0.25)
 shader_parameter/spume_uv_speed = Vector3(0.01, 0.01, 0.01)
-shader_parameter/spume_lod = 0.0
+shader_parameter/spume_lod = 6.0
 shader_parameter/spume_fade_lod_min = 5.0
 shader_parameter/spume_fade_lod_max = 200.0
-shader_parameter/spume_ues_depth = true
+shader_parameter/spume_ues_depth = false
+shader_parameter/texture_edge_noise = SubResource("NoiseTexture2D_uowjy")
+shader_parameter/texture_spume = ExtResource("8_y4uwr")
+shader_parameter/normal_spume = ExtResource("6_hnudy")
+shader_parameter/distance_fade_min = 2000.0
+shader_parameter/distance_fade_max = 3000.0
+shader_parameter/ues_near_fade = false
+shader_parameter/near_fade_min = 0.2
+shader_parameter/near_fade_max = 0.22
+
+[sub_resource type="BoxMesh" id="BoxMesh_xkrn3"]
+size = Vector3(20, 10, 20)
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkrn3"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_rxyyn")
+shader_parameter/color_surface = Color(0.2, 1, 1, 1)
+shader_parameter/color_shallow = Color(0.5, 0.916667, 1, 1)
+shader_parameter/color_deep = Color(0.27, 0.585, 0.9, 1)
+shader_parameter/roughness = 0.1
+shader_parameter/specular = 0.7
+shader_parameter/refraction = 0.5
+shader_parameter/refraction_lod = 0.5
+shader_parameter/refraction_texture_channel = Vector4(0.01, 0.01, 0.01, 0.01)
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_fewrn")
+shader_parameter/normal_scale = 0.6
+shader_parameter/normal_uv_scale = 0.4
+shader_parameter/normal_noise_scale = 1.0
+shader_parameter/normal_noise_lod = 4.0
+shader_parameter/normal_noise_angle = 3.14159
+shader_parameter/texture_normal = ExtResource("7_1gmxb")
+shader_parameter/uv1_scale = Vector3(0.1, 0.1, 0.1)
+shader_parameter/uv2_scale = Vector3(0.01, 0.01, 0.01)
+shader_parameter/uv1_speed = Vector3(0.01, 0.01, 0.01)
+shader_parameter/uv2_speed = Vector3(0.002, 0.005, 0.01)
+shader_parameter/wave_speed = 0.01
+shader_parameter/wave_noise_scale = 30.0
+shader_parameter/wave_height_scale = 0.5
+shader_parameter/wave = SubResource("NoiseTexture2D_4w8fl")
+shader_parameter/surface_beers_law = 0.4
+shader_parameter/surface_depth_offset = -0.75
+shader_parameter/beers_law = 0.4
+shader_parameter/depth_offset = -1.5
+shader_parameter/surface_scale = 0.0
+shader_parameter/depth_multi = 6.0
+shader_parameter/depth_blend_powor = 0.5
+shader_parameter/depth_lod = 1.0
+shader_parameter/depth_color_add = 0.2
+shader_parameter/depth_color_mix = 0.2
+shader_parameter/spume_color = Color(1, 1, 1, 1)
+shader_parameter/spume_scale = 1.0
+shader_parameter/spume_uv_scale = Vector3(0.25, 0.25, 0.25)
+shader_parameter/spume_uv_speed = Vector3(0.01, 0.01, 0.01)
+shader_parameter/spume_lod = 6.0
+shader_parameter/spume_fade_lod_min = 5.0
+shader_parameter/spume_fade_lod_max = 200.0
+shader_parameter/spume_ues_depth = false
 shader_parameter/texture_edge_noise = SubResource("NoiseTexture2D_uowjy")
 shader_parameter/texture_spume = ExtResource("8_y4uwr")
 shader_parameter/normal_spume = ExtResource("6_hnudy")
@@ -233,7 +303,6 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/scale = 0.01
 shader_parameter/texture_albedo = ExtResource("3_g6fev")
 shader_parameter/texture_roughness = ExtResource("3_g6fev")
 
@@ -245,15 +314,16 @@ radial_segments = 16
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_clm57"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_nka2l"]
-top_radius = 0.0
-radial_segments = 4
-rings = 0
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bb7ar"]
-points = PackedVector3Array(-0.5, -1, 0, 0, -1, -0.5, 0, -1, 0.5, -0.400059, -0.600039, 0, 0, -0.600039, -0.400059, 0.5, -1, 0, 0, 1, 0, -0.200078, 0.199883, 0, 0, 0.199883, -0.200078)
-
 [sub_resource type="SphereMesh" id="SphereMesh_a3jkn"]
+radius = 0.62
+height = 1.241
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_psbl8"]
+radius = 0.62
+
+[sub_resource type="SphereMesh" id="SphereMesh_y8scb"]
+radial_segments = 16
+rings = 8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_w8yk3"]
 
@@ -275,11 +345,22 @@ points = PackedVector3Array(-0.261851, -0.0125972, 1.16589, -1.17031, -0.117894,
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_la41i"]
 points = PackedVector3Array(-0.571458, 0.0999776, 0, -0.261851, -0.0125972, -1.16589, -0.263357, 0.0220459, -1.16348, -1.16589, -0.0125972, -0.261851, 0, -0.319048, -0.79997, 0, 0.328571, -0.838036, -0.981225, -0.282523, -0.0687519, -1.0269, 0.265619, -0.0530217, -0.768936, 0.212024, -0.800799, -0.737726, -0.20356, -0.833702, -0.647589, -0.24285, 0, 0, -0.0904538, -0.571458, -0.838036, 0.328571, 0, -0.0487336, -0.117894, -1.17031, -0.443702, -0.277179, -0.908024, -0.0656865, 0.225689, -1.08533, -0.773497, 0.0211361, -0.904696, 0, 0.176176, -0.609524, -1.17032, -0.117895, -0.0487292, -0.79997, -0.319048, 0, -0.67519, 0.28406, -0.70792, -1.00228, -0.207973, -0.478606, -1.03424, 0.1191, -0.54423, -0.444605, 0.219183, -1.00539, -0.839042, -0.274157, -0.576735, -0.970986, -0.0773868, -0.675207, -0.723601, 0.290472, 0, -0.543535, -0.110792, -1.03876, -1.17732, 0.0934594, -0.0417266, -1.00539, 0.219183, -0.444605, -0.201165, -0.216426, -1.08589, 0, -0.24285, -0.647589)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ifv30"]
-size = Vector3(2, 0.2, 3)
+[sub_resource type="TorusMesh" id="TorusMesh_c8mrg"]
+inner_radius = 0.7
+outer_radius = 1.4
+rings = 16
+ring_segments = 8
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pt3k3"]
-points = PackedVector3Array(1, 0.1, 1.5, 1, -0.1, 1.5, 1, 0.1, -1.5, -1, 0.1, 1.5, -1, -0.1, 1.5, 1, -0.1, -1.5, -1, 0.1, -1.5, -1, -0.1, -1.5)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xkrn3"]
+points = PackedVector3Array(-0.000274062, -6.85155e-05, -1.4, -0.000274062, 0.247426, -1.29749, 0.535552, -6.85155e-05, -1.29366, -0.000274062, -0.247494, -1.29749, -0.535826, -6.85155e-05, -1.29366, -0.000274062, 0.349932, -1.05, 0.401801, 0.349932, -0.970243, 0.496359, 0.247426, -1.19883, -0.496633, 0.247426, -1.19883, -0.402075, 0.349932, -0.970243, 0.917345, 0.247426, -0.917619, 0.989703, -6.85155e-05, -0.989976, 0.917345, -0.247494, -0.917619, 0.496359, -0.247494, -1.19883, 0.401801, -0.35, -0.970243, -0.000274062, -0.35, -1.05, -0.402075, -0.35, -0.970243, -0.496633, -0.247494, -1.19883, -0.917619, -0.247494, -0.917619, -0.989976, -6.85155e-05, -0.989976, -0.917619, 0.247426, -0.917619, 0.742208, 0.349932, -0.742482, -0.742482, 0.349932, -0.742482, 0.969969, 0.349932, -0.402075, 1.19855, 0.247426, -0.496633, 1.29338, -6.85155e-05, -0.535826, 0.742208, -0.35, -0.742482, 1.19855, -0.247494, -0.496633, 0.969969, -0.35, -0.402075, -0.742482, -0.35, -0.742482, -0.970243, -0.35, -0.402075, -1.19883, -0.247494, -0.496633, -1.29366, -6.85155e-05, -0.535826, -1.19883, 0.247426, -0.496633, -0.970243, 0.349932, -0.402075, 1.04973, 0.349932, -0.000274062, 1.29722, 0.247426, -0.000274062, 1.39973, -6.85155e-05, -0.000274062, 1.29722, -0.247494, -0.000274062, 1.04973, -0.35, -0.000274062, -1.05, -0.35, -0.000274062, -1.29749, -0.247494, -0.000274062, -1.29749, 0.247426, -0.000274062, -1.4, -6.85155e-05, 0, -1.05, 0.349932, -0.000274062, 0.969969, 0.349932, 0.401801, 1.19855, 0.247426, 0.496359, 1.29338, -6.85155e-05, 0.535552, 1.19855, -0.247494, 0.496359, 0.969969, -0.35, 0.401801, -0.970243, -0.35, 0.401801, -1.19883, -0.247494, 0.496359, -1.29366, -6.85155e-05, 0.535552, -1.19883, 0.247426, 0.496359, -0.970243, 0.349932, 0.401801, 0.917345, 0.247426, 0.917345, 0.742208, 0.349932, 0.742208, 0.989703, -6.85155e-05, 0.989703, 0.917345, -0.247494, 0.917345, 0.742208, -0.35, 0.742208, -0.742482, -0.35, 0.742208, -0.917619, -0.247494, 0.917345, -0.989976, -6.85155e-05, 0.989703, -0.917619, 0.247426, 0.917345, -0.742482, 0.349932, 0.742208, 0.401801, 0.349932, 0.969969, 0.496359, 0.247426, 1.19855, 0.535552, -6.85155e-05, 1.29338, 0.496359, -0.247494, 1.19855, 0.401801, -0.35, 0.969969, -0.402075, -0.35, 0.969969, -0.496633, -0.247494, 1.19855, -0.535826, -6.85155e-05, 1.29338, -0.496633, 0.247426, 1.19855, -0.402075, 0.349932, 0.969969, 0, 0.349932, 1.04973, 0, 0.247426, 1.29722, 0, -6.85155e-05, 1.39973, 0, -0.247494, 1.29722, 0, -0.35, 1.04973)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nka2l"]
+top_radius = 0.0
+radial_segments = 4
+rings = 0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bb7ar"]
+points = PackedVector3Array(-0.5, -1, 0, 0, -1, -0.5, 0, -1, 0.5, -0.400059, -0.600039, 0, 0, -0.600039, -0.400059, 0.5, -1, 0, 0, 1, 0, -0.200078, 0.199883, 0, 0, 0.199883, -0.200078)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ecah3"]
 top_radius = 0.0
@@ -291,32 +372,41 @@ rings = 0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hpyph"]
 points = PackedVector3Array(-0.951056, -1.5, 0.308869, -0.587801, -1.5, -0.809017, -0.000186086, -1.5, 1, -0.000186086, 1.5, -0.000130057, 0.587615, -1.5, -0.809017, 0.95087, -1.5, 0.308869)
 
-[sub_resource type="SphereMesh" id="SphereMesh_y8scb"]
-radial_segments = 16
-rings = 8
+[sub_resource type="BoxMesh" id="BoxMesh_ifv30"]
+size = Vector3(2, 0.2, 3)
 
-[sub_resource type="TorusMesh" id="TorusMesh_c8mrg"]
-inner_radius = 0.6
-outer_radius = 1.2
-rings = 16
-ring_segments = 8
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_psbl8"]
+points = PackedVector3Array(1, 0.1, 1.5, 1, -0.1, 1.5, 1, 0.1, -1.5, -1, 0.1, 1.5, -1, -0.1, 1.5, 1, -0.1, -1.5, -1, 0.1, -1.5, -1, -0.1, -1.5)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xkrn3"]
+radial_segments = 16
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_psbl8"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wb0nf"]
 radius = 2.0
 height = 8.0
 radial_segments = 16
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fjfk6"]
-points = PackedVector3Array(-2, -2, 0, -1.84808, -2, -0.765466, -1.96985, -2.34769, 0, -1.84808, -2, 0.765074, -2, 2, 0, -1.41425, -2, -1.41425, -1.39311, -2.34769, -1.39311, -1.81989, -2.34769, -0.754111, -1.84808, 2, -0.765466, -1.81989, -2.34769, 0.75372, -1.73649, -2.68442, -0.719264, -1.8794, -2.68442, 0, -1.73649, -2.68442, 0.718872, -1.39311, -2.34769, 1.39272, -1.41425, -2, 1.41386, -1.84808, 2, 0.765074, -1.96985, 2.34691, 0, -0.765466, -2, -1.84808, -1.41425, 2, -1.41425, -0.754111, -2.34769, -1.81989, -1.32929, -2.68442, -1.32929, -1.81989, 2.34691, -0.754111, -1.39311, 2.34691, -1.39311, -1.32929, -2.68442, 1.3289, -1.60023, -3, -0.662882, -1.73218, -3, 0, -1.60023, -3, 0.66249, -0.754111, -2.34769, 1.8195, -0.765466, -2, 1.84769, -1.41425, 2, 1.41386, -1.39311, 2.34691, 1.39272, -1.81989, 2.34691, 0.75372, -1.73649, 2.68363, 0.718872, -1.8794, 2.68363, 0, -1.73649, 2.68363, -0.719264, 0, -2, -2, 0, -2.34769, -1.96985, -0.765466, 2, -1.84808, -0.719264, -2.68442, -1.73649, -0.662882, -3, -1.60023, -1.22475, -3, -1.22475, -1.32929, 2.68363, -1.32929, -0.754111, 2.34691, -1.81989, -0.719264, -2.68442, 1.7361, -1.22475, -3, 1.22435, -0.662882, -3, 1.59984, -1.41582, -3.28583, -0.586531, -1.53211, -3.28583, 0, -1.41582, -3.28583, 0.586139, 0, -2.34769, 1.96946, 0, -2, 2, -0.765466, 2, 1.84769, -0.754111, 2.34691, 1.8195, -1.32929, 2.68363, 1.3289, -1.60023, 3, 0.66249, -1.73218, 3, 0, -1.60023, 3, -0.662882, 0.765074, -2, -1.84808, 0, 2, -2, 0.75372, -2.34769, -1.81989, 0.718872, -2.68442, -1.73649, 0, -2.68442, -1.8794, 0, 2.34691, -1.96985, 0, -3, -1.73218, -0.586531, -3.28583, -1.41582, -1.0834, -3.28583, -1.0834, -1.22475, 3, -1.22475, -0.662882, 3, -1.60023, -0.719264, 2.68363, -1.73649, 0, -3, 1.73179, 0, -2.68442, 1.87901, -1.0834, -3.28583, 1.08301, -0.586531, -3.28583, 1.41543, -0.909162, -3.5325, -0.909162, -1.18794, -3.5325, -0.492169, -1.28583, -3.5325, 0, -1.18794, -3.5325, 0.491778, -0.909162, -3.5325, 0.908771, 0.718872, -2.68442, 1.7361, 0.75372, -2.34769, 1.8195, 0.765074, -2, 1.84769, 0, 2, 2, 0, 2.34691, 1.96946, -0.719264, 2.68363, 1.7361, -0.662882, 3, 1.59984, -1.22475, 3, 1.22435, -1.41582, 3.28504, 0.586139, -1.53211, 3.28504, 0, -1.41582, 3.28504, -0.586531, 1.41386, -2, -1.41425, 1.39272, -2.34769, -1.39311, 0.765074, 2, -1.84808, 1.3289, -2.68442, -1.32929, 0.66249, -3, -1.60023, 0, 2.68363, -1.8794, 0.718872, 2.68363, -1.73649, 0.75372, 2.34691, -1.81989, 0.586139, -3.28583, -1.41582, 0, -3.28583, -1.53211, 0, -3.5325, -1.28583, -0.492169, -3.5325, -1.18794, -1.0834, 3.28504, -1.0834, -0.586531, 3.28504, -1.41582, 0, 3, -1.73218, 0.66249, -3, 1.59984, 0, -3.28583, 1.53171, 0.586139, -3.28583, 1.41543, -0.492169, -3.5325, 1.18755, 0, -3.5325, 1.28543, -0.382929, -3.73218, -0.924041, -0.707126, -3.73218, -0.707126, -0.924041, -3.73218, -0.382929, -1, -3.73218, 0, -0.924041, -3.73218, 0.382537, -0.707126, -3.73218, 0.706734, -0.382929, -3.73218, 0.923649, 1.3289, -2.68442, 1.3289, 1.39272, -2.34769, 1.39272, 1.41386, -2, 1.41386, 0.765074, 2, 1.84769, 0.75372, 2.34691, 1.8195, 0.718872, 2.68363, 1.7361, 0, 2.68363, 1.87901, 0, 3, 1.73179, -0.586531, 3.28504, 1.41543, -1.0834, 3.28504, 1.08301, -0.909162, 3.53171, 0.908771, -1.18794, 3.53171, 0.491778, -1.28583, 3.53171, 0, -1.18794, 3.53171, -0.492169, -0.909162, 3.53171, -0.909162, 1.84769, -2, -0.765466, 1.41386, 2, -1.41425, 1.8195, -2.34769, -0.754111, 1.39272, 2.34691, -1.39311, 1.7361, -2.68442, -0.719264, 1.59984, -3, -0.662882, 1.22435, -3, -1.22475, 0.66249, 3, -1.60023, 1.3289, 2.68363, -1.32929, 1.08301, -3.28583, -1.0834, 0.908771, -3.5325, -0.909162, 0.491778, -3.5325, -1.18794, 0.382537, -3.73218, -0.924041, 0, -3.73218, -1, -0.492169, 3.53171, -1.18794, 0, 3.53171, -1.28583, 0, 3.28504, -1.53211, 0.586139, 3.28504, -1.41582, 1.22435, -3, 1.22435, 1.08301, -3.28583, 1.08301, 0.491778, -3.5325, 1.18755, 0.908771, -3.5325, 0.908771, 0, -3.73218, 0.999609, 0.382537, -3.73218, 0.923649, 0, -3.8794, -0.684417, -0.261942, -3.8794, -0.632341, -0.483947, -3.8794, -0.483947, -0.632341, -3.8794, -0.261942, -0.684417, -3.8794, 0, -0.632341, -3.8794, 0.26155, -0.483947, -3.8794, 0.483555, -0.261942, -3.8794, 0.63195, 0, -3.8794, 0.684025, 1.59984, -3, 0.66249, 1.7361, -2.68442, 0.718872, 1.8195, -2.34769, 0.75372, 1.84769, -2, 0.765074, 1.41386, 2, 1.41386, 1.39272, 2.34691, 1.39272, 1.3289, 2.68363, 1.3289, 0.66249, 3, 1.59984, 0.586139, 3.28504, 1.41543, 0, 3.28504, 1.53171, 0, 3.53171, 1.28543, -0.492169, 3.53171, 1.18755, -0.382929, 3.7314, 0.923649, -0.707126, 3.7314, 0.706734, -0.924041, 3.7314, 0.382537, -1, 3.7314, 0, -0.924041, 3.7314, -0.382929, -0.707126, 3.7314, -0.707126, -0.382929, 3.7314, -0.924041, 2, -2, 0, 1.84769, 2, -0.765466, 1.96946, -2.34769, 0, 1.8195, 2.34691, -0.754111, 1.87901, -2.68442, 0, 1.73179, -3, 0, 1.41543, -3.28583, -0.586531, 1.22435, 3, -1.22475, 1.7361, 2.68363, -0.719264, 1.59984, 3, -0.662882, 1.18755, -3.5325, -0.492169, 0.923649, -3.73218, -0.382929, 0.706734, -3.73218, -0.707126, 0.483555, -3.8794, -0.483947, 0.26155, -3.8794, -0.632341, 0.491778, 3.53171, -1.18794, 0, 3.7314, -1, 0.382537, 3.7314, -0.924041, 1.08301, 3.28504, -1.0834, 0.908771, 3.53171, -0.909162, 1.41543, -3.28583, 0.586139, 0.706734, -3.73218, 0.706734, 0.923649, -3.73218, 0.382537, 1.18755, -3.5325, 0.491778, 0.26155, -3.8794, 0.63195, 0.483555, -3.8794, 0.483555, 0.132733, -3.97024, -0.321065, 0, -3.97024, -0.347298, -0.133124, -3.97024, -0.321065, -0.245889, -3.97024, -0.245889, -0.321065, -3.97024, -0.133124, -0.347298, -3.97024, 0, -0.321065, -3.97024, 0.132733, -0.245889, -3.97024, 0.245497, -0.133124, -3.97024, 0.320673, 0, -3.97024, 0.346907, 0.132733, -3.97024, 0.320673, 1.84769, 2, 0.765074, 1.8195, 2.34691, 0.75372, 1.7361, 2.68363, 0.718872, 1.59984, 3, 0.66249, 1.22435, 3, 1.22435, 1.08301, 3.28504, 1.08301, 0.908771, 3.53171, 0.908771, 0.491778, 3.53171, 1.18755, 0, 3.7314, 1, -0.261942, 3.87862, 0.63195, -0.483947, 3.87862, 0.483555, -0.632341, 3.87862, 0.26155, -0.684417, 3.87862, 0, -0.632341, 3.87862, -0.261942, -0.483947, 3.87862, -0.483947, -0.261942, 3.87862, -0.632341, 0, 3.87862, -0.684417, 2, 2, 0, 1.96946, 2.34691, 0, 1.53171, -3.28583, 0, 1.28543, -3.5325, 0, 1.41543, 3.28504, -0.586531, 1.87901, 2.68363, 0, 1.73179, 3, 0, 0.999609, -3.73218, 0, 0.684025, -3.8794, 0, 0.63195, -3.8794, -0.261942, 0.245497, -3.97024, -0.245889, 0.706734, 3.7314, -0.707126, 0.26155, 3.87862, -0.632341, 0.483555, 3.87862, -0.483947, 1.18755, 3.53171, -0.492169, 0.923649, 3.7314, -0.382929, 0.63195, -3.8794, 0.26155, 0.245497, -3.97024, 0.245497, 0, -4, 0, 1.41543, 3.28504, 0.586139, 1.18755, 3.53171, 0.491778, 0.923649, 3.7314, 0.382537, 0.706734, 3.7314, 0.706734, 0.382537, 3.7314, 0.923649, 0.26155, 3.87862, 0.63195, 0, 3.87862, 0.684025, -0.133124, 3.96946, 0.320673, -0.245889, 3.96946, 0.245497, -0.321065, 3.96946, 0.132733, -0.347298, 3.96946, 0, -0.321065, 3.96946, -0.133124, -0.245889, 3.96946, -0.245889, -0.133124, 3.96946, -0.321065, 0, 3.96946, -0.347298, 0.132733, 3.96946, -0.321065, 1.53171, 3.28504, 0, 1.28543, 3.53171, 0, 0.320673, -3.97024, 0.132733, 0.346907, -3.97024, 0, 0.320673, -3.97024, -0.133124, 0.245497, 3.96946, -0.245889, 0.63195, 3.87862, -0.261942, 1, 3.7314, 0, 0.63195, 3.87862, 0.26155, 0.483555, 3.87862, 0.483555, 0.245497, 3.96946, 0.245497, 0.132733, 3.96946, 0.320673, 0, 3.96946, 0.346907, 0, 4, 0, 0.320673, 3.96946, -0.133124, 0.684025, 3.87862, 0, 0.320673, 3.96946, 0.132733, 0.346907, 3.96946, 0)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wh6y3"]
+radius = 2.0
+height = 8.0
 
 [node name="大水测试" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 40)
 
-[node name="WaterPhysicsAdder" parent="." instance=ExtResource("1_ifj8q")]
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 9, -6)
+light_energy = 16.0
+shadow_enabled = true
+shadow_bias = 0.01
+shadow_normal_bias = 0.5
+spot_range = 30.0
+spot_angle = 40.0
 
 [node name="Floor3" type="CSGBox3D" parent="."]
 process_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -6, -7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -8, -7)
 use_collision = true
 collision_layer = 2
 size = Vector3(30, 0.5, 18)
@@ -325,30 +415,40 @@ material = SubResource("ShaderMaterial_xi2kq")
 [node name="OccluderInstance3D2" type="OccluderInstance3D" parent="Floor3"]
 occluder = SubResource("BoxOccluder3D_kjtr1")
 
-[node name="WaterMaker3D" parent="." instance=ExtResource("4_yvlnf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1, 0, -6)
-mesh = SubResource("BoxMesh_4su60")
-material = SubResource("StandardMaterial3D_fd4r8")
+[node name="Floor4" type="CSGBox3D" parent="."]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 38.5)
+use_collision = true
+collision_layer = 2
+size = Vector3(36, 0.5, 60)
+material = SubResource("ShaderMaterial_xi2kq")
 
-[node name="WaterMaker3D4" parent="." instance=ExtResource("4_yvlnf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -12.5, -1)
-mesh = SubResource("BoxMesh_16jpx")
-material = SubResource("ShaderMaterial_01miy")
+[node name="OccluderInstance3D2" type="OccluderInstance3D" parent="Floor4"]
+occluder = SubResource("BoxOccluder3D_kjtr1")
 
-[node name="WaterMaker3D3" parent="." instance=ExtResource("4_yvlnf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.31566, 1.5, 14.6902)
-mesh = SubResource("TorusMesh_ci80q")
-material = SubResource("ShaderMaterial_ycqhb")
+[node name="WaterMesh3D" parent="." instance=ExtResource("4_wh6y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -12.5, 10)
+mesh = SubResource("BoxMesh_2w1di")
+surface_material_override/0 = SubResource("ShaderMaterial_qtrbo")
+density = 800.0
 
-[node name="SoapBubble" parent="." instance=ExtResource("9_04oo4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -6)
-skeleton = NodePath("../../Maps")
+[node name="WaterMesh3D2" parent="." instance=ExtResource("4_wh6y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0.5, -5)
+mesh = SubResource("CylinderMesh_6jcys")
+surface_material_override/0 = SubResource("ShaderMaterial_6jcys")
+density = 900.0
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 9, -6)
-light_energy = 16.0
-spot_range = 20.0
-spot_angle = 40.0
+[node name="WaterMesh3D3" parent="." instance=ExtResource("4_wh6y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, 12)
+mesh = SubResource("TorusMesh_wh6y3")
+surface_material_override/0 = SubResource("ShaderMaterial_wh6y3")
+density = 500.0
+
+[node name="WaterMesh3D4" parent="." instance=ExtResource("4_wh6y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -3.5, 24)
+mesh = SubResource("BoxMesh_xkrn3")
+surface_material_override/0 = SubResource("ShaderMaterial_xkrn3")
+viscosity = 100.0
 
 [node name="水测试" type="CSGMesh3D" parent="."]
 process_mode = 1
@@ -367,7 +467,7 @@ mesh = SubResource("CylinderMesh_3s87f")
 material = SubResource("ShaderMaterial_0v180")
 
 [node name="水测试3" parent="." instance=ExtResource("10_nbqy2")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12.5, -12, 5.2571)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11.5, -12, 5.2571)
 size = Vector3(30, 30, 6)
 num_stairs = 0
 
@@ -375,6 +475,7 @@ num_stairs = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.74985, 5.02885, -5.4632)
 collision_layer = 32
 collision_mask = 110
+mass = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="方体1"]
 mesh = SubResource("BoxMesh_u4i0g")
@@ -382,33 +483,47 @@ mesh = SubResource("BoxMesh_u4i0g")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="方体1"]
 shape = SubResource("BoxShape3D_clm57")
 
-[node name="四锥" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14585, 5.39496, -8.3926)
+[node name="方体2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22202, 5.02885, -5.4632)
 collision_layer = 32
 collision_mask = 110
+mass = 100.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="四锥"]
-mesh = SubResource("CylinderMesh_nka2l")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="方体2"]
+mesh = SubResource("BoxMesh_u4i0g")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="四锥"]
-shape = SubResource("ConvexPolygonShape3D_bb7ar")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="方体2"]
+shape = SubResource("BoxShape3D_clm57")
 
 [node name="球1" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.36496, 5.20026, -4.3949)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.64422, 5.20026, -6.66176)
 collision_layer = 32
 collision_mask = 110
+mass = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="球1"]
 mesh = SubResource("SphereMesh_a3jkn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="球1"]
+shape = SubResource("SphereShape3D_psbl8")
+
+[node name="球2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2864, 5.20026, -4.51589)
+collision_layer = 32
+collision_mask = 110
+mass = 60.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="球2"]
+mesh = SubResource("SphereMesh_y8scb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="球2"]
 shape = SubResource("SphereShape3D_w8yk3")
 
 [node name="泳圈1" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.79493, 5.45696, -7.4982)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.99842, 5.45696, -2.04924)
 collision_layer = 32
 collision_mask = 110
-mass = 3.0
+mass = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="泳圈1"]
 mesh = SubResource("TorusMesh_leo2t")
@@ -425,23 +540,35 @@ shape = SubResource("ConvexPolygonShape3D_3uo4u")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="泳圈1"]
 shape = SubResource("ConvexPolygonShape3D_la41i")
 
-[node name="方板" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.39525, 5.02885, -3.33015)
+[node name="泳圈2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83187, 5.45696, -7.6192)
 collision_layer = 32
 collision_mask = 110
-mass = 2.0
+mass = 80.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="方板"]
-mesh = SubResource("BoxMesh_ifv30")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="泳圈2"]
+mesh = SubResource("TorusMesh_c8mrg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="方板"]
-shape = SubResource("ConvexPolygonShape3D_pt3k3")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="泳圈2"]
+shape = SubResource("ConvexPolygonShape3D_xkrn3")
+
+[node name="四锥" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14585, 5.39496, -8.3926)
+collision_layer = 32
+collision_mask = 110
+mass = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="四锥"]
+mesh = SubResource("CylinderMesh_nka2l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="四锥"]
+shape = SubResource("ConvexPolygonShape3D_bb7ar")
 
 [node name="五锥" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42067, 5.39496, -6.62116)
 collision_layer = 32
 collision_mask = 110
-mass = 2.0
+mass = 50.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="五锥"]
 mesh = SubResource("CylinderMesh_ecah3")
@@ -449,49 +576,41 @@ mesh = SubResource("CylinderMesh_ecah3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="五锥"]
 shape = SubResource("ConvexPolygonShape3D_hpyph")
 
-[node name="球2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2864, 5.20026, -4.51589)
+[node name="方板" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.39525, 5.02885, -3.33015)
 collision_layer = 32
 collision_mask = 110
+mass = 500.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="球2"]
-mesh = SubResource("SphereMesh_y8scb")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="方板"]
+mesh = SubResource("BoxMesh_ifv30")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="球2"]
-shape = SubResource("SphereShape3D_w8yk3")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="方板"]
+shape = SubResource("ConvexPolygonShape3D_psbl8")
 
-[node name="泳圈2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83187, 5.45696, -7.6192)
+[node name="胶囊" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.91337, 5.0243, -1.94437)
 collision_layer = 32
 collision_mask = 110
-mass = 10.0
+mass = 1600.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="泳圈2"]
-mesh = SubResource("TorusMesh_c8mrg")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="胶囊"]
+mesh = SubResource("CapsuleMesh_xkrn3")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="泳圈2"]
-shape = SubResource("ConvexPolygonShape3D_hhkeq")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="泳圈2"]
-shape = SubResource("ConvexPolygonShape3D_l1v6p")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="泳圈2"]
-shape = SubResource("ConvexPolygonShape3D_3uo4u")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="泳圈2"]
-shape = SubResource("ConvexPolygonShape3D_la41i")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="胶囊"]
+shape = SubResource("CapsuleShape3D_psbl8")
 
 [node name="大胶囊" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.04144, 5.0243, 0.952141)
 collision_layer = 32
 collision_mask = 110
-mass = 80.0
+mass = 1000.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="大胶囊"]
 mesh = SubResource("CapsuleMesh_wb0nf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="大胶囊"]
-shape = SubResource("ConvexPolygonShape3D_fjfk6")
+shape = SubResource("CapsuleShape3D_wh6y3")
 
 [node name="DynamiteBarrel3" parent="." instance=ExtResource("11_0n463")]
 transform = Transform3D(0.866025, 2.18557e-08, 0.5, -2.18557e-08, 1, -5.85622e-09, -0.5, -5.85622e-09, 0.866025, 2.42072, 4.60814, -0.0359535)

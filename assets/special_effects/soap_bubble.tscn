@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bf1u7xjslyhmy"]
 
-[ext_resource type="Shader" path="res://assets/shaders/waters/soap_bubble.gdshader" id="1_c1l0b"]
+[ext_resource type="Shader" uid="uid://jgkgld0oqj3y" path="res://assets/arts_graphic/shaders/waters/soap_bubble.gdshader" id="1_c1l0b"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_642kb"]
 resource_local_to_scene = true

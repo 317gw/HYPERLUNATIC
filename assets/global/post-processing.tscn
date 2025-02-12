@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://djbvwfd5m25rh"]
+
+[ext_resource type="Shader" uid="uid://cf1ljx74b0dtk" path="res://assets/arts_graphic/shaders/waters/CameraWaterOverlay.gdshader" id="1_8p2xh"]
+[ext_resource type="Script" uid="uid://c12lsxls2v0ex" path="res://assets/global/scripts/post_processing.gd" id="1_h61ip"]
+[ext_resource type="Shader" uid="uid://wi8sh60h6r2i" path="res://assets/arts_graphic/shaders/radial_blur.gdshader" id="2_h61ip"]
+[ext_resource type="Script" uid="uid://ceyh4h78sm3dd" path="res://assets/controllers/scripts/radial_blur.gd" id="3_fykk8"]
+[ext_resource type="Script" uid="uid://d2lvax62psnwa" path="res://assets/global/scripts/water_ripple_overlay.gd" id="3_s2f4l"]
+[ext_resource type="Texture2D" uid="uid://bmkktpgboa6us" path="res://icon.svg" id="4_s2f4l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xuisv"]
+resource_local_to_scene = true
+shader = ExtResource("1_8p2xh")
+shader_parameter/color = Color(0.501961, 0.917647, 1, 1)
+shader_parameter/value_all = 1.0
+shader_parameter/ripple_speed = 1.0
+shader_parameter/ripple_density = 5.0
+shader_parameter/ripple_strength = 0.01
+shader_parameter/blur_radius = 0.05
+shader_parameter/blur_count = 1.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_blbsa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fykk8"]
+radius = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d84be"]
+resource_local_to_scene = true
+shader = ExtResource("2_h61ip")
+shader_parameter/blur_center = Vector2(0.5, 0.5)
+shader_parameter/un_blur_radius_min = 0.2
+shader_parameter/un_blur_radius_max = 0.5
+shader_parameter/blur_power = 0.01
+shader_parameter/sampling_count = 6
+shader_parameter/lod = 0.5
+
+[node name="Post-processing" type="Node3D"]
+script = ExtResource("1_h61ip")
+
+[node name="WaterRippleOverlay" type="TextureRect" parent="."]
+z_index = 1
+z_as_relative = false
+material = SubResource("ShaderMaterial_xuisv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("PlaceholderTexture2D_blbsa")
+script = ExtResource("3_s2f4l")
+wrosp_in_value = null
+
+[node name="CameraPosShapeCast3D" type="ShapeCast3D" parent="WaterRippleOverlay"]
+shape = SubResource("SphereShape3D_fykk8")
+target_position = Vector3(0, 0, 0)
+collision_mask = 512
+collide_with_areas = true
+
+[node name="RadialBlur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_d84be")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("3_fykk8")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="RadialBlur"]
+modulate = Color(1, 1, 1, 0.4)
+layout_mode = 1
+anchors_preset = -1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("4_s2f4l")
+metadata/_edit_use_anchors_ = true

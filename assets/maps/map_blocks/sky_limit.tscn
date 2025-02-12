@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://bujg7rhcmtlx4"]
+
+[ext_resource type="Script" uid="uid://ythw2ikcxhik" path="res://assets/maps/map_blocks/scripts/sky_limit.gd" id="1_gn6i4"]
+[ext_resource type="Shader" uid="uid://b4wo4wxugb3w" path="res://assets/arts_graphic/shaders/sky_limit.gdshader" id="2_6n45k"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6n45k"]
+frequency = 0.015
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6n45k"]
+width = 256
+height = 256
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_6n45k")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jgm7"]
+render_priority = 0
+shader = ExtResource("2_6n45k")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_6n45k")
+shader_parameter/color = Color(0.6, 0.8, 0.8, 1)
+shader_parameter/alpha = 0.8
+shader_parameter/parallax_mix = 0.5
+shader_parameter/near_fade_min = 50.0
+shader_parameter/near_fade_max = 60.0
+shader_parameter/uv_scale = Vector3(0.1, 0.1, 0.1)
+shader_parameter/uv_offset = Vector3(0, 0, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vx1bv"]
+height = 1.0
+radial_segments = 32
+rings = 2
+
+[sub_resource type="MultiMesh" id="MultiMesh_lj2ld"]
+transform_format = 1
+instance_count = 1
+mesh = SubResource("CylinderMesh_vx1bv")
+buffer = PackedFloat32Array(100, 0, 0, 0, 0, 0.15, 0, 0, 0, 0, 100, 0)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6n45k"]
+margin = 1.0
+plane = Plane(0, -1, 0, 0)
+
+[node name="SkyLimit" type="Node3D"]
+script = ExtResource("1_gn6i4")
+size = Vector3(100, 0.15, 100)
+layer = 1
+layer_ofset = 0.0
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_6jgm7")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_lj2ld")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 45
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("WorldBoundaryShape3D_6n45k")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

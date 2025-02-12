@@ -7,9 +7,8 @@ extends Node
 
 var frame_skiper: FrameSkiper
 func _ready() -> void:
-	frame_skiper = FrameSkiper.new()
+	frame_skiper = FrameSkiper.new(30, 6)
 	self.add_child(frame_skiper)
-	frame_skiper.ready(30, 6)
 func _physics_process(_delta: float) -> void:
 	if frame_skiper.is_in_executable_frame():
 """
@@ -20,7 +19,7 @@ var _randomize_frame: int = 0
 var _frames_per_skip: int = 1
 
 
-func ready(target_frames: int, randomize_frame_range: int = 0) -> void:
+func _init(target_frames: int, randomize_frame_range: int = 0) -> void:
 	if target_frames <= 0:
 		push_error("目标帧数必须大于0")
 		return
@@ -44,6 +43,7 @@ func _physics_process(delta: float) -> void:
 func is_in_executable_frame() -> bool: ## 确定是否在“可执行帧”上
 	return Engine.get_physics_frames() % _frames_per_skip == _randomize_frame % _frames_per_skip
 	#return (Engine.get_physics_frames() + _randomize_frame) % _frames_per_skip == 0
+
 
 func skip_frame() -> bool:
 	return Engine.get_physics_frames() % _frames_per_skip != _randomize_frame % _frames_per_skip

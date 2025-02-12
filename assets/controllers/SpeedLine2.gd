@@ -6,7 +6,7 @@ var process_material
 var draw_pass_1
 var threshold: float = 0.0
 
-@onready var player: HL.Controller.Player = $"../.."
+@onready var player: HL.Player = $"../.."
 @onready var particles: GPUParticles3D = $SpeedLineParticles
 
 func _ready() -> void:

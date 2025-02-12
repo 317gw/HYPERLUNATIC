@@ -1,7 +1,7 @@
 extends AnimatableBody3D
 #RigidBody3D
 #AnimatableBody3D
-@onready var player: HL.Controller.Player = $"../Player"
+@onready var player: HL.Player = $"../Player"
 @onready var player_CollisionShape: CollisionShape3D = $"../Player/CollisionShape3D"
 
 func _physics_process(_delta: float) -> void:

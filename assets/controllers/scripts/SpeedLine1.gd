@@ -5,7 +5,7 @@ class_name SpeedLine1 extends Node3D
 var process_material
 var threshold: float = 0.0
 
-@onready var player: HL.Controller.Player = $"../.."
+@onready var player: HL.Player = $"../.."
 @onready var airflow_particles: GPUParticles3D = $SpeedLineParticles
 
 func _ready() -> void:

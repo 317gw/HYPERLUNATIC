@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://i8xq76r2y4gy"]
+
+[sub_resource type="GDScript" id="GDScript_ltp1g"]
+script/source = "extends Node3D
+
+
+func _ready() -> void:
+	#for i in range(100):
+		#var _in: int = randi_range(0, 255)
+		#prints(_in, _in & 3, _in % 4, _in/4.0)
+	
+	#prints(1e-2, 1e05)
+	
+	
+	var vvvvvv = Vector3(3, 5, 8)
+	
+	prints(vvvvvv * vvvvvv, vvvvvv.normalized() * vvvvvv.length()**2)
+"
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_ltp1g")

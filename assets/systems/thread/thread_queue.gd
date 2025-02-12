@@ -11,7 +11,7 @@ var _jobs := []
 var _mtx := Mutex.new()
 var _working: bool = false
 
-func _nop(arg=null): pass
+static func _nop(_arg = null): pass
 
 func _init(tmax : int = 1):
 	if tmax < 1:
@@ -60,9 +60,8 @@ func _work(thread) -> void:
 			break
 
 	# Shitty hack so that we safely(i think) end this Thread
-	(
-		func(_thread_finished, thread):
-			_thread_finished.emit(thread)
+	(func(_thread_finished, thread):
+		_thread_finished.emit(thread)
 	).call_deferred(_thread_finished, thread)
 
 func __thread_finished(_thread: Thread) -> void:
@@ -70,8 +69,8 @@ func __thread_finished(_thread: Thread) -> void:
 	_threads -= 1
 
 	# Fairly certain that this Thread should already be dead
-	#if thread.is_active():
-	#    thread.wait_to_finish.call_deferred()
+	if _thread.is_active():
+		_thread.wait_to_finish.call_deferred()
 
 	if _threads < 0:
 		_threads = 0

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://4fqemhklghn0"]
+
+[ext_resource type="PackedScene" uid="uid://3mt6ceaww3dv" path="res://assets/maps/route_levels/route_000_template.tscn" id="1_12o2r"]
+[ext_resource type="PackedScene" uid="uid://l1mr3iu53wd4" path="res://assets/maps/map_blocks/world_border.tscn" id="2_jskei"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qj5ha"]
+size = Vector3(60, 10, 1)
+
+[node name="Route_001_50m" instance=ExtResource("1_12o2r")]
+
+[node name="Route" parent="." index="0"]
+route_name = "50m"
+
+[node name="DestinationTerminal" parent="Route" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 0)
+
+[node name="WorldBorder" parent="SwitchMaps" index="0" instance=ExtResource("2_jskei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 4.5, -5)
+mesh = SubResource("BoxMesh_qj5ha")
+
+[node name="WorldBorder2" parent="SwitchMaps" index="1" instance=ExtResource("2_jskei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 4.5, 5)
+mesh = SubResource("BoxMesh_qj5ha")

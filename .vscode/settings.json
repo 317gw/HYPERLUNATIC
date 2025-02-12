@@ -1,3 +1,5 @@
 {
-    "godotTools.editorPath.godot4": "d:\\steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe"
+    "godotTools.editorPath.godot4": "d:\\steam\\steamapps\\common\\Godot Engine\\godot.windows.opt.tools.64.exe",
+    "Codegeex.Chat.fontSize": 14,
+    "Codegeex.RepoIndex": true
 }

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqurrurexwask"]
+
+[ext_resource type="Script" uid="uid://3lfbjxy3qv7a" path="res://assets/maps/map_blocks/scripts/route.gd" id="1_qidt0"]
+
+[node name="Route" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_qidt0")
+
+[connection signal="destination" from="." to="." method="_on_destination"]
+[connection signal="start" from="." to="." method="_on_start"]

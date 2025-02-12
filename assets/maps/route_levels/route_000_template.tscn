@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://3mt6ceaww3dv"]
+
+[ext_resource type="PackedScene" uid="uid://cqurrurexwask" path="res://assets/maps/map_blocks/route.tscn" id="1_ywlgk"]
+[ext_resource type="PackedScene" uid="uid://car16aic6av36" path="res://assets/maps/map_blocks/terminal/start_terminal.tscn" id="2_ga63p"]
+[ext_resource type="PackedScene" uid="uid://cybgseaman2r" path="res://assets/maps/map_blocks/terminal/destination_terminal.tscn" id="3_21yib"]
+
+[node name="Route_000_template" type="Node3D"]
+
+[node name="Route" parent="." node_paths=PackedStringArray("owning_level", "start_terminal", "destination_terminal", "switch_maps") instance=ExtResource("1_ywlgk")]
+owning_level = NodePath("..")
+start_terminal = NodePath("StartTerminal")
+destination_terminal = NodePath("DestinationTerminal")
+switch_maps = NodePath("../SwitchMaps")
+
+[node name="StartTerminal" parent="Route" instance=ExtResource("2_ga63p")]
+
+[node name="DestinationTerminal" parent="Route" instance=ExtResource("3_21yib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="SwitchMaps" type="Node3D" parent="."]

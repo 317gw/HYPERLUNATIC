@@ -30,7 +30,7 @@ enum CurveSamplingMode {
 
 var _internal_render_mode = Mesh.PRIMITIVE_TRIANGLES
 
-var _linegen = LineGen3D.new()
+var _linegen := LineGen3D.new()
 
 func _show_imm_geo():
 	push_warning("Immediate renderer is not implemented.")
@@ -152,7 +152,7 @@ func _draw():
 		#var start = Time.get_ticks_usec()
 		_mesh_instance.mesh = _linegen.draw_from_points_strip(points,length)
 		#var end = Time.get_ticks_usec()
-		#print( points.size(), " points, ", (end-start)*0.001, " ms" )
+		#print( points.size(), " points, ", end-start, " ms" )
 
 		_update_material()
 

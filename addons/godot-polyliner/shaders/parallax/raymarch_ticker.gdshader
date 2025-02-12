@@ -26,9 +26,9 @@ void vertex(){
 	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX,1.0)).xyz;
 	NORMAL = mat3(MODELVIEW_MATRIX) * NORMAL;
 	TANGENT = mat3(MODELVIEW_MATRIX) * TANGENT;
-	
+
 	quick_line(line_width,false)
-	
+
 	float line_length = UV2.x;
 	if (!stretch) { UV.x *= line_length; }
 	TBN = mat3(
@@ -36,15 +36,15 @@ void vertex(){
 		TANGENT,
 		NORMAL
 	);
-	
+
 	vec3 yeds = MODELVIEW_MATRIX[1].xyz * TBN;
 	mat3 rot = rotation3dX( atan(-yeds.y,yeds.z) );
 	TBN *= rot;
-	
+
 	vec2 scale = vec2(aspect / line_width, 1.0);
 	ray_origin = vec3((UV*scale)-0.5,0.0);
 	ray_origin *= rot;
-	
+
 }
 
 float sdCylinder( vec3 p, float c ){
@@ -53,9 +53,9 @@ float sdCylinder( vec3 p, float c ){
 
 float scene(vec3 p){
 	float o1 = sdCylinder(p,0.5);
-	
+
 	float rope = o1;
-	
+
 	return rope;
 }
 
@@ -63,33 +63,33 @@ vec3 getNormal( in vec3 p )
 {
     const float h = 0.01;
     const vec2 k = vec2(1,-1);
-    return normalize( k.xyy*scene( p + k.xyy*h ) + 
-                      k.yyx*scene( p + k.yyx*h ) + 
-                      k.yxy*scene( p + k.yxy*h ) + 
+    return normalize( k.xyy*scene( p + k.xyy*h ) +
+                      k.yyx*scene( p + k.yyx*h ) +
+                      k.yxy*scene( p + k.yxy*h ) +
                       k.xxx*scene( p + k.xxx*h ) );
 }
 
 float raymarch_base(
-	vec3 ro, 
-	vec3 rd, 
-	int sph_checks, 
+	vec3 ro,
+	vec3 rd,
+	int sph_checks,
 	float min_dist,
 	float max_dist,
 	float start_dist
 	){
 	float total_dist = start_dist;
-	
+
 	for(int i=0; i<sph_checks; i++){
 		if (total_dist > max_dist) { break; }
-		
+
 		vec3 ray = ro + (rd * total_dist);
 		float dist = scene(ray);
-		
+
 		if (dist < min_dist){ return total_dist; }
-		
+
 		total_dist += dist;
 	}
-	
+
 	return RAY_MISS;
 }
 
@@ -124,16 +124,16 @@ varying vec3 hit_normal;
 void fragment() {
 	vec3 ro = ray_origin;
 	vec3 rd = normalize(-VIEW * TBN);
-	
+
 	float hit = raymarch(ro, rd);
 	if (hit > 0.0) { discard; }
-	
+
 	hit_pos = ro + (rd * hit);
 	hit_normal = getNormal(hit_pos);
 	NORMAL = TBN * hit_normal;
-	
+
 	ROUGHNESS = 0.8;
-	
+
 	vec2 uvr = vec2(
 		hit_pos.x,
 		atan(hit_pos.y,hit_pos.z)*0.159+0.5

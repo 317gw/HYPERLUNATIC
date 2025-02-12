@@ -1,17 +1,17 @@
 [gd_scene load_steps=56 format=3 uid="uid://bk6p2ir23a777"]
 
 [ext_resource type="Environment" uid="uid://dd5bpvybxmy6u" path="res://addons/godot-polyliner/demos/default_env.tres" id="1"]
-[ext_resource type="Script" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="3"]
-[ext_resource type="Script" path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" id="4"]
+[ext_resource type="Script" uid="uid://dgfr3enlu7n4q" path="res://addons/godot-polyliner/Line3D/LinePath3D.gd" id="3"]
+[ext_resource type="Script" uid="uid://geqat1drmaex" path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" id="4"]
 [ext_resource type="Shader" uid="uid://c30na0obdky88" path="res://addons/godot-polyliner/shaders/line_pbr.tres" id="4_12q1m"]
 [ext_resource type="Shader" uid="uid://bpkesrnyx2hr5" path="res://addons/godot-polyliner/shaders/line_fade.tres" id="5_kk3ms"]
-[ext_resource type="Shader" path="res://addons/godot-polyliner/shaders/parallax/raymarch_rope.gdshader" id="6"]
-[ext_resource type="Shader" path="res://addons/godot-polyliner/shaders/parallax/raymarch_ticker.gdshader" id="6_5q0jx"]
+[ext_resource type="Shader" uid="uid://bylqx8s2ettvl" path="res://addons/godot-polyliner/shaders/parallax/raymarch_rope.gdshader" id="6"]
+[ext_resource type="Shader" uid="uid://ljnfe7jn355c" path="res://addons/godot-polyliner/shaders/parallax/raymarch_ticker.gdshader" id="6_5q0jx"]
 [ext_resource type="Shader" uid="uid://c2c7sknvw28nm" path="res://addons/godot-polyliner/shaders/line_glow.tres" id="8_c1yqp"]
-[ext_resource type="Shader" path="res://addons/godot-polyliner/shaders/parallax/raymarch_xmaslightbulbs.gdshader" id="8_fk2di"]
-[ext_resource type="Shader" path="res://addons/godot-polyliner/shaders/parallax/raymarch_driverpassenger.gdshader" id="9_rawnu"]
+[ext_resource type="Shader" uid="uid://8jyyupsc7bhp" path="res://addons/godot-polyliner/shaders/parallax/raymarch_xmaslightbulbs.gdshader" id="8_fk2di"]
+[ext_resource type="Shader" uid="uid://bjd6epkxmhr0a" path="res://addons/godot-polyliner/shaders/parallax/raymarch_driverpassenger.gdshader" id="9_rawnu"]
 [ext_resource type="Shader" uid="uid://dno2b0s1fv77i" path="res://addons/godot-polyliner/shaders/parallax/raymarch_xmasgarland.tres" id="10_gpltd"]
-[ext_resource type="Shader" path="res://addons/godot-polyliner/shaders/parallax/raymarch_chain.gdshader" id="11"]
+[ext_resource type="Shader" uid="uid://xl50edvp0agh" path="res://addons/godot-polyliner/shaders/parallax/raymarch_chain.gdshader" id="11"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "@tool
@@ -89,11 +89,11 @@ curve = SubResource("49")
 render_priority = 0
 shader = ExtResource("5_kk3ms")
 shader_parameter/line_width = 0.155
+shader_parameter/width_curve = SubResource("50")
 shader_parameter/tangent_facing = false
 shader_parameter/tangent_offset = -0.16
 shader_parameter/color = Color(1, 0, 0, 1)
 shader_parameter/alpha_curve = 0.5
-shader_parameter/width_curve = SubResource("50")
 
 [sub_resource type="Curve3D" id="10"]
 bake_interval = 0.01
@@ -194,11 +194,11 @@ render_priority = 0
 shader = ExtResource("8_c1yqp")
 shader_parameter/line_width = 0.095
 shader_parameter/glow_width = 1.09
+shader_parameter/width_curve = SubResource("54")
 shader_parameter/tangent_facing = false
 shader_parameter/rounded = true
 shader_parameter/color = Color(0, 0.4, 1, 1)
 shader_parameter/glow_curve = 0.05
-shader_parameter/width_curve = SubResource("54")
 
 [sub_resource type="Curve3D" id="12"]
 bake_interval = 0.13
@@ -220,6 +220,7 @@ curve = SubResource("Curve_3airw")
 render_priority = 0
 shader = ExtResource("4_12q1m")
 shader_parameter/line_width = 0.03
+shader_parameter/width_curve = SubResource("CurveTexture_ovms4")
 shader_parameter/tangent_facing = false
 shader_parameter/rounded = true
 shader_parameter/tube_normal = true
@@ -230,7 +231,6 @@ shader_parameter/color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 shader_parameter/metallic = 0.0
 shader_parameter/specular = 0.5
 shader_parameter/roughness = 0.41
-shader_parameter/width_curve = SubResource("CurveTexture_ovms4")
 
 [sub_resource type="Curve3D" id="14"]
 bake_interval = 0.23
@@ -478,7 +478,7 @@ shader_parameter/color = Color(0.1, 0.1, 0.1, 1)
 [node name="Node3D" type="Node3D"]
 
 [node name="wormspinner" type="Node3D" parent="."]
-transform = Transform3D(0.836198, 0, 0.548404, 0, 0.999999, 0, -0.5484, 0, 0.836204, -0.368962, 0.016, 3.531)
+transform = Transform3D(-0.675108, 0, -0.737703, 0, 0.999999, 0, 0.737698, 0, -0.675113, -0.181492, 0.016, 3.531)
 script = SubResource("1")
 mul = 1.59
 

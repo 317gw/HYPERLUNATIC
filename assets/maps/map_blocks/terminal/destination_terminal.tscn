@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://cybgseaman2r"]
+
+[ext_resource type="Script" uid="uid://cm80ujbjh7fod" path="res://assets/maps/map_blocks/terminal/destination_terminal.gd" id="1_s1xtj"]
+[ext_resource type="PackedScene" uid="uid://c80dflah5a2cw" path="res://assets/maps/map_blocks/terminal/全息终端导入.blend" id="2_ds4xx"]
+[ext_resource type="Shader" uid="uid://dlfdo6rm7201o" path="res://assets/arts_graphic/shaders/check_point.gdshader" id="2_s1xtj"]
+[ext_resource type="PackedScene" uid="uid://mkqgkrtaglfc" path="res://assets/maps/map_blocks/terminal/terminal_interactive_screen.tscn" id="3_ds4xx"]
+[ext_resource type="PackedScene" uid="uid://bnucec4uq6taa" path="res://assets/maps/map_blocks/check_point.tscn" id="6_ds4xx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_34ka2"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xmmfv"]
+width = 64
+height = 64
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_34ka2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyuf3"]
+render_priority = 0
+shader = ExtResource("2_s1xtj")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_xmmfv")
+shader_parameter/noise_speed = 0.1
+shader_parameter/noise_range = 0.3
+shader_parameter/color = Color(0, 0.5, 1, 1)
+shader_parameter/round_scale = 10.75
+shader_parameter/uv_scale = Vector2(1, 1.5)
+shader_parameter/uv_offset = Vector2(0, 0.025)
+
+[node name="DestinationTerminal" type="Node3D"]
+script = ExtResource("1_s1xtj")
+
+[node name="全息终端导入" parent="." instance=ExtResource("2_ds4xx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.4, 0.1, 2.4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.1, 0.05)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.6, 0.2, 2.5)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.05, 0.1)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.8, 0.1, 2.6)
+
+[node name="TerminalInteractiveScreen" parent="." instance=ExtResource("3_ds4xx")]
+transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 1.6, -1.42)
+
+[node name="ButtonOut" parent="TerminalInteractiveScreen/SubViewport/Content/VBoxContainer" index="0"]
+visible = false
+
+[node name="ButtonNow" parent="TerminalInteractiveScreen/SubViewport/Content/VBoxContainer" index="1"]
+visible = false
+
+[node name="CheckPoint" parent="." instance=ExtResource("6_ds4xx")]
+
+[node name="MeshInstance3D" parent="CheckPoint" index="0"]
+material_override = SubResource("ShaderMaterial_kyuf3")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[connection signal="change_name" from="." to="TerminalInteractiveScreen/SubViewport/Content" method="change_name"]
+[connection signal="pressed" from="TerminalInteractiveScreen/SubViewport/Content/VBoxContainer/ButtonTeleport" to="." method="_on_button_teleport_pressed"]
+[connection signal="body_entered" from="CheckPoint" to="." method="_on_area_3d_body_entered"]
+
+[editable path="TerminalInteractiveScreen"]
+[editable path="CheckPoint"]

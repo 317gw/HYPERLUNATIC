@@ -1,0 +1,115 @@
+[gd_scene load_steps=7 format=3 uid="uid://mkqgkrtaglfc"]
+
+[ext_resource type="PackedScene" uid="uid://bsv7k32eyyqqr" path="res://addons/goat/main_scenes/InteractiveScreen.tscn" id="1_0aq6n"]
+[ext_resource type="Script" uid="uid://bwutkvbmi8y52" path="res://assets/maps/map_blocks/terminal/route_terminal_interactive_screen.gd" id="2_suowv"]
+[ext_resource type="Shader" uid="uid://7eielxa5bb20" path="res://assets/arts_graphic/shaders/other_author/hologram_simple.gdshader" id="3_38nfm"]
+[ext_resource type="Script" uid="uid://b0ha8q0n5rxo5" path="res://assets/maps/map_blocks/terminal/route_terminal_content.gd" id="4_dbfdl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ougqu"]
+transparency = 1
+cull_mode = 2
+emission_enabled = true
+texture_filter = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjqxd"]
+shader = ExtResource("3_38nfm")
+shader_parameter/lines = 200
+shader_parameter/color1 = Color(0.09, 0.616, 0.902, 0.9)
+shader_parameter/color2 = Color(0.0901961, 0.615686, 0.901961, 1)
+shader_parameter/speed = 0.1
+shader_parameter/alpha = 0.5
+shader_parameter/noise_amount = 0.1
+shader_parameter/effect_factor = 1.0
+
+[node name="RouteTerminalInteractiveScreen" instance=ExtResource("1_0aq6n")]
+script = ExtResource("2_suowv")
+unique_name = "RouteTerminal"
+
+[node name="ScreenSurface" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_ougqu")
+
+[node name="SubViewport" parent="." index="2"]
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 3
+canvas_item_default_texture_repeat = 1
+render_target_update_mode = 2
+
+[node name="Content" type="ColorRect" parent="SubViewport" index="0"]
+material = SubResource("ShaderMaterial_cjqxd")
+layout_direction = 1
+offset_right = 300.0
+offset_bottom = 300.0
+color = Color(0.09, 0.6165, 0.9, 1)
+script = ExtResource("4_dbfdl")
+
+[node name="LabelName" type="Label" parent="SubViewport/Content" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 17.0
+offset_right = -48.0
+offset_bottom = -228.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Go"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelTime" type="Label" parent="SubViewport/Content" index="1"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 82.0
+offset_right = -14.0
+offset_bottom = -163.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "999999999999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Content" index="2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = 137.0
+offset_right = 28.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="ButtonOut" type="Button" parent="SubViewport/Content/VBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+text = "Start On You Out"
+
+[node name="ButtonNow" type="Button" parent="SubViewport/Content/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+text = "Start Now"
+
+[node name="ButtonTeleport" type="Button" parent="SubViewport/Content/VBoxContainer" index="2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+text = "Teleport To Destination"

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://car16aic6av36"]
+
+[ext_resource type="Script" uid="uid://csocoikko430o" path="res://assets/maps/map_blocks/terminal/start_terminal.gd" id="1_34ka2"]
+[ext_resource type="PackedScene" uid="uid://c80dflah5a2cw" path="res://assets/maps/map_blocks/terminal/全息终端导入.blend" id="2_xmmfv"]
+[ext_resource type="PackedScene" uid="uid://mkqgkrtaglfc" path="res://assets/maps/map_blocks/terminal/terminal_interactive_screen.tscn" id="3_xmmfv"]
+[ext_resource type="PackedScene" uid="uid://bnucec4uq6taa" path="res://assets/maps/map_blocks/check_point.tscn" id="4_34ka2"]
+
+[node name="StartTerminal" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_34ka2")
+
+[node name="全息终端导入" parent="." instance=ExtResource("2_xmmfv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.4, 0.1, 2.4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.1, 0.05)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.6, 0.2, 2.5)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.05, 0.1)
+use_collision = true
+collision_layer = 2
+size = Vector3(2.8, 0.1, 2.6)
+
+[node name="TerminalInteractiveScreen" parent="." instance=ExtResource("3_xmmfv")]
+transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 1.6, -1.42)
+
+[node name="CheckPoint" parent="." instance=ExtResource("4_34ka2")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[connection signal="change_name" from="." to="TerminalInteractiveScreen/SubViewport/Content" method="change_name"]
+[connection signal="pressed" from="TerminalInteractiveScreen/SubViewport/Content/VBoxContainer/ButtonOut" to="." method="_on_button_out_pressed"]
+[connection signal="pressed" from="TerminalInteractiveScreen/SubViewport/Content/VBoxContainer/ButtonNow" to="." method="_on_button_now_pressed"]
+[connection signal="pressed" from="TerminalInteractiveScreen/SubViewport/Content/VBoxContainer/ButtonTeleport" to="." method="_on_button_teleport_pressed"]
+[connection signal="body_exited" from="CheckPoint" to="." method="_on_area_3d_body_exited"]
+
+[editable path="TerminalInteractiveScreen"]

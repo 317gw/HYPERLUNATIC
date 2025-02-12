@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxeeplslbn0xc"]
 
-[ext_resource type="Script" path="res://assets/systems/water_physics/scripts/water_physics_adder.gd" id="1_fb7ir"]
+[ext_resource type="Script" uid="uid://2t8noms60fgh" path="res://assets/systems/water_physics/old/scripts/water_physics_adder.gd" id="1_fb7ir"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sbdrd"]
 margin = 1.0

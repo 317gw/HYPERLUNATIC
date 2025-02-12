@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://dgfw2ekkdclvk"]
 
-[ext_resource type="Script" path="res://assets/systems/water_physics/scripts/water_physics.gd" id="1_wkaqe"]
-[ext_resource type="Script" path="res://assets/controllers/state_scripts/StateMachine.gd" id="2_qylq1"]
-[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/out_water.gd" id="3_68qmd"]
-[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/probe_simulations.gd" id="4_xt212"]
-[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/simple_simulations.gd" id="5_xxf25"]
-[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/at_surface.gd" id="6_mg8q4"]
-[ext_resource type="Script" path="res://assets/systems/water_physics/state_scripts/in_water_sleeping.gd" id="7_v1d5w"]
+[ext_resource type="Script" uid="uid://lqy457dwqbb1" path="res://assets/systems/water_physics/old/scripts/water_physics.gd" id="1_wkaqe"]
+[ext_resource type="Script" uid="uid://d4l4548jq2mqk" path="res://assets/controllers/state_scripts/StateMachine.gd" id="2_qylq1"]
+[ext_resource type="Script" uid="uid://c4leudcqptmcr" path="res://assets/systems/water_physics/old/state_scripts/out_water.gd" id="3_68qmd"]
+[ext_resource type="Script" uid="uid://b8olaua2ew0h7" path="res://assets/systems/water_physics/old/state_scripts/probe_simulations.gd" id="4_xt212"]
+[ext_resource type="Script" uid="uid://odqq0ao2pomu" path="res://assets/systems/water_physics/old/state_scripts/simple_simulations.gd" id="5_xxf25"]
+[ext_resource type="Script" uid="uid://us53pnwft2um" path="res://assets/systems/water_physics/old/state_scripts/at_surface.gd" id="6_mg8q4"]
+[ext_resource type="Script" uid="uid://cko6ibtj3d68q" path="res://assets/systems/water_physics/old/state_scripts/in_water_sleeping.gd" id="7_v1d5w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyd5j"]
 albedo_color = Color(0.6, 1, 0.5, 1)

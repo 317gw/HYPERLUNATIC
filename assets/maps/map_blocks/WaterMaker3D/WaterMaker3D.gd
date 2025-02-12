@@ -22,8 +22,6 @@ var underwater_objects: Array = [] # 在水中的物体
 # var objects_volume: Array = [] # 物体体积
 var in_water_material: ShaderMaterial
 
-#var _gravity_vector: Vector3
-var _gravity: Vector3
 var check_camera_underwater: bool = false
 
 static var last_frame_drew_underwater_effect : int = -999
@@ -54,12 +52,10 @@ class WROSP: # WaterRippleOverlay shader_parameter
 func _ready() -> void:
 	await owner.ready
 	underwater_objects.clear()
-	_gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector").normalized()
 	#self.process_priority = 999 # Call _process last to update move after any camera movement
 	# 跳帧
-	frame_skiper = HL.FrameSkiper.new()
+	frame_skiper = HL.FrameSkiper.new(60)
 	self.add_child(frame_skiper)
-	frame_skiper.ready(60)
 
 	#if collision_shape_3d.shape is ConcavePolygonShape3D:
 		#var collision_shape: ConcavePolygonShape3D = collision_shape_3d.shape
@@ -105,7 +101,7 @@ func _physics_process(delta: float) -> void:
 			water_ripple_overlay.visible = false
 			water_ripple_overlay.process_mode = Node.PROCESS_MODE_DISABLED
 
-		wrosp_trg = Global.exponential_decay(wrosp_trg, wrosp_ori, delta*1.53333)
+		wrosp_trg = HL.exponential_decay(wrosp_trg, wrosp_ori, delta*1.53333)
 		in_water_material.set_shader_parameter("value_all", wrosp_trg)
 
 
@@ -143,7 +139,7 @@ func underwater_physics_process(delta: float) -> void:
 			if water_physics.should_at_surface:
 				water_physics.liquid_discharged_volume = obj.mass / self.density / frame_skiper.skiped_delta
 			var volume: float = water_physics.liquid_discharged_volume
-			var buoyancy_force: Vector3 = self.density * -_gravity * volume
+			var buoyancy_force: Vector3 = self.density * -Global.gravity * volume
 			buoyancy_force *= frame_skiper.skiped_delta
 			water_physics.buoyancy_force = buoyancy_force
 
@@ -168,7 +164,7 @@ func underwater_physics_process(delta: float) -> void:
 				) / 2.0
 			drag_force = drag_force / water_physics.resistance_probe_in_water.size()
 			drag_force *= delta
-			drag_force = min(drag_force.length(), (_gravity * obj.mass).length() ) * drag_force.normalized()
+			drag_force = min(drag_force.length(), (Global.gravity * obj.mass).length() ) * drag_force.normalized()
 			obj.apply_force(-drag_force, probe.global_position - obj.global_position)
 			DebugDraw.draw_line_relative(probe.global_position, -drag_force, Color(0.5, 0, 0, 1) )
 			water_physics.resistance_force += drag_force
@@ -189,7 +185,7 @@ func _on_swimmable_area_3d_body_entered(body: Node3D) -> void:
 					child.water_area.append(self)
 				break
 
-	if body is HL.Controller.Player:
+	if body is HL.Player:
 		check_camera_underwater = true
 
 
@@ -207,7 +203,7 @@ func _on_swimmable_area_3d_body_exited(body: Node3D) -> void:
 				break
 		underwater_objects.erase(body)
 
-	if body is HL.Controller.Player:
+	if body is HL.Player:
 		check_camera_underwater = false
 		water_ripple_overlay.visible = false
 		water_ripple_overlay.process_mode = Node.PROCESS_MODE_DISABLED

@@ -59,7 +59,6 @@ var _mesh_vertices: PackedVector3Array
 var _mesh_indices: PackedInt32Array
 var _mesh_normals: PackedVector3Array
 var _mesh_vertex_count: int = 0
-var _gravity: Vector3
 
 var frame_skiper: HL.FrameSkiper
 
@@ -69,13 +68,11 @@ var frame_skiper: HL.FrameSkiper
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 @onready var water_physics_state_machine: StateMachine = $WaterPhysicsStateMachine
 
-const PROBE = preload("res://assets/systems/water_physics/probe.tscn")
-
+#const PROBE = preload("res://assets/systems/water_physics/probe.tscn")
+const PROBE = preload("res://assets/systems/water_physics/old/probe.tscn")
 
 func _ready() -> void:
 	_parent_rigid_body = self.get_parent()
-	# 设置重力
-	_gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * ProjectSettings.get_setting("physics/3d/default_gravity_vector").normalized()
 	# 错误检查
 	if not _parent_rigid_body is RigidBody3D:
 		push_error("MeshVolume: Parent is not a RigidBody3D!")
@@ -89,9 +86,8 @@ func _ready() -> void:
 		push_error("MeshVolume: No mesh found!")
 		return
 	# 初始化跳帧
-	frame_skiper = HL.FrameSkiper.new()
+	frame_skiper = HL.FrameSkiper.new(60, 12)
 	self.add_child(frame_skiper)
-	frame_skiper.ready(60, 12)
 	# 初始化公用模型参数
 	_mesh_surface = _mesh.surface_get_arrays(0)
 	_mesh_vertices = _mesh_surface[Mesh.ARRAY_VERTEX]
@@ -131,7 +127,7 @@ func _ready() -> void:
 	mesh_instance_3d.global_position = global_position
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	current_state = water_physics_state_machine.current_state.name
 
 
@@ -151,7 +147,7 @@ func _physics_process(delta: float) -> void:
 			at_surface_time = at_surface_wait_time
 			should_at_surface = false
 		if at_surface_time <= 0:
-			#buoyancy_centre = Global.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
+			#buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
 			should_at_surface = true
 
 		#mesh_instance_3d.global_position = buoyancy_centre + global_position
@@ -177,7 +173,7 @@ func probe_simulations(delta: float, speed: float = 30, power: float = 1, use_hi
 
 	if buoyancy_probe_count > 0:
 		if buoyancy_centre_in_water_ratio == 1:
-			buoyancy_centre = Global.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta)
+			buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta)
 		else:
 			var target_buoyancy_centre = Vector3.ZERO
 			if buoyancy_centre_in_water_ratio != 1:
@@ -186,8 +182,8 @@ func probe_simulations(delta: float, speed: float = 30, power: float = 1, use_hi
 				target_buoyancy_centre /= float(buoyancy_probe_count)
 				target_buoyancy_centre -= global_position
 			buoyancy_centre_lest_frame = buoyancy_centre
-			buoyancy_centre = Global.exponential_decay_vec3(buoyancy_centre, target_buoyancy_centre, delta)
-		liquid_discharged_volume = Global.exponential_decay(liquid_discharged_volume, volume * (buoyancy_centre_in_water_ratio ** 2) * power, delta)
+			buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, target_buoyancy_centre, delta)
+		liquid_discharged_volume = HL.exponential_decay(liquid_discharged_volume, volume * (buoyancy_centre_in_water_ratio ** 2) * power, delta)
 	else:
 		buoyancy_centre = Vector3.ZERO
 		liquid_discharged_volume = 0.0
@@ -195,11 +191,11 @@ func probe_simulations(delta: float, speed: float = 30, power: float = 1, use_hi
 
 func simple_simulations(delta: float, smoothly: bool = false) -> void:
 	sleeping = false
-	#buoyancy_centre = Global.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
+	#buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
 	buoyancy_centre = Vector3.ZERO
 	if smoothly:
 		var target_volume: float = volume * clamp(max(high_diff, 0.0) / max(_mesh_volume_sphere_radius, 0.001), 0.0, 1.0)
-		liquid_discharged_volume = Global.exponential_decay(liquid_discharged_volume, target_volume, delta*20)
+		liquid_discharged_volume = HL.exponential_decay(liquid_discharged_volume, target_volume, delta*20)
 	else:
 		liquid_discharged_volume = volume * clamp(max(high_diff, 0.0) / max(_mesh_volume_sphere_radius, 0.001), 0.0, 1.0)
 	#if should_at_surface:
@@ -249,7 +245,7 @@ func at_surface_pid(delta: float) -> void:
 
 
 func in_water_sleeping() -> void:
-	_parent_rigid_body.apply_central_force(-_gravity * _parent_rigid_body.mass)
+	_parent_rigid_body.apply_central_force(-Global.gravity * _parent_rigid_body.mass)
 	_parent_rigid_body.linear_velocity *= 0.99
 	_parent_rigid_body.angular_velocity *= 0.99
 

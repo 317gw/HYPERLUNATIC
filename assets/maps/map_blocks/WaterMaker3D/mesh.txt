@@ -314,4 +314,3 @@ enum BlendShapeMode:
 为给定表面设置 Material。表面将使用该材质进行渲染。
 
 注意：这会分配 Mesh 资源中的材质，而不是与 MeshInstance3D 的表面材质覆盖属性关联的 Material。要设置与 MeshInstance3D 的表面材质覆盖属性关联的 Material，请改用 MeshInstance3D.set_surface_override_material()。
-

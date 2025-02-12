@@ -1,7 +1,8 @@
-class_name WaterPhysicsAdder
+#class_name WaterPhysicsAdder
 extends Area3D
 
-const WATER_PHYSICS = preload("res://assets/systems/water_physics/water_physics.tscn")
+#const WATER_PHYSICS = preload("res://assets/systems/water_physics/water_physics.tscn")
+const WATER_PHYSICS = preload("res://assets/systems/water_physics/old/water_physics.tscn")
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is RigidBody3D:

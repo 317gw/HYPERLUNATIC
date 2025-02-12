@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://14he2f65hnly"]
+
+[ext_resource type="Script" uid="uid://dp2yy3c34dx6w" path="res://assets/systems/water_physics/scripts/fluid_mechanics.gd" id="1_66mn8"]
+
+[node name="FluidMechanics" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_66mn8")

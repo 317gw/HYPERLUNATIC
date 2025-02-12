@@ -1,11 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://ca0wevg1lb4rx"]
+[gd_scene load_steps=18 format=3 uid="uid://ca0wevg1lb4rx"]
 
-[ext_resource type="Script" path="res://assets/maps/map_blocks/WaterMaker3D/WaterMaker3D.gd" id="1_7s6ww"]
-[ext_resource type="Shader" path="res://assets/shaders/waters/water3d202409.gdshader" id="1_shk2g"]
-[ext_resource type="Texture2D" uid="uid://c17swbjodnlcl" path="res://assets/textures/water/spume_normal_512.png" id="2_l7ua0"]
-[ext_resource type="Texture2D" uid="uid://dmsyagyieahoy" path="res://assets/textures/water/Ocean_normal_512.png" id="3_rxtgm"]
-[ext_resource type="Texture2D" uid="uid://bye687yl2sesr" path="res://assets/textures/water/spume_mask_512.png" id="4_3wf25"]
-[ext_resource type="Shader" path="res://assets/shaders/waters/CameraWaterOverlay.gdshader" id="5_536xd"]
+[ext_resource type="Script" uid="uid://ka4dhvqbwdib" path="res://assets/maps/map_blocks/WaterMaker3D/WaterMaker3D.gd" id="1_7s6ww"]
+[ext_resource type="Shader" uid="uid://cnhxxxmoqfip4" path="res://assets/arts_graphic/shaders/waters/water3d202409.gdshader" id="1_shk2g"]
+[ext_resource type="Texture2D" uid="uid://c17swbjodnlcl" path="res://assets/arts_graphic/textures/water/spume_normal_512.png" id="2_l7ua0"]
+[ext_resource type="Texture2D" uid="uid://dmsyagyieahoy" path="res://assets/arts_graphic/textures/water/Ocean_normal_512.png" id="3_rxtgm"]
+[ext_resource type="Texture2D" uid="uid://bye687yl2sesr" path="res://assets/arts_graphic/textures/water/spume_mask_512.png" id="4_3wf25"]
+[ext_resource type="Shader" uid="uid://cf1ljx74b0dtk" path="res://assets/arts_graphic/shaders/waters/CameraWaterOverlay.gdshader" id="5_536xd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_paeh5"]
 resource_local_to_scene = true
@@ -19,16 +19,6 @@ frequency = 0.03
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uowjy"]
 seamless = true
 noise = SubResource("FastNoiseLite_k6yyt")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_3wsdx"]
-frequency = 0.0011
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_skxl6"]
-width = 64
-height = 64
-seamless = true
-seamless_blend_skirt = 1.0
-noise = SubResource("FastNoiseLite_3wsdx")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_h8wdc"]
 
@@ -64,8 +54,6 @@ shader_parameter/normal_noise_scale = 1.0
 shader_parameter/normal_noise_lod = 4.0
 shader_parameter/normal_noise_angle = 3.14159
 shader_parameter/texture_normal = ExtResource("3_rxtgm")
-shader_parameter/texture_normal_noise1 = SubResource("NoiseTexture2D_skxl6")
-shader_parameter/texture_normal_noise2 = SubResource("NoiseTexture2D_skxl6")
 shader_parameter/uv1_scale = Vector3(0.1, 0.1, 0.1)
 shader_parameter/uv2_scale = Vector3(0.01, 0.01, 0.01)
 shader_parameter/uv1_speed = Vector3(0.01, 0.01, 0.01)
@@ -104,7 +92,7 @@ shader_parameter/near_fade_max = 0.22
 [sub_resource type="SphereShape3D" id="SphereShape3D_yfdbl"]
 radius = 0.1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccyp1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spewy"]
 resource_local_to_scene = true
 shader = ExtResource("5_536xd")
 shader_parameter/color = Color(0.501961, 0.917647, 1, 1)
@@ -115,7 +103,7 @@ shader_parameter/ripple_strength = 0.01
 shader_parameter/blur_radius = 0.05
 shader_parameter/blur_count = 1.0
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dcd7l"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_asgd1"]
 
 [node name="WaterMaker3D" type="CSGMesh3D"]
 process_mode = 1
@@ -136,6 +124,7 @@ linear_damp = 0.5
 angular_damp = 0.5
 
 [node name="CameraPosShapeCast3D" type="ShapeCast3D" parent="."]
+visible = false
 enabled = false
 shape = SubResource("SphereShape3D_yfdbl")
 exclude_parent = false
@@ -145,16 +134,16 @@ collide_with_areas = true
 
 [node name="WaterRippleOverlay" type="TextureRect" parent="."]
 visible = false
-z_index = -10
+z_index = 1
 z_as_relative = false
-material = SubResource("ShaderMaterial_ccyp1")
+material = SubResource("ShaderMaterial_spewy")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("PlaceholderTexture2D_dcd7l")
+texture = SubResource("PlaceholderTexture2D_asgd1")
 
 [connection signal="area_entered" from="SwimmableArea3D" to="." method="_on_swimmable_area_3d_area_entered"]
 [connection signal="area_exited" from="SwimmableArea3D" to="." method="_on_swimmable_area_3d_area_exited"]

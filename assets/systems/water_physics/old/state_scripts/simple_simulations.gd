@@ -3,7 +3,7 @@ extends State
 
 var no_surface: bool = false
 
-@onready var water_physics: WaterPhysics = $"../.."
+@onready var water_physics: Node3D = $"../.."
 @onready var mesh_instance_3d: MeshInstance3D = $"../../MeshInstance3D"
 @onready var buoyancy_probe: Node3D = $"../../BuoyancyProbe"
 @onready var resistance_probe: Node3D = $"../../ResistanceProbe"
@@ -23,7 +23,7 @@ func Physics_Update(_delta: float) -> void:
 		water_physics.buoyancy_centre_clamp()
 	else:
 		no_surface = true
-		water_physics.liquid_discharged_volume = Global.exponential_decay(water_physics.liquid_discharged_volume, water_physics.volume * 0.5, _delta*20)
+		water_physics.liquid_discharged_volume = HL.exponential_decay(water_physics.liquid_discharged_volume, water_physics.volume * 0.5, _delta*20)
 		water_physics.buoyancy_centre = Vector3.ZERO
 
 	#water_physics.simple_simulations(_delta)

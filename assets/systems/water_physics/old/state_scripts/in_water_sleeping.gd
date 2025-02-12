@@ -2,7 +2,7 @@ class_name InWaterSleeping
 extends State
 
 
-@onready var water_physics: WaterPhysics = $"../.."
+@onready var water_physics: Node3D = $"../.."
 @onready var mesh_instance_3d: MeshInstance3D = $"../../MeshInstance3D"
 @onready var buoyancy_probe: Node3D = $"../../BuoyancyProbe"
 @onready var resistance_probe: Node3D = $"../../ResistanceProbe"

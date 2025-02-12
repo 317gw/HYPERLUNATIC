@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjsic3dfuev4j"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_svim7"]
+radius = 0.04
+height = 0.08
+radial_segments = 6
+rings = 3
+
+[node name="PM" type="MeshInstance3D"]
+cast_shadow = 0
+mesh = SubResource("SphereMesh_svim7")

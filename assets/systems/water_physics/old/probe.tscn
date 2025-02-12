@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dcxsldjetp6jb"]
 
-[ext_resource type="Script" path="res://assets/systems/water_physics/scripts/probe.gd" id="1_m5svb"]
+[ext_resource type="Script" uid="uid://bpnq1iyrbgyyo" path="res://assets/systems/water_physics/old/scripts/probe.gd" id="1_m5svb"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_xbs6u"]
 radius = 0.05
@@ -19,6 +19,7 @@ collision_mask = 512
 script = ExtResource("1_m5svb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = SubResource("SphereMesh_xbs6u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

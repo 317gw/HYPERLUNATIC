@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://gf18oglphnsv"]
+
+[ext_resource type="Script" uid="uid://ccrfvwv574lfb" path="res://assets/systems/water_physics/scripts/fluid_mechanics_manager.gd" id="1_iqkyk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gx1v5"]
+margin = 10.0
+radius = 200.0
+
+[sub_resource type="MultiMesh" id="MultiMesh_iqkyk"]
+
+[node name="FluidMechanicsManager" type="Node3D"]
+script = ExtResource("1_iqkyk")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_gx1v5")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="MultiProbeBuoy" type="MultiMeshInstance3D" parent="."]
+visible = false
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_iqkyk")
+
+[node name="MultiProbeSlice" type="MultiMeshInstance3D" parent="."]
+visible = false
+cast_shadow = 0
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

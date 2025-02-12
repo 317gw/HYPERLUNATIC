@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dc5dmc4u3bymp"]
 
-[ext_resource type="Shader" uid="uid://r86j8h8vgsav" path="res://assets/materials/displacement_n_uvscroll.tres" id="1_qi4dj"]
-[ext_resource type="Texture2D" uid="uid://dh4d4tknxe2ks" path="res://assets/textures/waterfall_texture_colored_0001_waterfall_texture_inv-拷贝.png" id="2_6w0oj"]
-[ext_resource type="Texture2D" uid="uid://ck50hv0xabsws" path="res://assets/textures/waterfall_texture_colored_0002_waterfall_texture-拷贝.png" id="3_0i00w"]
+[ext_resource type="Shader" uid="uid://r86j8h8vgsav" path="res://assets/arts_graphic/materials/displacement_n_uvscroll.tres" id="1_qi4dj"]
+[ext_resource type="Texture2D" uid="uid://dh4d4tknxe2ks" path="res://assets/arts_graphic/textures/waterfall_texture_colored_0001_waterfall_texture_inv-拷贝.png" id="2_6w0oj"]
+[ext_resource type="Texture2D" uid="uid://ck50hv0xabsws" path="res://assets/arts_graphic/textures/waterfall_texture_colored_0002_waterfall_texture-拷贝.png" id="3_0i00w"]
 
 [sub_resource type="Gradient" id="Gradient_we5wm"]
 offsets = PackedFloat32Array(0, 0.5, 1)

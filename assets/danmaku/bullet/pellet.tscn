@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://beflirj640wgt"]
 
-[ext_resource type="Script" path="res://assets/danmaku/scripts/pellet.gd" id="1_55t3o"]
-[ext_resource type="Shader" path="res://assets/shaders/danmaku_ring.gdshader" id="2_dyoly"]
+[ext_resource type="Script" uid="uid://ctrlnepbcqac5" path="res://assets/danmaku/scripts/pellet.gd" id="1_55t3o"]
+[ext_resource type="Shader" uid="uid://d0d0qfyxh4nci" path="res://assets/arts_graphic/shaders/danmaku_ring.gdshader" id="2_dyoly"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jah5q"]
 shading_mode = 0

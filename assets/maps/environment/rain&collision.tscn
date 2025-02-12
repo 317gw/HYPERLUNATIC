@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bhrv00rek3783"]
 
-[ext_resource type="Material" uid="uid://c6t0m2riv275" path="res://assets/materials/rain_particles.tres" id="1_xihll"]
+[ext_resource type="Material" uid="uid://c6t0m2riv275" path="res://assets/arts_graphic/materials/rain_particles.tres" id="1_xihll"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fhktv"]
 emission_shape_offset = Vector3(0, 40, 0)

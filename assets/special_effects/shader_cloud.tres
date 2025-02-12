@@ -1,6 +1,6 @@
 [gd_resource type="QuadMesh" load_steps=2 format=3 uid="uid://pa0t7xpxdb15"]
 
-[ext_resource type="Material" uid="uid://77pilefsig7j" path="res://assets/materials/cloud_ball2.tres" id="1_ng8ig"]
+[ext_resource type="Material" uid="uid://77pilefsig7j" path="res://assets/arts_graphic/materials/cloud_ball2.tres" id="1_ng8ig"]
 
 [resource]
 resource_local_to_scene = true

@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://3b7n54dfsnvo"]
+
+[ext_resource type="Shader" uid="uid://cgyxreti5ltwg" path="res://assets/arts_graphic/shaders/cloud_ball.gdshader" id="1_jmc5i"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j332t"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jmc5i")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_power = 1.0
+shader_parameter/ex_power = 1.0
+shader_parameter/alpha_power = 3.0
+shader_parameter/texture_cloud = SubResource("CompressedTexture2D_j332t")
+shader_parameter/particles_anim_h_frames = 1
+shader_parameter/particles_anim_v_frames = 1
+shader_parameter/frame = 0.0
+shader_parameter/particles_anim_loop = false
+shader_parameter/roughness = 1.0
+shader_parameter/fresnel = 1.0
+shader_parameter/bsdf_back_clamp = -0.03
+shader_parameter/bsdf_clamp_min = -0.2
+shader_parameter/bsdf_clamp_max = 1.0
+shader_parameter/back_power = 1.0
+shader_parameter/bsdf_color = Color(1, 1, 1, 1)
+shader_parameter/enable_geometric_masking_functions = false

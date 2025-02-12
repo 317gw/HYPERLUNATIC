@@ -1,11 +1,11 @@
 [gd_scene load_steps=23 format=3 uid="uid://iwii2nshhfsm"]
 
-[ext_resource type="Script" path="res://assets/maps/levels/scripts/conway's_game_of_life.gd" id="1_xigbc"]
-[ext_resource type="Script" path="res://assets/maps/levels/scripts/Map.gd" id="2_6oine"]
-[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="3_nij8b"]
-[ext_resource type="Shader" uid="uid://cysn3jagchegr" path="res://assets/shaders/cell_blocks.tres" id="3_x7x2w"]
-[ext_resource type="Script" path="res://assets/maps/levels/scripts/GridMap.gd" id="4_yujyx"]
-[ext_resource type="Script" path="res://assets/maps/levels/scripts/DepthMap.gd" id="5_mg2tk"]
+[ext_resource type="Script" uid="uid://c36p2jdtnpryh" path="res://assets/maps/levels/scripts/conway's_game_of_life.gd" id="1_xigbc"]
+[ext_resource type="Script" uid="uid://cljvxggio446m" path="res://assets/maps/levels/scripts/Map.gd" id="2_6oine"]
+[ext_resource type="Texture2D" path="res://assets/textures/grid.jpg" id="3_nij8b"]
+[ext_resource type="Shader" uid="uid://cysn3jagchegr" path="res://assets/arts_graphic/shaders/cell_blocks.tres" id="3_x7x2w"]
+[ext_resource type="Script" uid="uid://bs51hhgm2ofwk" path="res://assets/maps/levels/scripts/GridMap.gd" id="4_yujyx"]
+[ext_resource type="Script" uid="uid://duki6nk705vps" path="res://assets/maps/levels/scripts/DepthMap.gd" id="5_mg2tk"]
 
 [sub_resource type="Shader" id="Shader_ru41t"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.1.dev4's StandardMaterial3D.

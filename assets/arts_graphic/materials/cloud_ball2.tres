@@ -1,0 +1,67 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://77pilefsig7j"]
+
+[ext_resource type="Shader" uid="uid://if2wi3lgse28" path="res://assets/arts_graphic/shaders/cloud_ball2.gdshader" id="1_wqh7p"]
+[ext_resource type="Texture2D" uid="uid://ev7uemgsdbf7" path="res://assets/arts_graphic/textures/云3x4片512_2_export.png" id="2_kul5k"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h65ud"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m4xvd"]
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource("FastNoiseLite_h65ud")
+
+[sub_resource type="Gradient" id="Gradient_s8hp8"]
+interpolation_color_space = 1
+colors = PackedColorArray(0.589903, 0.589903, 0.589903, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kfcir"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7mo7q"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_s8hp8")
+noise = SubResource("FastNoiseLite_kfcir")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_wqh7p")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_power = 1.0
+shader_parameter/ex_power = 5.0
+shader_parameter/alpha_pow = 1.0
+shader_parameter/alpha_power = 1.0
+shader_parameter/albedo_clamp_max = 5.0
+shader_parameter/texture_cloud = ExtResource("2_kul5k")
+shader_parameter/particles_anim_h_frames = 3
+shader_parameter/particles_anim_v_frames = 4
+shader_parameter/frame = 0.0
+shader_parameter/particles_anim_loop = false
+shader_parameter/brightness = 0.9
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/mix_color = Color(1, 1, 1, 1)
+shader_parameter/noise_speed1 = 0.01
+shader_parameter/noise_max1 = 0.5
+shader_parameter/noise_mix1 = 1.0
+shader_parameter/color_noise = SubResource("NoiseTexture2D_7mo7q")
+shader_parameter/noise_speed2 = 0.01
+shader_parameter/noise_max2 = 0.5
+shader_parameter/noise_mix2 = 0.0
+shader_parameter/alpha_noise = SubResource("NoiseTexture2D_m4xvd")
+shader_parameter/roughness = 0.5
+shader_parameter/fresnel = 1.0
+shader_parameter/bsdf_back_clamp = -0.14
+shader_parameter/bsdf_clamp_min = -0.2
+shader_parameter/bsdf_clamp_max = 2.0
+shader_parameter/back_power = 0.8
+shader_parameter/back_color_pow = 1.0
+shader_parameter/bsdf_color = Color(1, 1, 1, 1)
+shader_parameter/enable_geometric_masking_functions = false
+shader_parameter/ues_fade_by_distance = true
+shader_parameter/fade_distance = 6.0
+shader_parameter/fade_power = 15.0
+shader_parameter/multi = 100.0
+shader_parameter/character_position = Vector3(0, 0, 0)

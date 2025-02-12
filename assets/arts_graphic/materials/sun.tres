@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://chil6k0jf85by"]
+
+[ext_resource type="Shader" uid="uid://cj1fwrqa5t5mt" path="res://assets/arts_graphic/shaders/sun.gdshader" id="1_kkb0u"]
+[ext_resource type="Texture2D" uid="uid://exxg2iqmxogm" path="res://assets/arts_graphic/textures/sun/512_sun.png" id="2_3atr5"]
+[ext_resource type="Gradient" uid="uid://dhnfmwb85ltaf" path="res://assets/arts_graphic/resources/sun_gradient.tres" id="3_xnqnq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h52s6"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u2yg5"]
+in_3d_space = true
+seamless = true
+color_ramp = ExtResource("3_xnqnq")
+noise = SubResource("FastNoiseLite_h52s6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7w86u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ukq57"]
+seamless = true
+color_ramp = ExtResource("3_xnqnq")
+noise = SubResource("FastNoiseLite_7w86u")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kkb0u")
+shader_parameter/Glow_Power = 10.0
+shader_parameter/Lightness_Difference = 1.0
+shader_parameter/fresnel = 1.0
+shader_parameter/waveSpeed = 0.1
+shader_parameter/sunWaveSpeed = 0.5
+shader_parameter/scale = 0.01
+shader_parameter/blendSharpness = 0.0
+shader_parameter/Sun_Color = Color(1, 1, 1, 1)
+shader_parameter/Sun_Texture = ExtResource("2_3atr5")
+shader_parameter/voronoi_noise = SubResource("NoiseTexture2D_ukq57")
+shader_parameter/emission_noise = SubResource("NoiseTexture2D_u2yg5")

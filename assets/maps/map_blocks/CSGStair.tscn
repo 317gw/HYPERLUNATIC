@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bak8ltrhbmlv5"]
 
-[ext_resource type="Script" path="res://assets/maps/map_blocks/scripts/CSGStair.tres.gd" id="1_ce5eq"]
-[ext_resource type="Shader" path="res://assets/shaders/grid202410.gdshader" id="1_gks7w"]
-[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/textures/grid2.png" id="2_1cn1p"]
+[ext_resource type="Script" uid="uid://d0dyq1g8reckt" path="res://assets/maps/map_blocks/scripts/CSGStair.tres.gd" id="1_ce5eq"]
+[ext_resource type="Shader" uid="uid://cw6oiihwa0fgm" path="res://assets/arts_graphic/shaders/grid202410.gdshader" id="1_gks7w"]
+[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/arts_graphic/textures/grid2.png" id="2_1cn1p"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ramyb"]
 noise_type = 0

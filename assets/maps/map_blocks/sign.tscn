@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddvfv3jnldvx1"]
 
-[ext_resource type="Script" path="res://assets/maps/map_blocks/scripts/sign.gd" id="1_lhwlw"]
-[ext_resource type="Shader" path="res://assets/shaders/grid202410.gdshader" id="2_qn65j"]
-[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/textures/grid2.png" id="3_vp63u"]
+[ext_resource type="Script" uid="uid://biual5b6714i0" path="res://assets/maps/map_blocks/scripts/sign.gd" id="1_lhwlw"]
+[ext_resource type="Shader" uid="uid://cw6oiihwa0fgm" path="res://assets/arts_graphic/shaders/grid202410.gdshader" id="2_qn65j"]
+[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/arts_graphic/textures/grid2.png" id="3_vp63u"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ramyb"]
 noise_type = 0

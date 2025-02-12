@@ -1,6 +1,6 @@
 [gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://b3xg1hs8wt6jr"]
 
-[ext_resource type="Material" uid="uid://028htewwsm0q" path="res://assets/materials/explode_white.tres" id="1_rdsag"]
+[ext_resource type="Material" uid="uid://028htewwsm0q" path="res://assets/arts_graphic/materials/explode_white.tres" id="1_rdsag"]
 
 [resource]
 material = ExtResource("1_rdsag")

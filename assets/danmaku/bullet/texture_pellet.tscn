@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://34f26nn5pmjo"]
 
-[ext_resource type="Texture2D" uid="uid://dg0hmgykno87d" path="res://assets/textures/弹幕环.png" id="1_e7d2m"]
-[ext_resource type="Texture2D" uid="uid://c0tufnc5aorr4" path="res://assets/textures/弹幕中心.png" id="2_rbdyd"]
-[ext_resource type="Script" path="res://assets/danmaku/scripts/texture_pellet.gd" id="3_045y0"]
+[ext_resource type="Texture2D" uid="uid://dg0hmgykno87d" path="res://assets/arts_graphic/textures/弹幕环.png" id="1_e7d2m"]
+[ext_resource type="Texture2D" uid="uid://c0tufnc5aorr4" path="res://assets/arts_graphic/textures/弹幕中心.png" id="2_rbdyd"]
+[ext_resource type="Script" uid="uid://dybnujfsgt28d" path="res://assets/danmaku/scripts/texture_pellet.gd" id="3_045y0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_maswp"]
 resource_local_to_scene = true

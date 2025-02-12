@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://cwx6o51d466wq"]
 
-[ext_resource type="Script" path="res://assets/weapons/scripts/explode.gd" id="1_3lniu"]
+[ext_resource type="Script" uid="uid://ddeeveoky6dwd" path="res://assets/weapons/scripts/explode.gd" id="1_3lniu"]
 [ext_resource type="AudioStream" uid="uid://c2jlqohrs0522" path="res://assets/audio/爆炸1 100773__cgeffex__impact-explosion.wav" id="2_pnhiv"]
-[ext_resource type="Texture2D" uid="uid://b3crtbvn0ikch" path="res://assets/textures/3烟64没尾巴.png" id="4_r2mfm"]
+[ext_resource type="Texture2D" uid="uid://b3crtbvn0ikch" path="res://assets/arts_graphic/textures/3烟64没尾巴.png" id="4_r2mfm"]
 [ext_resource type="Texture2D" uid="uid://b6mh4yhqbh84" path="res://assets/special_effects/衰减曲线.tres" id="6_ktnxl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lxgn7"]

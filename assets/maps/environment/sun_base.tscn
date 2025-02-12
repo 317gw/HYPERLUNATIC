@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://du85v8jerwcaf"]
 
-[ext_resource type="Shader" path="res://assets/shaders/sun_ring.gdshader" id="1_mip3l"]
-[ext_resource type="Texture2D" uid="uid://ci7yt7nbv0hqr" path="res://assets/arts_resources/sun_ring_noise.tres" id="2_2wp0c"]
-[ext_resource type="Gradient" uid="uid://dhnfmwb85ltaf" path="res://assets/arts_resources/sun_gradient.tres" id="3_ynwcv"]
-[ext_resource type="Material" uid="uid://chil6k0jf85by" path="res://assets/materials/sun.tres" id="4_hua1m"]
+[ext_resource type="Shader" uid="uid://nfrs4ccjwsqc" path="res://assets/arts_graphic/shaders/sun_ring.gdshader" id="1_mip3l"]
+[ext_resource type="Texture2D" uid="uid://ci7yt7nbv0hqr" path="res://assets/arts_graphic/resources/sun_ring_noise.tres" id="2_2wp0c"]
+[ext_resource type="Gradient" uid="uid://dhnfmwb85ltaf" path="res://assets/arts_graphic/resources/sun_gradient.tres" id="3_ynwcv"]
+[ext_resource type="Material" uid="uid://chil6k0jf85by" path="res://assets/arts_graphic/materials/sun.tres" id="4_hua1m"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_cmuiu"]
 frequency = 0.05

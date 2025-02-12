@@ -1,11 +1,11 @@
 [gd_scene load_steps=22 format=3 uid="uid://m2y1ntw2rfx3"]
 
-[ext_resource type="Material" uid="uid://3b7n54dfsnvo" path="res://assets/materials/cloud_ball.tres" id="1_oruoi"]
-[ext_resource type="Shader" uid="uid://bife4g36wb5h7" path="res://assets/shaders/cloud_particles.tres" id="2_w8fe2"]
-[ext_resource type="Texture2D" uid="uid://ev7uemgsdbf7" path="res://assets/textures/云3x4片512_2_export.png" id="3_prhfs"]
+[ext_resource type="Material" uid="uid://3b7n54dfsnvo" path="res://assets/arts_graphic/materials/cloud_ball.tres" id="1_oruoi"]
+[ext_resource type="Shader" uid="uid://bife4g36wb5h7" path="res://assets/arts_graphic/shaders/cloud_particles.tres" id="2_w8fe2"]
+[ext_resource type="Texture2D" uid="uid://ev7uemgsdbf7" path="res://assets/arts_graphic/textures/云3x4片512_2_export.png" id="3_prhfs"]
 [ext_resource type="PackedScene" uid="uid://nodfbtkaprwb" path="res://assets/special_effects/cloud_sprites.tscn" id="4_7rkm3"]
 [ext_resource type="PackedScene" uid="uid://dgl3ng1l80q71" path="res://assets/special_effects/shader_cloud.tscn" id="5_rgfc3"]
-[ext_resource type="Shader" path="res://assets/shaders/cloud_ball2.gdshader" id="6_pkaev"]
+[ext_resource type="Shader" uid="uid://if2wi3lgse28" path="res://assets/arts_graphic/shaders/cloud_ball2.gdshader" id="6_pkaev"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_o0skb"]
 material = ExtResource("1_oruoi")

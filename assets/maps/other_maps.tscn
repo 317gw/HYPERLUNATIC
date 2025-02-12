@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=3 uid="uid://yqkq8snvew0p"]
 
-[ext_resource type="Shader" path="res://assets/shaders/top_cloud.gdshader" id="1_rutse"]
-[ext_resource type="Shader" path="res://assets/shaders/bottom_cloud.gdshader" id="2_0i8ra"]
-[ext_resource type="Material" uid="uid://dgt8ovuurj2rt" path="res://assets/materials/sea2.tres" id="3_0udkl"]
-[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="4_5hxfp"]
+[ext_resource type="Shader" uid="uid://u7r8vxdjt1o6" path="res://assets/arts_graphic/shaders/top_cloud.gdshader" id="1_rutse"]
+[ext_resource type="Shader" uid="uid://cirae8exw286r" path="res://assets/arts_graphic/shaders/bottom_cloud.gdshader" id="2_0i8ra"]
+[ext_resource type="Material" uid="uid://dgt8ovuurj2rt" path="res://assets/arts_graphic/materials/sea2.tres" id="3_0udkl"]
+[ext_resource type="Texture2D" path="res://assets/textures/grid.jpg" id="4_5hxfp"]
 [ext_resource type="PackedScene" uid="uid://iwii2nshhfsm" path="res://assets/maps/levels/conway's_game_of_life.tscn" id="5_3vm7a"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vsrpy"]

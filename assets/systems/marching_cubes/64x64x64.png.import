@@ -1,0 +1,26 @@
+[remap]
+
+importer="3d_texture"
+type="CompressedTexture3D"
+uid="uid://c15es5m28ycil"
+path="res://.godot/imported/64x64x64.png-1ba010bc9c2aa215e8a2609ac83e8293.ctex3d"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/systems/marching_cubes/64x64x64.png"
+dest_files=["res://.godot/imported/64x64x64.png-1ba010bc9c2aa215e8a2609ac83e8293.ctex3d"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=8
+slices/vertical=8

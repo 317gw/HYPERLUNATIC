@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0xy8c163daqj"]
+
+[ext_resource type="Script" uid="uid://b7hjv4p7d4ure" path="res://assets/systems/marching_cubes/war_fog.gd" id="1_3brnc"]
+[ext_resource type="Script" uid="uid://bm4av1du4v0cc" path="res://assets/systems/marching_cubes/marching_cubes.gd" id="2_yrrb0"]
+[ext_resource type="Script" uid="uid://clapf1qwekwl5" path="res://assets/systems/marching_cubes/gpu_marching_cubes.gd" id="3_8s13r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3brnc"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+cull_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrrb0"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_47oc1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yrrb0"]
+
+[node name="WarFog" type="Node3D"]
+process_thread_group = 2
+process_thread_group_order = -1
+process_thread_messages = 3
+script = ExtResource("1_3brnc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_3brnc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_yrrb0")
+script = ExtResource("2_yrrb0")
+RESOLUTION = 16
+NOISE = SubResource("FastNoiseLite_47oc1")
+FLAT_SHADED = true
+DISABLED_EDGES = 63
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_yrrb0")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+visible = false
+script = ExtResource("3_8s13r")

@@ -1,0 +1,32 @@
+设置 GENERATE
+Time to update buffer: 98 ms
+Time to dispatch uniforms: 10 μs
+Time to submit and sync: 591 μs
+Time to read back buffer: 62 ms
+Time iterate vertices: 8 ms
+Total vertices 39588
+Time to create with array mesh: 1 ms
+Time to create with surface tool: 12 ms
+Terrain generated in: 0.191s
+设置 mesh
+设置 GENERATE
+Time to update buffer: 97 ms
+Time to dispatch uniforms: 12 μs
+Time to submit and sync: 2 ms
+Time to read back buffer: 47 ms
+Time iterate vertices: 8 ms
+Total vertices 39588
+Time to create with array mesh: 1 ms
+Time to create with surface tool: 11 ms
+Terrain generated in: 0.176s
+设置 mesh
+设置 GENERATE
+Time to update buffer: 96 ms
+Time to dispatch uniforms: 12 μs
+Time to submit and sync: 2 ms
+Time to read back buffer: 46 ms
+Time iterate vertices: 8 ms
+Total vertices 39588
+Time to create with array mesh: 1 ms
+Time to create with surface tool: 12 ms
+Terrain generated in: 0.175s

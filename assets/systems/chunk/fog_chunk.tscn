@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://2hq1rrticgar"]
+
+[ext_resource type="Script" uid="uid://bm4av1du4v0cc" path="res://assets/systems/marching_cubes/marching_cubes.gd" id="1_36h2f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c8q4"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+
+[node name="FogChunk" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_3c8q4")
+script = ExtResource("1_36h2f")
+RESOLUTION = 8
+ISO_LEVEL = 0.5
+FLAT_SHADED = true
+DISABLED_EDGES = 63

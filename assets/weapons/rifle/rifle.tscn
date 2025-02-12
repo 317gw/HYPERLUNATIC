@@ -1,6 +1,6 @@
 [gd_scene load_steps=53 format=4 uid="uid://boandfdhseyio"]
 
-[ext_resource type="Script" path="res://assets/weapons/rifle/rifle.gd" id="1_e3ixt"]
+[ext_resource type="Script" uid="uid://wqbcjd7emh6y" path="res://assets/weapons/rifle/rifle.gd" id="1_e3ixt"]
 [ext_resource type="Texture2D" uid="uid://1t46v5piq0sb" path="res://assets/weapons/rifle/步枪全新ps基本色.png" id="2_feowk"]
 [ext_resource type="Texture2D" uid="uid://f3rjpxen3782" path="res://assets/weapons/rifle/步枪全新ps粗糙.png" id="3_n2veh"]
 [ext_resource type="Texture2D" uid="uid://28b75hr5073f" path="res://assets/weapons/rifle/步枪法线ps512大大修后修.png" id="4_dqfry"]
@@ -472,9 +472,9 @@ tracks/3/keys = PackedFloat32Array(0, 1, -0.243538, 0.243538, -0.663844, 0.66384
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3y3y3"]
 _data = {
-"RESET": SubResource("Animation_3l57r"),
-"大开火加退弹": SubResource("Animation_bkwv6"),
-"闲置": SubResource("Animation_bh8aa")
+&"RESET": SubResource("Animation_3l57r"),
+&"大开火加退弹": SubResource("Animation_bkwv6"),
+&"闲置": SubResource("Animation_bh8aa")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6l3v"]
@@ -677,7 +677,7 @@ bones/0/name = "枪根"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -9.7388e-18, 0, 0, 0, 1, -9.7388e-18, -1, 0, 1.11022e-17, 0.063, 0.38)
 bones/0/enabled = true
-bones/0/position = Vector3(-0.00121476, 0.061601, 0.38)
+bones/0/position = Vector3(0.00105932, 0.0643021, 0.38)
 bones/0/rotation = Quaternion(-0.707107, 3.44319e-18, 3.44319e-18, 0.707107)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "大栓"
@@ -750,7 +750,7 @@ skin = SubResource("Skin_2kuhr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="低多边步枪"]
 libraries = {
-"": SubResource("AnimationLibrary_3y3y3")
+&"": SubResource("AnimationLibrary_3y3y3")
 }
 
 [node name="WallLimitMarker" type="Marker3D" parent="."]

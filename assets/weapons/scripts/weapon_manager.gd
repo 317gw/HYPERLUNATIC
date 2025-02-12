@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var PLAYER: HL.Player
+@export var CAMERA: HL.Camera
 @export var initial_weapon: HL.Weapon
 @export var print_transition: bool = false
 
@@ -18,14 +20,23 @@ func _ready() -> void:
 			child.weapon_manager = self
 			child.Transitioned.connect(on_child_transition)
 			player_weapons[child.name.to_lower()] = child
+			child._switch_visible(false) # 显示保险
+			child.on_weapon_manager_ready()
 	if initial_weapon:
 		initial_weapon.Enter()
 		current_weapon = initial_weapon
+		initial_weapon._switch_visible(true)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_weapon:
 		current_weapon.Handle_Input(event)
+	
+	# switch weaponsssssss
+	if event.is_action_pressed("weapon_rifle"):
+		on_child_transition(current_weapon, "Rifle")
+	if event.is_action_pressed("weapon_holy_fisher"):
+		on_child_transition(current_weapon, "HolyFisher")
 
 
 func _process(delta: float) -> void:
@@ -40,8 +51,8 @@ func _physics_process(delta: float) -> void:
 	is_first_tick = false
 
 
-func on_child_transition(weapon: HL.Weapon, new_weapon_name: String):
-	if weapon != current_weapon:
+func on_child_transition(now_weapon: HL.Weapon, new_weapon_name: String):
+	if now_weapon != current_weapon:
 		return
 
 	var new_weapon: HL.Weapon = player_weapons.get(new_weapon_name.to_lower())
@@ -50,16 +61,21 @@ func on_child_transition(weapon: HL.Weapon, new_weapon_name: String):
 
 	if current_weapon:
 		current_weapon.Exit()
+		current_weapon.ready_to_action = false
+		current_weapon._switch_visible(false)
 		if print_transition:
 			print("out: %s\n" %current_weapon)
 
 	new_weapon.Enter()
 	if print_transition:
 		print("in: %s" %new_weapon)
-	last_weapon = weapon
+	last_weapon = now_weapon
+	
+	# 换
+	_current = new_weapon.name
+	new_weapon.ready_to_action = true
+	new_weapon._switch_visible(true)
 	current_weapon = new_weapon
-	_current = current_weapon.name
-
 	is_first_tick = true
 
 

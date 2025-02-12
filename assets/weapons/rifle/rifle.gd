@@ -24,7 +24,7 @@ var wall_limit: float = 0.0
 @onready var target_ball: MeshInstance3D = $TargetBall
 
 
-func Ready() -> void: # 节点准备好时执行
+func _ready() -> void: # 节点准备好时执行
 	animation_state_machine = animation_tree["parameters/playback"]
 	gun_ray_cast.target_position.z = -firing_range
 	normal_target_marker.position.z = -firing_range
@@ -38,51 +38,59 @@ func Physics_Update(_delta: float) -> void:
 		await get_tree().create_timer(_delta).timeout
 		fire_mark.visible = false
 
-	var look_at_target: Vector3 = PLAYER.eye_ray_cast.get_collision_point() if PLAYER.eye_ray_cast.is_colliding() else PLAYER.normal_target_marker.global_position
 	var speed = 20 * _delta
 	var self_rotation_before = self.rotation
-	self.look_at(look_at_target)
-	target_rotation.x = Global.exponential_decay(self_rotation_before.x, self.rotation.x, speed)
-	target_rotation.y = Global.exponential_decay(self_rotation_before.y, self.rotation.y, speed)
-	target_rotation.z = Global.exponential_decay(self_rotation_before.z, self.rotation.z, speed)
+	self.look_at(PLAYER.look_at_target)
+	target_rotation.x = HL.exponential_decay(self_rotation_before.x, self.rotation.x, speed)
+	target_rotation.y = HL.exponential_decay(self_rotation_before.y, self.rotation.y, speed)
+	target_rotation.z = HL.exponential_decay(self_rotation_before.z, self.rotation.z, speed)
 	self.rotation = target_rotation
 
 	self.position = self_position_origin
-	var distance_to_wall = wall_limit - self.global_position.distance_to(look_at_target)
+	var distance_to_wall = wall_limit - self.global_position.distance_to(PLAYER.look_at_target)
 	distance_to_wall = clamp(distance_to_wall, 0.0, wall_limit)
 	self.position = self_position_origin + self.transform.basis.z * distance_to_wall
 	# else:
 	# 	self.position = self_position_origin
 
-	target_ball.global_position = look_at_target
+	target_ball.global_position = PLAYER.look_at_target
 	# print("look_at_target:", look_at_target)
 
 
 func Main_Action() -> void:
-	if animation_state_machine.get_current_node() != "大开火加退弹":
-		animation_state_machine.start("大开火加退弹", true)
+	if animation_state_machine.get_current_node() == "大开火加退弹":
+		return
+	
+	animation_state_machine.start("大开火加退弹", true)
 
-		fire_mark.visible = true
-		fire_mark.rotation.z = (randf() - 0.5)*PI*0.3
+	fire_mark.visible = true
+	fire_mark.rotation.z = (randf() - 0.5)*PI*0.3
 
-		var shoot_pos: Vector3 = muzzle_marker.global_position
-		var target_pos: Vector3 = gun_ray_cast.get_collision_point() if gun_ray_cast.is_colliding() else normal_target_marker.global_position
-		var line = FIRE_LINE.instantiate()
-		line.set_line(shoot_pos, target_pos - global_position, 4, fire_line_color)
-		add_child(line)
+	var shoot_pos: Vector3 = muzzle_marker.global_position
+	var target_pos: Vector3 = gun_ray_cast.get_collision_point() if gun_ray_cast.is_colliding() else normal_target_marker.global_position
+	
+	# 开火线
+	var line = FIRE_LINE.instantiate()
+	line.set_line(shoot_pos, target_pos - global_position, 4, fire_line_color)
+	add_child(line)
 
-		if gun_ray_cast.is_colliding():
-			var body = gun_ray_cast.get_collider()
-			print(body)
-			add_bullet_decal(target_pos, body)
-			if body.is_in_group("BodyBoneParts"):
-				body = get_BodyBoneRoot(body.get_parent()) # 递归寻找身体根节点
-			if body.has_method("be_hit"): # 击中敌人
-				var attack = HL.Attack.new()
-				attack.damage = damage
-				attack.knockback_force = knockback_force
-				attack.position = global_position
-				body.be_hit(attack)
+	# 检测命中目标
+	if not gun_ray_cast.is_colliding():
+		return
+	
+	var body = gun_ray_cast.get_collider()
+	print(body)
+	add_bullet_decal(target_pos, body)
+	
+	# 命中骨骼
+	if body.is_in_group("BodyBoneParts"):
+		body = get_BodyBoneRoot(body.get_parent()) # 递归寻找身体根节点
+	if body.has_method("be_hit"): # 击中敌人
+		var attack = HL.Attack.new()
+		attack.damage = damage
+		attack.knockback_force = knockback_force
+		attack.position = global_position
+		body.be_hit(attack)
 
 
 func add_bullet_decal(target_pos: Vector3, body):

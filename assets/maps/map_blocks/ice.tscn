@@ -27,8 +27,7 @@ shader_parameter/uv1_offset = Vector3(0, 0, 0)
 size = Vector3(20, 1, 20)
 
 [node name="Ice" type="StaticBody3D"]
-collision_layer = 2
-collision_mask = 2093
+collision_mask = 30
 physics_material_override = SubResource("PhysicsMaterial_ouk5x")
 script = ExtResource("1_i8rn5")
 

@@ -53,8 +53,7 @@ cast_shadow = 0
 multimesh = SubResource("MultiMesh_lj2ld")
 
 [node name="Area3D" type="Area3D" parent="."]
-collision_layer = 2
-collision_mask = 45
+collision_mask = 30
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("WorldBoundaryShape3D_6n45k")

@@ -30,8 +30,8 @@ surface_material_override/0 = ExtResource("1_45n6h")
 script = ExtResource("2_81dym")
 
 [node name="SwimmableArea3D" type="Area3D" parent="." groups=["water_area"]]
-collision_layer = 512
-collision_mask = 1057
+collision_layer = 32
+collision_mask = 126
 gravity_point_center = Vector3(0, 1, 0)
 gravity_direction = Vector3(0, 1, 0)
 linear_damp = 0.5

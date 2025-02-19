@@ -45,9 +45,8 @@ shader_parameter/texture_grid = ExtResource("2_1cn1p")
 shader_parameter/texture_roughness = SubResource("NoiseTexture2D_q1asd")
 
 [node name="CSGStair" type="CSGBox3D"]
-snap = 0.01
 use_collision = true
-collision_layer = 2
+collision_mask = 30
 material = SubResource("ShaderMaterial_f6ab4")
 script = ExtResource("1_ce5eq")
 num_stairs = 4
@@ -55,6 +54,5 @@ num_stairs = 4
 [node name="StairsSubtractCSG" type="CSGPolygon3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0.5)
 operation = 2
-snap = 0.01
 polygon = PackedVector2Array(0, 0.25, 0.25, 0.25, 0.25, 0.5, 0.5, 0.5, 0.5, 0.75, 0.75, 0.75, 0.75, 1, 0, 1)
 material = SubResource("ShaderMaterial_ar2x6")

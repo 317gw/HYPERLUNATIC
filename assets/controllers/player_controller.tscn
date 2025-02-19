@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://b6dtopvb54qyu"]
+[gd_scene load_steps=60 format=3 uid="uid://b6dtopvb54qyu"]
 
 [ext_resource type="Script" uid="uid://bpmti2w3wvxh4" path="res://assets/controllers/scripts/PlayerController.gd" id="1_0ynvo"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://assets/arts_graphic/materials/player.tres" id="2_8r2m2"]
@@ -30,7 +30,6 @@
 [ext_resource type="PackedScene" uid="uid://chaj18oke8vcl" path="res://assets/weapons/holy_fisher/holy_fisher.tscn" id="14_i2bq6"]
 [ext_resource type="Script" uid="uid://bycoufvi0fw6x" path="res://assets/controllers/state_scripts/PlayerClimb.gd" id="18_u1swj"]
 [ext_resource type="Script" uid="uid://b0ft4sjpo0rpa" path="res://assets/controllers/state_scripts/PlayerSwim.gd" id="20_xnagn"]
-[ext_resource type="Script" uid="uid://1nfjybprpn4n" path="res://assets/controllers/state_scripts/State.gd" id="21_i2bq6"]
 [ext_resource type="Script" uid="uid://geqat1drmaex" path="res://addons/godot-polyliner/Trail3D/Trail3D.gd" id="21_iqf47"]
 [ext_resource type="Shader" uid="uid://bjuytb3x7vsl" path="res://assets/arts_graphic/shaders/player_trail3D.gdshader" id="24_8fqh3"]
 [ext_resource type="Script" uid="uid://bhdwqsyosr3d5" path="res://assets/controllers/scripts/grab.gd" id="26_x16s4"]
@@ -171,11 +170,12 @@ shader_parameter/fade_power = 0.6
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 process_mode = 1
 physics_interpolation_mode = 1
-collision_mask = 4130
+collision_layer = 2
+collision_mask = 17
 floor_stop_on_slope = false
 floor_snap_length = 0.2
-platform_floor_layers = 4294905858
-platform_wall_layers = 2
+platform_floor_layers = 1
+platform_wall_layers = 1
 script = ExtResource("1_0ynvo")
 mass = 50.0
 
@@ -191,7 +191,7 @@ shape = SubResource("CapsuleShape3D_4bbek")
 [node name="PlayerTransformMarker" type="Marker3D" parent="."]
 
 [node name="BelowRay" type="RayCast3D" parent="."]
-collision_mask = 4134
+collision_mask = 53
 
 [node name="SnapStairs" type="Node3D" parent="."]
 script = ExtResource("3_breom")
@@ -200,24 +200,24 @@ step_length = null
 
 [node name="StairsAheadRay" type="RayCast3D" parent="SnapStairs"]
 target_position = Vector3(0, -0.6, 0)
-collision_mask = 34
+collision_mask = 17
 
 [node name="StairsBelowRay" type="RayCast3D" parent="SnapStairs"]
 target_position = Vector3(0, -0.8, 0)
-collision_mask = 34
+collision_mask = 17
 
 [node name="StairsBelowEdgeRay" type="RayCast3D" parent="SnapStairs"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -1.2)
 target_position = Vector3(0, 0, 2)
-collision_mask = 34
+collision_mask = 17
 
 [node name="StairRay2" type="RayCast3D" parent="SnapStairs"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-collision_mask = 34
+collision_mask = 17
 
 [node name="StairRay3" type="RayCast3D" parent="SnapStairs"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-collision_mask = 34
+collision_mask = 17
 
 [node name="Climb" type="Node3D" parent="."]
 script = ExtResource("4_ks7pu")
@@ -234,7 +234,7 @@ gap_max_angle = null
 [node name="StrikeHeadArea" type="Area3D" parent="Climb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 0)
 collision_layer = 0
-collision_mask = 34
+collision_mask = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Climb/StrikeHeadArea"]
 shape = SubResource("CylinderShape3D_gespb")
@@ -244,39 +244,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 enabled = false
 shape = SubResource("CapsuleShape3D_ehhrh")
 target_position = Vector3(0, 0, 0)
-collision_mask = 34
+collision_mask = 17
 
 [node name="EdgeCast" type="ShapeCast3D" parent="Climb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -1)
 enabled = false
 shape = SubResource("SphereShape3D_r4ei1")
 target_position = Vector3(0, 0, 0)
-collision_mask = 34
+collision_mask = 17
 
 [node name="WallRay" type="RayCast3D" parent="Climb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 enabled = false
 target_position = Vector3(0, 0, -1)
-collision_mask = 34
+collision_mask = 17
 debug_shape_custom_color = Color(0, 1, 1, 0.0313726)
 
 [node name="AirRay" type="RayCast3D" parent="Climb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 enabled = false
 target_position = Vector3(0, 0, -1)
-collision_mask = 34
+collision_mask = 17
 
 [node name="DownToFloorRay" type="RayCast3D" parent="Climb/AirRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 enabled = false
 target_position = Vector3(0, -0.6, 0)
-collision_mask = 34
+collision_mask = 17
 
 [node name="ChestRay" type="RayCast3D" parent="Climb"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 enabled = false
 target_position = Vector3(0, 0, -1)
-collision_mask = 34
+collision_mask = 17
 debug_shape_custom_color = Color(0, 1, 1, 0.0313726)
 
 [node name="Mesh1" type="MeshInstance3D" parent="Climb"]
@@ -300,7 +300,7 @@ script = ExtResource("6_s6i6a")
 [node name="StandBody" type="AnimatableBody3D" parent="StandOnHead"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 top_level = true
-collision_layer = 4096
+collision_mask = 2
 
 [node name="StandCollision" type="CollisionShape3D" parent="StandOnHead/StandBody"]
 shape = SubResource("CylinderShape3D_s0f3v")
@@ -312,7 +312,7 @@ mesh = SubResource("CylinderMesh_maadx")
 [node name="StandArea" type="Area3D" parent="StandOnHead"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
 collision_layer = 0
-collision_mask = 2052
+collision_mask = 14
 
 [node name="StandAreaCollision" type="CollisionShape3D" parent="StandOnHead/StandArea"]
 shape = SubResource("CylinderShape3D_160lq")
@@ -321,7 +321,7 @@ shape = SubResource("CylinderShape3D_160lq")
 top_level = true
 enabled = false
 target_position = Vector3(0, -2, 0)
-collision_mask = 2052
+collision_mask = 12
 collide_with_areas = true
 
 [node name="Head" type="Node3D" parent="."]
@@ -347,12 +347,12 @@ camera_extension = null
 
 [node name="EyeRayCast" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, 0)
-collision_mask = 54
+collision_mask = 127
 collide_with_areas = true
 
 [node name="InteractiveRayCast" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -2)
-collision_mask = 2
+collision_mask = 65
 script = ExtResource("7_xnagn")
 category = "environment"
 
@@ -403,7 +403,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="Interaction" type="RayCast3D" parent="Head/Hand"]
 target_position = Vector3(0, 0, -3)
-collision_mask = 32
+collision_mask = 16
 debug_shape_thickness = 1
 
 [node name="Joint" type="Generic6DOFJoint3D" parent="Head/Hand"]
@@ -471,7 +471,7 @@ script = ExtResource("9_xk5q4")
 
 [node name="Swim" type="Node" parent="MovementStateMachine"]
 script = ExtResource("20_xnagn")
-metadata/_custom_type_script = ExtResource("21_i2bq6")
+metadata/_custom_type_script = "uid://1nfjybprpn4n"
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("10_nqmol")

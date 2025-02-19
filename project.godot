@@ -91,9 +91,10 @@ folder_colors={
 
 [global_group]
 
-BeStandCharacter=""
-BeStandDanmaku=""
 Normal3DGameScene=""
+Sign="告示牌一类"
+Probe="探针"
+BeStandBody=""
 
 [importer_defaults]
 
@@ -301,19 +302,13 @@ goat_rotate_inventory={
 3d_render/layer_1="所有"
 3d_render/layer_2="云"
 3d_render/layer_3="远景"
-3d_physics/layer_1="Player"
-3d_physics/layer_2="Wall"
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemy"
-3d_physics/layer_4="Bullet"
-3d_physics/layer_5="Sign"
-3d_physics/layer_6="RigidBody3D"
-3d_physics/layer_7="PlayerRigidBody"
-3d_physics/layer_8="Debris"
-3d_physics/layer_9="Explode"
-3d_physics/layer_10="Water"
-3d_physics/layer_11="Probe"
-3d_physics/layer_12="Danmaku"
-3d_physics/layer_13="StandOnHead"
+3d_physics/layer_4="Projectiles"
+3d_physics/layer_5="PhysicsObjects"
+3d_physics/layer_6="Liquid"
+3d_physics/layer_7="Interaction"
 
 [physics]
 
@@ -330,10 +325,10 @@ common/physics_interpolation=true
 textures/canvas_textures/default_texture_filter=3
 lights_and_shadows/directional_shadow/size=8192
 reflections/sky_reflections/fast_filter_high_quality=true
-textures/decals/filter=4
-textures/light_projectors/filter=4
 anti_aliasing/quality/msaa_2d=3
 anti_aliasing/quality/msaa_3d=3
+textures/decals/filter=4
+textures/light_projectors/filter=4
 anti_aliasing/quality/screen_space_aa=1
 anti_aliasing/quality/use_debanding=true
 occlusion_culling/use_occlusion_culling=true

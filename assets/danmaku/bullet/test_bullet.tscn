@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://df0mdbxk4spma"]
 
-[ext_resource type="Script" path="res://assets/danmaku/scripts/bullet.gd" id="1_t3iue"]
+[ext_resource type="Script" uid="uid://8vsflbc6h4tx" path="res://assets/danmaku/scripts/bullet.gd" id="1_t3iue"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_jtlbr"]
 radial_segments = 16
 rings = 8
 
-[node name="TestBullet" type="MeshInstance3D" groups=["BeStandDanmaku"]]
+[node name="TestBullet" type="MeshInstance3D"]
 process_priority = 3
 process_physics_priority = 3
 visibility_range_end = 80.0

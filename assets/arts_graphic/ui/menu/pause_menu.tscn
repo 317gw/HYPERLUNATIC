@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg24r2642jpyw"]
+[gd_scene load_steps=3 format=3 uid="uid://bg24r2642jpyw"]
 
-[ext_resource type="Script" uid="uid://b4pxiysdjl6cg" path="res://assets/arts_graphic/ui/menu/scripts/pause_menu.gd" id="1_slv7n"]
+[ext_resource type="Script" uid="uid://b4pxiysdjl6cg" path="res://assets/arts_graphic/ui/menu/pause_menu.gd" id="1_slv7n"]
+
+[sub_resource type="Theme" id="Theme_rai0o"]
 
 [node name="PauseMenu" type="Control"]
 z_index = 999
@@ -45,6 +47,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Title2" type="Label" parent="."]
+visible = false
 layout_mode = 2
 anchor_left = 0.0188235
 anchor_top = 0.391667
@@ -82,6 +85,7 @@ Ctrl
 metadata/_edit_use_anchors_ = true
 
 [node name="Title3" type="Label" parent="."]
+visible = false
 layout_mode = 2
 anchor_left = 0.163529
 anchor_top = 0.391667
@@ -124,16 +128,19 @@ theme_override_constants/separation = 8
 
 [node name="Resume" type="Button" parent="ButtonContainer"]
 layout_mode = 2
+theme = SubResource("Theme_rai0o")
 theme_override_font_sizes/font_size = 64
 text = "RESUME"
 
 [node name="Restart" type="Button" parent="ButtonContainer"]
 layout_mode = 2
+theme = SubResource("Theme_rai0o")
 theme_override_font_sizes/font_size = 64
 text = "RESTART"
 
 [node name="Quit" type="Button" parent="ButtonContainer"]
 layout_mode = 2
+theme = SubResource("Theme_rai0o")
 theme_override_font_sizes/font_size = 64
 text = "QUIT"
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://dhg1cfuc0tf3j"]
 
-[ext_resource type="Script" uid="uid://boqrpavcoynsu" path="res://assets/arts_graphic/ui/scripts/UI.gd" id="1_uwkun"]
+[ext_resource type="Script" uid="uid://boqrpavcoynsu" path="res://assets/arts_graphic/ui/player_ui/UI.gd" id="1_uwkun"]
 [ext_resource type="Texture2D" uid="uid://dpurc6nyhut8d" path="res://assets/arts_graphic/textures/crosshair.png" id="2_hkwn4"]
-[ext_resource type="Script" uid="uid://vgj2gaoxrkht" path="res://assets/arts_graphic/ui/scripts/Line2D.gd" id="3_730b6"]
-[ext_resource type="Script" uid="uid://2y1d8bca5qh0" path="res://assets/arts_graphic/ui/scripts/DisplayInput.gd" id="4_lchcx"]
+[ext_resource type="Script" uid="uid://vgj2gaoxrkht" path="res://assets/arts_graphic/ui/player_ui/Line2D.gd" id="3_730b6"]
+[ext_resource type="Script" uid="uid://2y1d8bca5qh0" path="res://assets/arts_graphic/ui/player_ui/DisplayInput.gd" id="4_lchcx"]
 
-[node name="UI" type="CanvasLayer"]
+[node name="PlayerUI" type="CanvasLayer"]
 script = ExtResource("1_uwkun")
 
 [node name="Crosshair" type="TextureRect" parent="."]

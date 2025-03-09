@@ -10,13 +10,13 @@ var dialogue_manager
 
 func _enter_tree():
 	prepare_goat_project_settings()
-	
+
 	add_goat_actions()
 	add_goat_audio_buses()
-	
+
 	add_autoload_singleton("goat_audio_bus", "res://addons/goat/autoload/audio_bus.gd")
 	add_autoload_singleton("goat_locale", "res://addons/goat/autoload/locale.gd")
-	
+
 	add_autoload_singleton("goat_utils", "res://addons/goat/globals/goat_utils.gd")
 	add_autoload_singleton("goat", "res://addons/goat/globals/goat.gd")
 	add_autoload_singleton("goat_state", "res://addons/goat/globals/goat_state.gd")
@@ -24,7 +24,7 @@ func _enter_tree():
 	add_autoload_singleton("goat_interaction", "res://addons/goat/globals/goat_interaction.gd")
 	add_autoload_singleton("goat_voice", "res://addons/goat/globals/goat_voice.gd")
 	add_autoload_singleton("goat_settings", "res://addons/goat/globals/goat_settings.gd")
-	
+
 	main_screen_instance = load("res://addons/goat/globals/goat_main_screen.tscn").instantiate()
 	get_editor_interface().get_editor_main_screen().add_child(main_screen_instance)
 	_make_visible(false)
@@ -39,15 +39,15 @@ func _exit_tree():
 	remove_autoload_singleton("goat_state")
 	remove_autoload_singleton("goat")
 	remove_autoload_singleton("goat_utils")
-	
+
 	remove_autoload_singleton("goat_locale")
 	remove_autoload_singleton("goat_audio_bus")
-	
+
 	remove_goat_audio_buses()
 	remove_goat_actions()
-	
+
 	clear_plugins()
-	
+
 	if main_screen_instance:
 		main_screen_instance.queue_free()
 
@@ -106,12 +106,12 @@ func prepare_goat_project_settings():
 	var DEFAULT_GOAT_SETTINGS = {
 		"game_resources_directory": "",
 	}
-	
+
 	for setting in DEFAULT_GOAT_SETTINGS:
 		var setting_name: String = "goat/general/%s" % setting
 		if not ProjectSettings.has_setting(setting_name):
 			var default_value = DEFAULT_GOAT_SETTINGS[setting]
 			ProjectSettings.set_setting(setting_name, default_value)
 			ProjectSettings.set_initial_value(setting_name, default_value)
-	
+
 	ProjectSettings.save()

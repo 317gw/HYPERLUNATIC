@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://i2pcctq0i2o3"]
+
+[ext_resource type="Script" path="res://addons/panku_console/modules/data_controller/exporter/row_ui_bool.gd" id="1_n4ai0"]
+[ext_resource type="Theme" uid="uid://bk18yfu0d77wk" path="res://addons/panku_console/res/panku_console_theme.tres" id="1_u58sr"]
+
+[sub_resource type="SystemFont" id="SystemFont_l1ss8"]
+font_names = PackedStringArray("Monospace")
+font_weight = 900
+
+[node name="RowBool" type="HBoxContainer" node_paths=PackedStringArray("label_btn")]
+theme = ExtResource("1_u58sr")
+script = ExtResource("1_n4ai0")
+label_btn = NodePath("Button")
+
+[node name="VName" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "value3"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_l1ss8")
+toggle_mode = true
+text = "[OFF] / ON"

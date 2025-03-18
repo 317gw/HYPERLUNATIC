@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnsnrihcgjsa"]
+
+[ext_resource type="Script" path="res://addons/panku_console/modules/data_controller/exporter/row_ui_int.gd" id="1_gi50r"]
+[ext_resource type="PackedScene" uid="uid://drn5t13m088fb" path="res://addons/panku_console/common/panku_button.tscn" id="2_cfn1u"]
+[ext_resource type="Texture2D" uid="uid://dnexm7u6lq3km" path="res://addons/panku_console/res/icons2/remove.svg" id="2_ityxl"]
+[ext_resource type="Texture2D" uid="uid://dprpfr0l5xvmu" path="res://addons/panku_console/res/icons2/add.svg" id="3_3vcaq"]
+
+[node name="RowInt" type="HBoxContainer" node_paths=PackedStringArray("line_edit", "button_inc", "button_dec")]
+script = ExtResource("1_gi50r")
+line_edit = NodePath("LineEdit")
+button_inc = NodePath("Button2")
+button_dec = NodePath("Button")
+
+[node name="VName" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "value3"
+
+[node name="Button" parent="." instance=ExtResource("2_cfn1u")]
+layout_mode = 2
+
+[node name="TextureRect" parent="Button/HBoxContainer" index="0"]
+texture = ExtResource("2_ityxl")
+
+[node name="Label" parent="Button/HBoxContainer" index="1"]
+text = ""
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12345"
+
+[node name="Button2" parent="." instance=ExtResource("2_cfn1u")]
+layout_mode = 2
+
+[node name="TextureRect" parent="Button2/HBoxContainer" index="0"]
+texture = ExtResource("3_3vcaq")
+
+[node name="Label" parent="Button2/HBoxContainer" index="1"]
+text = ""
+
+[editable path="Button"]
+[editable path="Button2"]

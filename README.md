@@ -1,25 +1,29 @@
 # HYPERLUNATIC
 
+![高塔](forREADME/godot.windows.opt.tools.64_iuGFJwCi3z.jpg)
+![50m](forREADME/godot.windows.opt.tools.64_7GSDSlLmNj.jpg)
 ![太阳景色](/forREADME/godot.windows.opt.tools.64_GtXq4hUzeo.jpg)
 ![弹幕](/forREADME/godot.windows.opt.tools.64_bKXhlvlfwd.jpg)
 ![水下](/forREADME/godot.windows.opt.tools.64_WjNpwygEvz.jpg)
 
+#### 📝说明：
 HYPERLUNATIC 游戏项目备份存档开源学习文件和文件夹，由 白色蜂鸟(AlbedoHummingbird / 317gw) 制作，使用 Godot Engine 开发
 
+#### 📦开始：
 引擎版本会激进跟随最新稳定版 —— Godot_4.4-stable
 
-所有设计都在施工中，看看概率论与统计，保不齐会发生什么
+现阶段导出游戏意义不大。请从上面<font color = green> <>Code▽</font>下载源码ZIP压缩包，自行下载安装 [Godot Engine](https://godotengine.org/)，并导入项目文件，然后自由发挥:)
+
+所有设计都在施工中，看看概率论与统计，保不齐后续会发生什么
 
 嘿！你现在就可以参与进来！地图设计 彩蛋 小游戏 ARG 之类……
-
-现阶段还不能导出游戏文件，请从上面<font color = green> <>Code▽</font>下载源码ZIP压缩包，自行下载安装 Godot Engine，并导入项目文件，然后自由发挥:)
 
 #### 🪪介绍：
 这是一款开源的\*头部视角\*3D游戏，包含 平台跳跃、冒险解谜、动作射击、弹幕躲避 等元素，你可以去地图中找找有什么是需要完成的。
 
 > 或者去看看你身处的世界……
 
-###### 🎭剧情
+###### 🎦剧情
 2077年，Karole Kate休假回到了老家。在整理老电脑的过程中，她发现以前玩的一款\*超级老\*的游戏的其中一个服务器还在线上。于是在一通硬件、软件、升级、整理、打MOD之后，她进入了这个——2000年便在计划的服务器。
 
 ###### 🗺地图设计
@@ -51,7 +55,7 @@ Deadlock、
 DEATH STRANDING DIRECTOR'S CUT、
 Antimatter Dimensions、
 NGU IDLE
- …… 等好玩的游戏。
+…… 等好玩的游戏。
 
 还有，以上构想均在制作中
 
@@ -61,6 +65,12 @@ PS: 风格灵感来自gmod和mc的服务器
 * 游戏系统：
   - [ ] 弹幕系统
   - [x] 起点终点
+  - [ ] Buff系统
+  - [ ] 受伤事件记录 用来代替玩家生命值
+  - [ ] 成就系统
+  - [ ] 关卡管理系统
+  - [ ] 特效管理系统
+  - [ ] 声效管理系统
 
 * 游戏场景：
   - [x] 一个非常简单测试地图
@@ -73,14 +83,19 @@ PS: 风格灵感来自gmod和mc的服务器
   - [ ] 太阳
   - [ ] 地球
 
-* 场景组件：
+* 场景组件&交互：
+  - [x] 玩家对其他物体的物理碰撞
   - [x] 康威生命游戏的地图模块
   - [x] 可以爆炸的油桶，根据伤害变化的爆炸效果
   - [x] 性能较差的浮力水
   - [x] 性能稍好的浮力水
   - [x] 冰面
+  - [x] 根据表面应用摩擦力
   - [ ] 翻牌显示器
   - [ ] 蜡烛数量触发器 烛火是数字 红色是敌人 蓝色是场景组件破坏 归零触发门和机关
+  - [ ] 门
+  - [ ] 按钮
+  - [ ] 压力板
 
 * 视觉效果：
   - [x] 太阳
@@ -131,15 +146,9 @@ PS: 风格灵感来自gmod和mc的服务器
   - [ ] 太阳马  #一个向导 Sun Mare
   - [ ] 拿花妖精  #Invoke Flower Yousei
 
-* 场景交互：
-  - [x] 玩家对其他物体的物理碰撞
-  - [x] 根据表面应用摩擦力
-  - [ ] 按钮
-  - [ ] 门
-
 * UI：
   - [ ] 游戏主菜单
-  - [ ] 暂停菜单
+  - [x] 暂停菜单
   - [ ] gmod的C键调出可鼠标操作的ui
   - [ ] 显示RigidBody3D信息的ui
   - [ ] mc的对话窗口
@@ -149,25 +158,25 @@ PS: 风格灵感来自gmod和mc的服务器
 
 * 生活质量：
   - [ ] 修bug
+  - [x] F3 Debug菜单
+  - [x] panku_console 的Debug命令行+菜单
 
 * 杂项：
   - [ ] 完善Github仓库，添加更多的说明和信息。
-  - [ ] 关卡管理系统
-  - [ ] 特效管理系统
 
 
 #### Q&A：
 * 为什么选择使用Godot开发3D游戏？
   * Godot本身足够轻量级，磁盘、内存占用低，软件开关迅速，电脑负担小，开发方便。其他引擎的高新技术尚不考虑。
 
-* 如何参与开发？
-  * 参与贡献可以有很多方式，比如提交代码、报告Bug、提供建议、翻译文档等。
+* 参与开发可以干什么？
+  * 很多方式，比如提交代码、报告Bug、提供建议、翻译文档等。
 
 * 我想提供帮助？
-  * 你可以使用这个Github仓库，或者加入QQ群705304831，或者发邮件到<wo3178216379@outlook.com>，也许之后会有discord群。
+  * 你可以使用这个Github仓库，或在下方↓的联系方式留言讨论。
 
 * 多语言支持？
-  * 简体中文、繁体中文、英文。目前没有实力支持其他语言。
+  * 简体中文、繁体中文、英文。目前没有实力支持其他语言。如你想制作其他语言翻译，我非常乐意，直接联系我。
 
 * 登录平台？
   * 仅目前，PC端，Steam、itch.io
@@ -179,7 +188,8 @@ PS: 风格灵感来自gmod和mc的服务器
   * 因为好多赛博朋克或者未来风格作品都有出现这个年份。
 
 * 游戏玩法是啥啊？缝合这么多游戏？
-  * 主要玩法参考Celeste的平台跳跃，ULTRAKILL的快节奏操作，地图设计参考Celeste、Neon White。四处逛逛。
+  * 主要玩法参考Celeste的平台跳跃，ULTRAKILL的快节奏操作，地图设计参考Celeste、Neon White。感觉和印象是更重要的，实际上并没有搭配毫不相干的游戏机制。
+  * 四处逛逛。
 
 * 我好像没看到有什么角色？
   * 游戏流程以玩家为中心，故事性较弱，大概会有我小说、车卡、RimWorld中的角色，且大概都是女的，因为Touhou Project。
@@ -191,6 +201,12 @@ PS: 风格灵感来自gmod和mc的服务器
   * 答应我，好好睡觉。
 
 #### 注意事项：
+本项目为开源项目，欢迎参与贡献，但请遵守以下规定：
+1. 请不要删除或修改文件中的版权声明。
+2. 请不要在项目中使用任何未经授权的素材或代码。
+3. 请在参与贡献时，遵循开源协议的规定。
+4. 用于商业用途时，仅代码可用 遵守GPL-3.0许可证；不要使用 美术/声效/模型/文本 等资源；不要使用 HYPERLUNATIC/FireKami/白色蜂鸟/AlbedoHummingbird/317gw 等字样用于宣传或主要内容(包括其大小写形式)。
+
 项目根目录下，目前只有assets文件夹能确保为项目作者制作的主要原创部分。
 assets文件夹下的部分代码和资源文件、图像、音频来自网络，对其进行了修改，遵守其协议，并尽可能的表明了出处，如发现问题请联系项目作者。
 目前并未整理非代码资源的许可，请不要擅自使用。
@@ -202,20 +218,23 @@ addons文件夹下存放着Godot Engine的插件。
 
 如有对其他开源项目、addon、互联网资源的使用许可或许可证的异议，为项目作者的疏忽，请联系项目作者。
 
-> 欢迎加入QQ讨论群：705304831
 > 作者邮箱：<wo3178216379@outlook.com>
-> 看看INDIENOVA网站的主页 -> [HYPERLUNATIC](https://indienova.com/g/hyperlunatic)
+> INDIENOVA主页 -> [HYPERLUNATIC](https://indienova.com/g/hyperlunatic)
+> itch.io主页 -> [HYPERLUNATIC](https://albedohummingbird.itch.io/hyperlunatic)
+> QQ讨论群 -> [白色蜂鸟&FireKami讨论](https://qm.qq.com/q/zh3svlXTBm) 705304831
+> Discord聊天室 -> [FireKami Game&Fiction](https://discord.gg/c9v67xuuQR)
+> /tp [github开源地址](https://github.com/317gw/HYPERLUNATIC)
 
+![Alt text](forREADME/godot.windows.opt.tools.64_1721bm5eGd.jpg)
+![Alt text](forREADME/godot.windows.opt.tools.64_6GGmSkblFN.jpg)
+![Alt text](forREADME/godot.windows.opt.tools.64_OmOsZfQeu6.png)
 ![远景](/forREADME/godot.windows.opt.tools.64_vnLDbKccJK.jpg)
 ![水](/forREADME/godot.windows.opt.tools.64_8xybG45lHn.jpg)
 ![海泡沫1](/forREADME/godot.windows.opt.tools.64_PwjpRzcOVt.jpg)
 ![海泡沫2](/forREADME/godot.windows.opt.tools.64_d1uX4mJ7kA.jpg)
-![弹幕发射器1](/forREADME/godot.windows.opt.tools.64_W5910U7S1b.jpg)
 ![弹幕发射器2](/forREADME/godot.windows.opt.tools.64_q3VD1p4X4Q.jpg)
-![弹幕发射器3](/forREADME/godot.windows.opt.tools.64_fJoZthogYL.jpg)
 ![弹幕发射器4](/forREADME/godot.windows.opt.tools.64_KAdiUCbcte.jpg)
 ![弹幕发射器5](/forREADME/godot.windows.opt.tools.64_zS6zkwZ24w.jpg)
-![弹幕发射器6](/forREADME/godot.windows.opt.tools.64_2IJ8CeczTi.jpg)
 ![制作组logo](/logo/logo暗处变亮.png)
 
 > 现实的荒野

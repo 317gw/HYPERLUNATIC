@@ -219,10 +219,15 @@ addons文件夹下存放着Godot Engine的插件。
 如有对其他开源项目、addon、互联网资源的使用许可或许可证的异议，为项目作者的疏忽，请联系项目作者。
 
 > 作者邮箱：<wo3178216379@outlook.com>
+> 
 > INDIENOVA主页 -> [HYPERLUNATIC](https://indienova.com/g/hyperlunatic)
+> 
 > itch.io主页 -> [HYPERLUNATIC](https://albedohummingbird.itch.io/hyperlunatic)
+> 
 > QQ讨论群 -> [白色蜂鸟&FireKami讨论](https://qm.qq.com/q/zh3svlXTBm) 705304831
+> 
 > Discord聊天室 -> [FireKami Game&Fiction](https://discord.gg/c9v67xuuQR)
+> 
 > /tp [github开源地址](https://github.com/317gw/HYPERLUNATIC)
 
 ![Alt text](forREADME/godot.windows.opt.tools.64_1721bm5eGd.jpg)

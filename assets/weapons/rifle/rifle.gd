@@ -60,7 +60,7 @@ func Physics_Update(_delta: float) -> void:
 func Main_Action() -> void:
 	if animation_state_machine.get_current_node() == "大开火加退弹":
 		return
-	
+
 	animation_state_machine.start("大开火加退弹", true)
 
 	fire_mark.visible = true
@@ -68,7 +68,7 @@ func Main_Action() -> void:
 
 	var shoot_pos: Vector3 = muzzle_marker.global_position
 	var target_pos: Vector3 = gun_ray_cast.get_collision_point() if gun_ray_cast.is_colliding() else normal_target_marker.global_position
-	
+
 	# 开火线
 	var line = FIRE_LINE.instantiate()
 	line.set_line(shoot_pos, target_pos - global_position, 4, fire_line_color)
@@ -77,11 +77,11 @@ func Main_Action() -> void:
 	# 检测命中目标
 	if not gun_ray_cast.is_colliding():
 		return
-	
+
 	var body = gun_ray_cast.get_collider()
 	print(body)
 	add_bullet_decal(target_pos, body)
-	
+
 	# 命中骨骼
 	if body.is_in_group("BodyBoneParts"):
 		body = get_BodyBoneRoot(body.get_parent()) # 递归寻找身体根节点

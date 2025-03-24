@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=4 uid="uid://bw7bpxiao2prn"]
 
 [ext_resource type="Script" uid="uid://ddw8llx1xder8" path="res://assets/maps/map_blocks/scripts/dynamite_barrel.gd" id="1_rqymw"]
-[ext_resource type="Texture2D" uid="uid://ct724ew6f7fj0" path="res://assets/models/抄的油桶/textures/油桶颜色.png" id="2_1rsql"]
-[ext_resource type="Texture2D" uid="uid://duehubvx0ausd" path="res://assets/models/抄的油桶/textures/油桶法向.png" id="4_tvkex"]
-[ext_resource type="Texture2D" uid="uid://bc1axsqc58so1" path="res://assets/models/抄的油桶/textures/油桶粗糙.png" id="5_1rhg1"]
+[ext_resource type="Texture2D" uid="uid://ct724ew6f7fj0" path="res://assets/models/objects/抄的油桶/textures/油桶颜色.png" id="2_1rsql"]
+[ext_resource type="Texture2D" uid="uid://duehubvx0ausd" path="res://assets/models/objects/抄的油桶/textures/油桶法向.png" id="4_tvkex"]
+[ext_resource type="Texture2D" uid="uid://bc1axsqc58so1" path="res://assets/models/objects/抄的油桶/textures/油桶粗糙.png" id="5_1rhg1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwl0v"]
 resource_name = "材质"

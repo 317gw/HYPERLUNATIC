@@ -96,9 +96,8 @@ shader_parameter/color = Color(1, 0, 0, 1)
 shader_parameter/alpha_curve = 0.5
 
 [sub_resource type="Curve3D" id="10"]
-bake_interval = 0.01
 _data = {
-"points": PackedVector3Array(-0.314905, 1.41452, 0.0695871, 0.314905, -1.41452, -0.0695871, -0.2527, 1.27615, -0.198765, 0, 0, 0, 0, 0, 0, 3.777, 1.04701, -0.188479),
+"points": PackedVector3Array(-0.314905, 1.41452, 0.0695871, 0, -0.995, 0, -0.0995625, 0.798262, 2.04444e-05, 0, -0.665, 0, 0, 0, 0, 3.15155, 0.49903, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -478,7 +477,7 @@ shader_parameter/color = Color(0.1, 0.1, 0.1, 1)
 [node name="Node3D" type="Node3D"]
 
 [node name="wormspinner" type="Node3D" parent="."]
-transform = Transform3D(-0.675108, 0, -0.737703, 0, 0.999999, 0, 0.737698, 0, -0.675113, -0.181492, 0.016, 3.531)
+transform = Transform3D(0.838898, 0, 0.544264, 0, 0.999999, 0, -0.54426, 0, 0.838904, 0.395323, 0.016, 3.531)
 script = SubResource("1")
 mul = 1.59
 
@@ -527,12 +526,12 @@ iter_add_last_point = false
 material = SubResource("ShaderMaterial_eq0cb")
 
 [node name="rope2" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.151, -0.721456)
+transform = Transform3D(0.99565, 0, 0, 0, 0.99565, 0, 0, 0, 0.99565, -0.1, 0.151, -0.721456)
 curve = SubResource("10")
 script = ExtResource("3")
 curve_mode = 1
 iter_add_last_point = false
-uv_size = 1.012
+uv_size = 1.022
 material = SubResource("57")
 
 [node name="rope4" type="Path3D" parent="."]

@@ -15,18 +15,18 @@ extends StaticBody3D
 
 func _ready():
 	add_to_group("goat_interactive_object_" + unique_name)
-	
+
 	goat_interaction.connect("object_selected", self._on_object_selected)
 	goat_interaction.connect("object_deselected", self._on_object_deselected)
 	goat_interaction.connect("object_activated", self._on_object_activated)
 	goat_interaction.connect("object_activated_alternatively", self._on_object_activated_alternatively)
-	
+
 	# Content is moved to the Viewport
 	viewport.size = content_size
 	#remove_child(content)
 	#viewport.add_child(content)
 	content.position = Vector2i(0, 0)
-	
+
 	# Duplicate the existing material and set a viewport texture
 	var new_material = screen_surface.material_override.duplicate(true)
 	var tex = viewport.get_texture()
@@ -43,11 +43,11 @@ func _ready():
 func _on_object_selected(object_name, point):
 	if object_name != unique_name:
 		return
-	
+
 	if not interaction_icon.visible:
 		interaction_icon.show()
 	interaction_icon.position = screen_surface.to_local(point)
-	
+
 	var screen_coordinates = _convert_to_screen_coordinates(point)
 	# Creates a mouse motion event
 	var event = InputEventMouseMotion.new()
@@ -64,7 +64,7 @@ func _on_object_deselected(object_name):
 func _on_object_activated(object_name, point):
 	if object_name != unique_name:
 		return
-	
+
 	# Screen activation should not play default audio
 	goat_voice.prevent_default()
 	var screen_coordinates = _convert_to_screen_coordinates(point)

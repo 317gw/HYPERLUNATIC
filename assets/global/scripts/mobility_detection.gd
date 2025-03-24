@@ -1,15 +1,15 @@
-extends CanvasLayer # 继承自CanvasLayer
+extends Control
 
-@onready var player: HL.Player = $"../Player" # 3D角色体的引用
+@onready var speed_graph: Panel = $Graphs/SpeedGraph/Graph # 速度图表的引用
+@onready var acceleration_graph: Panel = $Graphs/AccelerationGraph/Graph
 
-@onready var speed_graph: Panel = $DebugMenu/VBoxContainer/Graphs/SpeedGraph/Graph # 速度图表的引用
-@onready var acceleration_graph: Panel = $DebugMenu/VBoxContainer/Graphs/AccelerationGraph/Graph
+@onready var speed_title = $Graphs/SpeedGraph/Title
+@onready var acceleration_title = $Graphs/AccelerationGraph/Title
 
-@onready var speed_title = $DebugMenu/VBoxContainer/Graphs/SpeedGraph/Title
-@onready var acceleration_title = $DebugMenu/VBoxContainer/Graphs/AccelerationGraph/Title
+@onready var jumping_time = $Graphs/JumpingTime
+@onready var jumping_height = $Graphs/JumpingHeight
 
-@onready var jumping_time = $DebugMenu/VBoxContainer/Graphs/JumpingTime
-@onready var jumping_height = $DebugMenu/VBoxContainer/Graphs/JumpingHeight
+var player: HL.Player
 
 var HISTORY_NUM_FRAMES = 150 # 历史帧数
 
@@ -38,6 +38,29 @@ var gradient := Gradient.new()
 
 
 func _ready() -> void: # _ready函数
+	#await Global.main_player_ready
+	player = Global.main_player
+
+	# NOTE: Both FPS and frametimes are colored following FPS logic
+	# (red = 10 FPS, yellow = 60 FPS, green = 110 FPS, cyan = 160 FPS).
+	# This makes the color gradient non-linear.
+	# Colors are taken from <https://tailwindcolor.com/>.
+	gradient.set_color(0, Color8(239, 68, 68)) # red-500
+	gradient.set_color(1, Color8(56, 189, 248)) # light-blue-400
+	gradient.add_point(0.3333, Color8(250, 204, 21)) # yellow-400
+	gradient.add_point(0.6667, Color8(128, 226, 95)) # 50-50 mix of lime-400 and green-400
+
+	speed_graph.resized.connect(_set_graph_size)
+	_set_graph_size()
+
+
+func _physics_process(delta: float) -> void:
+	speed_graph.queue_redraw() # 请求图表重绘
+	acceleration_graph.queue_redraw()
+	_up_title(delta)
+
+
+func _set_graph_size() -> void:
 	GRAPH_SIZE = speed_graph.size # 初始化图表尺寸
 	HISTORY_NUM_FRAMES = speed_graph.size.x * 200 / 480
 
@@ -49,23 +72,11 @@ func _ready() -> void: # _ready函数
 	acceleration_history.resize(HISTORY_NUM_FRAMES)
 	acceleration_xz_history.resize(HISTORY_NUM_FRAMES)
 
-	# NOTE: Both FPS and frametimes are colored following FPS logic
-	# (red = 10 FPS, yellow = 60 FPS, green = 110 FPS, cyan = 160 FPS).
-	# This makes the color gradient non-linear.
-	# Colors are taken from <https://tailwindcolor.com/>.
-	gradient.set_color(0, Color8(239, 68, 68)) # red-500
-	gradient.set_color(1, Color8(56, 189, 248)) # light-blue-400
-	gradient.add_point(0.3333, Color8(250, 204, 21)) # yellow-400
-	gradient.add_point(0.6667, Color8(128, 226, 95)) # 50-50 mix of lime-400 and green-400
-
-
-func _physics_process(delta: float) -> void:
-	speed_graph.queue_redraw() # 请求图表重绘
-	acceleration_graph.queue_redraw()
-	_up_title(delta)
-
 
 func _up_title(delta: float) -> void:
+	if not player:
+		return
+
 	# 2 player_speed
 	var player_speed = player.velocity.length() # 获取玩家速度
 	speed_history.push_back(player_speed) # 将速度添加到历史记录
@@ -78,7 +89,7 @@ func _up_title(delta: float) -> void:
 		speed_xz_history.pop_front() # 移除最旧的速度
 	# max
 	var speed_max = speed_history.max() # 获取历史记录中的最大速度
-	GRAPH_MAX_SPEED = speed_max if (speed_max and speed_max > GRAPH_MAX_SPEED_MIN) else GRAPH_MAX_SPEED_MIN 
+	GRAPH_MAX_SPEED = speed_max if (speed_max and speed_max > GRAPH_MAX_SPEED_MIN) else GRAPH_MAX_SPEED_MIN
 
 
 	# 2 player_acceleration
@@ -98,8 +109,8 @@ func _up_title(delta: float) -> void:
 	# max
 	var acceleration_max = acceleration_history.max() # 获取历史记录中的最大
 	GRAPH_MAX_ACCELERATION = acceleration_max if (acceleration_max and acceleration_max > GRAPH_MAX_ACCELERATION_MIN) else GRAPH_MAX_ACCELERATION_MIN
-	
-	
+
+
 	# speed_title
 	speed_title.text = ("Speed↓\n"
 		+ str(floor(player_speed * 100) / 100) + "\n"
@@ -115,10 +126,10 @@ func _up_title(delta: float) -> void:
 	var player_acceleration_temp: float
 	var player_acceleration_xz_temp: float
 	for x in range(1, 5): # 平滑显示 筛选数值
-		if acceleration_history[- x] != 0:
+		if not acceleration_history.is_empty() and acceleration_history[- x] != 0:
 			player_acceleration_temp = acceleration_history[- x]
 	for x in range(1, 10):
-		if acceleration_xz_history[- x] != 0:
+		if not acceleration_xz_history.is_empty() and acceleration_xz_history[- x] != 0:
 			player_acceleration_xz_temp = acceleration_xz_history[- x]
 	acceleration_title.text = ("Acceleration↓\n"
 		 + str(floor(player_acceleration_temp * 100) / 100) + "\n"
@@ -149,11 +160,12 @@ func _graph_draw(_graph: Panel, _history: Array, _min: float, _max: float, color
 	_polyline.resize(HISTORY_NUM_FRAMES) # 调整速度折线的大小
 	for i in _history.size(): # 遍历速度历史记录
 		_polyline[i] = Vector2( # 设置速度折线的点
-			remap(i, 
-				0, _history.size(), 
+			remap(i,
+				0, _history.size(),
 				0, GRAPH_SIZE.x), # X坐标
-			remap(clampf(_history[i], _min, _max), 
-				_min, _max, 
+			remap(clampf(_history[i], _min, _max),
+				_min, _max,
 				GRAPH_SIZE.y, 0.0)  # Y坐标
 		)
-	_graph.draw_polyline(_polyline, color, width, antialiased) # 绘制速度折线
+	if _polyline.size() > 2:
+		_graph.draw_polyline(_polyline, color, width, antialiased) # 绘制速度折线

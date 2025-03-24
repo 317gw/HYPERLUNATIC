@@ -99,7 +99,7 @@ func _ready() -> void: # 节点准备好时执行
 	normal_target_marker.position.z = -PLAYER.visible_range
 	var edge: Vector3 = project_position(Vector2(get_viewport().get_size().x / 2, 0), PLAYER.auxiliary_aiming_distance)
 	auxiliary_end_marker.position.z = -PLAYER.auxiliary_aiming_distance
-	
+
 	# 距离设置
 	enemy_area_radius = auxiliary_end_marker.position.distance_to(edge)
 	eye_area_collision_shape.shape.radius = enemy_area_radius
@@ -112,7 +112,7 @@ func _ready() -> void: # 节点准备好时执行
 	enemy_area_body.clear()
 	aiming_aidable_objects.clear()
 	head_pos_original = head.position
-	
+
 	# 初始化摄像旋转
 	_mouse_rotation = self.global_rotation
 	_camera_rotation = self.global_rotation
@@ -198,7 +198,7 @@ func _update_camera(delta) -> void: # 更新摄像机位置
 	#var yy = smoothstep(deg_to_rad(80), deg_to_rad(180), abs(_camera_rotation.y))
 	#_player_rotation.y = HL.exponential_decay(last_player_rotation.y, transform_marker.y, (yy*4 + 6) * delta)
 	_camera_rotation.y = clamp(_camera_rotation.y, -deg_to_rad(180), deg_to_rad(180))
-	
+
 	# 应用
 	head.transform.basis = Basis.from_euler(_camera_rotation) # 应用摄头部旋转
 	PLAYER.global_transform.basis = Basis.from_euler(_player_rotation) # 应用玩家模型旋转
@@ -351,18 +351,18 @@ const CROUCH_TRANSLATE_XZ = 0.2  # 新增常量，用于x和z坐标的平移量
 var slide_camera_smooth_back_to_origin_y_only: bool = false
 var slide_camera_smooth_back_to_origin_ready: bool = false
 func slide_camera_smooth_back_to_origin(delta: float, y_only: bool = false) -> void:
-	if saved_camera_global_pos == null: 
+	if saved_camera_global_pos == null:
 		return
-		
+
 	if y_only:
 		head.global_position.y = saved_camera_global_pos.y
 	else:
 		head.global_position = saved_camera_global_pos
-	
+
 	if slide_camera_smooth_back_to_origin_ready:
 		smooth_target_pos = head.position
 		slide_camera_smooth_back_to_origin_ready = false
-		
+
 	# Clamp incase teleported
 	smooth_target_pos.y = clampf(smooth_target_pos.y, -CROUCH_TRANSLATE, CROUCH_TRANSLATE)
 	if not y_only:

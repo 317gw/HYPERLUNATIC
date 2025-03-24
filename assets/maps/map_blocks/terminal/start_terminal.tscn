@@ -15,19 +15,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 use_collision = true
-collision_layer = 2
+collision_mask = 30
 size = Vector3(2.4, 0.1, 2.4)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.1, 0.05)
 use_collision = true
-collision_layer = 2
+collision_mask = 30
 size = Vector3(2.6, 0.2, 2.5)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.05, 0.1)
 use_collision = true
-collision_layer = 2
+collision_mask = 30
 size = Vector3(2.8, 0.1, 2.6)
 
 [node name="TerminalInteractiveScreen" parent="." instance=ExtResource("3_xmmfv")]

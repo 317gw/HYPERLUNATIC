@@ -22,6 +22,7 @@ shader_parameter/noise_amount = 0.1
 shader_parameter/effect_factor = 1.0
 
 [node name="RouteTerminalInteractiveScreen" instance=ExtResource("1_0aq6n")]
+collision_layer = 64
 script = ExtResource("2_suowv")
 unique_name = "RouteTerminal"
 

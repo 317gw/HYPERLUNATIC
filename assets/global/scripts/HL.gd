@@ -1,4 +1,4 @@
-class_name HL 
+class_name HL
 extends NAMESPACE
 # NameSpace daze⭐
 
@@ -31,13 +31,37 @@ const RouteTerminal = preload("res://assets/maps/map_blocks/terminal/route_termi
 const MarchingCubes = preload("res://assets/systems/marching_cubes/marching_cubes.gd")
 const ChunkManager = preload("res://assets/systems/chunk/chunk_manager.gd")
 
+# ui
+const PauseMenu = preload("res://assets/arts_graphic/ui/menu/pause_menu.gd")
+const OptionWindow = preload("res://assets/arts_graphic/ui/menu/option_window.gd")
+const Propertie = preload("res://assets/arts_graphic/ui/menu/propertie.gd")
+
+const SkyLimit = preload("res://assets/maps/map_blocks/scripts/sky_limit.gd")
+
 # 常数
 class Viscositys:
 	const AIR: float = 0.0000178
 	const WATER: float = 0.001
-	const QUICKSILVER: float = 0.00155  
+	const QUICKSILVER: float = 0.00155
 
 const E: float = 2.718281828459045
+
+
+# 小写英文字母
+const LowercaseAlphabet: String = "abcdefghijklmnopqrstuvwxyz"
+const LowercaseAlphabetArray: Array = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+# 大写英文字母
+const UppercaseAlphabet: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const UppercaseAlphabetArray: Array = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+# 小写大写英文字母
+const Alphabet: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+const AlphabetArray: Array = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+# 数字
+const Digits: String = "0123456789"
+const DigitsArray: Array = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# 英文字母和数字
+const Alphanumeric: String = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+const AlphanumericArray: Array = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 
 
@@ -114,13 +138,13 @@ static func generate_adaption_cubic_lattice(_distance: float = 1.0, _aabb: AABB 
 	var rx := range(-_range.x, _range.x +1) if _range.x % 2 == 0 else range(-_range.x-1, _range.x+1)
 	var ry := range(-_range.y, _range.y +1) if _range.y % 2 == 0 else range(-_range.y-1, _range.y+1)
 	var rz := range(-_range.z, _range.z +1) if _range.z % 2 == 0 else range(-_range.z-1, _range.z+1)
-	
+
 	var offset = Vector3(
 		float(_range.x % 2 != 0),
 		float(_range.y % 2 != 0),
 		float(_range.z % 2 != 0)
 	)/2
-	
+
 	var arr: PackedVector3Array
 	for x in rx:
 		for y in ry:
@@ -141,7 +165,7 @@ static func reynold(density: float, velocity: float, length: float, viscosity: f
 
 
 # https://pages.mtu.edu/~fmorriso/DataCorrelationForSphereDrag2016.pdf
-# Use beyond Re=106 is not recommended; for Re<2 equation 1 follows the creeping-flow result (CD=24/Re). 
+# Use beyond Re=106 is not recommended; for Re<2 equation 1 follows the creeping-flow result (CD=24/Re).
 static func sphere_Cd_by_reynold(reynold: float) -> float:  # Sphere_oooo
 	reynold = clampf(reynold, 0.01, 1e7)
 	if reynold < 2:
@@ -154,3 +178,45 @@ static func sphere_Cd_by_reynold(reynold: float) -> float:  # Sphere_oooo
 	var _c: float = 0.411*Re_105**-7.94 / (1 + Re_105**-8)
 	var _d: float = 0.25*Re_106 / (1 + Re_106)
 	return _a+_b+_c+_d
+
+
+# 输入字符串输出颜色。输入几个相似的字符串，输出的颜色也应该是相似的。相同的输入会有相同的结果。允许不同字符串对应同样的结果。
+# 0.1882 ~ 0.4784
+static func get_color_from_string(input: String, ues_alpha: bool = false) -> Color:
+	var sum: Vector4 = Vector4.ZERO
+	var decay: Vector4 = Vector4(0.8, 0.7, 0.6, 1.0)
+	var weight: Vector4 = Vector4.ONE
+
+	for i in range(input.length()):
+		var char_code: int = input.unicode_at(i)
+		char_code = remap(float(char_code), "0".unicode_at(0), "z".unicode_at(0), 0, 255)
+		sum += char_code * weight# * difference
+		weight *= decay
+
+	var r = cos(sum.x/255*PI) * 0.5 + 0.5
+	var g = cos(sum.y/255*PI) * 0.5 + 0.5
+	var b = cos(sum.z/255*PI) * 0.5 + 0.5
+	var a = cos(sum.w/255*PI) * 0.5 + 0.5 if ues_alpha else 1.0
+	return Color(r, g, b, a)
+
+"""测试
+	var strs: Array = HL.AlphanumericArray + ["hello", "hellp", "hallo", "nello", "fu*@ck"]
+	for i in strs.size():
+		var color:= HL.get_color_from_string(strs[i])
+		print_rich("[color=#%s][b]%s[/b][/color]" % [color.to_html(), strs[i]])
+		print(color)
+
+	for i in 50:
+		var str = HL.random_string(randi_range(1, 10))
+		var color:= HL.get_color_from_string(str)
+		print_rich("[color=#%s][b]%s[/b][/color]" % [color.to_html(), str])
+		print(color)
+"""
+
+
+# 输出限定字表限定长度的随机字符串
+static func random_string(length: int = 7, character_set: String = Alphanumeric) -> String:
+	var result: String = ""
+	for _i in range(length):
+		result += character_set[randi() % character_set.length()]
+	return result

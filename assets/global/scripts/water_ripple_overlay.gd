@@ -37,7 +37,7 @@ func should_draw_camera_underwater_effect() -> bool:
 	return camera_pos_shape_cast_3d.is_colliding()
 
 #func _player_in_water() -> void:
-	
+
 
 func _player_out_water() -> void:
 	visible = false

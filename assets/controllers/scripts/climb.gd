@@ -102,7 +102,7 @@ func can_climb() -> bool:
 	#print("   ")
 	if Input.is_action_pressed("slow"):
 		return false
-	
+
 	if climb_timer.is_stopped() and can_climb_input() and not hand.picked_up:
 		#print("1")
 		update_raycasts() # false

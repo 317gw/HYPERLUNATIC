@@ -28,8 +28,8 @@ func _physics_process(delta: float) -> void:
 		uv_offset_trg = HL.exponential_decay_vec2(uv_offset_trg, uv_offset_ori, delta*5)
 	material.set_shader_parameter("noise_range", noise_range_trg)
 	material.set_shader_parameter("uv_offset", uv_offset_trg)
-	
-	
+
+
 	var rotation_amount = current_rotation_speed * delta
 	mesh_instance_3d.rotate_y(deg_to_rad(rotation_amount)) # 转
 

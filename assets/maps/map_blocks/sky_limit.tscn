@@ -4,11 +4,8 @@
 [ext_resource type="Shader" uid="uid://b4wo4wxugb3w" path="res://assets/arts_graphic/shaders/sky_limit.gdshader" id="2_6n45k"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6n45k"]
-frequency = 0.015
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6n45k"]
-width = 256
-height = 256
 generate_mipmaps = false
 seamless = true
 seamless_blend_skirt = 0.5
@@ -18,12 +15,12 @@ noise = SubResource("FastNoiseLite_6n45k")
 render_priority = 0
 shader = ExtResource("2_6n45k")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_6n45k")
-shader_parameter/color = Color(0.6, 0.8, 0.8, 1)
+shader_parameter/color = Color(0.792, 0.9, 0.9, 1)
 shader_parameter/alpha = 0.8
-shader_parameter/parallax_mix = 0.5
+shader_parameter/parallax_mix = 0.45
 shader_parameter/near_fade_min = 50.0
-shader_parameter/near_fade_max = 60.0
-shader_parameter/uv_scale = Vector3(0.1, 0.1, 0.1)
+shader_parameter/near_fade_max = 100.0
+shader_parameter/uv_scale = Vector3(0.02, 0.02, 0.02)
 shader_parameter/uv_offset = Vector3(0, 0, 0)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vx1bv"]
@@ -35,7 +32,7 @@ rings = 2
 transform_format = 1
 instance_count = 1
 mesh = SubResource("CylinderMesh_vx1bv")
-buffer = PackedFloat32Array(100, 0, 0, 0, 0, 0.15, 0, 0, 0, 0, 100, 0)
+buffer = PackedFloat32Array(2000, 0, 0, 0, 0, 0.15, 0, 0, 0, 0, 2000, 0)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6n45k"]
 margin = 1.0

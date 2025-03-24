@@ -7,7 +7,7 @@ extends Node3D
 	#"Start": self,
 	#"check_points": [],
 	#"Destination": null,
-#} 
+#}
 
 signal teleport_enable
 signal change_name

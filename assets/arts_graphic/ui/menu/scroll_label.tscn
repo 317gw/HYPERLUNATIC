@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d2aioktb3sqfc"]
+
+[node name="ScrollLabel" type="Label"]
+offset_right = 1700.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "前方到站：东冰港电子科技无限公司  想要下车的乘客请提前准备下车"
+metadata/_edit_use_anchors_ = true

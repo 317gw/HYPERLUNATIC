@@ -50,11 +50,11 @@ var style := Style.HIDDEN:
 			Style.VISIBLE_COMPACT, Style.VISIBLE_DETAILED:
 				visible = true
 				frame_number.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/VBoxContainer/FrameTimeHistory.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/VBoxContainer/Graphs/FPSGraph.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/VBoxContainer/Graphs/TotalGraph.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/VBoxContainer/Graphs/CPUGraph.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/VBoxContainer/Graphs/GPUGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenu/PC/FrameTimeHistory.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenu/PC/Graphs/FPSGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenu/PC/Graphs/TotalGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenu/PC/Graphs/CPUGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenu/PC/Graphs/GPUGraph.visible = style == Style.VISIBLE_DETAILED
 				information.visible = style == Style.VISIBLE_DETAILED
 				settings.visible = style == Style.VISIBLE_DETAILED
 
@@ -134,7 +134,7 @@ func _ready() -> void:
 			update_settings_label()
 	)
 
-	style = 2
+	style = 1
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("cycle_debug_menu"):

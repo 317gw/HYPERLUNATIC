@@ -16,13 +16,13 @@ func _enter_tree() -> void:
 	)
 	for base in script_editor.get_open_script_editors():
 		base.request_open_script_at_line.connect(_on_script_changed)
-	
-	
+
+
 func _on_script_changed(script: Script, line: int):
 	if use_shift and not Input.is_key_pressed(KEY_SHIFT):
-		return 
+		return
 	if not is_namespace(script):
-		return 
+		return
 	var lines = script.source_code.rsplit("\n")
 	var code = lines[line].strip_edges()
 	if not code:
@@ -31,7 +31,7 @@ func _on_script_changed(script: Script, line: int):
 		var gd_path = utils.get_gd_path(code)
 		EditorInterface.edit_script.call_deferred(load(gd_path))
 		EditorInterface.select_file(gd_path)
-		
+
 	elif utils.is_tscn_load(code):
 		var tscn_path = utils.get_tscn_path(code)
 		EditorInterface.open_scene_from_path(tscn_path)
@@ -50,9 +50,9 @@ class NamespaceUtils:
 	var gd_path_pattern = r'res://.*.gd'
 	var tscn_pattern = r'load\(["\']res://.*.tscn["\']\)'
 	var tscn_path_pattern = r'res://.*.tscn'
-	
+
 	var regex = RegEx.new()
-		
+
 	func is_gd_load(code:String) -> bool:
 		# NOTE: load 和 preload都能识别
 		regex.compile(gds_pattern)
@@ -60,21 +60,21 @@ class NamespaceUtils:
 		if not result:
 			return false
 		return true
-		
+
 	func get_gd_path(code:String) -> String:
 		regex.compile(gd_path_pattern)
 		var result = regex.search(code)
 		if not result:
 			return ""
 		return result.get_string()
-	
+
 	func is_tscn_load(code:String) -> bool:
 		regex.compile(tscn_pattern)
 		var result = regex.search(code)
 		if not result:
 			return false
 		return true
-		
+
 	func get_tscn_path(code:String) -> String:
 		regex.compile(tscn_path_pattern)
 		var result = regex.search(code)

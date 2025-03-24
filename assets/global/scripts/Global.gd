@@ -3,6 +3,7 @@ extends Node
 
 signal main_player_ready
 signal global_scenes_ready
+signal sky_limit_ready
 
 const explod_max_speed: float = 100.0 ## m
 
@@ -29,19 +30,23 @@ var global_scenes_list: Array = []
 var global_nodes: Array = []
 var main_player: HL.Player = null
 
+var sky_limit: HL.SkyLimit = null
+
 var gravity_value: float
 var gravity_vector: Vector3
 var gravity: Vector3:
 	get():
 		return gravity_vector * gravity_value
 
+# await get_tree().physics_frame
+
 	#var time_start = Time.get_ticks_usec()
 	#var time_end = Time.get_ticks_usec()
 	#print("took %d microseconds" % (time_end - time_start))
 
-#ProjectSettings.get_setting("") 
+#ProjectSettings.get_setting("")
 func _ready() -> void:
-	gravity_value = ProjectSettings.get_setting("physics/3d/default_gravity") 
+	gravity_value = ProjectSettings.get_setting("physics/3d/default_gravity")
 	gravity_vector = ProjectSettings.get_setting("physics/3d/default_gravity_vector")
 
 	if not get_tree().current_scene.is_in_group("Normal3DGameScene") : # 防止其他节点
@@ -51,15 +56,25 @@ func _ready() -> void:
 
 	ready_global_scenes()
 
+	add_child(GetReady.new(func(): return get_tree().current_scene, _global_scenes_ready))
 
-func _process(delta: float) -> void:
-	if _current_scene_add_global_scenes and get_tree().current_scene:
-		for scene_dir in global_scenes_list:
-			var scene_name: String = scene_dir["name"]
-			var scene = self.get(scene_name)
-			get_tree().current_scene.add_child(scene)
-		_current_scene_add_global_scenes = false
-		global_scenes_ready.emit()
+
+#func _process(delta: float) -> void:
+	#if _current_scene_add_global_scenes and get_tree().current_scene:
+		#for scene_dir in global_scenes_list:
+			#var scene_name: String = scene_dir["name"]
+			#var scene = self.get(scene_name)
+			#get_tree().current_scene.add_child(scene)
+		#_current_scene_add_global_scenes = false
+		#global_scenes_ready.emit()
+
+
+func _global_scenes_ready() -> void:
+	for scene_dir in global_scenes_list:
+		var scene_name: String = scene_dir["name"]
+		var scene = self.get(scene_name)
+		get_tree().current_scene.add_child(scene)
+	global_scenes_ready.emit()
 
 
 func ready_global_scenes() -> void:
@@ -71,7 +86,7 @@ func ready_global_scenes() -> void:
 		if scene: scene.queue_free()
 		self.set(scene_name, SCENE.instantiate())
 		self.get(scene_name).process_mode = Node.PROCESS_MODE_PAUSABLE
-	
+
 	_current_scene_add_global_scenes = true
 
 
@@ -178,8 +193,7 @@ static func impact_velocity(m1:float, m2:float, v1:float, v2:float) -> float:
 	return (m1-m2)/(m1+m2)*v1 + 2*m2/(m1+m2)*v2
 
 
-#func 
-
+#func
 
 
 

@@ -2,12 +2,12 @@ extends MeshInstance3D
 
 
 @export var density: float = 1000.0 # 水的密度，单位：kg/m³
-@export var viscosity: float = 0.001 # kg/(m*s)  
+@export var viscosity: float = 0.001 # kg/(m*s)
 """
 20.2°c
-水	0.001 
-空气	0.0000178 
-水银	0.00155  
+水	0.001
+空气	0.0000178
+水银	0.00155
 玄武岩溶体
 700°c	160434.155
 869.12°c	20000
@@ -38,14 +38,14 @@ var aabb: AABB
 
 func _ready() -> void:
 	await Global.global_scenes_ready
-	
+
 	underwater_objects.clear()
 	apply_collision()
 
 	var wm_dic: Dictionary = Global.fluid_mechanics_manager.water_mesh_3d_s
 	id = String(self.get_path())
 	wm_dic[id] = self
-	#gpu_particles_3d.amount = 
+	#gpu_particles_3d.amount =
 	aabb = mesh.get_aabb()
 
 

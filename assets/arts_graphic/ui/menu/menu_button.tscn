@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://3dac3f7s7tk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m14cg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vagp5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_rai0o"]
+Button/font_sizes/font_size = 36
+Button/fonts/font = null
+Button/styles/disabled = SubResource("StyleBoxFlat_m14cg")
+Button/styles/normal = SubResource("StyleBoxFlat_vagp5")
+
+[node name="Button" type="Button"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -30.0
+offset_right = 200.0
+offset_bottom = 30.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource("Theme_rai0o")
+text = "Button"
+alignment = 0
+autowrap_mode = 3

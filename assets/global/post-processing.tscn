@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://wi8sh60h6r2i" path="res://assets/arts_graphic/shaders/radial_blur.gdshader" id="2_h61ip"]
 [ext_resource type="Script" uid="uid://ceyh4h78sm3dd" path="res://assets/controllers/scripts/radial_blur.gd" id="3_fykk8"]
 [ext_resource type="Script" uid="uid://d2lvax62psnwa" path="res://assets/global/scripts/water_ripple_overlay.gd" id="3_s2f4l"]
-[ext_resource type="Texture2D" uid="uid://i81cncs5yhty" path="res://icon.svg" id="4_s2f4l"]
+[ext_resource type="Texture2D" uid="uid://bmbjdolg14ihw" path="res://icon.svg" id="4_s2f4l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xuisv"]
 resource_local_to_scene = true
@@ -48,12 +48,12 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_blbsa")
 script = ExtResource("3_s2f4l")
-wrosp_in_value = null
 
 [node name="CameraPosShapeCast3D" type="ShapeCast3D" parent="WaterRippleOverlay"]
 shape = SubResource("SphereShape3D_fykk8")
 target_position = Vector3(0, 0, 0)
-collision_mask = 512
+max_results = 8
+collision_mask = 32
 collide_with_areas = true
 
 [node name="RadialBlur" type="ColorRect" parent="."]

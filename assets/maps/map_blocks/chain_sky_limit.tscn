@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci76ja8jlv4dr"]
+
+[ext_resource type="Script" uid="uid://d3t1y0ib3as0t" path="res://assets/maps/map_blocks/scripts/chain_sky_limit.gd" id="1_6heax"]
+[ext_resource type="Shader" uid="uid://xl50edvp0agh" path="res://addons/godot-polyliner/shaders/parallax/raymarch_chain.gdshader" id="2_e51fv"]
+
+[sub_resource type="Curve3D" id="Curve3D_bm6dd"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(-0.314905, 1.41452, 0.0695871, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orbra"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_e51fv")
+shader_parameter/twirl_aspect = 0.5
+shader_parameter/extra_angle = 0.0
+shader_parameter/line_width = 0.05
+shader_parameter/link_radius = 0.15
+shader_parameter/link_thickness = 0.05
+shader_parameter/repeat_size = 1.0
+shader_parameter/repeat_size_b = 0.1
+shader_parameter/roughness = 0.25
+shader_parameter/metallic = 1.0
+shader_parameter/color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="ChainSkyLimit" type="Path3D"]
+curve = SubResource("Curve3D_bm6dd")
+script = ExtResource("1_6heax")
+curve_mode = 1
+material = SubResource("ShaderMaterial_orbra")

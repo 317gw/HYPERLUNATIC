@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://chaj18oke8vcl"]
+[gd_scene load_steps=34 format=4 uid="uid://chaj18oke8vcl"]
 
 [ext_resource type="Script" uid="uid://c5rhubo0xds58" path="res://assets/weapons/holy_fisher/holy_fisher.gd" id="1_ifqvt"]
 [ext_resource type="Texture2D" uid="uid://b6tw68fi0hwlj" path="res://assets/weapons/holy_fisher/圣水钓竿_便利贴 卷线桶 吊线圈 and masdasdore.png" id="2_jliot"]
@@ -378,8 +378,6 @@ radius = 0.1
 
 [sub_resource type="Curve3D" id="Curve3D_odowl"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gs3xn"]
-
 [node name="HolyFisher" type="Node3D"]
 process_mode = 1
 script = ExtResource("1_ifqvt")
@@ -509,7 +507,7 @@ anim_player = NodePath("../圣水钓竿/AnimationPlayer")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0804817, 0.109556, 0)
 top_level = true
 collision_layer = 0
-collision_mask = 102
+collision_mask = 61
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("4_gs3xn")
@@ -544,7 +542,7 @@ skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="Hook"]
 collision_layer = 0
-collision_mask = 2158
+collision_mask = 2108
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hook/Area3D"]
 shape = SubResource("SphereShape3D_yftmf")
@@ -558,6 +556,3 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 1
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_gs3xn")

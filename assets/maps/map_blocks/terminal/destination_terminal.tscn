@@ -22,7 +22,7 @@ shader = ExtResource("2_s1xtj")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_xmmfv")
 shader_parameter/noise_speed = 0.1
 shader_parameter/noise_range = 0.3
-shader_parameter/color = Color(0, 0.5, 1, 1)
+shader_parameter/color = Color(0, 0.333333, 1, 1)
 shader_parameter/round_scale = 10.75
 shader_parameter/uv_scale = Vector2(1, 1.5)
 shader_parameter/uv_offset = Vector2(0, 0.025)
@@ -36,19 +36,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 use_collision = true
-collision_layer = 2
+collision_mask = 30
 size = Vector3(2.4, 0.1, 2.4)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.1, 0.05)
 use_collision = true
-collision_layer = 2
+collision_mask = 30
 size = Vector3(2.6, 0.2, 2.5)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.05, 0.1)
 use_collision = true
-collision_layer = 2
+collision_mask = 30
 size = Vector3(2.8, 0.1, 2.6)
 
 [node name="TerminalInteractiveScreen" parent="." instance=ExtResource("3_ds4xx")]

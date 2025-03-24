@@ -12,6 +12,7 @@ config_version=5
 
 config/name="HYPERLUNATIC"
 config/version="0.01"
+config/tags=PackedStringArray("master")
 run/main_scene="res://assets/maps/levels/level_001_test_sandbox.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
@@ -41,7 +42,9 @@ goat_inventory="*res://addons/goat/globals/goat_inventory.gd"
 goat_interaction="*res://addons/goat/globals/goat_interaction.gd"
 goat_voice="*res://addons/goat/globals/goat_voice.gd"
 goat_settings="*res://addons/goat/globals/goat_settings.gd"
+Console="*res://addons/console/console.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+Panku="*res://addons/panku_console/console.tscn"
 
 [debug]
 
@@ -59,13 +62,13 @@ project/assembly_name="HYPERLUNATIC"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/goat/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/godot4-graph2d-main/graph_2d/plugin.cfg", "res://addons/namespace_linker/plugin.cfg", "res://addons/proton_trail-master/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg", "res://addons/timer/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/goat/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/godot4-graph2d-main/graph_2d/plugin.cfg", "res://addons/godot_3d_auto_collision_generator/plugin.cfg", "res://addons/namespace_linker/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/proton_trail-master/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg", "res://addons/timer/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://SimpleFPSController-main/": "gray",
-"res://addons/": "blue",
+"res://assets/": "blue",
 "res://assets/arts_graphic/": "green",
 "res://assets/arts_graphic/icon/": "green",
 "res://assets/arts_graphic/materials/": "green",
@@ -297,6 +300,11 @@ goat_rotate_inventory={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/localization/localizations.en.translation", "res://assets/localization/localizations.zh.translation")
+locale/test="zh"
+
 [layer_names]
 
 3d_render/layer_1="所有"
@@ -323,10 +331,9 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=3
-lights_and_shadows/directional_shadow/size=8192
 reflections/sky_reflections/fast_filter_high_quality=true
-anti_aliasing/quality/msaa_2d=3
-anti_aliasing/quality/msaa_3d=3
+anti_aliasing/quality/msaa_2d=2
+anti_aliasing/quality/msaa_3d=2
 textures/decals/filter=4
 textures/light_projectors/filter=4
 anti_aliasing/quality/screen_space_aa=1

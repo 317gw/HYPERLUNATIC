@@ -677,7 +677,7 @@ bones/0/name = "枪根"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -9.7388e-18, 0, 0, 0, 1, -9.7388e-18, -1, 0, 1.11022e-17, 0.063, 0.38)
 bones/0/enabled = true
-bones/0/position = Vector3(0.00105932, 0.0643021, 0.38)
+bones/0/position = Vector3(-0.00119817, 0.0616198, 0.38)
 bones/0/rotation = Quaternion(-0.707107, 3.44319e-18, 3.44319e-18, 0.707107)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "大栓"
@@ -761,7 +761,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, -0.756)
 
 [node name="GunRayCast" type="RayCast3D" parent="MuzzleMarker"]
 target_position = Vector3(0, 0, -100)
-collision_mask = 54
+collision_mask = 127
 collide_with_areas = true
 
 [node name="NormalTargetMarker" type="Marker3D" parent="MuzzleMarker"]

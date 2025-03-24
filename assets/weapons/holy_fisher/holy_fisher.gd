@@ -31,11 +31,11 @@ var current_length: float = short_length
 func _ready() -> void:
 	animation_state_machine = animation_tree["parameters/playback"]
 	hook.process_mode = Node.PROCESS_MODE_DISABLED
-	
+
 	special_visible_mode = true
 	line.visible = false
 	line_draw.visible = false
-	
+
 	line.curve.clear_points()
 	line.curve.add_point(head_marker.global_position)
 	line.curve.add_point(hook.global_position)
@@ -70,15 +70,15 @@ func Physics_Update(_delta: float) -> void:
 	var force = smoothstep(current_length, current_length * 1.1, dis) * hook_force
 	force += smoothstep(current_length * 1.1, current_length * 2, dis) * hook_force * 2
 	hook.apply_central_force(force * direc)
-	
+
 	if is_reel_in:
 		current_length = move_toward(current_length, 0, _delta * 10)
 		if is_zero_approx(current_length):
 			is_reel_in = false
-	
+
 	if not is_cast_out and not is_reel_in:
 		current_length = move_toward(current_length, short_length, _delta * 2)
-	
+
 	if dis > current_length:
 		hook.global_position = head_marker.global_position - direc * current_length
 
@@ -98,18 +98,18 @@ func Sub_Action() -> void:
 	animation_state_machine.start("挥杆", true)
 	is_cast_out = !is_cast_out
 	var apply_dir: Vector3
-	
+
 	if is_cast_out:
 		hook.velocity = Vector3.ZERO
 		hook.global_position = head_marker.global_position
 		current_length = long_length
-		
+
 		is_reel_in = false
 		apply_dir = head_marker.global_position.direction_to(PLAYER.look_at_target)
 	else:
 		is_reel_in = true
 		apply_dir = hook.global_position.direction_to(head_marker.global_position)
-	
+
 	hook.apply_central_impulse(apply_dir * cast_force)
 
 	# 收杆
@@ -131,30 +131,34 @@ func Handle_Visible(_visible: bool) -> void:
 
 
 func _check_hook() -> void:
+	if is_hooked:
+		return
+
 	if not is_cast_out:
 		return
-	
+
 	if not hook_area.get_overlapping_bodies():
 		return
-	
+
 	var colliding_bodies: Array[Node3D] = hook_area.get_overlapping_bodies()
 	if colliding_bodies.is_empty():
 		return
-	
+
 	for obj in colliding_bodies:
-		if obj is RigidBody3D or obj is CharacterBody3D or obj is PhysicalBone3D:
+		if obj != hook and (obj is RigidBody3D or obj is CharacterBody3D or obj is PhysicalBone3D):
 			is_hooked = true
 			hooked_obj = obj
+			prints("hooked!", hooked_obj)
 			break
 
 
 func _on_hooking(_delta: float) -> void:
 	if not is_cast_out:
 		return
-	
+
 	if not is_hooked:
 		return
-	
+
 	hook.global_position = HL.exponential_decay_vec3(hook.global_position, hooked_obj.global_position, _delta*46)
 
 
@@ -162,7 +166,7 @@ func _on_hooking(_delta: float) -> void:
 func _drawing_fishing_line(_line: Path3D) -> void:
 	if not _line.visible:
 		return
-	
+
 	middle_point = Global.gravity_vector * 0.3
 	_line.curve.set_point_position(0, head_marker.global_position)
 	_line.curve.set_point_position(1, hook.global_position)
@@ -176,7 +180,7 @@ func _draw(Lines):
 	for i in range(len(Lines) -1):
 		if DebugDraw.is_line3d_behind_camera(Lines[i], Lines[i+1]):
 			continue
-		
+
 		var ScreenPointStart = DebugDraw.camera.unproject_position(Lines[i])
 		var ScreenPointEnd = DebugDraw.camera.unproject_position(Lines[i+1])
 

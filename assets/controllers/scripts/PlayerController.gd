@@ -68,7 +68,7 @@ var jumping_height_temp: Vector3
 # 空中
 var air_speed: float = 0.0
 var air_acc: float = 0.0 # 空中加速度 60.0
-var air_acc_time: float = 0.08 # 空中加速度 
+var air_acc_time: float = 0.08 # 空中加速度
 var air_acc_target: float = 0.0 # 目标空中加速度
 var speed_temp: Vector3 # 速度暂存
 var horizontal_acceleration: float = 0.0 # 实时水平加速度
@@ -222,7 +222,7 @@ func _physics_process(_delta: float) -> void:
 			, 0, 0.9)
 		decelerate_list.append(_water_decelerate)
 		#decelerate_list.append(clampf(remap(velocity.length()**2, 0, 100, 0, 0.9), 0, 0.9) )
-		
+
 
 	# 限速
 	max_current_speed_hor = remap(water_viscosity, 0.001, 400, 8, 1) if is_swimming() else 1000
@@ -232,16 +232,16 @@ func _physics_process(_delta: float) -> void:
 
 	additional_slowdown(_delta)
 	handle_friction()
-	
+
 	# 移动参数
 	acc_normal = max(speed_normal / acc_normal_t * friction * decelerate, 0)
 	acc_max = max(speed_max / acc_max_t * friction * decelerate, 0)
-	dash.dash_speed = dash.dash_distance / dash.dash_time	
+	dash.dash_speed = dash.dash_distance / dash.dash_time
 
 	_calculate_acceleration_in_physics_process(_delta)
 	velocity_last_frame = velocity
 	global_position_last_frame = global_position
-	
+
 	# 发送处理完信号
 	physics_process.emit()
 
@@ -356,8 +356,8 @@ func movement_air(delta: float, is_dashjump: bool = false) -> void: # 有方向�
 		#vel_hor = vel_hor.move_toward(_dir_hor * air_speed * decelerate, air_acc_target * delta)
 	#else:
 	vel_hor = vel_hor.move_toward(dir_hor * air_speed * decelerate, air_acc_target * delta)
-	
-	
+
+
 
 
 func stop_movement(delta: float) -> void: # 地面&空中
@@ -395,7 +395,7 @@ func jump_ready(jumpVEL: float) -> void: # 处理跳跃
 		if below_ray.get_collider() is RigidBody3D:
 			var collider: RigidBody3D = below_ray.get_collider()
 			collider.apply_force(
-				Global.gravity_vector * jump_distance_max / current_jump_time * (mass + collider.mass) * 1.5, 
+				Global.gravity_vector * jump_distance_max / current_jump_time * (mass + collider.mass) * 1.5,
 				below_ray.get_collision_point() - collider.global_position)
 	jumping_height_temp = global_position
 
@@ -623,7 +623,7 @@ func can_vertical_dash() -> bool: # 没用
 func can_dash_jump() -> bool: # can_dash_on_floor_jump
 	return can_jump() and dash_jump_timer.time_left > 0
 
-func can_wheel_jump() -> bool: 
+func can_wheel_jump() -> bool:
 	return Input.is_action_pressed("mouse_wheel_jump") and not hand.picked_up and not camera.is_zoom
 
 func is_player_idle() -> bool:

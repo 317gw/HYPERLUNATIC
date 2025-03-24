@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fo0aj"]
 render_priority = 0
 shader = ExtResource("1_yuwlp")
-shader_parameter/freq = 1.0
+shader_parameter/freq = 0.5
 shader_parameter/speed = 0.5
 shader_parameter/cutoff = 0.5
 shader_parameter/color = Color(0, 0.5, 1, 1)

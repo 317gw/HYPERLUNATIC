@@ -21,11 +21,17 @@ func _ready() -> void:
 	set_multi_mesh()
 	set_plane()
 
+	if not Engine.is_editor_hint():
+		if Global.sky_limit == null:
+			Global.sky_limit = self
+			#prints("wdf", Global.sky_limit, self)
+			Global.sky_limit_ready.emit()
+
 
 #func _physics_process(delta: float) -> void:
 	#if Engine.is_editor_hint():
-	
-	
+
+
 
 
 func set_multi_mesh() -> void:

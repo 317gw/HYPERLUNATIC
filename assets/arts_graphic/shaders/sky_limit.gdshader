@@ -45,6 +45,6 @@ void fragment(){
 	vec2 uv = UV * uv_scale.xy + uv_offset.xy;
 	float _texture = triplanar_texture_nearest(noise_texture, uv1_power_normal, uv1_triplanar_pos).r;
 	ALBEDO = color;
-	//EMISSION = color;
+	EMISSION = color;
 	ALPHA *= alpha * step(_texture, parallax_mix + 0.05 * sin(TIME) * _texture);
 }

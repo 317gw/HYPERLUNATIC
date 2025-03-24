@@ -333,17 +333,9 @@ script = ExtResource("3_riu41")
 MOUSE_SENSITIVITY = 0.33
 PLAYER = NodePath("../..")
 tilt_head_to_body_angle = 20.0
-tilt_head_to_body_clamp = null
 tilt_angle = 2.0
 lr_tilt_speed = 0.05
-player_rotation_smooth = null
-tilt_target_angle_multiply = null
 fov_base = 80.0
-fov_zoom = null
-fov_clamp_max = null
-fov_sensitivity = null
-fov_lerp_speed = null
-camera_extension = null
 
 [node name="EyeRayCast" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, 0)

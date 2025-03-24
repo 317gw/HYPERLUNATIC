@@ -28,53 +28,57 @@ script = ExtResource("1_cmbg2")
 [node name="DebugMenu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 theme = SubResource("Theme_hhkhm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DebugMenu"]
+[node name="MobilityDetection" type="VBoxContainer" parent="DebugMenu"]
 layout_mode = 1
 offset_right = 101.0
 offset_bottom = 50.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_cmbg2")
+
+[node name="Graphs" type="VBoxContainer" parent="DebugMenu/MobilityDetection"]
+layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Graphs" type="VBoxContainer" parent="DebugMenu/VBoxContainer"]
+[node name="SpeedGraph" type="HBoxContainer" parent="DebugMenu/MobilityDetection/Graphs"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SpeedGraph" type="HBoxContainer" parent="DebugMenu/VBoxContainer/Graphs"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Graph" type="Panel" parent="DebugMenu/VBoxContainer/Graphs/SpeedGraph"]
+[node name="Graph" type="Panel" parent="DebugMenu/MobilityDetection/Graphs/SpeedGraph"]
 custom_minimum_size = Vector2(480, 192)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="DebugMenu/VBoxContainer/Graphs/SpeedGraph"]
+[node name="Title" type="Label" parent="DebugMenu/MobilityDetection/Graphs/SpeedGraph"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Speed↓"
 
-[node name="AccelerationGraph" type="HBoxContainer" parent="DebugMenu/VBoxContainer/Graphs"]
+[node name="AccelerationGraph" type="HBoxContainer" parent="DebugMenu/MobilityDetection/Graphs"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Graph" type="Panel" parent="DebugMenu/VBoxContainer/Graphs/AccelerationGraph"]
+[node name="Graph" type="Panel" parent="DebugMenu/MobilityDetection/Graphs/AccelerationGraph"]
 custom_minimum_size = Vector2(480, 192)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="DebugMenu/VBoxContainer/Graphs/AccelerationGraph"]
+[node name="Title" type="Label" parent="DebugMenu/MobilityDetection/Graphs/AccelerationGraph"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Acceleration↓"
 
-[node name="JumpingTime" type="Label" parent="DebugMenu/VBoxContainer/Graphs"]
+[node name="JumpingTime" type="Label" parent="DebugMenu/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "JumpingTime:"
 
-[node name="JumpingHeight" type="Label" parent="DebugMenu/VBoxContainer/Graphs"]
+[node name="JumpingHeight" type="Label" parent="DebugMenu/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0

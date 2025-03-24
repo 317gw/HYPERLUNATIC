@@ -87,31 +87,82 @@ func _enter_tree():
 
 	_rd()
 
+#func _get_iterative_points():
+	#var points = []
+	#var expected_dist = iter_min_dist
+	#var allowed_error = expected_dist*0.01
+#
+	#points.push_back(curve.get_point_position(0))
+	#var last_good_f = 0.0
+	#var last_good_f2 = null
+	#var test_f = 0.1
+	#var dist_error = 0.0
+	#var spins = 0
+	#var f_to_dist = 0.05
+	#while points.size() < 4096:
+		#if spins >= 500:
+			#print("too many spins")
+			#return points
+		#var p = curve.samplef(test_f)
+#
+		#f_to_dist = 0.05
+#
+		#dist_error = p.distance_to(points[-1]) - expected_dist
+		#if abs(dist_error) < allowed_error:
+#
+			#points.push_back(p)
+##			print("point!")
+			#if last_good_f != 0.0:
+				#last_good_f2 = last_good_f
+			#last_good_f = test_f
+#
+			#if last_good_f2 != null:
+				#f_to_dist = last_good_f2 - last_good_f
+#
+			#spins = 0
+#
+		#else:
+			#var cur = curve.samplef(test_f)
+			#var last = curve.samplef(curve.point_count)
+#
+			#if cur.distance_squared_to(last) < 1e-8:
+				#if iter_add_last_point:
+					#points.push_back(last)
+				#break
+			#spins += 1
+#
+##		print(f_to_dist)
+		#test_f = max(test_f-(dist_error * f_to_dist), last_good_f)
+#
+##	print(points.size(), " ", spins, " spins total")
+	#return points
+
+
 func _get_iterative_points():
 	var points = []
 	var expected_dist = iter_min_dist
-	var allowed_error = expected_dist*0.01
+	var allowed_error = expected_dist * 0.01
 
 	points.push_back(curve.get_point_position(0))
 	var last_good_f = 0.0
 	var last_good_f2 = null
 	var test_f = 0.1
-	var dist_error = 0.0
 	var spins = 0
 	var f_to_dist = 0.05
+	var max_adjustment = 0.1  # 新增：限制最大调整量
+
 	while points.size() < 4096:
-		if spins >= 500:
+		if spins >= 512:
 			print("too many spins")
 			return points
 		var p = curve.samplef(test_f)
 
-		f_to_dist = 0.05
+		f_to_dist = 0.05  # 初始步长
 
-		dist_error = p.distance_to(points[-1]) - expected_dist
+		var current_dist = p.distance_to(points[-1])
+		var dist_error = current_dist - expected_dist
 		if abs(dist_error) < allowed_error:
-
 			points.push_back(p)
-#			print("point!")
 			if last_good_f != 0.0:
 				last_good_f2 = last_good_f
 			last_good_f = test_f
@@ -121,21 +172,46 @@ func _get_iterative_points():
 
 			spins = 0
 
-		else:
-			var cur = curve.samplef(test_f)
-			var last = curve.samplef(curve.point_count)
-
-			if cur.distance_squared_to(last) < 1e-8:
-				if iter_add_last_point:
-					points.push_back(last)
+			# 提前检查终点
+			if test_f >= 0.99:
+				var end_p = curve.samplef(1.0)
+				if points[-1].distance_to(end_p) >= expected_dist - allowed_error:
+					points.push_back(end_p)
+				else:
+					if iter_add_last_point:
+						points.push_back(end_p)
 				break
+		else:
+			var end_p = curve.samplef(1.0)
+			if p.distance_squared_to(end_p) < 1e-8:
+				if iter_add_last_point:
+					points.push_back(end_p)
+				break
+
+			# 使用导数近似调整步长
+			var delta = 0.001
+			var f_next = min(test_f + delta, 1.0)
+			var p_current = curve.samplef(test_f)
+			var p_next = curve.samplef(f_next)
+			var delta_dist = p_next.distance_to(p_current)
+			var derivative = delta_dist / (f_next - test_f) if (f_next - test_f) != 0 else 0.0
+
+			if derivative == 0:
+				spins += 1
+				continue
+
+			var adjustment = dist_error / derivative
+			adjustment = clamp(adjustment, -max_adjustment, max_adjustment)
+			test_f -= adjustment
+			test_f = max(test_f, last_good_f)
+
 			spins += 1
 
-#		print(f_to_dist)
-		test_f = max(test_f-(dist_error * f_to_dist), last_good_f)
+		# 确保test_f不超过1.0
+		test_f = clamp(test_f, 0.0, 1.0)
 
-#	print(points.size(), " ", spins, " spins total")
 	return points
+
 
 func _draw():
 	if _mesh_instance:

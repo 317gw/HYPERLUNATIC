@@ -224,6 +224,8 @@ addons文件夹下存放着Godot Engine的插件。
 > 
 > itch.io主页 -> [HYPERLUNATIC](https://albedohummingbird.itch.io/hyperlunatic)
 > 
+> bilibili -> [白色蜂鸟的个人空间](https://space.bilibili.com/32704272)
+> 
 > QQ讨论群 -> [白色蜂鸟&FireKami讨论](https://qm.qq.com/q/zh3svlXTBm) 705304831
 > 
 > Discord聊天室 -> [FireKami Game&Fiction](https://discord.gg/c9v67xuuQR)

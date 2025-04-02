@@ -6,7 +6,11 @@ signal global_scenes_ready
 signal sky_limit_ready
 
 const explod_max_speed: float = 100.0 ## m
+const Hl = preload("res://assets/global/scripts/HL.gd")
 
+
+###
+# 自动场景初始化
 # 注意大小写对应
 const EFFECTS = preload("res://assets/global/Effects.tscn")
 const POST_PROCESSING = preload("res://assets/global/post-processing.tscn")
@@ -14,23 +18,34 @@ const FLUID_MECHANICS_MANAGER = preload("res://assets/systems/water_physics/flui
 const WAR_FOG = preload("res://assets/systems/marching_cubes/war_fog.tscn")
 const CHUNK_MANAGER = preload("res://assets/systems/chunk/chunk_manager.tscn")
 
-var GLOBAL_SCENES_LIST_START = "GLOBAL_SCENES_LIST_START"
+const DEBUG_MENU = preload("res://addons/debug_menu/debug_menu.tscn")
+const PLAYER_FP_UI = preload("res://assets/arts_graphic/ui/player_ui/PlayerFP_UI.tscn")
+const MAIN_MENUS = preload("res://assets/arts_graphic/ui/menu/main_menus.tscn")
 
+###
+var GLOBAL_SCENES_LIST_START = "GLOBAL_SCENES_LIST_START"
+#
 var effects: Node3D
-var post_processing: Node3D
 var fluid_mechanics_manager: HL.FluidMechanicsManager
 var war_fog: Node3D
 var chunk_manager: HL.ChunkManager
-
+# ui
+var post_processing: CanvasLayer
+var debug_menu: HL.DebugMenu
+var player_fp_ui: HL.PlayerFP_UI = null
+var main_menus: HL.MainMenus = null
+#
 var GLOBAL_SCENES_LIST_END = "GLOBAL_SCENES_LIST_END"
-
-var _current_scene_add_global_scenes: bool = false
+###
 var global_scenes_list: Array = []
 
-var global_nodes: Array = []
-var main_player: HL.Player = null
 
+# 其他
+#var global_nodes: Array = []
+
+var main_player: HL.Player = null
 var sky_limit: HL.SkyLimit = null
+
 
 var gravity_value: float
 var gravity_vector: Vector3
@@ -55,18 +70,11 @@ func _ready() -> void:
 	global_scenes_list = get_dicts_between_start_end(_list, GLOBAL_SCENES_LIST_START, GLOBAL_SCENES_LIST_END)
 
 	ready_global_scenes()
-
 	add_child(GetReady.new(func(): return get_tree().current_scene, _global_scenes_ready))
 
 
-#func _process(delta: float) -> void:
-	#if _current_scene_add_global_scenes and get_tree().current_scene:
-		#for scene_dir in global_scenes_list:
-			#var scene_name: String = scene_dir["name"]
-			#var scene = self.get(scene_name)
-			#get_tree().current_scene.add_child(scene)
-		#_current_scene_add_global_scenes = false
-		#global_scenes_ready.emit()
+func _process(_delta: float) -> void:
+	pass
 
 
 func _global_scenes_ready() -> void:
@@ -80,20 +88,24 @@ func _global_scenes_ready() -> void:
 func ready_global_scenes() -> void:
 	for scene_dir in global_scenes_list:
 		var scene_name: String = scene_dir["name"]
-		var scene: Node3D = self.get(scene_name)
+		var old_scene: Node = self.get(scene_name)
+		if old_scene:
+			old_scene.queue_free()
+
 		var SCENE: PackedScene = self.get(scene_name.to_upper())
-
-		if scene: scene.queue_free()
 		self.set(scene_name, SCENE.instantiate())
-		self.get(scene_name).process_mode = Node.PROCESS_MODE_PAUSABLE
-
-	_current_scene_add_global_scenes = true
+		var new_scene: Node = self.get(scene_name)
+		if new_scene.has_method("_ready_process_mode"):
+			new_scene.process_mode = new_scene._ready_process_mode()
+		else:
+			new_scene.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 
 func reload_current_scene() -> void:
 	get_tree().reload_current_scene()
 	#await get_tree().current_scene.ready
 	ready_global_scenes()
+	add_child(GetReady.new(func(): return get_tree().current_scene, _global_scenes_ready))
 
 
 
@@ -101,6 +113,30 @@ func get_delta_time() -> float:
 	if Engine.is_in_physics_frame():
 		return get_physics_process_delta_time()
 	return get_process_delta_time()
+
+
+# Global.set_mouse_mode()
+# 鼠标模式控制逻辑
+func set_mouse_mode() -> void:
+	if tool_ui_visible():  # 如果工具UI可见
+		if player_fp_ui.tool_ui.is_mouse_wheel_pressed:  # 且鼠标滚轮被按下
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED  # 限制鼠标在窗口内
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE  # 否则显示自由鼠标
+
+	elif main_player and not main_menus.visible:  # 如果主角色存在且主菜单不可见
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED  # 捕获鼠标(通常用于第一人称视角)
+
+	else:  # 其他所有情况
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE  # 显示自由鼠标
+
+
+func is_tool_ui_move_camera() -> bool:
+	return tool_ui_visible() and player_fp_ui.tool_ui.is_mouse_wheel_pressed
+
+
+func tool_ui_visible() -> bool:
+	return player_fp_ui and player_fp_ui.tool_ui and player_fp_ui.tool_ui.visible
 
 
 # 计算mesh体积
@@ -174,6 +210,54 @@ static func get_dicts_between_start_end(dict_array: Array, start: String = "STAR
 			result.append(dict)
 
 	return result
+
+
+# 获取指定文件夹下特定类型的随机资源
+# folder_path: 文件夹路径（如"res://assets/sounds"）
+# allowed_types: 允许的资源类型数组（如["PackedScene", "Texture2D"]），留空则允许所有类型
+func get_random_resource(folder_path: String, allowed_types: Array = []) -> Resource:
+	# 用于存储符合条件的资源路径
+	var valid_resources := []
+
+	# 检查文件夹是否存在
+	if not DirAccess.dir_exists_absolute(folder_path):
+		push_error("Folder does not exist: " + folder_path)
+		return null
+
+	# 遍历目录
+	var dir := DirAccess.open(folder_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name := dir.get_next()
+		while file_name != "":
+			# 跳过目录和隐藏文件
+			if not dir.current_is_dir() and not file_name.begins_with("."):
+				var full_path := folder_path.path_join(file_name)
+				# 检查文件扩展名是否是资源类型
+				if ResourceLoader.exists(full_path):
+					# 如果指定了类型限制，则检查类型
+					if allowed_types.is_empty():
+						valid_resources.append(full_path)
+					else:
+						var rfl := ResourceFormatLoader.new()
+						var resource_type := rfl._get_resource_type(full_path) # buggggggg
+						if resource_type in allowed_types:
+							valid_resources.append(full_path)
+			file_name = dir.get_next()
+	else:
+		push_error("Failed to open directory: " + folder_path)
+		return null
+
+	# 如果没有找到符合条件的资源
+	if valid_resources.is_empty():
+		push_error("No valid resources found in: " + folder_path)
+		return null
+
+	# 随机选择一个资源并加载
+	var random_index := randi() % valid_resources.size()
+	var selected_resource := ResourceLoader.load(valid_resources[random_index])
+
+	return selected_resource
 
 
 

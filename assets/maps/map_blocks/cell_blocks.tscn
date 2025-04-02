@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://4uwnidatkscf"]
 
-[ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://assets/textures/grid.jpg" id="1_r3xp4"]
+[ext_resource type="Texture2D" uid="uid://d370hovli471m" path="res://assets/arts_graphic/textures/grid2.png" id="1_r3xp4"]
 
 [sub_resource type="Shader" id="Shader_io84i"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.1.dev4's StandardMaterial3D.
@@ -64,9 +64,11 @@ void fragment() {
 render_priority = 0
 shader = SubResource("Shader_io84i")
 shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("1_r3xp4")
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 0.5
-shader_parameter/metallic_texture_channel = null
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/texture_roughness = ExtResource("1_r3xp4")
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_blend_sharpness = 1.0
@@ -74,8 +76,6 @@ shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv1_offset = Vector3(0.5, 0.5, 0.5)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = ExtResource("1_r3xp4")
-shader_parameter/texture_roughness = ExtResource("1_r3xp4")
 
 [sub_resource type="BoxMesh" id="BoxMesh_16pvb"]
 material = SubResource("ShaderMaterial_jh8kv")

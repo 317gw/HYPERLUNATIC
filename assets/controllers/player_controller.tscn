@@ -177,7 +177,27 @@ floor_snap_length = 0.2
 platform_floor_layers = 1
 platform_wall_layers = 1
 script = ExtResource("1_0ynvo")
+visible_range = null
+auxiliary_aiming_distance = null
+auxiliary_aiming_radius = null
 mass = 50.0
+slow_rigid_force = null
+speed_slow = null
+speed_normal = null
+speed_max = null
+acc_normal_t = null
+acc_max_t = null
+jump_time = null
+jump_height = null
+mouse_wheel_jump_time = null
+mouse_wheel_jump_height = null
+jump_distance_min = null
+jump_distance_max = null
+air_speed_max = null
+normal_jump_air_speed_acc = null
+dashjump_air_acc_multi = null
+push_power = null
+acc_decelerate = null
 
 [node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
@@ -382,13 +402,6 @@ visible = false
 
 [node name="Hand" type="Node3D" parent="Head"]
 script = ExtResource("26_x16s4")
-grab_power = null
-rotation_power = null
-throw_power = null
-push_power = null
-distance_power = null
-distance_min = null
-distance_max = null
 
 [node name="Marker3D" type="Marker3D" parent="Head/Hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)

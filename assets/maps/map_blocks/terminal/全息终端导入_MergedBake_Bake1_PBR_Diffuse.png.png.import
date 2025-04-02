@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdyy5l0grpvvs"
-path.s3tc="res://.godot/imported/全息终端导入_MergedBake_Bake1_PBR_Diffuse.png.png-04a37761b714ae2d7c96414dcdac2b6a.s3tc.ctex"
+path="res://.godot/imported/全息终端导入_MergedBake_Bake1_PBR_Diffuse.png.png-04a37761b714ae2d7c96414dcdac2b6a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "e594bdb48d413167b40696d4e8b69642"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/maps/map_blocks/terminal/全息终端导入_MergedBake_Bake1_PBR_Diffuse.png.png"
-dest_files=["res://.godot/imported/全息终端导入_MergedBake_Bake1_PBR_Diffuse.png.png-04a37761b714ae2d7c96414dcdac2b6a.s3tc.ctex"]
+dest_files=["res://.godot/imported/全息终端导入_MergedBake_Bake1_PBR_Diffuse.png.png-04a37761b714ae2d7c96414dcdac2b6a.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

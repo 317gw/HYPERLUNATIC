@@ -1,4 +1,4 @@
-extends Node3D
+extends CanvasLayer
 
 
 @onready var water_ripple_overlay: TextureRect = $WaterRippleOverlay
@@ -6,6 +6,7 @@ extends Node3D
 
 
 func _ready() -> void:
-	for child: Control in get_children():
-		child.visible = false
-		child.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for child in get_children():
+		#child.visible = false
+		if child is Control:
+			child.mouse_filter = Control.MOUSE_FILTER_IGNORE

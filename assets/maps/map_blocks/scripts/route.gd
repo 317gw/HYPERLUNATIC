@@ -21,13 +21,13 @@ func _ready() -> void:
 	if owning_level and route_name == "":
 		var parts = owning_level.name.split("_")
 		route_name = parts[2] if parts.size() >= 3 else ""
-	
+
 	if start_terminal:
 		start_terminal.route = self
 		start_terminal.change_name.emit(route_name)
 	else:
 		prints("no start_terminal", get_path())
-		
+
 	if check_points:
 		for Point in check_points:
 			Point.route = self
@@ -38,7 +38,7 @@ func _ready() -> void:
 		destination_terminal.off_area_3d()
 	else:
 		prints("no destination_terminal", get_path())
-	
+
 	switch_maps.visible = false
 	switch_maps.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 

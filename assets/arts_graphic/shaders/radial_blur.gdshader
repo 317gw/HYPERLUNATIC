@@ -15,9 +15,9 @@ void fragment( )
 {
 	vec2 direction = SCREEN_UV - blur_center;
 	vec2 direction_center = SCREEN_UV - vec2(0.5);
-	if (length(direction_center) < un_blur_radius_min) {
-		discard;
-	}
+	//if (length(direction_center) < un_blur_radius_min) {
+		//discard;
+	//}
 
 	float r = smoothstep(un_blur_radius_min, un_blur_radius_max, length(direction_center));
 	direction -= normalize(direction) * un_blur_radius_min;

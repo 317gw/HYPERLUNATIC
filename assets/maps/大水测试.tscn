@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dmsyagyieahoy" path="res://assets/arts_graphic/textures/water/Ocean_normal_512.png" id="7_1gmxb"]
 [ext_resource type="Texture2D" uid="uid://bye687yl2sesr" path="res://assets/arts_graphic/textures/water/spume_mask_512.png" id="8_y4uwr"]
 [ext_resource type="PackedScene" uid="uid://bak8ltrhbmlv5" path="res://assets/maps/map_blocks/CSGStair.tscn" id="10_nbqy2"]
-[ext_resource type="PackedScene" uid="uid://bw7bpxiao2prn" path="res://assets/maps/map_blocks/dynamite_barrel.tscn" id="11_0n463"]
+[ext_resource type="PackedScene" uid="uid://bw7bpxiao2prn" path="res://assets/maps/map_blocks/rigid_body_3D_s/dynamite_barrel.tscn" id="11_0n463"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xi2kq"]
 render_priority = 0
@@ -473,8 +473,8 @@ num_stairs = 0
 
 [node name="方体1" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.74985, 5.02885, -5.4632)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="方体1"]
@@ -485,8 +485,8 @@ shape = SubResource("BoxShape3D_clm57")
 
 [node name="方体2" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22202, 5.02885, -5.4632)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 100.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="方体2"]
@@ -497,8 +497,8 @@ shape = SubResource("BoxShape3D_clm57")
 
 [node name="球1" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.64422, 5.20026, -6.66176)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="球1"]
@@ -509,8 +509,8 @@ shape = SubResource("SphereShape3D_psbl8")
 
 [node name="球2" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2864, 5.20026, -4.51589)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 60.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="球2"]
@@ -521,8 +521,8 @@ shape = SubResource("SphereShape3D_w8yk3")
 
 [node name="泳圈1" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.99842, 5.45696, -2.04924)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 20.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="泳圈1"]
@@ -542,8 +542,8 @@ shape = SubResource("ConvexPolygonShape3D_la41i")
 
 [node name="泳圈2" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.83187, 5.45696, -7.6192)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 80.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="泳圈2"]
@@ -554,8 +554,8 @@ shape = SubResource("ConvexPolygonShape3D_xkrn3")
 
 [node name="四锥" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14585, 5.39496, -8.3926)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="四锥"]
@@ -566,8 +566,8 @@ shape = SubResource("ConvexPolygonShape3D_bb7ar")
 
 [node name="五锥" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42067, 5.39496, -6.62116)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 50.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="五锥"]
@@ -578,8 +578,8 @@ shape = SubResource("ConvexPolygonShape3D_hpyph")
 
 [node name="方板" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.39525, 5.02885, -3.33015)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 500.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="方板"]
@@ -590,8 +590,8 @@ shape = SubResource("ConvexPolygonShape3D_psbl8")
 
 [node name="胶囊" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.91337, 5.0243, -1.94437)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 1600.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="胶囊"]
@@ -602,8 +602,8 @@ shape = SubResource("CapsuleShape3D_psbl8")
 
 [node name="大胶囊" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.04144, 5.0243, 0.952141)
-collision_layer = 32
-collision_mask = 110
+collision_layer = 16
+collision_mask = 63
 mass = 1000.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="大胶囊"]

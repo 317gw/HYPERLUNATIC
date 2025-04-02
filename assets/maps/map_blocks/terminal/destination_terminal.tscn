@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cybgseaman2r"]
 
 [ext_resource type="Script" uid="uid://cm80ujbjh7fod" path="res://assets/maps/map_blocks/terminal/destination_terminal.gd" id="1_s1xtj"]
-[ext_resource type="PackedScene" uid="uid://c80dflah5a2cw" path="res://assets/maps/map_blocks/terminal/全息终端导入.blend" id="2_ds4xx"]
+[ext_resource type="PackedScene" uid="uid://vay2x2qc7h21" path="res://assets/maps/map_blocks/terminal/terminal_model.tscn" id="2_kyuf3"]
 [ext_resource type="Shader" uid="uid://dlfdo6rm7201o" path="res://assets/arts_graphic/shaders/check_point.gdshader" id="2_s1xtj"]
 [ext_resource type="PackedScene" uid="uid://mkqgkrtaglfc" path="res://assets/maps/map_blocks/terminal/terminal_interactive_screen.tscn" id="3_ds4xx"]
 [ext_resource type="PackedScene" uid="uid://bnucec4uq6taa" path="res://assets/maps/map_blocks/check_point.tscn" id="6_ds4xx"]
@@ -30,26 +30,7 @@ shader_parameter/uv_offset = Vector2(0, 0.025)
 [node name="DestinationTerminal" type="Node3D"]
 script = ExtResource("1_s1xtj")
 
-[node name="全息终端导入" parent="." instance=ExtResource("2_ds4xx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-use_collision = true
-collision_mask = 30
-size = Vector3(2.4, 0.1, 2.4)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.1, 0.05)
-use_collision = true
-collision_mask = 30
-size = Vector3(2.6, 0.2, 2.5)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.05, 0.1)
-use_collision = true
-collision_mask = 30
-size = Vector3(2.8, 0.1, 2.6)
+[node name="TerminalModel" parent="." instance=ExtResource("2_kyuf3")]
 
 [node name="TerminalInteractiveScreen" parent="." instance=ExtResource("3_ds4xx")]
 transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 1.6, -1.42)

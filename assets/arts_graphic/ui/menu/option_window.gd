@@ -60,7 +60,7 @@ var input_map: Array
 
 const PROPERTIE = preload("res://assets/arts_graphic/ui/menu/Propertie.tscn")
 
-@onready var pause_menu: Control = $".."
+@onready var main_menus: CanvasLayer = $"../.."
 # Field of View
 @onready var display_mode: HBoxContainer = %DisplayMode
 @onready var aspect_ratios: HBoxContainer = %AspectRatios
@@ -88,7 +88,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"pause"):
-		pause_menu.switch_menu()
+		main_menus.switch_menu()
 
 
 func set_up_ui_input_map() -> void:

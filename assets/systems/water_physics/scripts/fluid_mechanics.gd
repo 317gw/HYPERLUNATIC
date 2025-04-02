@@ -90,7 +90,8 @@ func _ready() -> void:
 	_ppqp_intersect_mesh.collide_with_bodies = true
 	_ppqp_in_water.collide_with_bodies = false
 	_ppqp_in_water.collide_with_areas = true
-	_ppqp_in_water.set_collision_mask(512)
+	_ppqp_in_water.set_collision_mask(32)
+
 
 	# 错误检查
 	if not _parent_rigid_body is RigidBody3D:
@@ -112,13 +113,13 @@ func _ready() -> void:
 	_mesh_indices = _mesh_surface[Mesh.ARRAY_INDEX]
 	_mesh_normals = _mesh_surface[Mesh.ARRAY_NORMAL]
 	_mesh_vertex_count = _mesh_vertices.size()
-	
+
 	# 处理模型
 	calculate_mesh(_mesh_vertices, _mesh_indices, _mesh_normals)
 	volume_sphere_radius = pow(body_volume * 0.238732, 0.333333)
 	body_mass = _parent_rigid_body.mass
 	body_density = body_mass / body_volume
-	
+
 	_position_last = global_position
 	target_pos = global_position
 	auto_inertia = get_inertia()
@@ -129,7 +130,7 @@ func _physics_process(delta: float) -> void:
 	_position_last = global_position
 	_acceleration = (_velocity - _velocity_last) / delta
 	_velocity_last = _velocity
-	
+
 	handle_sleep(delta)
 
 
@@ -176,7 +177,7 @@ func generate_voxel_points() -> void:
 	using_simple_resistance = (
 		body_volume < 1.0 and (probe_buoy_pos.size() < 8) #or probe_slice_pos.size() < 6
 	) or body_volume < 20
-	
+
 	probe_buoy_radius = pow(body_volume / probe_buoy_pos.size() * 0.238732, 0.333333)
 
 
@@ -191,13 +192,13 @@ func _get_probe_buoy_fcc(_range: int) -> void:
 
 
 # , type: String, id: int           , "buoy", id
-# space_state: PhysicsDirectSpaceState3D, 
+# space_state: PhysicsDirectSpaceState3D,
 func is_point_intersect_mesh(point: Vector3) -> bool:
 	_ppqp_intersect_mesh.position = point
 	var result := space_state.intersect_point(_ppqp_intersect_mesh)
 	if not result: return false
 	if result.size() == 0: return false
-	
+
 	for i in result.size():
 		var collider = result[i].collider
 		if result[i].collider == _parent_rigid_body:
@@ -221,6 +222,22 @@ func is_point_in_water(point: Vector3 = Vector3.ZERO) -> Array: # TODO 批量检
 	return [_d / result.size(), _v / result.size()]
 
 
+# 在fluid_mechanics.gd中，批量处理物理查询
+func batch_query_points(points: Array) -> Array:
+	var results = []
+	for point in points:
+		results.append(is_point_in_water(point))
+	return results
+
+
+# 根据物体形状使用更合适的阻力系数
+func get_drag_coefficient(reynold: float, shape: String = "sphere") -> float:
+	match shape:
+		"sphere": return HL.sphere_Cd_by_reynold(reynold)
+		"cube": return 1.05  # 立方体的典型阻力系数
+		_: return HL.sphere_Cd_by_reynold(reynold)
+
+
 func apply_force(_delta: float) -> void:
 	var g: Vector3 = Global.gravity
 	#if _thread.is_started():
@@ -240,7 +257,7 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 	var density_add: float = 0
 	var viscosity_add: float = HL.Viscositys.AIR
 	var m: Vector3 = Vector3.ZERO
-	
+
 	#var time_start = Time.get_ticks_usec()
 	in_water_const = 0
 	if is_in_water():
@@ -252,7 +269,7 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 			var rezt: Array = is_point_in_water(point)
 			var density: float = rezt[0]
 			var viscosity: float = rezt[1]
-			
+
 			# 确定浸入比例
 			if i % 3 == 0 and density > 0:
 				_prqp.from = point
@@ -265,7 +282,7 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 					closest_distance = dist
 			# 计算浸入比例（假设晶格点半径为0.5）
 			var submergence = clamp(closest_distance / probe_buoy_radius * 1, 0.0, 1.0)
-			
+
 			density_add += density * submergence
 			viscosity_add += viscosity * submergence
 			in_water_const += int(density > 0)# * submergence
@@ -281,7 +298,7 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 		in_water_ratio,
 		HL.sigmoid(_velocity.length() - 4),
 		)
-	
+
 	density_add /= max(probe_buoy_pos.size(), 1)
 	viscosity_add /= max(probe_buoy_pos.size(), 1)
 	#in_water_const = max(in_water_const, 1)
@@ -299,7 +316,8 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 
 	var _force: Vector3 = -g * body_volume * density_add
 	_force -= resistance.limit_length(body_volume * density_add / discharged_volume_ratio)
-	
+	#print(_force)
+
 	# 受力平衡
 	#target_pos = HL.exponential_decay_vec3(target_pos, global_position, _delta)
 	#current_error = target_pos - global_position
@@ -307,17 +325,22 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 		#var _convergence_index = current_error.length()
 		#_force = lerp(-g * body_mass, _force, HL.sigmoid(_convergence_index))
 		#m = lerp(Vector3.ZERO, m, HL.sigmoid(_convergence_index))
-	
+
 	# 应用
 	_parent_rigid_body.call_deferred("apply_central_force", _force)
 	_parent_rigid_body.call_deferred("apply_torque", m)
-	
+	#_parent_rigid_body.apply_central_force(_force)
+	#_parent_rigid_body.apply_torque(m)
+
 	# 阻尼
 	var _damp: float = discharged_volume_ratio
 	if is_all_in_water:
 		_damp = max(_damp*_velocity.normalized().dot(-g.normalized()), 0)
 	#_parent_rigid_body.linear_damp = 2 * _damp
 	_parent_rigid_body.angular_damp = 0.5 * _damp + pow(viscosity_add, 0.5)
+
+
+
 
 
 #func get_water_meshs() -> Array:
@@ -348,6 +371,6 @@ func _exit_tree() -> void:
 	_manager.rigid_bodys_fluid_mechanics.erase(self)
 	if _thread.is_started():
 		_thread.wait_to_finish()
-	
+
 	if _parent_rigid_body.has_meta("fluid_mechanics"):
 		_parent_rigid_body.remove_meta("fluid_mechanics")

@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbsmvov8u78q"]
+
+[ext_resource type="Script" uid="uid://xkuaiytq4kwd" path="res://addons/SignalVisualizer/Debugger/signal_debugger_panel.gd" id="1_66cpc"]
+[ext_resource type="Texture2D" uid="uid://be3nwoioa311t" path="res://addons/SignalVisualizer/Play.svg" id="2_2wkuv"]
+[ext_resource type="Texture2D" uid="uid://oo1oq2colx5b" path="res://addons/SignalVisualizer/Stop.svg" id="3_bg5eu"]
+[ext_resource type="Texture2D" uid="uid://bmnff63evbdhv" path="res://addons/SignalVisualizer/Clear.svg" id="4_vg63r"]
+
+[node name="SignalDebugger" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_66cpc")
+start_icon = ExtResource("2_2wkuv")
+stop_icon = ExtResource("3_bg5eu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ActionButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Start"
+icon = ExtResource("2_2wkuv")
+
+[node name="ClearAllButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear All"
+icon = ExtResource("4_vg63r")
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClearLogsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear Logs"
+icon = ExtResource("4_vg63r")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SignalTree" type="Tree" parent="VBoxContainer/HSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+columns = 2
+allow_reselect = true
+allow_rmb_select = true
+hide_root = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="VBoxContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+tab_count = 2
+tab_0/title = "Signal Log"
+tab_1/title = "Signal Graph"
+
+[node name="LogLabel" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.690196, 0.690196, 0.690196, 1)
+bbcode_enabled = true
+scroll_following = true
+
+[node name="Graph" type="GraphEdit" parent="VBoxContainer/HSplitContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ActionButton" to="." method="_on_action_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ClearAllButton" to="." method="_on_clear_all_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ClearLogsButton" to="." method="_on_clear_logs_button_pressed"]
+[connection signal="item_selected" from="VBoxContainer/HSplitContainer/SignalTree" to="." method="_on_signal_tree_item_selected"]
+[connection signal="tab_changed" from="VBoxContainer/HSplitContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]

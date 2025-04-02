@@ -50,13 +50,15 @@ var style := Style.HIDDEN:
 			Style.VISIBLE_COMPACT, Style.VISIBLE_DETAILED:
 				visible = true
 				frame_number.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/PC/FrameTimeHistory.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/PC/Graphs/FPSGraph.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/PC/Graphs/TotalGraph.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/PC/Graphs/CPUGraph.visible = style == Style.VISIBLE_DETAILED
-				$DebugMenu/PC/Graphs/GPUGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenuControl/PC/FrameTimeHistory.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenuControl/PC/Graphs/FPSGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenuControl/PC/Graphs/TotalGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenuControl/PC/Graphs/CPUGraph.visible = style == Style.VISIBLE_DETAILED
+				$DebugMenuControl/PC/Graphs/GPUGraph.visible = style == Style.VISIBLE_DETAILED
 				information.visible = style == Style.VISIBLE_DETAILED
 				settings.visible = style == Style.VISIBLE_DETAILED
+
+
 
 # Value of `Time.get_ticks_usec()` on the previous frame.
 var last_tick := 0
@@ -77,6 +79,9 @@ var frametime_cpu_avg := GRAPH_MAX_FRAMETIME
 var frametime_gpu_avg := GRAPH_MIN_FRAMETIME
 var frames_per_second := float(GRAPH_MIN_FPS)
 var frame_time_gradient := Gradient.new()
+
+@onready var debug_menu_control: Control = $DebugMenuControl
+
 
 func _init() -> void:
 	# This must be done here instead of `_ready()` to avoid having `visibility_changed` be emitted immediately.

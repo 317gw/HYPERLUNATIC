@@ -31,7 +31,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if current_weapon:
 		current_weapon.Handle_Input(event)
-	
+
 	# switch weaponsssssss
 	if event.is_action_pressed("weapon_rifle"):
 		on_child_transition(current_weapon, "Rifle")
@@ -70,7 +70,7 @@ func on_child_transition(now_weapon: HL.Weapon, new_weapon_name: String):
 	if print_transition:
 		print("in: %s" %new_weapon)
 	last_weapon = now_weapon
-	
+
 	# 换
 	_current = new_weapon.name
 	new_weapon.ready_to_action = true

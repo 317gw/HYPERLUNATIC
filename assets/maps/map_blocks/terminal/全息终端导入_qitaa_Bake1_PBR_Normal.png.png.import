@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctitfmswlyhwq"
-path.s3tc="res://.godot/imported/全息终端导入_qitaa_Bake1_PBR_Normal.png.png-0ebf64a76ccc7519734be810dace1b90.s3tc.ctex"
+path="res://.godot/imported/全息终端导入_qitaa_Bake1_PBR_Normal.png.png-0ebf64a76ccc7519734be810dace1b90.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "1615d04c67bdabcde617c08d0999ec62"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/maps/map_blocks/terminal/全息终端导入_qitaa_Bake1_PBR_Normal.png.png"
-dest_files=["res://.godot/imported/全息终端导入_qitaa_Bake1_PBR_Normal.png.png-0ebf64a76ccc7519734be810dace1b90.s3tc.ctex"]
+dest_files=["res://.godot/imported/全息终端导入_qitaa_Bake1_PBR_Normal.png.png-0ebf64a76ccc7519734be810dace1b90.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

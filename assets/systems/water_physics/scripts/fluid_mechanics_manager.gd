@@ -5,6 +5,7 @@ const FLUID_MECHANICS = preload("res://assets/systems/water_physics/fluid_mechan
 const PROBE = preload("res://assets/systems/water_physics/probe.tres")
 
 #@export var voxel_point_distance: float = 1 # m
+@export var use_rigid_bodys_fluid_mechanic: bool = false
 
 var space_state: PhysicsDirectSpaceState3D
 var water_mesh_3d_s: Dictionary = {} # {"id": 0, "body": dddddd}
@@ -42,41 +43,43 @@ func _physics_process(_delta: float) -> void:
 	space_state = get_world_3d().direct_space_state
 	if not probe_finish:
 		return
-	
-	
+
+	if not use_rigid_bodys_fluid_mechanic:
+		return
+
 	#_apply_force(_delta)
-	
+
 	#_multi_probe_thread.wait_to_finish()
 	#_multi_probe_thread.start(_update_multi_probe_pos)
 	#
 	#_force_thread.wait_to_finish()
 	#_force_thread.start(_apply_force.bind(_delta))
-	
+
 	#_probe_count = 0
 	#if _thread_queue._working:
 		#await _thread_queue._thread_finished
-	
-	
-	
-	#var time_start = Time.get_ticks_usec()
-	#for rbfm: HL.FluidMechanics in rigid_bodys_fluid_mechanics:
-		#rbfm.space_state = space_state
-		#rbfm.apply_force(_delta)
-		##_update_multi_probe_pos(rbfm)
-	#var time_end = Time.get_ticks_usec()
-	#
-	## 平均计时
-	#_history.push_back(time_end - time_start)
-	#if _history.size() > _history_size:
-		#_history.pop_front()
-	#_average_physics_process_m = 0
-	#for i in _history:
-		#_average_physics_process_m += i
-	#_average_physics_process_m /= _history_size
-	#prints("took %d microseconds" % (time_end - time_start), int(_average_physics_process_m))
-	
-	
-	
+
+
+
+	var time_start = Time.get_ticks_usec()
+	for rbfm: HL.FluidMechanics in rigid_bodys_fluid_mechanics:
+		rbfm.space_state = space_state
+		rbfm.apply_force(_delta)
+		#_update_multi_probe_pos(rbfm)
+	var time_end = Time.get_ticks_usec()
+
+	# 平均计时
+	_history.push_back(time_end - time_start)
+	if _history.size() > _history_size:
+		_history.pop_front()
+	_average_physics_process_m = 0
+	for i in _history:
+		_average_physics_process_m += i
+	_average_physics_process_m /= _history_size
+	prints("took %d microseconds" % (time_end - time_start), int(_average_physics_process_m))
+
+
+
 		#var force_p: Vector3 = -Global.gravity * rbfm.volume / rbfm.probe_buoy_pos.size()
 		#_thread_queue.add_job(_apply_force, ThreadQueue._nop, [rbfm, force_p])
 		#_thread_queue.add_job(_update_multi_probe_pos, ThreadQueue._nop, [rbfm])
@@ -88,13 +91,13 @@ func _physics_process(_delta: float) -> void:
 		#var density: float = float(_rbfm.is_point_in_water(_rbfm.probe_buoy_pos[i])[0])
 		#if density == 0:
 			#continue
-		#
+#
 		#_rbfm._parent_rigid_body.apply_force(
 			#_force_p * density,
 			#_rbfm.probe_buoy_pos[i]
 			#)
 
-# 
+#
 func _update_multi_probe_pos(_rbfm: HL.FluidMechanics) -> void:
 	for i in _rbfm.probe_buoy_pos.size():
 		multi_probe_buoy.multimesh.set_instance_transform(

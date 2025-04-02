@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhg1cfuc0tf3j"]
+
+[ext_resource type="Script" uid="uid://boqrpavcoynsu" path="res://assets/arts_graphic/ui/player_ui/player_fp_ui.gd" id="1_uwkun"]
+[ext_resource type="Texture2D" uid="uid://dpurc6nyhut8d" path="res://assets/arts_graphic/textures/crosshair.png" id="2_hkwn4"]
+[ext_resource type="Script" uid="uid://vgj2gaoxrkht" path="res://assets/arts_graphic/ui/player_ui/Line2D.gd" id="3_730b6"]
+[ext_resource type="Script" uid="uid://baekj2wvefc48" path="res://assets/arts_graphic/ui/player_ui/tool_ui.gd" id="4_dqguf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqguf"]
+albedo_color = Color(0.1975, 0.79, 0.1975, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_retnh"]
+material = SubResource("StandardMaterial3D_dqguf")
+radius = 0.05
+height = 0.1
+radial_segments = 16
+rings = 8
+
+[node name="PlayerFP_UI" type="CanvasLayer"]
+script = ExtResource("1_uwkun")
+
+[node name="FrontSight" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Crosshair" type="TextureRect" parent="FrontSight"]
+texture_filter = 3
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_hkwn4")
+
+[node name="Line2D" type="Line2D" parent="FrontSight"]
+closed = true
+width = 2.0
+script = ExtResource("3_730b6")
+
+[node name="Label" type="Label" parent="FrontSight"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1137.0
+offset_bottom = 1160.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="ToolUI" type="Control" parent="."]
+editor_description = "C Key"
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_dqguf")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ToolUI"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(1, 0.5, 0, 0.8)
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ToolUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MenuButton" type="MenuButton" parent="ToolUI/ColorRect/HBoxContainer"]
+layout_mode = 2
+text = "AAAAAAAAAAAAAAA"
+item_count = 1
+popup/item_0/text = "omg"
+popup/item_0/id = 0
+
+[node name="RayCast3D" type="RayCast3D" parent="ToolUI"]
+top_level = true
+enabled = false
+target_position = Vector3(0, 0, -50)
+collision_mask = 29
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ToolUI"]
+mesh = SubResource("SphereMesh_retnh")
+
+[node name="InforColorRect" type="ColorRect" parent="ToolUI"]
+layout_mode = 1
+color = Color(0, 0, 0, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="InforLabel" type="Label" parent="ToolUI/InforColorRect"]
+layout_mode = 1
+offset_right = 28.0
+offset_bottom = 23.0
+text = "+++"
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true

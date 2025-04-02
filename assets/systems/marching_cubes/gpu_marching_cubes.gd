@@ -52,7 +52,7 @@ func release():
 func set_voxel_grid(new_grid: MarchingTable.VoxelGrid):
 	if voxel_grid and (voxel_grid.resolution != new_grid.resolution):
 		_needs_buffer_rebuild = true
-	
+
 	voxel_grid = new_grid
 	if is_inside_tree() and rd:
 		compute()
@@ -88,7 +88,7 @@ func setup_bindings(force_rebuild := false):
 	for b in buffers:
 		rd.free_rid(b)
 	buffers.clear()
-	
+
 	# Create the input params buffer
 	var input = get_params()
 	var input_bytes = input.to_byte_array()

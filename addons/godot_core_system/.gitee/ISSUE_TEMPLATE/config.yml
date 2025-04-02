@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 项目讨论区
+    url: https://discord.com/channels/1255664864593186889/1338049403558035486
+    about: 请在这里讨论项目相关话题
+  - name: 项目文档
+    url: https://gitee.com/Giab/godot_core_system/wikis
+    about: 查看项目文档

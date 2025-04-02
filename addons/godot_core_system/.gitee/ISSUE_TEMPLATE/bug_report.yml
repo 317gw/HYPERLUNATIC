@@ -1,0 +1,71 @@
+name: Bug 报告
+description: 创建一个 Bug 报告以帮助我们改进
+title: '[BUG] '
+labels: bug
+assignees: ''
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢对项目的支持与关注。在提出问题之前，请确保你已查看相关开发或使用文档：
+  - type: textarea
+    attributes:
+      label: 问题描述
+      description: 请清晰简洁地描述这个 Bug
+      placeholder: [简洁说明异常现象，如"旋转地牢时角色卡入不可达区域"]
+      validations:
+        required: true
+  - type: textarea
+    attributes:
+      label: 💻复现步骤
+      description: 请详细描述复现这个 Bug 的步骤
+      placeholder: |
+        - 1. 进入晶洞层第三区
+        - 2. 连续逆时针旋转红轴3次
+        - 3. 尝试向西北方向移动
+      validations:
+        required: true
+  - type: textarea
+    attributes:
+      label: 📝 预期行为
+      description: 请描述你期望发生的事情
+      placeholder: [角色应抵达隐藏房间]
+      validations:
+        required: false
+  - type: textarea
+    attributes:
+      label: 📝 实际行为
+      description: 请描述实际发生的事情
+      placeholder: [角色模型卡在岩壁中，摄像机视角错位]
+  - type: textarea
+    attributes:
+      label: 📎附加信息
+      description: 请提供额外的信息以帮助我们更好地理解这个 Bug
+      placeholder: |
+        [可选] 你可以在这里添加任何你认为有用的附加信息
+      validations:
+        required: false
+  - type: textarea
+    attributes:
+      label: 截图或视频
+      description: 如果可以的话，上传任何关于 bug 的截图。
+      value: |
+        ![异常截图](URL)
+  - type: textarea
+    attributes:
+      label: 🔍 环境信息
+      description: 请提供额外的信息以帮助我们更好地理解这个 Bug
+      placeholder: |
+        - 游戏版本：v0.3.2
+        - 项目版本/分支：[例如 main]
+        - Godot 版本：[例如 4.3]
+        - 操作系统：[例如 Windows 11]
+      validations:
+        required: false
+  - type: checkboxes
+    attributes:
+      label: 确认
+      options:
+        - label: 我已确认该问题未被重复报告
+          default: false
+          required: false

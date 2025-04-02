@@ -28,7 +28,6 @@ const FOV_CHANGE: float = 1.5
 @export var camera_extension: float = 5.0
 
 
-
 var look_back_rotation: float = 0.0 # 回头
 var up_down_rotation: float = 0.0 # 抬头和低头
 var fov_air_chang: float # fov变化
@@ -41,7 +40,7 @@ var targetZ: float
 var aiming_aidable_objects: Array = [CharacterBody3D]
 var enemy_area_body: Array = [CharacterBody3D]
 var enemy_area_radius: float
-var ui: CanvasLayer
+var player_fp_ui: HL.PlayerFP_UI
 # FOV & Zoom  缩放
 var is_zoom: bool = false
 var fov_lerp: float = 0.7
@@ -89,11 +88,9 @@ var _camera_rotation: Vector3 # 私有变量，用于存储摄像机旋转值
 @onready var auxiliary_aiming_ball: MeshInstance3D = $AuxiliaryAimingBall
 
 
-
 func _ready() -> void: # 节点准备好时执行
 	await owner.ready
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED # 捕获鼠标
-	ui = PLAYER.ui
+	player_fp_ui = Global.player_fp_ui
 	# 初始化瞄准参数
 	eye_ray_cast.target_position.z = -PLAYER.visible_range
 	normal_target_marker.position.z = -PLAYER.visible_range
@@ -126,7 +123,8 @@ func _ready() -> void: # 节点准备好时执行
 func _unhandled_input(event: InputEvent) -> void: # 处理未处理的输入事件
 	# 判断是否为鼠标移动事件且鼠标模式为捕获模式
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-	if _mouse_input:
+	if _mouse_input and event:
+		#print("uyyyuyuy")
 		var mouse_motion: InputEventMouseMotion = event
 		sensitivity = MOUSE_SENSITIVITY
 		if is_zoom:
@@ -141,11 +139,23 @@ func _unhandled_input(event: InputEvent) -> void: # 处理未处理的输入事�
 		fov_lerp_change()
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and Global.is_tool_ui_move_camera():
+		var mouse_motion: InputEventMouseMotion = event
+		sensitivity = MOUSE_SENSITIVITY
+		if mouse_motion.screen_relative.length() > 200:
+			return
+		_rotation_input = -mouse_motion.screen_relative.x * sensitivity # 计算旋转输入
+		_tilt_input = -mouse_motion.screen_relative.y * sensitivity # 计算倾斜输入
+
+
 func _physics_process(delta: float) -> void:
 	_face_dir = -global_transform.basis.z
 	tilt_head_to_body(delta)
+
 	if not hand.view_lock:
 		_update_camera(delta) # 根据鼠标移动更新摄像机位置
+
 	calculate_player_rotation_speed(delta)
 
 	# Head bob
@@ -155,7 +165,6 @@ func _physics_process(delta: float) -> void:
 		bob_time += delta * PLAYER.velocity.length() * float(PLAYER.is_on_floor())
 		head_bob_pos = head_bob_pos.lerp(headbob(bob_time), 0.2)
 	position = position.lerp(head_bob_pos, 0.5)
-
 
 	slide_camera_smooth_back_to_origin(delta, slide_camera_smooth_back_to_origin_y_only)
 	if saved_camera_global_pos == null:
@@ -279,6 +288,7 @@ func _on_eye_area_body_exited(body: Node3D) -> void:
 		aiming_aidable_objects.remove_at(aiming_aidable_objects.find(body))
 
 
+# 可自瞄物体进出
 func aiming_aidable_objects_in_out() -> void:
 	for body in enemy_area_body:
 		if body is CharacterBody3D:
@@ -289,6 +299,7 @@ func aiming_aidable_objects_in_out() -> void:
 				aiming_aidable_objects.remove_at(aiming_aidable_objects.find(body))
 
 
+# 位置在屏幕上
 func is_position_on_screen(global_pos: Vector3) -> bool:
 	var screen_pos = unproject_position(global_pos)
 	if screen_pos == screen_pos.clamp(Vector2(0, 0), get_viewport().get_size()):
@@ -323,21 +334,21 @@ func auxiliary_aiming() -> void:
 				auxiliary_aiming_ball.global_position = nearest_obj.global_position
 				# 设置瞄准
 				PLAYER.eye_ray_cast.look_at(nearest_obj.global_position)
-				ui.normal_crosshair = false
-				ui.crosshair.position = tag_screen_pos + ui.amend
+				player_fp_ui.normal_crosshair = false
+				player_fp_ui.crosshair.position = tag_screen_pos + player_fp_ui.amend
 			else:
 				PLAYER.eye_ray_cast.look_at(normal_target_marker.global_position)
-				ui.normal_crosshair = true
+				player_fp_ui.normal_crosshair = true
 				auxiliary_aiming_ball.visible = false
 	else:
 		#PLAYER.eye_ray_cast.look_at(normal_target_marker.global_position)
-		ui.normal_crosshair = true
+		player_fp_ui.normal_crosshair = true
 		auxiliary_aiming_ball.visible = false
 
 # PLAYER.auxiliary_aiming_radius
 
 
-
+# 保存用于平滑处理的相机位置
 var saved_camera_global_pos = null
 func save_camera_pos_for_smoothing() -> void:
 	if saved_camera_global_pos == null:
@@ -345,6 +356,7 @@ func save_camera_pos_for_smoothing() -> void:
 		slide_camera_smooth_back_to_origin_ready = true
 
 
+# 滑动镜头平稳地回到原点
 var smooth_target_pos
 const CROUCH_TRANSLATE = 0.2
 const CROUCH_TRANSLATE_XZ = 0.2  # 新增常量，用于x和z坐标的平移量

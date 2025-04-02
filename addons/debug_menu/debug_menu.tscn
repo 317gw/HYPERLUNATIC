@@ -8,32 +8,32 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki0n8"]
 bg_color = Color(0, 0, 0, 0.25098)
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("fps", "frame_time", "frame_number", "frame_history_total_avg", "frame_history_total_min", "frame_history_total_max", "frame_history_total_last", "frame_history_cpu_avg", "frame_history_cpu_min", "frame_history_cpu_max", "frame_history_cpu_last", "frame_history_gpu_avg", "frame_history_gpu_min", "frame_history_gpu_max", "frame_history_gpu_last", "fps_graph", "total_graph", "cpu_graph", "gpu_graph", "information", "settings")]
-layer = 128
+[node name="DebugMenu" type="CanvasLayer" node_paths=PackedStringArray("fps", "frame_time", "frame_number", "frame_history_total_avg", "frame_history_total_min", "frame_history_total_max", "frame_history_total_last", "frame_history_cpu_avg", "frame_history_cpu_min", "frame_history_cpu_max", "frame_history_cpu_last", "frame_history_gpu_avg", "frame_history_gpu_min", "frame_history_gpu_max", "frame_history_gpu_last", "fps_graph", "total_graph", "cpu_graph", "gpu_graph", "information", "settings")]
+layer = 64
 script = ExtResource("1_p440y")
-fps = NodePath("DebugMenu/PC/FPS")
-frame_time = NodePath("DebugMenu/PC/FrameTime")
-frame_number = NodePath("DebugMenu/PC/FrameNumber")
-frame_history_total_avg = NodePath("DebugMenu/PC/FrameTimeHistory/TotalAvg")
-frame_history_total_min = NodePath("DebugMenu/PC/FrameTimeHistory/TotalMin")
-frame_history_total_max = NodePath("DebugMenu/PC/FrameTimeHistory/TotalMax")
-frame_history_total_last = NodePath("DebugMenu/PC/FrameTimeHistory/TotalLast")
-frame_history_cpu_avg = NodePath("DebugMenu/PC/FrameTimeHistory/CPUAvg")
-frame_history_cpu_min = NodePath("DebugMenu/PC/FrameTimeHistory/CPUMin")
-frame_history_cpu_max = NodePath("DebugMenu/PC/FrameTimeHistory/CPUMax")
-frame_history_cpu_last = NodePath("DebugMenu/PC/FrameTimeHistory/CPULast")
-frame_history_gpu_avg = NodePath("DebugMenu/PC/FrameTimeHistory/GPUAvg")
-frame_history_gpu_min = NodePath("DebugMenu/PC/FrameTimeHistory/GPUMin")
-frame_history_gpu_max = NodePath("DebugMenu/PC/FrameTimeHistory/GPUMax")
-frame_history_gpu_last = NodePath("DebugMenu/PC/FrameTimeHistory/GPULast")
-fps_graph = NodePath("DebugMenu/PC/Graphs/FPSGraph/Graph")
-total_graph = NodePath("DebugMenu/PC/Graphs/TotalGraph/Graph")
-cpu_graph = NodePath("DebugMenu/PC/Graphs/CPUGraph/Graph")
-gpu_graph = NodePath("DebugMenu/PC/Graphs/GPUGraph/Graph")
-information = NodePath("DebugMenu/PC/Information")
-settings = NodePath("DebugMenu/PC/Settings")
+fps = NodePath("DebugMenuControl/PC/FPS")
+frame_time = NodePath("DebugMenuControl/PC/FrameTime")
+frame_number = NodePath("DebugMenuControl/PC/FrameNumber")
+frame_history_total_avg = NodePath("DebugMenuControl/PC/FrameTimeHistory/TotalAvg")
+frame_history_total_min = NodePath("DebugMenuControl/PC/FrameTimeHistory/TotalMin")
+frame_history_total_max = NodePath("DebugMenuControl/PC/FrameTimeHistory/TotalMax")
+frame_history_total_last = NodePath("DebugMenuControl/PC/FrameTimeHistory/TotalLast")
+frame_history_cpu_avg = NodePath("DebugMenuControl/PC/FrameTimeHistory/CPUAvg")
+frame_history_cpu_min = NodePath("DebugMenuControl/PC/FrameTimeHistory/CPUMin")
+frame_history_cpu_max = NodePath("DebugMenuControl/PC/FrameTimeHistory/CPUMax")
+frame_history_cpu_last = NodePath("DebugMenuControl/PC/FrameTimeHistory/CPULast")
+frame_history_gpu_avg = NodePath("DebugMenuControl/PC/FrameTimeHistory/GPUAvg")
+frame_history_gpu_min = NodePath("DebugMenuControl/PC/FrameTimeHistory/GPUMin")
+frame_history_gpu_max = NodePath("DebugMenuControl/PC/FrameTimeHistory/GPUMax")
+frame_history_gpu_last = NodePath("DebugMenuControl/PC/FrameTimeHistory/GPULast")
+fps_graph = NodePath("DebugMenuControl/PC/Graphs/FPSGraph/Graph")
+total_graph = NodePath("DebugMenuControl/PC/Graphs/TotalGraph/Graph")
+cpu_graph = NodePath("DebugMenuControl/PC/Graphs/CPUGraph/Graph")
+gpu_graph = NodePath("DebugMenuControl/PC/Graphs/GPUGraph/Graph")
+information = NodePath("DebugMenuControl/PC/Information")
+settings = NodePath("DebugMenuControl/PC/Settings")
 
-[node name="DebugMenu" type="Control" parent="."]
+[node name="DebugMenuControl" type="Control" parent="."]
 texture_filter = 5
 layout_mode = 3
 anchors_preset = 15
@@ -44,7 +44,8 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("2_vaxdg")
 
-[node name="PC" type="VBoxContainer" parent="DebugMenu"]
+[node name="PC" type="VBoxContainer" parent="DebugMenuControl"]
+z_index = 4
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.650588
@@ -57,7 +58,7 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="FPS" type="Label" parent="DebugMenu/PC"]
+[node name="FPS" type="Label" parent="DebugMenuControl/PC"]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -66,7 +67,7 @@ theme_override_constants/line_spacing = 0
 text = "60 FPS"
 horizontal_alignment = 2
 
-[node name="FrameTime" type="Label" parent="DebugMenu/PC"]
+[node name="FrameTime" type="Label" parent="DebugMenuControl/PC"]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -74,7 +75,7 @@ theme = ExtResource("2_vaxdg")
 text = "16.67 mspf (cap: 123 FPS + Adaptive V-Sync)"
 horizontal_alignment = 2
 
-[node name="FrameNumber" type="Label" parent="DebugMenu/PC"]
+[node name="FrameNumber" type="Label" parent="DebugMenuControl/PC"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -82,7 +83,7 @@ theme = ExtResource("2_vaxdg")
 text = "Frame: 1234"
 horizontal_alignment = 1
 
-[node name="FrameTimeHistory" type="GridContainer" parent="DebugMenu/PC"]
+[node name="FrameTimeHistory" type="GridContainer" parent="DebugMenuControl/PC"]
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 2
@@ -90,47 +91,47 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 5
 
-[node name="Spacer" type="Control" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="Spacer" type="Control" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="AvgHeader" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="AvgHeader" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("2_vaxdg")
 text = "Average"
 horizontal_alignment = 1
 
-[node name="MinHeader" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="MinHeader" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("2_vaxdg")
 text = "Best"
 horizontal_alignment = 1
 
-[node name="MaxHeader" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="MaxHeader" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("2_vaxdg")
 text = "Worst"
 horizontal_alignment = 1
 
-[node name="LastHeader" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="LastHeader" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("2_vaxdg")
 text = "Last"
 horizontal_alignment = 1
 
-[node name="TotalHeader" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="TotalHeader" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("2_vaxdg")
 text = "Total:"
 horizontal_alignment = 1
 
-[node name="TotalAvg" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="TotalAvg" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -138,7 +139,7 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="TotalMin" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="TotalMin" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -146,7 +147,7 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="TotalMax" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="TotalMax" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -154,7 +155,7 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="TotalLast" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="TotalLast" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -162,14 +163,14 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="CPUHeader" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="CPUHeader" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("2_vaxdg")
 text = "CPU:"
 horizontal_alignment = 1
 
-[node name="CPUAvg" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="CPUAvg" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -177,7 +178,7 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="CPUMin" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="CPUMin" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -185,7 +186,7 @@ theme = ExtResource("2_vaxdg")
 text = "12.34"
 horizontal_alignment = 1
 
-[node name="CPUMax" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="CPUMax" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -193,7 +194,7 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="CPULast" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="CPULast" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -201,14 +202,14 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="GPUHeader" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="GPUHeader" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme = ExtResource("2_vaxdg")
 text = "GPU:"
 horizontal_alignment = 1
 
-[node name="GPUAvg" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="GPUAvg" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -216,7 +217,7 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="GPUMin" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="GPUMin" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -224,7 +225,7 @@ theme = ExtResource("2_vaxdg")
 text = "1.23"
 horizontal_alignment = 1
 
-[node name="GPUMax" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="GPUMax" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -232,7 +233,7 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="GPULast" type="Label" parent="DebugMenu/PC/FrameTimeHistory"]
+[node name="GPULast" type="Label" parent="DebugMenuControl/PC/FrameTimeHistory"]
 modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -240,18 +241,18 @@ theme = ExtResource("2_vaxdg")
 text = "123.45"
 horizontal_alignment = 1
 
-[node name="Graphs" type="VBoxContainer" parent="DebugMenu/PC"]
+[node name="Graphs" type="VBoxContainer" parent="DebugMenuControl/PC"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="FPSGraph" type="HBoxContainer" parent="DebugMenu/PC/Graphs"]
+[node name="FPSGraph" type="HBoxContainer" parent="DebugMenuControl/PC/Graphs"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="Title" type="Label" parent="DebugMenu/PC/Graphs/FPSGraph"]
+[node name="Title" type="Label" parent="DebugMenuControl/PC/Graphs/FPSGraph"]
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -260,19 +261,19 @@ text = "FPS: ↑"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Graph" type="Panel" parent="DebugMenu/PC/Graphs/FPSGraph"]
+[node name="Graph" type="Panel" parent="DebugMenuControl/PC/Graphs/FPSGraph"]
 custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ki0n8")
 
-[node name="TotalGraph" type="HBoxContainer" parent="DebugMenu/PC/Graphs"]
+[node name="TotalGraph" type="HBoxContainer" parent="DebugMenuControl/PC/Graphs"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="Title" type="Label" parent="DebugMenu/PC/Graphs/TotalGraph"]
+[node name="Title" type="Label" parent="DebugMenuControl/PC/Graphs/TotalGraph"]
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -281,19 +282,19 @@ text = "Total: ↓"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Graph" type="Panel" parent="DebugMenu/PC/Graphs/TotalGraph"]
+[node name="Graph" type="Panel" parent="DebugMenuControl/PC/Graphs/TotalGraph"]
 custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ki0n8")
 
-[node name="CPUGraph" type="HBoxContainer" parent="DebugMenu/PC/Graphs"]
+[node name="CPUGraph" type="HBoxContainer" parent="DebugMenuControl/PC/Graphs"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="Title" type="Label" parent="DebugMenu/PC/Graphs/CPUGraph"]
+[node name="Title" type="Label" parent="DebugMenuControl/PC/Graphs/CPUGraph"]
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -302,19 +303,19 @@ text = "CPU: ↓"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Graph" type="Panel" parent="DebugMenu/PC/Graphs/CPUGraph"]
+[node name="Graph" type="Panel" parent="DebugMenuControl/PC/Graphs/CPUGraph"]
 custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ki0n8")
 
-[node name="GPUGraph" type="HBoxContainer" parent="DebugMenu/PC/Graphs"]
+[node name="GPUGraph" type="HBoxContainer" parent="DebugMenuControl/PC/Graphs"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="Title" type="Label" parent="DebugMenu/PC/Graphs/GPUGraph"]
+[node name="Title" type="Label" parent="DebugMenuControl/PC/Graphs/GPUGraph"]
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -323,13 +324,13 @@ text = "GPU: ↓"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Graph" type="Panel" parent="DebugMenu/PC/Graphs/GPUGraph"]
+[node name="Graph" type="Panel" parent="DebugMenuControl/PC/Graphs/GPUGraph"]
 custom_minimum_size = Vector2(160, 30)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ki0n8")
 
-[node name="Information" type="Label" parent="DebugMenu/PC"]
+[node name="Information" type="Label" parent="DebugMenuControl/PC"]
 modulate = Color(1, 1, 1, 0.752941)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -339,7 +340,7 @@ Windows 12 64-bit (double precision), Vulkan 1.2.34
 NVIDIA GeForce RTX 1234, 123.45.67"
 horizontal_alignment = 2
 
-[node name="Settings" type="Label" parent="DebugMenu/PC"]
+[node name="Settings" type="Label" parent="DebugMenuControl/PC"]
 modulate = Color(0.8, 0.84, 1, 0.752941)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -358,7 +359,7 @@ Volumetric Fog: On
 2D Antialiasing: 2× MSAA"
 horizontal_alignment = 2
 
-[node name="MobilityDetection" type="VBoxContainer" parent="DebugMenu"]
+[node name="MobilityDetection" type="VBoxContainer" parent="DebugMenuControl"]
 layout_mode = 1
 offset_right = 458.0
 offset_bottom = 232.0
@@ -366,60 +367,60 @@ mouse_filter = 2
 theme_override_constants/separation = 0
 script = ExtResource("3_g23da")
 
-[node name="Graphs" type="VBoxContainer" parent="DebugMenu/MobilityDetection"]
+[node name="Graphs" type="VBoxContainer" parent="DebugMenuControl/MobilityDetection"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="SpeedGraph" type="HBoxContainer" parent="DebugMenu/MobilityDetection/Graphs"]
+[node name="SpeedGraph" type="HBoxContainer" parent="DebugMenuControl/MobilityDetection/Graphs"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Graph" type="Panel" parent="DebugMenu/MobilityDetection/Graphs/SpeedGraph"]
+[node name="Graph" type="Panel" parent="DebugMenuControl/MobilityDetection/Graphs/SpeedGraph"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Title" type="Label" parent="DebugMenu/MobilityDetection/Graphs/SpeedGraph"]
+[node name="Title" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs/SpeedGraph"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("2_vaxdg")
 text = "Speed↓"
 
-[node name="AccelerationGraph" type="HBoxContainer" parent="DebugMenu/MobilityDetection/Graphs"]
+[node name="AccelerationGraph" type="HBoxContainer" parent="DebugMenuControl/MobilityDetection/Graphs"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Graph" type="Panel" parent="DebugMenu/MobilityDetection/Graphs/AccelerationGraph"]
+[node name="Graph" type="Panel" parent="DebugMenuControl/MobilityDetection/Graphs/AccelerationGraph"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Title" type="Label" parent="DebugMenu/MobilityDetection/Graphs/AccelerationGraph"]
+[node name="Title" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs/AccelerationGraph"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("2_vaxdg")
 text = "Acceleration↓"
 
-[node name="JumpingTime" type="Label" parent="DebugMenu/MobilityDetection/Graphs"]
+[node name="JumpingTime" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 theme = ExtResource("2_vaxdg")
 text = "JumpingTime:"
 
-[node name="JumpingHeight" type="Label" parent="DebugMenu/MobilityDetection/Graphs"]
+[node name="JumpingHeight" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 theme = ExtResource("2_vaxdg")
 text = "JumpingHeight:"
 
-[node name="DisplayInput" type="RichTextLabel" parent="DebugMenu"]
+[node name="DisplayInput" type="RichTextLabel" parent="DebugMenuControl"]
 process_mode = 1
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 1
@@ -438,15 +439,15 @@ threaded = true
 script = ExtResource("4_vffq7")
 paragraph_cap = 7
 
-[node name="LineFeedTimer" type="Timer" parent="DebugMenu/DisplayInput"]
+[node name="LineFeedTimer" type="Timer" parent="DebugMenuControl/DisplayInput"]
 wait_time = 0.5
 one_shot = true
 
-[node name="ClearUpTimer" type="Timer" parent="DebugMenu/DisplayInput"]
+[node name="ClearUpTimer" type="Timer" parent="DebugMenuControl/DisplayInput"]
 wait_time = 30.0
 one_shot = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="timeout" from="DebugMenu/DisplayInput/LineFeedTimer" to="DebugMenu/DisplayInput" method="_on_timer_timeout"]
-[connection signal="timeout" from="DebugMenu/DisplayInput/LineFeedTimer" to="DebugMenu/DisplayInput" method="_on_line_feed_timer_timeout"]
-[connection signal="timeout" from="DebugMenu/DisplayInput/ClearUpTimer" to="DebugMenu/DisplayInput" method="_on_clear_up_timer_timeout"]
+[connection signal="timeout" from="DebugMenuControl/DisplayInput/LineFeedTimer" to="DebugMenuControl/DisplayInput" method="_on_timer_timeout"]
+[connection signal="timeout" from="DebugMenuControl/DisplayInput/LineFeedTimer" to="DebugMenuControl/DisplayInput" method="_on_line_feed_timer_timeout"]
+[connection signal="timeout" from="DebugMenuControl/DisplayInput/ClearUpTimer" to="DebugMenuControl/DisplayInput" method="_on_clear_up_timer_timeout"]

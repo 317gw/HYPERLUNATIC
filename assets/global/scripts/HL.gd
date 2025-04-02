@@ -2,6 +2,7 @@ class_name HL
 extends NAMESPACE
 # NameSpace daze⭐
 
+# OMG! is .gd !!!!!!!!!
 const DoubleClick = preload("res://assets/global/scripts/double_click.gd")
 const FrameSkiper = preload("res://assets/global/scripts/frame_skiper.gd")
 
@@ -32,10 +33,14 @@ const MarchingCubes = preload("res://assets/systems/marching_cubes/marching_cube
 const ChunkManager = preload("res://assets/systems/chunk/chunk_manager.gd")
 
 # ui
-const PauseMenu = preload("res://assets/arts_graphic/ui/menu/pause_menu.gd")
+const MainMenus = preload("res://assets/arts_graphic/ui/menu/main_menus.gd")
 const OptionWindow = preload("res://assets/arts_graphic/ui/menu/option_window.gd")
 const Propertie = preload("res://assets/arts_graphic/ui/menu/propertie.gd")
+const PlayerFP_UI = preload("res://assets/arts_graphic/ui/player_ui/player_fp_ui.gd")
+const ToolUi = preload("res://assets/arts_graphic/ui/player_ui/tool_ui.gd")
+const DebugMenu = preload("res://addons/debug_menu/debug_menu.gd")
 
+# map?
 const SkyLimit = preload("res://assets/maps/map_blocks/scripts/sky_limit.gd")
 
 # 常数
@@ -63,6 +68,24 @@ const DigitsArray: Array = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 const Alphanumeric: String = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 const AlphanumericArray: Array = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
+
+const NEW_BOX_SHAPE_3D = preload("res://assets/models/low_prefabricate/new_box_shape_3d.tres")
+const NEW_CAPSULE_SHAPE_3D = preload("res://assets/models/low_prefabricate/new_capsule_shape_3d.tres")
+const NEW_CYLINDER_SHAPE_3D = preload("res://assets/models/low_prefabricate/new_cylinder_shape_3d.tres")
+const NEW_SEPARATION_RAY_SHAPE_3D = preload("res://assets/models/low_prefabricate/new_separation_ray_shape_3d.tres")
+const NEW_SPHERE_SHAPE_3D = preload("res://assets/models/low_prefabricate/new_sphere_shape_3d.tres")
+const shape_3d_array: Array = [NEW_BOX_SHAPE_3D, NEW_CAPSULE_SHAPE_3D, NEW_CYLINDER_SHAPE_3D, NEW_SEPARATION_RAY_SHAPE_3D, NEW_SPHERE_SHAPE_3D]
+
+
+const NEW_BOX_MESH = preload("res://assets/models/low_prefabricate/new_box_mesh.tres")
+const NEW_CAPSULE_MESH = preload("res://assets/models/low_prefabricate/new_capsule_mesh.tres")
+const NEW_CYLINDER_MESH = preload("res://assets/models/low_prefabricate/new_cylinder_mesh.tres")
+const NEW_PLANE_MESH = preload("res://assets/models/low_prefabricate/new_plane_mesh.tres")
+const NEW_PRISM_MESH = preload("res://assets/models/low_prefabricate/new_prism_mesh.tres")
+const NEW_QUAD_MESH = preload("res://assets/models/low_prefabricate/new_quad_mesh.tres")
+const NEW_SPHERE_MESH = preload("res://assets/models/low_prefabricate/new_sphere_mesh.tres")
+const NEW_TORUS_MESH = preload("res://assets/models/low_prefabricate/new_torus_mesh.tres")
+const mesh_array: Array = [NEW_BOX_MESH, NEW_CAPSULE_MESH, NEW_CYLINDER_MESH, NEW_PLANE_MESH, NEW_PRISM_MESH, NEW_QUAD_MESH, NEW_SPHERE_MESH, NEW_TORUS_MESH]
 
 
 # ↓常用复用静态函数

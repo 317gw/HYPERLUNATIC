@@ -89,7 +89,7 @@ func dropping_object() -> void:
 	# TODO 制作相关游戏机制 TODO
 	# ↓ 防止物体完全静止触发睡眠
 	picked_object.apply_central_impulse(Vector3.DOWN * 0.1)
-	
+
 	if picked_object.has_meta("be_picked_up"):
 		picked_object.set_meta("be_picked_up", false)
 

@@ -153,7 +153,7 @@ var max_current_speed_hor: float
 @onready var normal_target_marker: Marker3D = $Head/Camera3D/NormalTargetMarker
 @onready var rifle: Node3D = $WeaponManager/Rifle
 #@onready var eye_shape_cast: ShapeCast3D = $Head/Camera3D/EyeShapeCast
-@onready var ui: CanvasLayer = $"../UI"
+#@onready var player_fp_ui: CanvasLayer = $"../UI"
 # 楼梯检测
 @onready var snap_stairs: SnapStairs = $SnapStairs
 # 其他
@@ -168,6 +168,7 @@ func _ready() -> void:
 	calculate_jump()
 	await Global.global_scenes_ready
 	Global.war_fog.tracked_object.append(self)
+	Global.set_mouse_mode()
 
 
 func _enter_tree() -> void:
@@ -190,14 +191,14 @@ func _input(event) -> void:
 		weapon_sub_action.emit()
 
 
-func _process(_delta: float) -> void:
-	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED: # 进入角色时绑定鼠标
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-
 func _physics_process(_delta: float) -> void:
-	look_at_target = eye_ray_cast.get_collision_point() if eye_ray_cast.is_colliding() else normal_target_marker.global_position
 	trail_3d.process_mode = PROCESS_MODE_DISABLED if is_player_not_moving() else PROCESS_MODE_PAUSABLE
+
+	# 眼睛看看的
+	if Global.tool_ui_visible():
+		look_at_target = Global.player_fp_ui.tool_ui.look_at_target
+	else:
+		look_at_target = eye_ray_cast.get_collision_point() if eye_ray_cast.is_colliding() else normal_target_marker.global_position
 
 	# 预制方向和速度
 	input_dir = Input.get_vector(&"move_left", &"move_right", &"move_forward", &"move_backward") # 获取输入方向
@@ -222,7 +223,6 @@ func _physics_process(_delta: float) -> void:
 			, 0, 0.9)
 		decelerate_list.append(_water_decelerate)
 		#decelerate_list.append(clampf(remap(velocity.length()**2, 0, 100, 0, 0.9), 0, 0.9) )
-
 
 	# 限速
 	max_current_speed_hor = remap(water_viscosity, 0.001, 400, 8, 1) if is_swimming() else 1000

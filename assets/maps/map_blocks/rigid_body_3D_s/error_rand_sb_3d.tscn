@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://jpeytptxakoe"]
+
+[ext_resource type="Script" uid="uid://l0i8r3debbno" path="res://assets/maps/map_blocks/scripts/error_rand_sb_3d.gd" id="1_ljov4"]
+[ext_resource type="ArrayMesh" uid="uid://mfpb53troslv" path="res://assets/models/objects/error_mesh.tres" id="2_56xg6"]
+
+[node name="ERROR_RandSB3D" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 63
+script = ExtResource("1_ljov4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = ExtResource("2_56xg6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

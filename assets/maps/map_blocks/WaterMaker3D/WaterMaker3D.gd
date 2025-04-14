@@ -17,7 +17,7 @@ extends CSGMesh3D
 var uv1_offset: Vector3 = Vector3.ZERO
 var uv2_offset: Vector3 = Vector3.ZERO
 #var collision_shape
-var frame_skiper: HL.FrameSkiper
+var frame_skiper: FrameSkiper
 var underwater_objects: Array = [] # 在水中的物体
 # var objects_volume: Array = [] # 物体体积
 var in_water_material: ShaderMaterial
@@ -54,7 +54,7 @@ func _ready() -> void:
 	underwater_objects.clear()
 	#self.process_priority = 999 # Call _process last to update move after any camera movement
 	# 跳帧
-	frame_skiper = HL.FrameSkiper.new(60)
+	frame_skiper = FrameSkiper.new(60)
 	self.add_child(frame_skiper)
 
 	#if collision_shape_3d.shape is ConcavePolygonShape3D:

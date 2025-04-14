@@ -114,4 +114,5 @@ double_sided = false
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_uqs7f")
 autoplay = "default"
-frame = 12
+frame = 23
+frame_progress = 1.0

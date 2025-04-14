@@ -1,0 +1,154 @@
+[gd_scene load_steps=16 format=3 uid="uid://di3icl4o6dmra"]
+
+[ext_resource type="Script" uid="uid://defwaquq3gyv2" path="res://assets/danmaku/scripts/danmaku_manager.gd" id="1_ip5wq"]
+[ext_resource type="Script" uid="uid://vmbdjajpl88l" path="res://assets/danmaku/scripts/dm_particles.gd" id="2_t2px0"]
+[ext_resource type="Texture2D" uid="uid://dsmwhseh6xgxc" path="res://assets/arts_graphic/textures/danmu_break/Strip.png" id="3_eqyyv"]
+
+[sub_resource type="Gradient" id="Gradient_qm2l4"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qm2l4"]
+gradient = SubResource("Gradient_qm2l4")
+
+[sub_resource type="Curve" id="Curve_rj2kp"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rj2kp"]
+curve = SubResource("Curve_rj2kp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rj2kp"]
+angular_velocity_min = 50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_qm2l4")
+hue_variation_min = -0.01
+hue_variation_max = 0.01
+hue_variation_curve = SubResource("CurveTexture_rj2kp")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rj2kp"]
+transparency = 4
+blend_mode = 1
+shading_mode = 0
+diffuse_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.6)
+albedo_texture = ExtResource("3_eqyyv")
+texture_filter = 2
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 5
+particles_anim_loop = false
+proximity_fade_distance = 0.01
+distance_fade_mode = 3
+distance_fade_min_distance = 100.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_c8f0c"]
+material = SubResource("StandardMaterial3D_rj2kp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c8f0c"]
+angle_min = 120.0
+angle_max = 120.0
+angular_velocity_min = 50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.85
+scale_max = 0.85
+color = Color(1, 1, 1, 0.6)
+color_ramp = SubResource("GradientTexture1D_qm2l4")
+hue_variation_min = -0.01
+hue_variation_max = 0.01
+hue_variation_curve = SubResource("CurveTexture_rj2kp")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eaq3q"]
+angle_min = 150.0
+angle_max = 150.0
+angular_velocity_min = 50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_max = 0.6
+color = Color(1, 1, 1, 0.2)
+color_ramp = SubResource("GradientTexture1D_qm2l4")
+hue_variation_min = -0.01
+hue_variation_max = 0.01
+hue_variation_curve = SubResource("CurveTexture_rj2kp")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8f0c"]
+transparency = 4
+blend_mode = 1
+shading_mode = 0
+diffuse_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.6)
+albedo_texture = ExtResource("3_eqyyv")
+texture_filter = 2
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 5
+particles_anim_loop = false
+proximity_fade_distance = 0.01
+distance_fade_mode = 3
+distance_fade_min_distance = 100.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_eaq3q"]
+material = SubResource("StandardMaterial3D_c8f0c")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ip5wq"]
+
+[node name="DanmakuManager" type="Node3D"]
+script = ExtResource("1_ip5wq")
+
+[node name="Particles" type="Node3D" parent="."]
+script = ExtResource("2_t2px0")
+
+[node name="BreakGPUParticles1" type="GPUParticles3D" parent="Particles"]
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+use_fixed_seed = true
+seed = 2039200664
+process_material = SubResource("ParticleProcessMaterial_rj2kp")
+draw_pass_1 = SubResource("QuadMesh_c8f0c")
+
+[node name="BreakGPUParticles2" type="GPUParticles3D" parent="Particles"]
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+use_fixed_seed = true
+seed = 847311815
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_c8f0c")
+draw_pass_1 = SubResource("QuadMesh_c8f0c")
+
+[node name="BreakGPUParticles3" type="GPUParticles3D" parent="Particles"]
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+use_fixed_seed = true
+seed = 3586813187
+fixed_fps = 18
+process_material = SubResource("ParticleProcessMaterial_eaq3q")
+draw_pass_1 = SubResource("QuadMesh_eaq3q")
+
+[node name="Bullet&Collision" type="Node3D" parent="."]
+
+[node name="MultiMeshInstances" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+mesh = SubResource("SphereMesh_ip5wq")

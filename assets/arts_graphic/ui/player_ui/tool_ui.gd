@@ -27,11 +27,8 @@ func _physics_process(delta: float) -> void:
 	if not self.visible:
 		return
 
-	## 当鼠标中键按下时，直接返回不处理其他逻辑
-	#if is_mouse_wheel_pressed and Input.get_mouse_mode() == Input.MOUSE_MODE_CONFINED:
-		#return
+	# 处理鼠标传送逻辑
 	if is_mouse_wheel_pressed:
-		# 处理鼠标传送逻辑
 		viewport_size = get_viewport().size
 		var mouse_pos = get_viewport().get_mouse_position()
 		var new_mouse_pos = mouse_pos
@@ -49,7 +46,6 @@ func _physics_process(delta: float) -> void:
 
 		if new_mouse_pos != mouse_pos:
 			get_viewport().warp_mouse(new_mouse_pos)
-		#return
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE or (is_mouse_wheel_pressed and Input.get_mouse_mode() == Input.MOUSE_MODE_CONFINED):
 		var camera:= get_viewport().get_camera_3d()

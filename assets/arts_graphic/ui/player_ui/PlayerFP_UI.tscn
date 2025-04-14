@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://boqrpavcoynsu" path="res://assets/arts_graphic/ui/player_ui/player_fp_ui.gd" id="1_uwkun"]
 [ext_resource type="Texture2D" uid="uid://dpurc6nyhut8d" path="res://assets/arts_graphic/textures/crosshair.png" id="2_hkwn4"]
-[ext_resource type="Script" uid="uid://vgj2gaoxrkht" path="res://assets/arts_graphic/ui/player_ui/Line2D.gd" id="3_730b6"]
+[ext_resource type="Script" uid="uid://bd1opw56d6nf5" path="res://assets/arts_graphic/ui/player_ui/front_sight.gd" id="2_retnh"]
 [ext_resource type="Script" uid="uid://baekj2wvefc48" path="res://assets/arts_graphic/ui/player_ui/tool_ui.gd" id="4_dqguf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dqguf"]
@@ -26,31 +26,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_retnh")
 metadata/_edit_use_anchors_ = true
 
-[node name="Crosshair" type="TextureRect" parent="FrontSight"]
+[node name="AimCircle" type="Line2D" parent="FrontSight"]
+closed = true
+width = 2.0
+
+[node name="Crosshair" type="TextureRect" parent="FrontSight/AimCircle"]
 texture_filter = 3
-layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("2_hkwn4")
 
-[node name="Line2D" type="Line2D" parent="FrontSight"]
-closed = true
-width = 2.0
-script = ExtResource("3_730b6")
-
 [node name="Label" type="Label" parent="FrontSight"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = -1
+anchor_top = 0.980833
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1137.0
-offset_bottom = 1160.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
+metadata/_edit_use_anchors_ = true
 
 [node name="ToolUI" type="Control" parent="."]
 editor_description = "C Key"

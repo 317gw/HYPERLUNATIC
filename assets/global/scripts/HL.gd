@@ -4,7 +4,7 @@ extends NAMESPACE
 
 # OMG! is .gd !!!!!!!!!
 const DoubleClick = preload("res://assets/global/scripts/double_click.gd")
-const FrameSkiper = preload("res://assets/global/scripts/frame_skiper.gd")
+#const FrameSkiper = preload("res://assets/global/scripts/frame_skiper.gd")
 
 const Attack = preload("res://assets/global/scripts/attack.gd")
 const Weapon = preload("res://assets/weapons/scripts/weapon.gd")
@@ -37,8 +37,13 @@ const MainMenus = preload("res://assets/arts_graphic/ui/menu/main_menus.gd")
 const OptionWindow = preload("res://assets/arts_graphic/ui/menu/option_window.gd")
 const Propertie = preload("res://assets/arts_graphic/ui/menu/propertie.gd")
 const PlayerFP_UI = preload("res://assets/arts_graphic/ui/player_ui/player_fp_ui.gd")
+const FrontSight = preload("res://assets/arts_graphic/ui/player_ui/front_sight.gd")
 const ToolUi = preload("res://assets/arts_graphic/ui/player_ui/tool_ui.gd")
 const DebugMenu = preload("res://addons/debug_menu/debug_menu.gd")
+
+# 弹幕
+const DanmakuManager = preload("res://assets/danmaku/scripts/danmaku_manager.gd")
+const DmParticles = preload("res://assets/danmaku/scripts/dm_particles.gd")
 
 # map?
 const SkyLimit = preload("res://assets/maps/map_blocks/scripts/sky_limit.gd")
@@ -242,4 +247,89 @@ static func random_string(length: int = 7, character_set: String = Alphanumeric)
 	var result: String = ""
 	for _i in range(length):
 		result += character_set[randi() % character_set.length()]
+	return result
+
+
+static func rainbow_color_frame(frame: int, speed: float = 1.0, saturation: float = 1.0, value: float = 1.0) -> Color:
+	var hue: float = fmod(float(frame) * speed / 60.0, 1.0) # 计算色相 (0-1范围)，基于帧数和速度
+	var rainbow_color := Color.from_hsv(hue, saturation, value) # 使用HSV颜色模型创建颜色
+	return rainbow_color
+
+
+static func rainbow_color_time(speed: float = 1.0, saturation: float = 1.0, value: float = 1.0) -> Color:
+	var time = Time.get_ticks_msec() / 1000.0  # 获取秒数
+	var hue = fmod(time * speed, 1.0)
+	return Color.from_hsv(hue, saturation, value)
+
+
+# 字典和数组的文本格式化排版
+const FOUR_SPACES: String = "    "
+static func format_dict_recursive(dict: Dictionary, indent_level := 0) -> String:
+	var indent := FOUR_SPACES.repeat(indent_level)
+	var result := "{\n"
+	var keys := dict.keys()
+	for i in keys.size():
+		var key = keys[i]
+		var value = dict[key]
+
+		result += indent + FOUR_SPACES + '"%s": ' % str(key)
+
+		if value is Dictionary:
+			result += format_dict_recursive(value, indent_level + 1)
+		elif value is Array:
+			result += format_array_recursive(value, indent_level + 1)
+		elif value is String:
+			result += '"' + str(value) + '"'
+		elif value is StringName:
+			result += '&"' + str(value) + '"'
+		else:
+			result += str(value)
+
+		if i < keys.size() - 1:
+			result += ",\n"
+		else:
+			result += "\n"
+
+	result += indent + "}"
+	return result
+
+
+static func format_array_recursive(array: Array, indent_level := 0) -> String:
+	if array.is_empty():
+		return "[]"
+
+	# 单元素数组不换行
+	if array.size() == 1:
+		var element = array[0]
+		if element is Dictionary:
+			return "[%s]" % format_dict_recursive(element, indent_level + 1)
+		elif element is Array:
+			return "[%s]" % format_array_recursive(element, indent_level + 1)
+		else:
+			return "[%s]" % str(element)
+
+	# 多元素数组正常换行格式化
+	var indent := FOUR_SPACES.repeat(indent_level)
+	var result := "[\n"
+	for i in array.size():
+		result += indent + FOUR_SPACES
+
+		var element = array[i]
+		if element is Dictionary:
+			result += format_dict_recursive(element, indent_level + 1)
+		elif element is Array:
+			result += format_array_recursive(element, indent_level + 1)
+		elif element is String:
+			result += '"' + str(element) + '"'
+		elif element is StringName:
+			result += '&"' + str(element) + '"'
+		else:
+			result += str(element)
+
+		if i < array.size() - 1:
+			result += ",\n"
+		else:
+			result += "\n"
+
+	result += indent + "]"
 	return result

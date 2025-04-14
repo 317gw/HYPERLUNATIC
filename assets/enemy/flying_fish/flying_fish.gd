@@ -18,7 +18,7 @@ var _velocity: Vector3 # 速度向量
 var target_direction: Vector3
 var state_machine: AnimationNodeStateMachinePlayback
 var taking_damge: bool = false
-var frame_skiper: HL.FrameSkiper
+var frame_skiper: FrameSkiper
 
 var activity_center: Vector3 = Vector3.ZERO
 var activity_range: float = 20.0
@@ -35,16 +35,16 @@ func _ready() -> void:
 	randomize()
 	thread_queue = ThreadQueue.new()
 
-	frame_skiper = HL.FrameSkiper.new(30, 6)
+	frame_skiper = FrameSkiper.new(30, 6)
 	self.add_child(frame_skiper)
 
 	_velocity = Vector3(randf_range( - 1, 1), randf_range( - 1, 1), randf_range( - 1, 1)).normalized() * max_speed
 	view_radius.shape.radius = view_distance
 	_flock.clear()
 	target_direction = global_position + _velocity
-	
+
 	activity_center = self.global_position
-	
+
 	# 执行动画
 	state_machine = animation_tree["parameters/playback"]
 	state_machine.start("Start", true)
@@ -59,14 +59,14 @@ func _physics_process(_delta: float) -> void:
 		var cohesion_vector = vectors[0] * cohesion_force
 		var align_vector = vectors[1] * algin_force
 		var separation_vector = vectors[2] * separation_force
-		
+
 		# 防止逃出范围
 		var self_to_center = activity_center - self.global_position
 		var to_activity_center_vector = Vector3.ZERO
 		var d = self_to_center.length() - activity_range
 		if d > 0:
 			to_activity_center_vector = self_to_center.normalized() * d# * 0.5
-		
+
 		var acc = [cohesion_vector, align_vector, separation_vector, to_activity_center_vector]
 		_velocity = calculate_velocity(_velocity, acc)
 		#(_velocity + acc).limit_length(max_speed)
@@ -74,7 +74,7 @@ func _physics_process(_delta: float) -> void:
 
 	if is_on_floor() and _velocity.y < 0:
 		_velocity.y = 0
-	
+
 	# 设置飞鱼的方向为速度的方向
 	target_direction = target_direction.lerp(global_position + _velocity, 0.1)
 	if transform.basis.y.dot(Vector3.UP) > 0.001 and velocity.length() > 0.01 and not self.global_position == target_direction:
@@ -84,7 +84,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = _velocity
 
 	move_and_slide()
-	
+
 	animation_player.speed_scale = velocity.length() / max_speed # 移动速度管理动画速度
 
 
@@ -93,7 +93,7 @@ func get_flock_status(flock: Array, self_pos: Vector3) -> Array[Vector3]:
 	var center_vector := Vector3() # 中心向量
 	var align_vector := Vector3() # 对齐向量
 	var avoid_vector := Vector3() # 避开向量
-	
+
 	#(func():
 	for f: CharacterBody3D in flock:
 		var neighbor_pos: Vector3 = f.global_position
@@ -103,7 +103,7 @@ func get_flock_status(flock: Array, self_pos: Vector3) -> Array[Vector3]:
 		if d > 0 and d < avoid_distance:
 			avoid_vector -= (neighbor_pos - self_pos).normalized() * (avoid_distance / d * max_speed)
 	#).call_deferred()
-	
+
 	var flock_size = flock.size()
 	if flock_size:
 		align_vector /= flock_size
@@ -111,7 +111,7 @@ func get_flock_status(flock: Array, self_pos: Vector3) -> Array[Vector3]:
 		var center_dir = self_pos.direction_to(flock_center)
 		var center_speed = max_speed * (self_pos.distance_to(flock_center) / view_distance)
 		center_vector = center_dir * center_speed
-		
+
 	return [center_vector, align_vector, avoid_vector]
 
 

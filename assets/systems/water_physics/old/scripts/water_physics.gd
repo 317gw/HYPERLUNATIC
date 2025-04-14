@@ -60,7 +60,7 @@ var _mesh_indices: PackedInt32Array
 var _mesh_normals: PackedVector3Array
 var _mesh_vertex_count: int = 0
 
-var frame_skiper: HL.FrameSkiper
+var frame_skiper: FrameSkiper
 
 @onready var buoyancy_probe: Node3D = $BuoyancyProbe
 @onready var resistance_probe: Node3D = $ResistanceProbe
@@ -86,7 +86,7 @@ func _ready() -> void:
 		push_error("MeshVolume: No mesh found!")
 		return
 	# 初始化跳帧
-	frame_skiper = HL.FrameSkiper.new(60, 12)
+	frame_skiper = FrameSkiper.new(60, 12)
 	self.add_child(frame_skiper)
 	# 初始化公用模型参数
 	_mesh_surface = _mesh.surface_get_arrays(0)

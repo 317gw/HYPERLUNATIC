@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 
 
@@ -9,7 +10,10 @@ func _ready() -> void:
 
 	#var vvvvvv = Vector3(3, 5, 8)
 	#prints(vvvvvv * vvvvvv, vvvvvv.normalized() * vvvvvv.length()**2)
-	prints(AC)
+	#prints(AC)
+
+	var aaaa = TranslationServer.get_translation_object("")
+	print(aaaa)
 
 
 

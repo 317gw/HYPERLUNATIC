@@ -1,12 +1,12 @@
-@tool
+#@tool
 class_name TestDispenser
-extends Dispenser
+#extends Dispenser
 
 var rotation_y_speed: float = 0
 var 屎
 
 func ready() -> void:
-	#time_since_last_fire = fire_period / 60.0
+	#time_since_last_fire = fire_rate / 60.0
 	#bullet_scale = Vector3.ONE * 1
 	pass
 

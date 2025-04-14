@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://df0mdbxk4spma"]
+
+[ext_resource type="Script" uid="uid://8vsflbc6h4tx" path="res://assets/danmaku/scripts/bullet.gd" id="1_t3iue"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jtlbr"]
+radial_segments = 12
+rings = 8
+
+[node name="TestBullet" type="MeshInstance3D"]
+process_priority = 3
+process_physics_priority = 3
+visibility_range_end = 80.0
+visibility_range_end_margin = 20.0
+visibility_range_fade_mode = 1
+mesh = SubResource("SphereMesh_jtlbr")
+script = ExtResource("1_t3iue")

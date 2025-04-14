@@ -24,7 +24,7 @@ uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 // returns the average of red, green and blue color channels
 float vec3_avg(vec3 color) {
 	return (color.r + color.g + color.b) / 3.0;
-} 
+}
 
 // transform a pixel coordinate to screen UV
 vec2 pixel_to_screen_uv(vec2 viewport_size, vec2 pixel) {
@@ -33,18 +33,18 @@ vec2 pixel_to_screen_uv(vec2 viewport_size, vec2 pixel) {
 
 void fragment() {
 	vec4 albedo_tex = texture(texture_albedo, UV);
-	
+
 	vec2 iuv = vec2(SCREEN_UV.x * VIEWPORT_SIZE.x, SCREEN_UV.y * VIEWPORT_SIZE.y);
-	
+
 	vec3 neighbour_left = texture(SCREEN_TEXTURE, pixel_to_screen_uv(VIEWPORT_SIZE, iuv + vec2(0, 0))).rgb;
 	vec3 neighbour_right = texture(SCREEN_TEXTURE, pixel_to_screen_uv(VIEWPORT_SIZE, iuv + vec2(0.5, 0))).rgb;
-	
+
 	vec3 neighbour_top = texture(SCREEN_TEXTURE, pixel_to_screen_uv(VIEWPORT_SIZE, iuv + vec2(0, 0.0))).rgb;
 	vec3 neighbour_bottom = texture(SCREEN_TEXTURE, pixel_to_screen_uv(VIEWPORT_SIZE, iuv + vec2(0, 0.5))).rgb;
-	
+
 	//ALBEDO = albedo.rgb * texture(texture_albedo, UV).rgb;
 	ALBEDO = albedo.rgb * texture(SCREEN_TEXTURE, UV).rgb;
-	
+
 	// compare normals: if they differ, we draw an edge
 	// by mixing in the edge_color, by edge_strength amount
 	// feel free to try other ways to mix, such as multiply for more textured objects.
@@ -53,7 +53,7 @@ void fragment() {
 	}else if (abs(vec3_avg(neighbour_top) - vec3_avg(neighbour_bottom)) > 0.0) {
 		ALBEDO = mix(ALBEDO, edge_color.rgb, edge_strength);
 	}
-	
+
 	//METALLIC = metallic;
 	//ROUGHNESS = roughness;
 	//SPECULAR = specular;

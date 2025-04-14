@@ -6,16 +6,16 @@ class VoxelGrid:
 	var data: PackedFloat32Array
 	var resolution: Vector3
 	var res_squared: int  # 预计算 RESOLUTION²
-	
+
 	func _init(res: Vector3, data_fill: float = 0.0):
 		self.resolution = res
 		self.res_squared = res.x * res.y
 		self.data.resize(res.x * res.y * res.z)
 		self.data.fill(data_fill)
-	
+
 	func read(x: int, y: int, z: int):
 		return self.data[x + y * self.resolution.x + z * self.res_squared]
-	
+
 	func write(x: int, y: int, z: int, value: float):
 		self.data[x + y * self.resolution.x + z * self.res_squared] = value
 

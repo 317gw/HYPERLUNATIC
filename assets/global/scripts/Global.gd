@@ -22,6 +22,8 @@ const DEBUG_MENU = preload("res://addons/debug_menu/debug_menu.tscn")
 const PLAYER_FP_UI = preload("res://assets/arts_graphic/ui/player_ui/PlayerFP_UI.tscn")
 const MAIN_MENUS = preload("res://assets/arts_graphic/ui/menu/main_menus.tscn")
 
+const DANMAKU_MANAGER = preload("res://assets/danmaku/danmaku_manager.tscn")
+
 ###
 var GLOBAL_SCENES_LIST_START = "GLOBAL_SCENES_LIST_START"
 #
@@ -32,8 +34,10 @@ var chunk_manager: HL.ChunkManager
 # ui
 var post_processing: CanvasLayer
 var debug_menu: HL.DebugMenu
-var player_fp_ui: HL.PlayerFP_UI = null
-var main_menus: HL.MainMenus = null
+var player_fp_ui: HL.PlayerFP_UI
+var main_menus: HL.MainMenus
+#弹幕
+var danmaku_manager: HL.DanmakuManager
 #
 var GLOBAL_SCENES_LIST_END = "GLOBAL_SCENES_LIST_END"
 ###
@@ -44,6 +48,7 @@ var global_scenes_list: Array = []
 #var global_nodes: Array = []
 
 var main_player: HL.Player = null
+var main_player_camera: HL.Camera = null
 var sky_limit: HL.SkyLimit = null
 
 
@@ -53,13 +58,7 @@ var gravity: Vector3:
 	get():
 		return gravity_vector * gravity_value
 
-# await get_tree().physics_frame
 
-	#var time_start = Time.get_ticks_usec()
-	#var time_end = Time.get_ticks_usec()
-	#print("took %d microseconds" % (time_end - time_start))
-
-#ProjectSettings.get_setting("")
 func _ready() -> void:
 	gravity_value = ProjectSettings.get_setting("physics/3d/default_gravity")
 	gravity_vector = ProjectSettings.get_setting("physics/3d/default_gravity_vector")
@@ -283,7 +282,28 @@ static func impact_velocity(m1:float, m2:float, v1:float, v2:float) -> float:
 
 
 
+"""
+update
+calculate
+create
+process
+global
+start
+end
+position
+count
 
+# await get_tree().physics_frame
+
+	#var time_start = Time.get_ticks_usec()
+	#var time_end = Time.get_ticks_usec()
+	#print("took %d microseconds" % (time_end - time_start))
+
+#ProjectSettings.get_setting("")
+
+
+
+"""
 
 
 

@@ -1,4 +1,4 @@
-// 边缘检测 暗处噪点 
+// 边缘检测 暗处噪点
 shader_type canvas_item;
 
 void vertex() {

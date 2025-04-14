@@ -3,6 +3,7 @@
 [sub_resource type="MultiMesh" id="MultiMesh_cw2vi"]
 resource_local_to_scene = true
 transform_format = 1
+use_colors = true
 
 [node name="BulletsMultiMeshInstance3D" type="MultiMeshInstance3D"]
 top_level = true

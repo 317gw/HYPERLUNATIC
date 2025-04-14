@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://7x8w60i2a5pu"]
+
+[ext_resource type="PackedScene" uid="uid://1ma6ldadgmhj" path="res://assets/danmaku/emitter/danmaku_emitter.tscn" id="1_x5j1l"]
+[ext_resource type="PackedScene" uid="uid://34f26nn5pmjo" path="res://assets/danmaku/bullet/bullet_pellet_texture.tscn" id="2_pkq64"]
+
+[sub_resource type="GDScript" id="GDScript_pkq64"]
+resource_name = "text"
+script/source = "@tool
+extends DanmakuEmitter
+
+
+func ready() -> void:
+	#time_since_last_fire = fire_rate / 60.0
+	#bullet_scale = Vector3.ONE * 1
+	pass
+
+
+func bullet_event(_delta: float) -> void:
+	#rotation_y_speed += _delta * 0.01
+	#stripe_angle += rotation_y_speed * 20
+	#disk_angle += _delta * 20
+	#spherical_count += _delta * 20
+	#ratio += _delta * 0.01
+	bullet_scale_multi = sin(Time.get_ticks_msec() / 1000.0)
+	bullet_color = HL.rainbow_color_time()
+	pass
+"
+
+[sub_resource type="MultiMesh" id="MultiMesh_gj8hp"]
+resource_local_to_scene = true
+transform_format = 1
+use_colors = true
+
+[node name="DanmakuEmitter" instance=ExtResource("1_x5j1l")]
+script = SubResource("GDScript_pkq64")
+bullet_scene = ExtResource("2_pkq64")
+
+[node name="BulletsMultiMeshInstance3D" parent="." index="0"]
+multimesh = SubResource("MultiMesh_gj8hp")

@@ -44,11 +44,13 @@ shader_parameter/lod = 0.5
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ncr2o"]
 render_priority = 0
 shader = ExtResource("8_xuisv")
-shader_parameter/outlineColor = Color(1, 1, 1, 0.5)
+shader_parameter/outlineColor = Color(0.702, 0.702, 0.702, 0.8)
 shader_parameter/depth_threshold = 10.0
 shader_parameter/normal_threshold = 1.0
 shader_parameter/normal_smoothing = 0.6
-shader_parameter/max_thickness = 1.0
+shader_parameter/s_mix = 1.0
+shader_parameter/v_mix = 0.5
+shader_parameter/max_thickness = 2.0
 shader_parameter/min_thickness = 0.5
 shader_parameter/max_distance = 1.2
 shader_parameter/min_distance = 1.3

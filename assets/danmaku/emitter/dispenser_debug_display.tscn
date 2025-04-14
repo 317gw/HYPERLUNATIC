@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://fr4xnpljc4u4"]
+
+[ext_resource type="Material" uid="uid://is0nttijciy8" path="res://assets/danmaku/dispenser_debug_display.material" id="1_onigc"]
+[ext_resource type="Script" uid="uid://dfm47aw166x0r" path="res://assets/danmaku/emitter/debug_display.gd" id="2_cg5bd"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6u2uc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hgpa"]
+albedo_color = Color(0.9, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rmfg6"]
+material = SubResource("StandardMaterial3D_8hgpa")
+radius = 0.2
+height = 0.4
+radial_segments = 32
+rings = 16
+
+[node name="DebugDisplay" type="MeshInstance3D"]
+material_override = ExtResource("1_onigc")
+transparency = 0.5
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_6u2uc")
+script = ExtResource("2_cg5bd")
+
+[node name="CenterMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_rmfg6")
+skeleton = NodePath("../..")

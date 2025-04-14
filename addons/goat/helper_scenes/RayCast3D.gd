@@ -26,16 +26,16 @@ func _set_is_holding(value):
 func _input(_event):
 	if not _is_interaction_enabled():
 		return
-	
+
 	# Force detecting items, in case some of them were deactivated
 	_detect_interactive_objects()
-	
+
 	if Input.is_action_just_pressed("goat_interact"):
 		if is_holding:
 			_put_down_hand_item()
 		else:
 			goat_interaction.activate_object(category)
-	
+
 	if Input.is_action_just_pressed("goat_interact_alternatively"):
 		if supports_alternative_interaction:
 			goat_interaction.alternatively_activate_object(category)
@@ -56,7 +56,7 @@ func _detect_interactive_objects():
 			goat_interaction.select_object(object_name, point, category)
 			collided = true
 			#prints("detect_interactive")
-	
+
 	if not collided:
 		goat_interaction.deselect_object(category)
 

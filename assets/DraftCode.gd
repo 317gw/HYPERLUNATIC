@@ -852,7 +852,7 @@ func save_exported_properties() -> void:
 		"velocity": velocity,
 		"acceleration": acceleration,
 		"center_position": center_position,
-		"fire_period": fire_period,
+		"fire_rate": fire_rate,
 		"fire_count": fire_count,
 		"interpolate_position": interpolate_position,
 		"start_fire_once": start_fire_once,
@@ -898,7 +898,7 @@ func load_exported_properties() -> void:
 	velocity = reset_data["velocity"]
 	acceleration = reset_data["acceleration"]
 	center_position = reset_data["center_position"]
-	fire_period = reset_data["fire_period"]
+	fire_rate = reset_data["fire_rate"]
 	fire_count = reset_data["fire_count"]
 	interpolate_position = reset_data["interpolate_position"]
 	start_fire_once = reset_data["start_fire_once"]

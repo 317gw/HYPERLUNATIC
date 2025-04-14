@@ -47,6 +47,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Panku="*res://addons/panku_console/console.tscn"
 CoreSystem="*res://addons/godot_core_system/source/core_system.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
+IndieBlueprintObjectPoolManager="*res://addons/ninetailsrabbit.indie_blueprint_pool/src/object_pool_manager.gd"
 
 [debug]
 
@@ -64,7 +65,7 @@ project/assembly_name="HYPERLUNATIC"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/DragNDropNodes/plugin.cfg", "res://addons/SignalVisualizer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/goat/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/godot4-graph2d-main/graph_2d/plugin.cfg", "res://addons/godot_3d_auto_collision_generator/plugin.cfg", "res://addons/godot_core_system/plugin.cfg", "res://addons/namespace_linker/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/proton_trail-master/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg", "res://addons/theme_gen_save_sync/plugin.cfg", "res://addons/timer/plugin.cfg")
+enabled=PackedStringArray("res://addons/DragNDropNodes/plugin.cfg", "res://addons/SignalVisualizer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/beehave/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/goat/plugin.cfg", "res://addons/godot-polyliner/plugin.cfg", "res://addons/godot4-graph2d-main/graph_2d/plugin.cfg", "res://addons/godot_3d_auto_collision_generator/plugin.cfg", "res://addons/godot_core_system/plugin.cfg", "res://addons/namespace_linker/plugin.cfg", "res://addons/ninetailsrabbit.indie_blueprint_pool/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/proton_trail-master/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg", "res://addons/terrain_3d/plugin.cfg", "res://addons/theme_gen_save_sync/plugin.cfg", "res://addons/timer/plugin.cfg")
 
 [file_customization]
 
@@ -315,7 +316,6 @@ goat_rotate_inventory={
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/localization/localizations.en.translation", "res://assets/localization/localizations.zh.translation")
-locale/test="zh"
 
 [layer_names]
 

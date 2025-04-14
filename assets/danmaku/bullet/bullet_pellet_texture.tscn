@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://34f26nn5pmjo"]
+
+[ext_resource type="Texture2D" uid="uid://cnkuwh5bk2of0" path="res://assets/arts_graphic/textures/texture_pellet.png" id="1_i5nsb"]
+[ext_resource type="Script" uid="uid://dybnujfsgt28d" path="res://assets/danmaku/scripts/texture_pellet.gd" id="3_045y0"]
+
+[sub_resource type="Shader" id="Shader_kd0ny"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, vertex_lighting, depth_prepass_alpha;
+
+uniform vec4 albedo_opacity : source_color = vec4(1.0);
+uniform vec4 albedo_lucency : source_color = vec4(1.0);
+uniform sampler2D texture_albedo : source_color, filter_nearest_mipmap, repeat_enable;
+uniform float emission = 0.4;
+
+uniform vec3 uv1_scale = vec3(1.0);
+uniform vec3 uv1_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+
+	// Billboard Mode: Enabled
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+			MAIN_CAM_INV_VIEW_MATRIX[0],
+			MAIN_CAM_INV_VIEW_MATRIX[1],
+			MAIN_CAM_INV_VIEW_MATRIX[2],
+			MODEL_MATRIX[3]);
+
+	// Billboard Keep Scale: Enabled
+	MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(
+			vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
+			vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
+			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
+			vec4(0.0, 0.0, 0.0, 1.0));
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = mix(albedo_lucency.rgb, albedo_opacity.rgb, albedo_tex.g);
+	ALPHA = mix(albedo_lucency.a, albedo_opacity.a, albedo_tex.g) * albedo_tex.a;
+	EMISSION = ALBEDO * ALPHA * emission;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i5nsb"]
+render_priority = 0
+shader = SubResource("Shader_kd0ny")
+shader_parameter/albedo_opacity = Color(1, 1, 1, 1)
+shader_parameter/albedo_lucency = Color(1, 1, 1, 0.5)
+shader_parameter/texture_albedo = ExtResource("1_i5nsb")
+shader_parameter/emission = 0.8
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0b6xh"]
+material = SubResource("ShaderMaterial_i5nsb")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4dgxv"]
+radius = 0.4
+
+[node name="TexturePellet" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_0b6xh")
+script = ExtResource("3_045y0")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 55
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_4dgxv")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

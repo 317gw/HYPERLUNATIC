@@ -99,7 +99,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl"]
+[node name="InforVBC" type="VBoxContainer" parent="MenuControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -113,15 +113,30 @@ grow_vertical = 0
 pivot_offset = Vector2(100, 50)
 metadata/_edit_use_anchors_ = true
 
-[node name="LoadingLabel" type="Label" parent="MenuControl/VBoxContainer"]
+[node name="LoadingLabel" type="Label" parent="MenuControl/InforVBC"]
 layout_mode = 2
 text = "loading ..."
 
-[node name="VersionLabel" type="Label" parent="MenuControl/VBoxContainer"]
+[node name="VersionLabel" type="Label" parent="MenuControl/InforVBC"]
 layout_mode = 2
 text = "v0.3_2025.02"
 
-[node name="TutorialLabel" type="Label" parent="MenuControl"]
+[node name="ColorRect" type="ColorRect" parent="MenuControl"]
+custom_minimum_size = Vector2(430, 560)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = -280.0
+offset_bottom = 280.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2)
+
+[node name="TutorialLabel" type="Label" parent="MenuControl/ColorRect"]
 custom_minimum_size = Vector2(420, 420)
 layout_mode = 1
 anchors_preset = 6
@@ -519,6 +534,7 @@ text = "应用"
 
 [node name="ScrollLabelTimer" type="Timer" parent="MenuControl"]
 wait_time = 10.0
+one_shot = true
 autostart = true
 
 [node name="ScrollLabelContainer" type="Control" parent="MenuControl"]
@@ -535,6 +551,7 @@ grow_vertical = 0
 layout_mode = 0
 
 [node name="ScrollLabel2" type="Label" parent="MenuControl/ScrollLabelContainer"]
+visible = false
 layout_mode = 2
 offset_right = 1700.0
 offset_bottom = 45.0

@@ -24,8 +24,8 @@ const SAFE_MARGIN = 0.001 # 碰撞安全距离
 #@export var CAMERA: HL.Camera
 @export var ShootMarker3D: Marker3D ## 武器位置
 @export var visible_range: float = 1000.0
-@export var auxiliary_aiming_distance: float = 20.0
-@export_range(0.0, 1.0, 0.01) var auxiliary_aiming_radius: float = 0.07
+@export var auto_aiming_distance: float = 20.0
+@export_range(0.0, 1.0, 0.01) var auto_aiming_radius: float = 0.07
 @export var mass: float = 60.0 # 2m->78kg  1.7m->60kg
 @export var slow_rigid_force: float = 10.0
 #@export var normal_max_current_speed: float = 40.0
@@ -173,6 +173,7 @@ func _ready() -> void:
 
 func _enter_tree() -> void:
 	Global.main_player = self
+	Global.main_player_camera = camera
 	Global.main_player_ready.emit()
 
 
@@ -503,7 +504,7 @@ func is_player_collision_into_rigidbody3D(motion: Vector3, input_direction: Vect
 func slow_movement_on_floor(delta: float) -> void:
 	self.floor_stop_on_slope = true
 	camera.slide_camera_smooth_back_to_origin_y_only = false
-	camera.save_camera_pos_for_smoothing()
+	camera.save_camera_position()
 
 	var speed = 0.1 if stairs_below_edge_colliding_last_frame else 0.5 * acc_normal
 	speed *= delta

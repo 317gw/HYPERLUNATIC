@@ -82,7 +82,7 @@ func snap_down_to_stairs_check(check_stairs_second_ray: bool = false) -> void:
 						return
 
 			camera.slide_camera_smooth_back_to_origin_y_only = true
-			camera.save_camera_pos_for_smoothing()
+			camera.save_camera_position()
 			player.global_position.y += translate_y
 			# + input_direction*air_speed*get_physics_process_delta_time()
 			player.apply_floor_snap()
@@ -121,7 +121,7 @@ func snap_up_stairs_check(delta: float) -> bool:
 	stairs_ahead_ray.force_raycast_update()
 	if stairs_ahead_ray.is_colliding() and not is_surface_too_steep(stairs_ahead_ray.get_collision_normal(), player.floor_max_angle/3):
 		camera.slide_camera_smooth_back_to_origin_y_only = false
-		camera.save_camera_pos_for_smoothing()
+		camera.save_camera_position()
 		player.global_position = step_pos_with_clearance.origin + down_check_result.get_travel() # ***
 		player.apply_floor_snap()
 		snapped_to_stairs_last_frame = true

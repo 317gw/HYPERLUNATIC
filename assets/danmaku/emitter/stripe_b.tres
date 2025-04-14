@@ -1,0 +1,13 @@
+[gd_resource type="CylinderMesh" load_steps=2 format=3 uid="uid://b17yao3m0ie5n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1atn"]
+transparency = 4
+albedo_color = Color(0, 0, 1, 0.7)
+
+[resource]
+material = SubResource("StandardMaterial3D_i1atn")
+top_radius = 0.0
+height = 1.0
+radial_segments = 4
+rings = 0
+cap_top = false

@@ -2,11 +2,26 @@ extends CanvasLayer
 # main_menus
 #signal
 
+const DEFAULT_OFFSET: float = 20
+const SCROLL_WAIT_TIME: float = 10.0
+const BASE_TWEEN_TIME: float = 5.0
+const SCROLL_LABEL = preload("res://assets/arts_graphic/ui/menu/scroll_label.tscn")
+
 enum LabelMode {ONE_SCROLL_LABEL, TILE_SCROLL_LABEL}
 @export var label_mode: LabelMode = LabelMode.ONE_SCROLL_LABEL
 @export var one_scroll_label_wait_time: float = 1
 @export var scroll_speed: float = 1
 @export var spacing: float = 200  # 文本间隔
+
+@onready var menu_control: Control = $MenuControl
+@onready var back_ground: Control = $MenuControl/BackGround
+@onready var option_window: Window = $MenuControl/OptionWindow
+@onready var button_container: Control = $MenuControl/ButtonContainer
+@onready var text_timer: Timer = $MenuControl/TextTimer
+@onready var scroll_label_timer: Timer = $MenuControl/ScrollLabelTimer
+@onready var scroll_label_container: Control = $MenuControl/ScrollLabelContainer
+@onready var scroll_label: Label = $MenuControl/ScrollLabelContainer/ScrollLabel
+@onready var frameskiper: FrameSkiper = FrameSkiper.new(45)
 
 var text_width: float
 var scroll_width: float
@@ -15,29 +30,16 @@ var scroll_label_count: int
 var base_scroll_speed_min: float = 50
 var base_scroll_speed_max: float = 400
 var oslw_time_temp: float = 0
-
 var main_menu_b0_id: int = 1
 var current_menu: Array
 var tween: Tween
 
-const SCROLL_LABEL = preload("res://assets/arts_graphic/ui/menu/scroll_label.tscn")
-
-@onready var menu_control: Control = $MenuControl
-@onready var back_ground: Control = $MenuControl/BackGround
-
-@onready var option_window: Window = $MenuControl/OptionWindow
-@onready var button_container: Control = $MenuControl/ButtonContainer
-@onready var text_timer: Timer = $MenuControl/TextTimer
-
-@onready var scroll_label_timer: Timer = $MenuControl/ScrollLabelTimer
-@onready var scroll_label_container: Control = $MenuControl/ScrollLabelContainer
-@onready var scroll_label: Label = $MenuControl/ScrollLabelContainer/ScrollLabel
-
-
 # Dictionary
 var MainMenu: Array = [ # 0--6
-	[{"name": "Previous Server", "hint": "回到上个服务器", "func": 0},
-	 {"name": "Pause Menu", "hint": "回到暂停菜单", "func": _on_to_PauseMenu_button_pressed}],
+	[
+		{"name": "Previous Server", "hint": "回到上个服务器", "func": 0},
+		{"name": "Pause Menu", "hint": "回到暂停菜单", "func": _on_to_PauseMenu_button_pressed}
+	],
 	{"name": "Find Server", "hint": "寻找服务器", "func": 0},
 	{"name": "Create Server", "hint": "创建服务器", "func": 0},
 	{"name": "Options", "hint": "游戏设置", "func": _on_to_Options_button_pressed},
@@ -95,32 +97,35 @@ func _process(_delta) -> void:
 	if label_mode == LabelMode.TILE_SCROLL_LABEL:
 		var base_scroll_speed: float = clampf(
 			remap(text_width,
-				200, menu_control.menu_control.get_viewport_rect().size.x/0.5,
+				200, menu_control.get_viewport_rect().size.x/0.5,
 				base_scroll_speed_min, base_scroll_speed_max),
 			base_scroll_speed_min, base_scroll_speed_max)
 		var offset: float = scroll_speed * _delta * base_scroll_speed
 		for s_l in scroll_label_container.get_children():
-			s_l.position.x = wrap(s_l.position.x - offset, -text_width, menu_control.menu_control.get_viewport_rect().size.x)
+			s_l.position.x = wrap(s_l.position.x - offset, -text_width, menu_control.get_viewport_rect().size.x)
 
 
 func _physics_process(delta: float) -> void:
-	if Engine.get_physics_frames() % 3 == 0:
-		for button in button_container.get_children():
-			var ratio: float = 1 - text_timer.time_left / text_timer.wait_time
-			button.text = replace_with_random_letters(button.text, button.get_meta("current_name"), ratio, ratio)
+	if frameskiper.skip_frame():
+		return
+
+	for button in button_container.get_children():
+		var ratio: float = 1 - text_timer.time_left / text_timer.wait_time
+		button.text = replace_with_random_letters(button.text, button.get_meta("current_name"), ratio, ratio)
 
 
 func _mouse_entered_update_text(button: Button) -> void:
 	_update_scroll_label(button.get_meta("hint"))
-	scroll_label_timer.call_deferred(&"set_wait_time", 10.0)
+	scroll_label_timer.call_deferred(&"set_wait_time", SCROLL_WAIT_TIME)
 	scroll_label_timer.call_deferred(&"start")
 
 
+# 更新滚动条
 func _update_scroll_label(new_text: String):
 	# 清理
 	#labels.clear()
 	for s_l in scroll_label_container.get_children():
-		if s_l == scroll_label:
+		if is_instance_valid(s_l) and s_l == scroll_label:
 			s_l.visible = false
 			continue
 		s_l.queue_free()
@@ -130,7 +135,7 @@ func _update_scroll_label(new_text: String):
 	scroll_label.size = scroll_label.get_minimum_size()
 	text_width = scroll_label.size.x
 	scroll_width = text_width + menu_control.get_viewport_rect().size.x
-	scroll_label.position.x = 20
+	scroll_label.position.x = DEFAULT_OFFSET
 
 	#labels.resize(floorf(scroll_width / (text_width + spacing)))
 	scroll_label_count = floorf(scroll_width / (text_width + spacing))
@@ -144,7 +149,7 @@ func _update_scroll_label(new_text: String):
 			#new_s_l.name = "ScrollLabel" + str(i+1)
 			new_s_l.text = new_text
 			new_s_l.size = scroll_label.get_minimum_size()
-			new_s_l.position.x = 20
+			new_s_l.position.x = DEFAULT_OFFSET
 			new_s_l.visible = false
 
 		#labels = scroll_label_container.get_children()
@@ -156,17 +161,23 @@ func _update_scroll_label(new_text: String):
 func _set_scroll_label_pos() -> void:
 	if label_mode == LabelMode.ONE_SCROLL_LABEL:
 		scroll_label.visible = true
-		scroll_label.position.x = 20
+		scroll_label.position.x = DEFAULT_OFFSET
 		if text_width > menu_control.get_viewport_rect().size.x:
-			var tween_time: float = 5 * text_width / menu_control.get_viewport_rect().size.x
-			scroll_label_timer.call_deferred(&"set_wait_time", 10.0 + tween_time*0.8)
+			var tween_time: float = BASE_TWEEN_TIME * text_width / menu_control.get_viewport_rect().size.x
+			scroll_label_timer.call_deferred(&"set_wait_time", SCROLL_WAIT_TIME + tween_time*0.8)
 			scroll_label_timer.call_deferred(&"start")
+			var pos_end: float = (menu_control.get_viewport_rect().size.x - text_width) - DEFAULT_OFFSET
 			# 动画
+			if tween:
+				tween.kill()
 			await get_tree().create_timer(2).timeout
 			tween = get_tree().create_tween()
+			tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+			tween.set_process_mode(Tween.TWEEN_PROCESS_IDLE)
 			tween.set_trans(Tween.TRANS_SINE)
 			tween.set_ease(Tween.EASE_IN_OUT)
-			tween.tween_property(scroll_label, ^"position:x", (menu_control.get_viewport_rect().size.x - text_width)-20, tween_time)
+			tween.tween_property(scroll_label, "position:x", pos_end, tween_time)
+			scroll_label.position.x = 50
 		else:
 			if tween:
 				tween.kill()
@@ -176,10 +187,11 @@ func _set_scroll_label_pos() -> void:
 		var viewport_rect_width = menu_control.get_viewport_rect().size.x
 		for i in scroll_label_container.get_child_count():
 			var s_l: Label = scroll_label_container.get_child(i)
-			s_l.position.x = i*(text_width + current_spacing) + 20# - text_width*0.5
+			s_l.position.x = i*(text_width + current_spacing) + DEFAULT_OFFSET# - text_width*0.5
 			s_l.visible = true
 
 
+# 更新按钮
 func _update_buttons(menu_data: Array) -> void:
 	var buttons:= button_container.get_children()
 	current_menu = menu_data
@@ -224,23 +236,28 @@ func open_menu():
 	if Global.post_processing:
 		Global.post_processing.radial_blur.visible = false
 	get_tree().paused = true
+	Global.set_mouse_mode()
+	if Global.player_fp_ui:
+		Global.player_fp_ui.front_sight.set_front_sight_visible()
 
 func close_menu():
 	get_tree().paused = false
 	self.visible = false
 	option_window.visible_save = option_window.visible
 	option_window.visible = false
-
+	Global.set_mouse_mode()
+	if Global.player_fp_ui:
+		Global.player_fp_ui.front_sight.set_front_sight_visible()
 
 func switch_menu() -> void:
 	if self.visible:
 		close_menu()
 	else:
 		open_menu()
-	Global.set_mouse_mode()
 
 
 #const alphabet: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+# 将输入字符串中的字符随机替换为其他字符
 func replace_with_random_letters(input_string: String, correct_string: String, replace_ratio: float, correct_ratio: float) -> String:
 	replace_ratio = clamp(replace_ratio, 0.0, 1.0) # 确保替换比例在0到1之间
 	correct_ratio = clamp(correct_ratio, 0.0, 1.0)
@@ -264,7 +281,7 @@ func replace_with_random_letters(input_string: String, correct_string: String, r
 
 
 func _on_scroll_label_timer_timeout() -> void:
-	scroll_label_timer.call_deferred(&"set_wait_time", 10.0)
+	scroll_label_timer.call_deferred(&"set_wait_time", SCROLL_WAIT_TIME)
 	scroll_label_timer.call_deferred(&"start")
 	var rand_hint: String = DefaultHint[randi_range(0, DefaultHint.size()-1)]
 	while rand_hint == scroll_label.text:

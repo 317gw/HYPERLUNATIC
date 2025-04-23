@@ -55,7 +55,7 @@ class Viscositys:
 	const QUICKSILVER: float = 0.00155
 
 const E: float = 2.718281828459045
-
+const GOLDEN_RATIO: float = 0.618033988749895 ## 黄金分割率
 
 # 小写英文字母
 const LowercaseAlphabet: String = "abcdefghijklmnopqrstuvwxyz"
@@ -250,14 +250,14 @@ static func random_string(length: int = 7, character_set: String = Alphanumeric)
 	return result
 
 
-static func rainbow_color_frame(frame: int, speed: float = 1.0, saturation: float = 1.0, value: float = 1.0) -> Color:
-	var hue: float = fmod(float(frame) * speed / 60.0, 1.0) # 计算色相 (0-1范围)，基于帧数和速度
+static func rainbow_color_custom(time: float, speed: float = GOLDEN_RATIO, saturation: float = 1.0, value: float = 1.0) -> Color:
+	var hue: float = fmod(time, 1.0) # 计算色相 (0-1范围)，基于帧数和速度
 	var rainbow_color := Color.from_hsv(hue, saturation, value) # 使用HSV颜色模型创建颜色
 	return rainbow_color
 
 
-static func rainbow_color_time(speed: float = 1.0, saturation: float = 1.0, value: float = 1.0) -> Color:
-	var time = Time.get_ticks_msec() / 1000.0  # 获取秒数
+static func rainbow_color_real_time(speed: float = GOLDEN_RATIO, saturation: float = 1.0, value: float = 1.0) -> Color:
+	var time = Time.get_ticks_msec() / 10000.0  # 获取秒数
 	var hue = fmod(time * speed, 1.0)
 	return Color.from_hsv(hue, saturation, value)
 
@@ -332,4 +332,50 @@ static func format_array_recursive(array: Array, indent_level := 0) -> String:
 			result += "\n"
 
 	result += indent + "]"
+	return result
+
+
+static func format_vector(vector, decimals: int = 3) -> Dictionary:
+	if vector is Vector2:
+		var vector2: Vector2 = vector
+		return {
+			"x": String.num(vector2.x, decimals).pad_decimals(decimals),
+			"y": String.num(vector2.y, decimals).pad_decimals(decimals)
+		}
+	elif vector is Vector3:
+		var vector3: Vector3 = vector
+		return {
+			"x": String.num(vector3.x, decimals).pad_decimals(decimals),
+			"y": String.num(vector3.y, decimals).pad_decimals(decimals),
+			"z": String.num(vector3.z, decimals).pad_decimals(decimals)
+		}
+	elif vector is Vector4:
+		var vector4: Vector4 = vector
+		return {
+			"x": String.num(vector4.x, decimals).pad_decimals(decimals),
+			"y": String.num(vector4.y, decimals).pad_decimals(decimals),
+			"z": String.num(vector4.z, decimals).pad_decimals(decimals),
+			"w": String.num(vector4.w, decimals).pad_decimals(decimals)
+		}
+	else:
+		return {}
+
+
+# return_vector["all"] =  X:1.321 Y:2.312 Z:3.312      (1.321, 2.312, 3.312)
+# HL.format_vector_extended().
+static func format_vector_extended(vector, decimals: int = 3) -> Dictionary:
+	var result := format_vector(vector, decimals)
+	if result.is_empty():
+		return {}
+
+	if vector is Vector2:
+		result["all"] = "X %s  Y %s" % [result["x"], result["y"]]
+		result["tuple"] = "(%s, %s)" % [result["x"], result["y"]]
+	elif vector is Vector3:
+		result["all"] = "X %s  Y %s  Z %s" % [result["x"], result["y"], result["z"]]
+		result["tuple"] = "(%s, %s, %s)" % [result["x"], result["y"], result["z"]]
+	elif vector is Vector4:
+		result["all"] = "X %s  Y %s  Z %s  W %s" % [result["x"], result["y"], result["z"], result["w"]]
+		result["tuple"] = "(%s, %s, %s, %s)" % [result["x"], result["y"], result["z"], result["w"]]
+
 	return result

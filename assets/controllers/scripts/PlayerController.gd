@@ -39,10 +39,10 @@ const SAFE_MARGIN = 0.001 # 碰撞安全距离
 @export var acc_max_t: float = 6.0
 # 跳跃
 @export_group("Jump Ready Parameters")
-@export var jump_time: float = 1.5 ## 跳跃时间
 @export var jump_height: float = 5.0 ## 跳跃高度
-@export var mouse_wheel_jump_time: float = 0.82158383625774 ## 跳跃时间 = pow((new_height * jump_time ** 2)/jump_height, 0.5)
-@export var mouse_wheel_jump_height: float = 1.5 ## 滚轮跳高度
+@export var jump_time: float = 1.5 ## 跳跃时间
+@export var mouse_wheel_jump_height: float = 1.7 ## 滚轮跳高度
+var mouse_wheel_jump_time: float = 0.0 ## 跳跃时间 = pow((new_height * jump_time ** 2)/jump_height, 0.5)
 @export var jump_distance_min: float = 10.0 ## 最小跳跃距离
 @export var jump_distance_max: float = 16.5 ## 跳跃距离
 # 空中
@@ -55,6 +55,7 @@ const SAFE_MARGIN = 0.001 # 碰撞安全距离
 @export var push_power: float = 8
 #@export var jerk_decelerate: float = 50
 @export var acc_decelerate: float = 20
+@export var height: float = 1.7
 
 # 跳跃
 var current_jump_time: float # 当前跳跃总时间
@@ -166,6 +167,8 @@ func _ready() -> void:
 	safe_margin = SAFE_MARGIN
 	#player_rigid_body.mass = self.mass
 	calculate_jump()
+	mouse_wheel_jump_time = calculate_sub_jump_time()
+
 	await Global.global_scenes_ready
 	Global.war_fog.tracked_object.append(self)
 	Global.set_mouse_mode()
@@ -182,10 +185,13 @@ func _input(event) -> void:
 		jump.is_wheel_jump = false
 		calculate_jump()
 		jump_request_timer.start()
+
 	if can_wheel_jump():
 		jump.is_wheel_jump = true
+		mouse_wheel_jump_time = calculate_sub_jump_time()
 		calculate_jump(mouse_wheel_jump_height, mouse_wheel_jump_time)
 		jump_request_timer.start()
+
 	if event.is_action_pressed("shoot_left") and not hand.picked_up:
 		weapon_main_action.emit()
 	if event.is_action_pressed("shoot_right") and not hand.picked_up:
@@ -278,6 +284,12 @@ func calculate_jump(_height: float = jump_height, _time: float = jump_time) -> v
 	# dashjump_gravity_fall = (2 * dashjump_height) / pow(dashjump_fall_time, 2)
 	# dashjump_vel = dashjump_gravity_jump * dashjump_Peak_time
 
+func calculate_sub_jump_time(
+	new_height: float = mouse_wheel_jump_height,
+	main_jump_time: float = jump_time,
+	main_jump_height: float = jump_height
+	) -> float:
+	return pow((new_height * main_jump_time ** 2) / main_jump_height, 0.5)
 
 func calculate_jump_distance() -> void: # 动态计算跳跃距离
 	jump_distance = air_speed * current_jump_time

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhg1cfuc0tf3j"]
+[gd_scene load_steps=8 format=3 uid="uid://dhg1cfuc0tf3j"]
 
 [ext_resource type="Script" uid="uid://boqrpavcoynsu" path="res://assets/arts_graphic/ui/player_ui/player_fp_ui.gd" id="1_uwkun"]
 [ext_resource type="Texture2D" uid="uid://dpurc6nyhut8d" path="res://assets/arts_graphic/textures/crosshair.png" id="2_hkwn4"]
@@ -15,6 +15,9 @@ height = 0.1
 radial_segments = 16
 rings = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqguf"]
+bg_color = Color(0, 0, 0, 0.501961)
+
 [node name="PlayerFP_UI" type="CanvasLayer"]
 script = ExtResource("1_uwkun")
 
@@ -30,8 +33,10 @@ script = ExtResource("2_retnh")
 metadata/_edit_use_anchors_ = true
 
 [node name="AimCircle" type="Line2D" parent="FrontSight"]
+position = Vector2(37, 57)
 closed = true
 width = 2.0
+default_color = Color(1, 1, 1, 0.4)
 
 [node name="Crosshair" type="TextureRect" parent="FrontSight/AimCircle"]
 texture_filter = 3
@@ -96,15 +101,30 @@ collision_mask = 29
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ToolUI"]
 mesh = SubResource("SphereMesh_retnh")
 
-[node name="InforColorRect" type="ColorRect" parent="ToolUI"]
+[node name="InforLabel" type="Label" parent="ToolUI"]
 layout_mode = 1
-color = Color(0, 0, 0, 0.5)
-metadata/_edit_use_anchors_ = true
-
-[node name="InforLabel" type="Label" parent="ToolUI/InforColorRect"]
-layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0405882
+anchor_top = 0.0741667
+anchor_right = 0.0405882
+anchor_bottom = 0.0741667
 offset_right = 28.0
 offset_bottom = 23.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dqguf")
+text = "+++"
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RayPointLabel" type="Label" parent="ToolUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0170588
+anchor_top = 0.0733333
+anchor_right = 0.0170588
+anchor_bottom = 0.0733333
+offset_right = 28.0
+offset_bottom = 23.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_dqguf")
 text = "+++"
 vertical_alignment = 2
 metadata/_edit_use_anchors_ = true

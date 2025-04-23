@@ -49,7 +49,7 @@ func debug_display() -> void:
 		for i in emitter.disk_count:
 			var trans:= Transform3D.IDENTITY
 			trans.origin = emitter.disk_positions[i] * emitter.rotation_matrixs[i]
-			trans.basis = emitter.rotation_matrixs[i].basis.inverse()
+			trans.basis = emitter.rotation_matrixs[i].basis.inverse()#.orthonormalized().scaled(Vector3(emitter.display_radius, emitter.display_radius, emitter.display_radius))
 			disk_mmi.multimesh.set_instance_transform(i, trans)
 	else:
 		disk_mmi.multimesh.instance_count = 0

@@ -12,8 +12,8 @@ var viewport_size: Vector2
 @onready var menu_button: MenuButton = $ColorRect/HBoxContainer/MenuButton
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 
-@onready var infor_color_rect: ColorRect = $InforColorRect
-@onready var infor_label: Label = $InforColorRect/InforLabel
+@onready var infor_label: Label = $InforLabel
+@onready var ray_point_label: Label = $RayPointLabel
 
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
@@ -54,19 +54,31 @@ func _physics_process(delta: float) -> void:
 		# 疯狂的蛇
 		ray_cast_3d.look_at_from_position(camera.global_position, pos)
 		ray_cast_3d.force_raycast_update()
-		var collider = ray_cast_3d.get_collider()
+		var collider: Node3D = ray_cast_3d.get_collider() if ray_cast_3d.is_colliding() and (ray_cast_3d.get_collider() is RigidBody3D or ray_cast_3d.get_collider() is CharacterBody3D) else null
+
 		look_at_target = ray_cast_3d.get_collision_point() if collider else camera.project_position(mouse_position, ray_length)
 		mesh_instance_3d.global_position = ray_cast_3d.get_collision_point() if collider else pos
 
+
 		# 标签
 		infor_label.text = "+++"
-		if collider is RigidBody3D or collider is CharacterBody3D:
-			infor_label.text = collider.name + "\n" + str(collider.global_position)
+		ray_point_label.text = "+++"
+
+		if collider:
+			infor_label.text = collider.name + "\n"
+			infor_label.text += "pos " + HL.format_vector_extended(collider.global_position).tuple + "\n"
+			#infor_label.text += str(collider.get_aabb()) + "\n"
+
+		if ray_cast_3d.is_colliding():
+			ray_point_label.text = "hit pos " + HL.format_vector_extended(ray_cast_3d.get_collision_point()).tuple
 
 		infor_label.size = infor_label.get_minimum_size()
-		infor_color_rect.size = infor_label.size
-		infor_color_rect.position = mouse_position
-		infor_color_rect.position.y -= infor_label.size.y
+		infor_label.position = mouse_position
+		infor_label.position.y -= infor_label.size.y
+
+		ray_point_label.size = ray_point_label.get_minimum_size()
+		ray_point_label.position = mouse_position
+		ray_point_label.position -= ray_point_label.size
 
 
 func _input(event: InputEvent) -> void:

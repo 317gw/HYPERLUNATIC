@@ -19,6 +19,8 @@ render_mode unshaded, blend_mix, depth_draw_never, depth_test_disabled;
 
 group_uniforms outline;
 uniform vec4 outlineColor: source_color = vec4(0.0, 0.0, 0.0, 0.78);
+uniform float saturation_threshold : hint_range(0.0, 1.0) = 0.6;
+uniform float saturation_smoothing : hint_range(0.0, 1.0) = 0.05;
 uniform float depth_threshold = 0.025;
 uniform float normal_threshold : hint_range(0.0, 1.5) = 0.5;
 uniform float normal_smoothing : hint_range(0.0, 1.0) = 0.25;
@@ -205,7 +207,8 @@ void fragment() {
 
 	vec3 screen = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
 	vec3 screen_hsv = rgb2hsv(screen);
-	ALPHA = mix(max(depthEdges, normEdges) * outlineColor.a * fade_a, 0.0, 1.0-screen_hsv.y);
+	ALPHA = mix(0.0, max(depthEdges, normEdges) * outlineColor.a * fade_a, screen_hsv.y);
+	ALPHA *= smoothstep(saturation_threshold - saturation_smoothing, saturation_threshold + saturation_smoothing, screen_hsv.y);
 	screen_hsv.y = mix(screen_hsv.y, 1.0, s_mix);
 	screen_hsv.z = mix(screen_hsv.z, 1.0, v_mix);
 	ALBEDO.rgb = hsv2rgb(screen_hsv);

@@ -6,8 +6,10 @@ extends Control
 @onready var speed_title = $Graphs/SpeedGraph/Title
 @onready var acceleration_title = $Graphs/AccelerationGraph/Title
 
+@onready var player_global_position: Label = $Graphs/GlobalPosition
 @onready var jumping_time = $Graphs/JumpingTime
 @onready var jumping_height = $Graphs/JumpingHeight
+@onready var danmaku_count: Label = $Graphs/DanmakuCount
 
 var player: HL.Player
 
@@ -111,6 +113,9 @@ func _up_title(delta: float) -> void:
 	GRAPH_MAX_ACCELERATION = acceleration_max if (acceleration_max and acceleration_max > GRAPH_MAX_ACCELERATION_MIN) else GRAPH_MAX_ACCELERATION_MIN
 
 
+	# pos！！！！！！
+	player_global_position.text = HL.format_vector_extended(player.global_position).all
+
 	# speed_title
 	speed_title.text = ("Speed↓\n"
 		+ str(floor(player_speed * 100) / 100) + "\n"
@@ -145,6 +150,11 @@ func _up_title(delta: float) -> void:
 	if player.jumpingtimer:
 		jumping_time.text = ("JumpingTime:" + str(floor(player.jumpingtimer.get_time_left() * 100) / 100))
 	jumping_height.text = ("JumpingHeight:" + str(floor(player.jumping_height * 100) / 100))
+
+
+	danmaku_count.text = "Danmaku:" + str(get_tree().get_node_count_in_group("danmaku"))
+
+
 
 
 func _speed_graph_draw() -> void: # _speed_graph_draw函数

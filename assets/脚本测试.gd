@@ -12,8 +12,11 @@ func _ready() -> void:
 	#prints(vvvvvv * vvvvvv, vvvvvv.normalized() * vvvvvv.length()**2)
 	#prints(AC)
 
-	var aaaa = TranslationServer.get_translation_object("")
-	print(aaaa)
+	#var aaaa = TranslationServer.get_translation_object("")
+	#print(aaaa)
+
+	var arr= [1, 2, 3]
+	print(arr.slice(1, 5))
 
 
 

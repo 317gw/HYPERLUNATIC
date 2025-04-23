@@ -1,0 +1,228 @@
+[gd_scene load_steps=23 format=3 uid="uid://5ki84p2eyjoq"]
+
+[ext_resource type="Script" uid="uid://b31bwo6wp7hnp" path="res://assets/maps/map_blocks/scripts/candelabrum.gd" id="1_5xdqx"]
+[ext_resource type="PackedScene" uid="uid://dmddk3iq7ts6f" path="res://assets/models/imported_models/大烛台.glb" id="1_iur63"]
+[ext_resource type="FontFile" uid="uid://dwt0p0x1ttvmv" path="res://assets/arts_graphic/font/Avara.ttf" id="3_m2jrm"]
+[ext_resource type="Texture2D" uid="uid://rdm42oxvq1lv" path="res://assets/arts_graphic/textures/smoke.png" id="4_4oy76"]
+[ext_resource type="Shader" uid="uid://k1i410xers" path="res://assets/arts_graphic/shaders/other_author/Stylized fire.gdshader" id="5_ocnv2"]
+[ext_resource type="Texture2D" uid="uid://yl5jkrhycmcx" path="res://assets/arts_graphic/textures/WispyNoise.png" id="6_2y7mi"]
+[ext_resource type="Texture2D" uid="uid://dne0mrgled6e1" path="res://assets/arts_graphic/textures/FireMask.png" id="7_r1e61"]
+
+[sub_resource type="Shader" id="Shader_5xdqx"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, alpha_to_coverage;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float alpha_hash_scale : hint_range(0.0, 2.0, 0.01);
+uniform float alpha_antialiasing_edge : hint_range(0.0, 1.0, 0.01);
+uniform ivec2 albedo_texture_size;
+
+uniform sampler2D texture_fire : source_color;
+
+uniform sampler2D noise_tex : filter_linear_mipmap, repeat_enable;
+uniform float noise_speed = 1.0;
+uniform float noise_power = 1.0;
+
+uniform sampler2D fire_height_gradient : source_color;
+uniform float fire_height_power = 1.0;
+
+uniform sampler2D texture_emission : source_color, hint_default_black, filter_linear_mipmap, repeat_enable;
+uniform vec4 emission : source_color;
+uniform float emission_energy : hint_range(0.0, 100.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+
+	// Billboard Mode: Y-Billboard
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+			vec4(normalize(cross(vec3(0.0, 1.0, 0.0), MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
+			vec4(0.0, 1.0, 0.0, 0.0),
+			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, vec3(0.0, 1.0, 0.0))), 0.0),
+			MODEL_MATRIX[3]);
+
+	// Billboard Keep Scale: Enabled
+	MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(
+			vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
+			vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
+			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
+			vec4(0.0, 0.0, 0.0, 1.0));
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 height_tex = texture(fire_height_gradient, UV);
+	float height_value = height_tex.r;
+
+	float noise_value = texture(noise_tex, UV + vec2(0.0, TIME) * noise_speed).x;
+	vec2 noise_uv = base_uv + (noise_value-0.5) * noise_power * (pow(height_value+1.0, fire_height_power)-1.0);
+	
+	vec4 fire_tex = texture(texture_fire, noise_uv);
+	vec4 albedo_tex = texture(texture_albedo, noise_uv);
+	ALBEDO = fire_tex.rgb * albedo_tex.rgb;
+
+	// Emission: Enabled
+	vec3 emission_tex = texture(texture_emission, base_uv).rgb;
+	// Emission Operator: Add
+	EMISSION = (emission.rgb + fire_tex.rgb) * emission_energy;
+	ALPHA *= albedo.a * albedo_tex.a;
+	ALPHA_HASH_SCALE = alpha_hash_scale;
+	ALPHA_ANTIALIASING_EDGE = alpha_antialiasing_edge;
+	ALPHA_TEXTURE_COORDINATE = UV * vec2(albedo_texture_size);
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_5xdqx"]
+offsets = PackedFloat32Array(0, 0.586667, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.724444, 0.724444, 0.724444, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m2jrm"]
+gradient = SubResource("Gradient_5xdqx")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4oy76"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3dnre"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_4oy76")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_iur63"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_m2jrm"]
+offsets = PackedFloat32Array(0, 0.68, 0.973333)
+colors = PackedColorArray(0.7, 0, 0, 1, 1, 0.75, 0, 1, 1, 1, 0.7, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4oy76"]
+gradient = SubResource("Gradient_m2jrm")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2jrm"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_5xdqx")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = SubResource("ViewportTexture_iur63")
+shader_parameter/alpha_hash_scale = 0.0
+shader_parameter/alpha_antialiasing_edge = 0.4
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/texture_fire = SubResource("GradientTexture2D_4oy76")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_3dnre")
+shader_parameter/noise_speed = 0.1
+shader_parameter/noise_power = 0.03
+shader_parameter/fire_height_gradient = SubResource("GradientTexture2D_m2jrm")
+shader_parameter/fire_height_power = 3.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 0.8
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_m2jrm"]
+size = Vector2(0.306818, 0.3)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3dnre"]
+lifetime_randomness = 0.5
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.24
+emission_ring_radius = 0.153409
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 40.0
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0.2, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1c1f"]
+transparency = 4
+albedo_color = Color(0.2, 0.2, 0.2, 0.701961)
+albedo_texture = ExtResource("4_4oy76")
+texture_filter = 0
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ocnv2"]
+material = SubResource("StandardMaterial3D_l1c1f")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b5ec1"]
+render_priority = 0
+shader = ExtResource("5_ocnv2")
+shader_parameter/albedo = Color(1, 0.5, 0, 1)
+shader_parameter/noise_texture = ExtResource("6_2y7mi")
+shader_parameter/texture_mask = ExtResource("7_r1e61")
+shader_parameter/emission_intensity = 1.5
+shader_parameter/time_scale = 0.1
+shader_parameter/texture_scale = Vector2(20, 5)
+shader_parameter/edge_softness = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_yr4fk"]
+size = Vector2(0.03, 0.1)
+
+[node name="Candelabrum" type="Node3D"]
+script = ExtResource("1_5xdqx")
+text = "42"
+text_mesh_high = 0.3
+
+[node name="大烛台" parent="." instance=ExtResource("1_iur63")]
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+
+[node name="TextMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, 0)
+material_override = SubResource("ShaderMaterial_m2jrm")
+mesh = SubResource("QuadMesh_m2jrm")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53928, 0)
+cast_shadow = 0
+amount = 4
+lifetime = 2.0
+explosiveness = 0.2
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_3dnre")
+draw_pass_1 = SubResource("QuadMesh_ocnv2")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(45, 44)
+render_target_update_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="SubViewport/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_m2jrm")
+theme_override_font_sizes/font_size = 30
+text = "42"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+material_override = SubResource("ShaderMaterial_b5ec1")
+mesh = SubResource("QuadMesh_yr4fk")

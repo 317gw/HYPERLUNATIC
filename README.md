@@ -13,6 +13,7 @@ HYPERLUNATIC 游戏项目备份存档开源学习文件和文件夹，由 白色
 引擎版本会激进跟随最新稳定版 —— Godot_4.4-stable
 
 现阶段导出游戏意义不大。请从上面<font color = green> <>Code▽</font>下载源码ZIP压缩包，自行下载安装 [Godot Engine](https://godotengine.org/)，并导入项目文件，然后自由发挥:)
+极个别情况，你要是碰见什么安装错误、没有依赖，那我也不知道 摆手✋
 
 所有设计都在施工中，看看概率论与统计，保不齐后续会发生什么
 
@@ -73,8 +74,10 @@ PS: 风格灵感来自gmod和mc的服务器
   - [ ] 声效管理系统
 
 * 游戏场景(基本是游玩顺序↓)：
-  * 服务器功能地图
-    - [ ] 服务器大厅，包括家、教程和地图连接(仅地图风格名称，目前不涉及联机内容)
+  * 服务器功能地图(目前不涉及联机内容)
+    - [ ] 购物中心 Mall # 服务器大厅
+    - [ ] 公寓 Apartment #参考传送门2开头
+    - [ ] 街区 Street #上述地图连接
   * 天空 Sky
     - [ ] 天空高塔 Sky Tower #飞鱼、拿花妖精。不是巴别塔😡
     - [ ] 雨弓工厂🌈 Rain Bow Factory #机器狗、鹿颈长。水、颜料、沥水槽
@@ -91,7 +94,7 @@ PS: 风格灵感来自gmod和mc的服务器
     - [ ] 电影院 Cinema
   * 其他 else
     - [x] 一个非常简单测试地图
-    - [ ] 万物的教堂 Church of All Things #Boss太阳马
+    - [ ] 其他万物的殿堂 The Palace of Everything Else #太阳马
     - [ ] 血宫 Blood Palace #无限打架图，就鬼泣那个
 
 * 场景组件&交互：
@@ -108,6 +111,9 @@ PS: 风格灵感来自gmod和mc的服务器
   - [ ] 按钮
   - [ ] 压力板
   - [ ] 椰子和椰子树 #某种保龄球
+  - [ ] 跳舞气球人
+  - [ ] 弹幕障碍高尔夫
+  - [ ] 小黄鸭
 
 * 视觉效果：
   - [x] 太阳
@@ -214,6 +220,9 @@ PS: 风格灵感来自gmod和mc的服务器
 * 我好像没看到有什么角色？
   * 游戏流程以玩家为中心，故事性较弱，大概会有我小说、车卡、RimWorld中的角色，且大概都是女的，因为Touhou Project。
 
+* 中文译名是啥啊？
+  * ~~亢奋的疯子~~ ~~超月狂~~ ~~超级月亮人~~ 没有合适的中文译名，唯一的名称叫HYPERLUNATIC就很合适了，如果你有合适的中文译名，欢迎告诉我。
+
 * Antimatter Dimensions和NGU IDLE是挂机、点击、idle游戏，和这游戏有啥关系？
   * 这俩游戏的流程设计非常好，其中的一些解谜部分非常有趣，所以偷了。
 
@@ -248,7 +257,7 @@ addons文件夹下存放着Godot Engine的插件。
 > bilibili -> [白色蜂鸟的个人空间](https://space.bilibili.com/32704272)
 >
 > 爱发电赞助: -> [白色蜂鸟主页](https://ifdian.net/a/AlbedoHummingbird)
-> 
+>
 > QQ讨论群 -> [白色蜂鸟&FireKami讨论](https://qm.qq.com/q/zh3svlXTBm) 705304831
 >
 > Discord聊天室 -> [FireKami Game&Fiction](https://discord.gg/c9v67xuuQR)

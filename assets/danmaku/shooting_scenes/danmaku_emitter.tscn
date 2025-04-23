@@ -1,39 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://7x8w60i2a5pu"]
+[gd_scene load_steps=6 format=3 uid="uid://7x8w60i2a5pu"]
 
 [ext_resource type="PackedScene" uid="uid://1ma6ldadgmhj" path="res://assets/danmaku/emitter/danmaku_emitter.tscn" id="1_x5j1l"]
 [ext_resource type="PackedScene" uid="uid://34f26nn5pmjo" path="res://assets/danmaku/bullet/bullet_pellet_texture.tscn" id="2_pkq64"]
-
-[sub_resource type="GDScript" id="GDScript_pkq64"]
-resource_name = "text"
-script/source = "@tool
-extends DanmakuEmitter
-
-
-func ready() -> void:
-	#time_since_last_fire = fire_rate / 60.0
-	#bullet_scale = Vector3.ONE * 1
-	pass
-
-
-func bullet_event(_delta: float) -> void:
-	#rotation_y_speed += _delta * 0.01
-	#stripe_angle += rotation_y_speed * 20
-	#disk_angle += _delta * 20
-	#spherical_count += _delta * 20
-	#ratio += _delta * 0.01
-	bullet_scale_multi = sin(Time.get_ticks_msec() / 1000.0)
-	bullet_color = HL.rainbow_color_time()
-	pass
-"
-
-[sub_resource type="MultiMesh" id="MultiMesh_gj8hp"]
-resource_local_to_scene = true
-transform_format = 1
-use_colors = true
+[ext_resource type="Script" uid="uid://1k18qi3ugc05" path="res://assets/danmaku/shooting_scenes/test_1.tres.gd" id="2_tpj4i"]
+[ext_resource type="PackedScene" uid="uid://chlmb6riilgct" path="res://assets/danmaku/bullet/multi/bullet_pellet_texture_multi_node.tscn" id="3_gj8hp"]
+[ext_resource type="PackedScene" uid="uid://cjgnytb1fs0ik" path="res://assets/danmaku/bullet/multi/bullet_texture_pellet_multi_mesh.tscn" id="5_3682j"]
 
 [node name="DanmakuEmitter" instance=ExtResource("1_x5j1l")]
-script = SubResource("GDScript_pkq64")
+script = ExtResource("2_tpj4i")
+fire_rate = 1
+stripe_count = 8
+stripe_radius = 1.0
 bullet_scene = ExtResource("2_pkq64")
-
-[node name="BulletsMultiMeshInstance3D" parent="." index="0"]
-multimesh = SubResource("MultiMesh_gj8hp")
+ues_multi_mesh_instance_3d = true
+bullet_scene_multi_node = ExtResource("3_gj8hp")
+bullet_scene_multi_mesh = ExtResource("5_3682j")
+exceeding_the_cap_mode = 1
+bullet_lifetime = 999.0
+bullet_speed = 5.0
+disk_debug_display = false
+stripe_debug_display = false

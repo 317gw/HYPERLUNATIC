@@ -96,11 +96,11 @@ func draw_mesh_line_relative(pointA: Vector3, pointB: Vector3, thickness: float=
 func draw_line_cube(transform: Transform3D = Transform3D.IDENTITY, color: Color = Color.RED):
 	if not use_debug_draw:
 		return
-	
+
 	var cube_vertices := []
 	for i in range(MarchingTable.POINTS.size()): # 应用变换
 		cube_vertices.append(transform * Vector3(MarchingTable.POINTS[i]))
-	
+
 	for edge in MarchingTable.EDGES: # 绘制立方体的12条边
 		var p1 = cube_vertices[edge[0]]
 		var p2 = cube_vertices[edge[1]]
@@ -115,7 +115,7 @@ func _get_wireframe_cube() -> ArrayMesh:
 		var p2 = MarchingTable.POINTS[edge[1]]
 		vertices.push_back(p1)
 		vertices.push_back(p2)
-	
+
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices
@@ -141,7 +141,7 @@ func _draw_canvas():
 			if line["points"].size() > 0:
 				draw_debug_control.draw_polyline(line["points"], line["color"], line["width"], line["antialiased"])
 		polylines.clear()
-	
+
 	if multilines.size() > 0:
 		for line in multilines:
 			if line["points"].size() > 0:
@@ -156,7 +156,7 @@ func draw_line_cube_canvas(transform: Transform3D = Transform3D.IDENTITY, color:
 	var lines: PackedVector2Array
 	for i in range(MarchingTable.POINTS.size()): # 应用变换
 		cube_vertices.append(transform * Vector3(MarchingTable.POINTS[i]))
-	
+
 	for edge in MarchingTable.EDGES: # 绘制立方体的12条边
 		var p1 = cube_vertices[edge[0]]
 		var p2 = cube_vertices[edge[1]]
@@ -236,7 +236,7 @@ func draw_chunks(chunks: Dictionary, size: Vector3, color: Color = Color.RED, wi
 		var transform = chunks[i].global_transform.scaled_local(size)
 		for j in range(MarchingTable.POINTS.size()): # 应用变换
 			cube_vertices.append(transform * Vector3(MarchingTable.POINTS[j]))
-		
+
 		for edge in MarchingTable.EDGES: # 绘制立方体的12条边
 			var p1 = cube_vertices[edge[0]]
 			var p2 = cube_vertices[edge[1]]
@@ -244,7 +244,7 @@ func draw_chunks(chunks: Dictionary, size: Vector3, color: Color = Color.RED, wi
 			if is_line3d_behind_camera(p1, p2):
 				continue
 			edges.append(AxisEdge.new(p1, p2))
-	
+
 	var edges2 = merge_edges(edges)
 	var lines: PackedVector2Array
 	for edge in edges2:

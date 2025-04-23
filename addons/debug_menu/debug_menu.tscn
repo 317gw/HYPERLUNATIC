@@ -406,19 +406,33 @@ size_flags_vertical = 0
 theme = ExtResource("2_vaxdg")
 text = "Acceleration↓"
 
+[node name="GlobalPosition" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "X 1.240  Y 9.666  Z -87.121"
+
 [node name="JumpingTime" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 theme = ExtResource("2_vaxdg")
-text = "JumpingTime:"
+text = "JumpingTime: "
 
 [node name="JumpingHeight" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 theme = ExtResource("2_vaxdg")
-text = "JumpingHeight:"
+text = "JumpingHeight: "
+
+[node name="DanmakuCount" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "Danmaku: "
 
 [node name="DisplayInput" type="RichTextLabel" parent="DebugMenuControl"]
 process_mode = 1
@@ -448,6 +462,6 @@ wait_time = 30.0
 one_shot = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="timeout" from="DebugMenuControl/DisplayInput/LineFeedTimer" to="DebugMenuControl/DisplayInput" method="_on_timer_timeout"]
 [connection signal="timeout" from="DebugMenuControl/DisplayInput/LineFeedTimer" to="DebugMenuControl/DisplayInput" method="_on_line_feed_timer_timeout"]
+[connection signal="timeout" from="DebugMenuControl/DisplayInput/LineFeedTimer" to="DebugMenuControl/DisplayInput" method="_on_timer_timeout"]
 [connection signal="timeout" from="DebugMenuControl/DisplayInput/ClearUpTimer" to="DebugMenuControl/DisplayInput" method="_on_clear_up_timer_timeout"]

@@ -4,6 +4,7 @@ extends Node
 signal main_player_ready
 signal global_scenes_ready
 signal sky_limit_ready
+signal danmaku_manager_ready
 
 const explod_max_speed: float = 100.0 ## m
 const Hl = preload("res://assets/global/scripts/HL.gd")
@@ -51,6 +52,8 @@ var main_player: HL.Player = null
 var main_player_camera: HL.Camera = null
 var sky_limit: HL.SkyLimit = null
 
+var paused_time_process: float = 0.0
+var paused_time_physics_process: float = 0.0
 
 var gravity_value: float
 var gravity_vector: Vector3
@@ -73,7 +76,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	pass
+	if not get_tree().paused:
+		paused_time_process += _delta
+
+
+func _physics_process(_delta: float) -> void:
+	if not get_tree().paused:
+		paused_time_physics_process += _delta
 
 
 func _global_scenes_ready() -> void:
@@ -81,6 +90,8 @@ func _global_scenes_ready() -> void:
 		var scene_name: String = scene_dir["name"]
 		var scene = self.get(scene_name)
 		get_tree().current_scene.add_child(scene)
+	paused_time_process = 0.0
+	paused_time_physics_process = 0.0
 	global_scenes_ready.emit()
 
 

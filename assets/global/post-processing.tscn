@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djbvwfd5m25rh"]
+[gd_scene load_steps=24 format=3 uid="uid://djbvwfd5m25rh"]
 
 [ext_resource type="Shader" uid="uid://cf1ljx74b0dtk" path="res://assets/arts_graphic/shaders/waters/CameraWaterOverlay.gdshader" id="1_8p2xh"]
 [ext_resource type="Script" uid="uid://c12lsxls2v0ex" path="res://assets/global/scripts/post_processing.gd" id="1_h61ip"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://d2lvax62psnwa" path="res://assets/global/scripts/water_ripple_overlay.gd" id="3_s2f4l"]
 [ext_resource type="Texture2D" uid="uid://bmbjdolg14ihw" path="res://icon.svg" id="4_s2f4l"]
 [ext_resource type="Shader" uid="uid://ca5pn0w2s5u1h" path="res://assets/arts_graphic/shaders/other_author/High Quality Post Process Outline.gdshader" id="8_xuisv"]
+[ext_resource type="Shader" uid="uid://dg8mrqtfs0ig8" path="res://assets/arts_graphic/shaders/shadow_color_dither.gdshader" id="9_blbsa"]
+[ext_resource type="Texture2D" uid="uid://c5py6kcchxitl" path="res://assets/arts_graphic/textures/palettes/steam-lords.png" id="10_d84be"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_blbsa"]
 shader = ExtResource("2_s2f4l")
@@ -42,14 +44,16 @@ shader_parameter/sampling_count = 6
 shader_parameter/lod = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ncr2o"]
-render_priority = 0
+render_priority = -1
 shader = ExtResource("8_xuisv")
 shader_parameter/outlineColor = Color(0.702, 0.702, 0.702, 0.8)
+shader_parameter/saturation_threshold = 0.6
+shader_parameter/saturation_smoothing = 0.1
 shader_parameter/depth_threshold = 10.0
 shader_parameter/normal_threshold = 1.0
-shader_parameter/normal_smoothing = 0.6
+shader_parameter/normal_smoothing = 1.0
 shader_parameter/s_mix = 1.0
-shader_parameter/v_mix = 0.5
+shader_parameter/v_mix = 0.6
 shader_parameter/max_thickness = 2.0
 shader_parameter/min_thickness = 0.5
 shader_parameter/max_distance = 1.2
@@ -59,9 +63,33 @@ shader_parameter/grazing_angle_mask_power = 1.0
 shader_parameter/grazing_angle_modulation_factor = 50.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_6hjmq"]
-material = SubResource("ShaderMaterial_ncr2o")
 flip_faces = true
 size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6hjmq"]
+render_priority = 0
+shader = ExtResource("9_blbsa")
+shader_parameter/dither_pixel_size = 2.0
+shader_parameter/dither_pixel_offset = Vector2(0, 0)
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_strength = 1.0
+shader_parameter/dither_palette = ExtResource("10_d84be")
+shader_parameter/screen_lod = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ohn2"]
+size = Vector2(2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d84be"]
+cull_mode = 2
+albedo_color = Color(1, 0.37, 0.37, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_ncr2o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncr2o"]
+cull_mode = 2
+albedo_color = Color(0.37, 0.79, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d84be"]
 
 [node name="Post-processing" type="CanvasLayer"]
 process_mode = 1
@@ -125,9 +153,24 @@ texture = ExtResource("4_s2f4l")
 metadata/_edit_use_anchors_ = true
 
 [node name="SpatialMeshs" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 top_level = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SpatialMeshs"]
+[node name="PostProcessOutline" type="MeshInstance3D" parent="SpatialMeshs"]
+material_override = SubResource("ShaderMaterial_ncr2o")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_6hjmq")
+
+[node name="ShadowColorDither" type="MeshInstance3D" parent="SpatialMeshs"]
+visible = false
+material_override = SubResource("ShaderMaterial_6hjmq")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_5ohn2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_d84be")
+mesh = SubResource("TorusMesh_ncr2o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.963789, 0.0016489, 1.20137)
+material_override = SubResource("StandardMaterial3D_ncr2o")
+mesh = SubResource("CylinderMesh_d84be")

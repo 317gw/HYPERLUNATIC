@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjgnytb1fs0ik"]
+
+[ext_resource type="Shader" uid="uid://eoipuvs3eijf" path="res://assets/arts_graphic/shaders/bullet_pellet_texture_multi.gdshader" id="1_ak6q8"]
+[ext_resource type="Texture2D" uid="uid://cnkuwh5bk2of0" path="res://assets/arts_graphic/textures/texture_pellet.png" id="2_khxrt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kssqk"]
+render_priority = 0
+shader = ExtResource("1_ak6q8")
+shader_parameter/texture_albedo = ExtResource("2_khxrt")
+shader_parameter/emission = 0.8
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_fe40k"]
+material = SubResource("ShaderMaterial_kssqk")
+size = Vector2(2, 2)
+
+[sub_resource type="MultiMesh" id="MultiMesh_gfy6m"]
+transform_format = 1
+use_colors = true
+use_custom_data = true
+mesh = SubResource("QuadMesh_fe40k")
+
+[node name="TexturePelletMultiMesh" type="MultiMeshInstance3D"]
+physics_interpolation_mode = 2
+multimesh = SubResource("MultiMesh_gfy6m")

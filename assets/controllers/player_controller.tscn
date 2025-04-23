@@ -152,20 +152,20 @@ stream_1/stream = ExtResource("8_mjdxn")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2sxo4"]
 render_priority = 0
 shader = ExtResource("24_8fqh3")
-shader_parameter/line_width = 0.04
+shader_parameter/line_width = 0.03
 shader_parameter/tangent_facing = true
 shader_parameter/rounded = false
 shader_parameter/tube_normal = true
 shader_parameter/uv_matches_width = true
 shader_parameter/tex_scale = Vector2(1, 1)
-shader_parameter/color = Color(0, 1, 1, 1)
-shader_parameter/alpha = 0.8
-shader_parameter/metallic = 1.0
+shader_parameter/color = Color(0.2, 1, 1, 1)
+shader_parameter/alpha = 0.6
+shader_parameter/metallic = 0.0
 shader_parameter/specular = 1.0
 shader_parameter/roughness = 0.0
 shader_parameter/tex_stretch = true
 shader_parameter/fade_distance = 2.0
-shader_parameter/fade_power = 0.6
+shader_parameter/fade_power = 1.0
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 process_mode = 1
@@ -560,7 +560,7 @@ process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 script = ExtResource("21_iqf47")
 sampling_mode = 1
-max_points = 400
+max_points = 500
 material = SubResource("ShaderMaterial_2sxo4")
 
 [connection signal="weapon_main_action" from="." to="WeaponManager" method="_on_main_action"]

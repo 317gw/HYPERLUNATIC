@@ -8,7 +8,7 @@ static func parse_time(time: int) -> String:
 	var SECOND: int = 1000 * MILLISECOND
 	var MINUTE: int = 60 * SECOND
 	var HOUR: int = 60 * MINUTE
-	
+
 	if time < MILLISECOND:
 		return "%s μs" % time
 	elif time < SECOND:

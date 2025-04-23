@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://di3icl4o6dmra"]
+[gd_scene load_steps=15 format=3 uid="uid://di3icl4o6dmra"]
 
 [ext_resource type="Script" uid="uid://defwaquq3gyv2" path="res://assets/danmaku/scripts/danmaku_manager.gd" id="1_ip5wq"]
 [ext_resource type="Script" uid="uid://vmbdjajpl88l" path="res://assets/danmaku/scripts/dm_particles.gd" id="2_t2px0"]
@@ -105,9 +105,8 @@ distance_fade_min_distance = 100.0
 [sub_resource type="QuadMesh" id="QuadMesh_eaq3q"]
 material = SubResource("StandardMaterial3D_c8f0c")
 
-[sub_resource type="SphereMesh" id="SphereMesh_ip5wq"]
-
 [node name="DanmakuManager" type="Node3D"]
+process_mode = 1
 script = ExtResource("1_ip5wq")
 
 [node name="Particles" type="Node3D" parent="."]
@@ -115,32 +114,32 @@ script = ExtResource("2_t2px0")
 
 [node name="BreakGPUParticles1" type="GPUParticles3D" parent="Particles"]
 cast_shadow = 0
+extra_cull_margin = 16384.0
 emitting = false
 amount = 1
+lifetime = 0.7
 one_shot = true
-use_fixed_seed = true
-seed = 2039200664
 process_material = SubResource("ParticleProcessMaterial_rj2kp")
 draw_pass_1 = SubResource("QuadMesh_c8f0c")
 
 [node name="BreakGPUParticles2" type="GPUParticles3D" parent="Particles"]
 cast_shadow = 0
+extra_cull_margin = 16384.0
 emitting = false
 amount = 1
+lifetime = 0.7
 one_shot = true
-use_fixed_seed = true
-seed = 847311815
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_c8f0c")
 draw_pass_1 = SubResource("QuadMesh_c8f0c")
 
 [node name="BreakGPUParticles3" type="GPUParticles3D" parent="Particles"]
 cast_shadow = 0
+extra_cull_margin = 16384.0
 emitting = false
 amount = 1
+lifetime = 0.7
 one_shot = true
-use_fixed_seed = true
-seed = 3586813187
 fixed_fps = 18
 process_material = SubResource("ParticleProcessMaterial_eaq3q")
 draw_pass_1 = SubResource("QuadMesh_eaq3q")
@@ -148,7 +147,3 @@ draw_pass_1 = SubResource("QuadMesh_eaq3q")
 [node name="Bullet&Collision" type="Node3D" parent="."]
 
 [node name="MultiMeshInstances" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
-mesh = SubResource("SphereMesh_ip5wq")

@@ -66,7 +66,7 @@ func _physics_process(_delta):
 
 		var _decelerate: float = remap(picked_object.mass, 0, 2000, 0, 0.5)
 		_decelerate = clampf(_decelerate, 0, 0.5)
-		player.decelerate_list.append(_decelerate) # 施加玩家减速
+		player.movement_decelerate_list.append(_decelerate) # 施加玩家减速
 
 
 func pick_object() -> void:

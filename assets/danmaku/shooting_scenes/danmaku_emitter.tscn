@@ -1,21 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://7x8w60i2a5pu"]
+[gd_scene load_steps=4 format=3 uid="uid://7x8w60i2a5pu"]
 
 [ext_resource type="PackedScene" uid="uid://1ma6ldadgmhj" path="res://assets/danmaku/emitter/danmaku_emitter.tscn" id="1_x5j1l"]
 [ext_resource type="PackedScene" uid="uid://34f26nn5pmjo" path="res://assets/danmaku/bullet/bullet_pellet_texture.tscn" id="2_pkq64"]
 [ext_resource type="Script" uid="uid://1k18qi3ugc05" path="res://assets/danmaku/shooting_scenes/test_1.tres.gd" id="2_tpj4i"]
-[ext_resource type="PackedScene" uid="uid://chlmb6riilgct" path="res://assets/danmaku/bullet/multi/bullet_pellet_texture_multi_node.tscn" id="3_gj8hp"]
-[ext_resource type="PackedScene" uid="uid://cjgnytb1fs0ik" path="res://assets/danmaku/bullet/multi/bullet_texture_pellet_multi_mesh.tscn" id="5_3682j"]
 
 [node name="DanmakuEmitter" instance=ExtResource("1_x5j1l")]
 script = ExtResource("2_tpj4i")
+bullet_scene = ExtResource("2_pkq64")
 fire_rate = 1
 stripe_count = 8
 stripe_radius = 1.0
-bullet_scene = ExtResource("2_pkq64")
-ues_multi_mesh_instance_3d = true
-bullet_scene_multi_node = ExtResource("3_gj8hp")
-bullet_scene_multi_mesh = ExtResource("5_3682j")
-exceeding_the_cap_mode = 1
 bullet_lifetime = 999.0
 bullet_speed = 5.0
 disk_debug_display = false

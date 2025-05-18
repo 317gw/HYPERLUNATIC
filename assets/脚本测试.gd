@@ -1,6 +1,24 @@
 @tool
 extends Node3D
 
+#height: float = 1.7 ## 身高
+#mass: float = 60.0 ## 质量 2m->78kg  1.7m->60kg
+#slow_rigid_force: float = 10.0 ## 低速移动推力
+#speed_slow: float = 2.0 ## 低速移动速度
+#speed_normal: float = 6.0 ## 地面普通移动速度
+#speed_max: float = 10.0 ## 地面奔跑最大速度
+#acc_normal_time: float = 0.1 ## 地面普通移动加速度时间 ACC -> Acceleration
+#acc_max_time: float = 6.0 ## 地面奔跑加速度时间
+#jump_height: float = 5.0 ## 普通跳跃高度
+#jump_time: float = 1.5 ## 普通跳跃时间
+#mouse_wheel_jump_height: float = 1.7 ## 滚轮跳高度
+#jump_distance_min: float = 10.0 ## 最小跳跃距离
+#jump_distance_max: float = 16.5 ## 跳跃距离
+#air_speed_max: float = 12.0 ## 空中移动最大速度
+
+
+
+
 
 func _ready() -> void:
 	#for i in range(100):
@@ -15,9 +33,24 @@ func _ready() -> void:
 	#var aaaa = TranslationServer.get_translation_object("")
 	#print(aaaa)
 
-	var arr= [1, 2, 3]
-	print(arr.slice(1, 5))
+	var aaaa
 
+
+	#aaaa = HL.next_power_of_two(2001)
+	aaaa = HL.nearest_power_of_two(5)
+
+	prints(-4 ** 0.5, HL.power(-4, 0.5))
+	prints(0 ** 0, pow(0, 0), HL.power(0, 0))
+
+#var ttt = 0
+#func _input(event: InputEvent) -> void:
+	#if event.is_action("mouse_wheel_down") or event.is_action("move_forward"):
+		#ttt += 1
+		#prints("_input", get_tree().get_frame(), ttt)
+#
+#func _physics_process(delta: float) -> void:
+	#ttt += 2
+	#prints("_physics_process", get_tree().get_frame(), ttt)
 
 
 const AC: float = 6.02e23 # Avogado Constant 阿伏伽德罗常量（约6.02×10^23）个微粒

@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://chlmb6riilgct"]
 
-[ext_resource type="Script" uid="uid://bel1tqycansmc" path="res://assets/danmaku/scripts/bullet_pellet_texture_multi.gd" id="1_hg0j8"]
+[ext_resource type="Script" uid="uid://bel1tqycansmc" path="res://assets/danmaku/scripts/bullet_pellet_texture_multi.gd" id="1_21wq4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4dgxv"]
 resource_local_to_scene = true
 radius = 0.25
 
 [node name="TexturePelletMultiNode" type="Node3D"]
-script = ExtResource("1_hg0j8")
+script = ExtResource("1_21wq4")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8

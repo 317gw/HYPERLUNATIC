@@ -18,12 +18,16 @@ func Exit():
 func Physics_Update(_delta: float) -> void:
 	PLAYER.stop_movement(_delta)
 	PLAYER.apply_gravity(-PLAYER.gravity_fall, _delta) # 关闭为特性，无操控滑出地面，可悬浮
+	PLAYER.swimming(_delta)
 	PLAYER.air_speed_clamp(_delta)
 
 	PLAYER.apply_velocity()
 	camera.slide_camera_smooth_back_to_origin(_delta)
 
 	#var direction :=
+	if PLAYER.is_swimming() and not PLAYER.is_on_floor():
+		Transitioned.emit(self, "Fall")
+		return
 	if Input.get_vector("move_left", "move_right", "move_forward", "move_backward"):
 		Transitioned.emit(self, "Run")
 		return
@@ -36,9 +40,6 @@ func Physics_Update(_delta: float) -> void:
 	if PLAYER.can_dash():
 		Transitioned.emit(self, "Dash")
 		return
-	#if PLAYER.is_swimming() and not PLAYER.is_on_floor():
-		#Transitioned.emit(self, "Swim")
-		#return
 
 
 func Handle_Input(_event: InputEvent) -> void:

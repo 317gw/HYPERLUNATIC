@@ -52,7 +52,7 @@ func create_pool(amount: int) -> void:
 	amount = mini(amount, max_objects_in_pool - pool.size())
 
 	for i in amount:
-		add_to_pool(IndieBlueprintObjectPoolWrapper.new(self))
+		add_to_pool(IndieBlueprintObjectPoolWrapper.new(self, i))
 
 
 func add_to_pool(new_object: IndieBlueprintObjectPoolWrapper) -> void:

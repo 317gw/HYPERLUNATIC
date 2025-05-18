@@ -31,7 +31,7 @@ void vertex() {
 		vec4(0.0, 0.0, 0.0, 1.0));
 	// Billboard Mode: Y-Billboard
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat_world;
-    
+
     // We map the coordinates on the vertical planes xy and zy
     // we also calculate how to blend between the two based on where the world space normal
     // is pointing.
@@ -43,19 +43,19 @@ void vertex() {
 
 void fragment() {
 	float mask = texture(texture_mask, UV).r;
-	
+
 	vec2 time_based_pan = vec2(0.2, 1.0) * (- TIME * time_scale);
 	float noise_xy = texture(noise_texture, world_coord.xy * texture_scale + time_based_pan).r;
 	float noise_zy = texture(noise_texture, world_coord.zy * texture_scale + time_based_pan + vec2(0.7, 0.3)).r;
-	
+
 	float noise = mix(noise_xy, noise_zy, clamp(world_x_dot, 0.0, 1.0));
-	
+
 	ALBEDO = COLOR.rgb * albedo.rgb;
 	EMISSION = ALBEDO * emission_intensity;
-	
+
 	float erosion_amount = (1.0 - COLOR.a);
 	float alpha = (noise * mask) - erosion_amount;
-	
+
 	alpha = clamp(alpha, 0.0, 1.0);
 	ALPHA = smoothstep(0.0, edge_softness, alpha) * albedo.a;
 }

@@ -430,7 +430,6 @@ occluder = SubResource("BoxOccluder3D_kjtr1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -12.5, 10)
 mesh = SubResource("BoxMesh_2w1di")
 surface_material_override/0 = SubResource("ShaderMaterial_qtrbo")
-density = 800.0
 
 [node name="WaterMesh3D2" parent="." instance=ExtResource("4_wh6y3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0.5, -5)

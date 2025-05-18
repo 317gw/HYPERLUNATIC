@@ -21,7 +21,7 @@ func Physics_Update(_delta: float) -> void:
 		#print("snap_up")
 		if PLAYER.vel_hor.length() > PLAYER.speed_normal:
 			PLAYER.vel_hor = move_toward(PLAYER.vel_hor.length(), PLAYER.speed_normal, PLAYER.acc_normal * 0.2 * _delta) * PLAYER.vel_hor.normalized()
-		move(_delta, false)
+		move(_delta, PLAYER.ApplyVelocityMode.DO_NOTHING)
 	else:
 		#print("snap_down")
 		move(_delta)
@@ -60,9 +60,9 @@ func Handle_Input(_event: InputEvent) -> void:
 		return
 
 
-func move(_delta: float, do_move_and_slide: bool = true) -> void:
+func move(_delta: float, apply_velocity_mode = PLAYER.ApplyVelocityMode.MOVE_AND_SLIDE) -> void:
 		PLAYER.movement_floor(_delta)
-		#PLAYER.swimming(_delta)
 		PLAYER.apply_gravity(-PLAYER.gravity_fall, _delta)
+		PLAYER.swimming(_delta)
 		PLAYER.air_speed_clamp(_delta)
-		PLAYER.apply_velocity(do_move_and_slide)
+		PLAYER.apply_velocity(apply_velocity_mode)

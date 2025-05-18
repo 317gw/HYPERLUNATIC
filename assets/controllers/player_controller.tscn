@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://b6dtopvb54qyu"]
+[gd_scene load_steps=61 format=3 uid="uid://b6dtopvb54qyu"]
 
 [ext_resource type="Script" uid="uid://bpmti2w3wvxh4" path="res://assets/controllers/scripts/PlayerController.gd" id="1_0ynvo"]
 [ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://assets/arts_graphic/materials/player.tres" id="2_8r2m2"]
@@ -45,6 +45,8 @@ rings = 4
 margin = 0.1
 radius = 0.35
 height = 1.7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_60att"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gespb"]
 height = 1.7
@@ -173,9 +175,10 @@ physics_interpolation_mode = 1
 collision_layer = 2
 collision_mask = 17
 floor_stop_on_slope = false
-floor_snap_length = 0.2
-platform_floor_layers = 1
-platform_wall_layers = 1
+floor_max_angle = 1.22173
+floor_snap_length = 0.15
+platform_floor_layers = 17
+platform_wall_layers = 17
 script = ExtResource("1_0ynvo")
 mass = 50.0
 
@@ -190,7 +193,43 @@ shape = SubResource("CapsuleShape3D_4bbek")
 
 [node name="PlayerTransformMarker" type="Marker3D" parent="."]
 
+[node name="BelowArea3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+collision_layer = 0
+collision_mask = 53
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BelowArea3D"]
+shape = SubResource("SphereShape3D_60att")
+
 [node name="BelowRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+enabled = false
+target_position = Vector3(0, -1.2, 0)
+collision_mask = 53
+
+[node name="BelowRay1" type="RayCast3D" parent="BelowRay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.2)
+enabled = false
+target_position = Vector3(0, -1.2, 0)
+collision_mask = 53
+
+[node name="BelowRay2" type="RayCast3D" parent="BelowRay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -0.2)
+enabled = false
+target_position = Vector3(0, -1.2, 0)
+collision_mask = 53
+
+[node name="BelowRay3" type="RayCast3D" parent="BelowRay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0.2)
+enabled = false
+target_position = Vector3(0, -1.2, 0)
+collision_mask = 53
+
+[node name="BelowRay4" type="RayCast3D" parent="BelowRay"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0.2)
+enabled = false
+target_position = Vector3(0, -1.2, 0)
 collision_mask = 53
 
 [node name="SnapStairs" type="Node3D" parent="."]
@@ -459,11 +498,6 @@ metadata/_custom_type_script = "uid://1nfjybprpn4n"
 
 [node name="Dash" type="Node" parent="MovementStateMachine"]
 script = ExtResource("10_nqmol")
-dash_number_max = null
-dash_distance = null
-dash_time = null
-dashjump_height = null
-dashjump_distance = null
 
 [node name="DashJump" type="Node" parent="MovementStateMachine"]
 script = ExtResource("11_tud07")
@@ -473,7 +507,6 @@ script = ExtResource("18_u1swj")
 
 [node name="FreeViewMode" type="Node" parent="MovementStateMachine"]
 script = ExtResource("14_a4jom")
-free_view_speed_sensitivity = null
 
 [node name="CameraStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_0pah7")

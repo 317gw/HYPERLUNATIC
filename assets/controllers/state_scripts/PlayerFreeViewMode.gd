@@ -26,9 +26,11 @@ func Physics_Update(_delta: float) -> void:
 
 func Handle_Input(_event: InputEvent) -> void:
 	if _event.is_action_pressed("free_view_mode"):
+		PLAYER.jump_distance = PLAYER.jump_distance_min
+		PLAYER.calculate_air_speed(PLAYER.jump_distance, PLAYER.jump_time, true)
 		Transitioned.emit(self, "Fall")
 		return
-	
+
 	if _event.is_action_pressed("mouse_wheel_up"):
 		free_view_speed_scale += free_view_speed_sensitivity
 	if _event.is_action_pressed("mouse_wheel_down"):

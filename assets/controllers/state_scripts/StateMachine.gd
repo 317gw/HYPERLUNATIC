@@ -23,6 +23,7 @@ func _ready() -> void:
 	if initial_state:
 		initial_state.Enter()
 		current_state = initial_state
+		_current = initial_state.name
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -54,7 +55,7 @@ func on_child_transition(state: State, new_state_name: String):
 		current_state.Exit()
 		if print_transition:
 			print("out: %s\n" %current_state)
-	
+
 	await player.physics_process
 	new_state.Enter()
 	if print_transition:

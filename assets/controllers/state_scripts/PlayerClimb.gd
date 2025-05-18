@@ -77,7 +77,7 @@ func Physics_Update(_delta: float) -> void:
 	#PLAYER.vel_hor *= (1 - abs(dot))
 
 	PLAYER.vel_hor = PLAYER.vel_hor.limit_length(PLAYER.speed_normal)
-	PLAYER.apply_velocity(false)
+	PLAYER.apply_velocity(PLAYER.ApplyVelocityMode.DO_NOTHING)
 
 
 

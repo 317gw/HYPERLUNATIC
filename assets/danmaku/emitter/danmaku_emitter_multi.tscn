@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://clofqx60vw10l"]
+
+[ext_resource type="Script" uid="uid://cese1yodu05ax" path="res://assets/danmaku/emitter/danmaku_emitter_multi.gd" id="1_f80lj"]
+[ext_resource type="Script" uid="uid://ccqqsgs2ctotb" path="res://assets/danmaku/emitter/emitter_mesh_display.gd" id="2_g2qf1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_cwfce"]
+radius = 0.1
+height = 0.2
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwfce"]
+transparency = 4
+cull_mode = 2
+shading_mode = 2
+diffuse_mode = 2
+albedo_color = Color(1, 0.55, 0.1, 0.3)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_f80lj"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_cwfce"]
+transform_format = 1
+instance_count = 3
+mesh = SubResource("ImmediateMesh_f80lj")
+buffer = PackedFloat32Array(-0.5, -0.866025, 0, 0, 0.866025, -0.5, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.5, 0.866025, 0, 0, -0.866025, -0.5, 0, 0, 0, 0, 1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1atn"]
+transparency = 4
+shading_mode = 2
+albedo_color = Color(0.3, 0.3, 1, 0.698039)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cwfce"]
+size = Vector3(0.02, 0.02, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_ldqey"]
+transform_format = 1
+use_colors = true
+instance_count = 18
+mesh = SubResource("BoxMesh_cwfce")
+buffer = PackedFloat32Array(-0.960393, 0.123065, -0.5, 0.25, 0.00278635, 0.901383, 0.866025, -0.433013, 0.278635, 0.415166, -1.73205, 0.866025, 0, 0, 0, 0, 0.017317, 0.865852, -1, 0.5, 0.009998, 0.4999, 1.73205, -0.866025, 0.9998, -0.019996, -2.44921e-16, 1.22461e-16, 0, 0, 0, 0, 0.961132, 0.117153, -0.5, 0.25, 0.00276075, 0.901384, 0.866025, -0.433013, 0.276075, -0.416873, 1.73205, -0.866025, 0, 0, 0, 0, 0.960393, 0.123065, 0.5, -0.25, -0.00278635, 0.901383, -0.866025, 0.433013, -0.278635, 0.415166, 1.73205, -0.866025, 0, 0, 0, 0, -0.017317, 0.865852, 1, -0.5, -0.009998, 0.4999, -1.73205, 0.866025, -0.9998, -0.019996, 4.89843e-16, -2.44921e-16, 0, 0, 0, 0, -0.961132, 0.117153, 0.5, -0.25, -0.00276075, 0.901384, -0.866025, 0.433013, -0.276075, -0.416873, -1.73205, 0.866025, 0, 0, 0, 0, -0.866015, -0.00433007, 1, -0.5, -0.00499994, 0.999987, 0, 0, -0.499994, -0.00249997, -1.73205, 0.866025, 0, 0, 0, 0, -1.22455e-16, -1.22455e-18, 2, -1, -0.0099995, 0.99995, 0, 0, -0.99995, -0.0099995, -2.44921e-16, 1.22461e-16, 0, 0, 0, 0, 0.866015, 0.00433007, 1, -0.5, -0.00499994, 0.999987, 0, 0, -0.499994, -0.00249997, 1.73205, -0.866025, 0, 0, 0, 0, 0.866015, -0.00433007, -1, 0.5, 0.00499994, 0.999987, 0, 0, 0.499994, -0.00249997, 1.73205, -0.866025, 0, 0, 0, 0, 2.44909e-16, -2.44909e-18, -2, 1, 0.0099995, 0.99995, 0, 0, 0.99995, -0.0099995, 4.89843e-16, -2.44921e-16, 0, 0, 0, 0, -0.866015, 0.00433007, -1, 0.5, 0.00499994, 0.999987, 0, 0, 0.499994, -0.00249997, -1.73205, 0.866025, 0, 0, 0, 0, -0.961132, -0.117153, -0.5, 0.25, 0.00276075, 0.901384, -0.866025, 0.433013, 0.276075, -0.416873, -1.73205, 0.866025, 0, 0, 0, 0, -0.017317, -0.865852, -1, 0.5, 0.009998, 0.4999, -1.73205, 0.866025, 0.9998, -0.019996, -2.44921e-16, 1.22461e-16, 0, 0, 0, 0, 0.960393, -0.123065, -0.5, 0.25, 0.00278635, 0.901383, -0.866025, 0.433013, 0.278635, 0.415166, 1.73205, -0.866025, 0, 0, 0, 0, 0.961132, -0.117153, 0.5, -0.25, -0.00276075, 0.901384, 0.866025, -0.433013, -0.276075, -0.416873, 1.73205, -0.866025, 0, 0, 0, 0, 0.017317, -0.865852, 1, -0.5, -0.009998, 0.4999, 1.73205, -0.866025, -0.9998, -0.019996, 4.89843e-16, -2.44921e-16, 0, 0, 0, 0, -0.960393, -0.123065, 0.5, -0.25, -0.00278635, 0.901383, 0.866025, -0.433013, -0.278635, 0.415166, -1.73205, 0.866025, 0, 0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdepa"]
+transparency = 4
+shading_mode = 2
+albedo_color = Color(1, 0.2, 0.2, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xdepa"]
+size = Vector3(0.02, 0.02, 0.02)
+
+[sub_resource type="MultiMesh" id="MultiMesh_xdepa"]
+transform_format = 1
+mesh = SubResource("BoxMesh_xdepa")
+
+[node name="DanmakuEmitterMulti" type="MeshInstance3D" node_paths=PackedStringArray("bullet_ware", "emitter_mesh_display")]
+process_mode = 1
+cast_shadow = 0
+mesh = SubResource("SphereMesh_cwfce")
+script = ExtResource("1_f80lj")
+bullet_ware = NodePath("BulletWare")
+emitter_mesh_display = NodePath("EmitterMeshDisplay")
+disk_count = 3
+stripe_count = 6
+
+[node name="EmitterMeshDisplay" type="Node3D" parent="."]
+script = ExtResource("2_g2qf1")
+
+[node name="DiskMMI3D" type="MultiMeshInstance3D" parent="EmitterMeshDisplay"]
+physics_interpolation_mode = 2
+material_override = SubResource("StandardMaterial3D_cwfce")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_cwfce")
+
+[node name="StripeMMI3D" type="MultiMeshInstance3D" parent="EmitterMeshDisplay"]
+physics_interpolation_mode = 2
+material_override = SubResource("StandardMaterial3D_i1atn")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_ldqey")
+
+[node name="SphericalMMI3D" type="MultiMeshInstance3D" parent="EmitterMeshDisplay"]
+physics_interpolation_mode = 2
+material_override = SubResource("StandardMaterial3D_xdepa")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_xdepa")
+
+[node name="BulletWare" type="Node3D" parent="."]

@@ -9,7 +9,7 @@ const VERTICES_STRIP_ORDER: Array = [4, 5, 0, 1, 2, 5, 6, 4, 7, 0, 3, 2, 7, 6, 0
 var pie_mash: ImmediateMesh
 
 @onready var frameskiper: FrameSkiper = FrameSkiper.new(30)
-@onready var emitter: DanmakuEmitter = $".."
+@onready var emitter: DanmakuEmitterBase = $".."
 @onready var disk_mmi: MultiMeshInstance3D = $DiskMMI3D
 @onready var stripe_mmi: MultiMeshInstance3D = $StripeMMI3D
 @onready var spherical_mmi: MultiMeshInstance3D = $SphericalMMI3D

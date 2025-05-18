@@ -42,7 +42,7 @@ func Physics_Update(_delta: float) -> void:
 	# 如果玩家松开了跳跃键
 	if not Input.is_action_pressed("jump") and PLAYER.vel_up > PLAYER.jump_vel / 2 and not is_wheel_jump:
 		PLAYER.vel_up = PLAYER.jump_vel / 2
-		PLAYER.apply_velocity(false)
+		PLAYER.apply_velocity(PLAYER.ApplyVelocityMode.DO_NOTHING)
 		Transitioned.emit(self, "Fall")
 		return
 	if PLAYER.can_dash():

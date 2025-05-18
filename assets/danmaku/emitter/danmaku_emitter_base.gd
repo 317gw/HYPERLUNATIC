@@ -1,4 +1,5 @@
-#class_name DanmakuEmitterBase
+@tool
+class_name DanmakuEmitterBase
 extends Node3D
 #danmaku_emitter_base
 
@@ -75,17 +76,11 @@ var Here_is_the_last_start = null
 
 # 弹幕
 @export_group("Bullet")
-# 弹幕样式
-@export var bullet_scene: PackedScene = preload("res://assets/danmaku/bullet/bullet_test.tscn") ## 类型 发射的弹幕预制体
-@export var ues_multi_mesh_instance_3d: bool = false ## 使用MultiMeshInstance3D
-@export var bullet_scene_multi_node: PackedScene = null
-@export var bullet_scene_multi_mesh: PackedScene = null
-@export var bullet_up_mode: BulletUpMode = BulletUpMode.UP ## 弹幕向上的模式
 # 消除处理
 @export_subgroup("Life&Delete")
-@export var exceeding_the_cap_mode: CapMode = CapMode.STOP_LAUNCHING ## 超出容量处理模式
+@export var exceeding_the_cap_mode: CapMode = CapMode.DELETE_OLDEST ## 超出容量处理模式
 @export var bullet_collision_enabled: bool = true ## 碰撞消除
-@export_range(0, 20000) var bullet_max_node: int = 2000 ## 下属的最大弹幕数量
+@export_range(0, 5000) var max_bullet: int = 500 ## 下属的最大弹幕数量
 @export var bullet_lifetime: float = 10.0 ## 生存时间 秒
 # 属性
 @export_subgroup("Property")
@@ -93,12 +88,20 @@ var Here_is_the_last_start = null
 @export var bullet_speed: float = 1.0 ## 弹幕速度
 @export var bullet_acceleration: Vector3 = Vector3.ZERO ## 弹幕加速度
 #@export var bullet_rotation: Vector3 = Vector3.ZERO ## 弹幕旋转
-@export var bullet_scale_multi: float = 1.0 ## 缩放倍率
-@export var bullet_scale: Vector3 = Vector3.ONE ## 缩放
+@export var bullet_scale_multi: float = 1.0 : ## 缩放倍率
+	set(v):
+		bullet_scale_multi = v
+		bullet_scale_final = (bullet_scale_multi * bullet_scale).max(Vector3.ONE*0.001)
+@export var bullet_scale: Vector3 = Vector3.ONE : ## 缩放
+	set(v):
+		bullet_scale = v
+		bullet_scale_final = (bullet_scale_multi * bullet_scale).max(Vector3.ONE*0.001)
+var bullet_scale_final: Vector3 = (bullet_scale_multi * bullet_scale).max(Vector3.ONE*0.001)
 # 特效
 @export_subgroup("Effect")
 @export_color_no_alpha var bullet_color1: Color = Color.WHITE ## 颜色
 @export_color_no_alpha var bullet_color2: Color = Color(Color.WHITE, 0.5) ## 颜色
+@export var bullet_up_mode: BulletUpMode = BulletUpMode.UP ## 弹幕向上的模式
 @export var bullet_blend_mode: int = 0 ## 混合模式
 @export var spawn_effect: PackedScene = null ## 生成特效
 @export var destroy_effect: PackedScene = null ## 消除特效
@@ -140,7 +143,6 @@ DANMAKU_BREAK
 """
 const DANMAKU_BREAK = preload("res://assets/special_effects/danmaku_break.tscn")
 const BULLET_BASE_AREA_3D = preload("res://assets/danmaku/bullet_base_area_3d.tscn")
-
 
 
 func _physics_process(delta: float) -> void:
@@ -214,7 +216,7 @@ func _in_firing(delta: float) -> void:
 			emitter_mesh_display.debug_display() # debug显示
 		match exceeding_the_cap_mode: # 发射弹幕
 			CapMode.STOP_LAUNCHING:
-				if bullet_ware.get_child_count() < bullet_max_node: # bullets.size()
+				if bullet_ware.get_child_count() < max_bullet: # bullets.size()
 					_fire_bullet()
 			CapMode.DELETE_OLDEST:
 				_fire_bullet()

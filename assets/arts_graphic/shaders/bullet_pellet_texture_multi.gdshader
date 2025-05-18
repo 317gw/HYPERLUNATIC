@@ -34,7 +34,7 @@ void vertex() {
 
 void fragment() {
 	vec2 base_uv = UV;
-	
+
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
 	ALBEDO = mix(color_lucency.rgb, COLOR.rgb, albedo_tex.g);
 	ALPHA = mix(color_lucency.a, COLOR.a, albedo_tex.g) * albedo_tex.a;

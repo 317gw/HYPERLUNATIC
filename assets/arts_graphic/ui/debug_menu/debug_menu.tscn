@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cggqb75a8w8r"]
+[gd_scene load_steps=8 format=3 uid="uid://cggqb75a8w8r"]
 
-[ext_resource type="Script" uid="uid://c4055nctk6xmr" path="res://addons/debug_menu/debug_menu.gd" id="1_p440y"]
+[ext_resource type="Script" uid="uid://c4055nctk6xmr" path="res://assets/arts_graphic/ui/debug_menu/debug_menu.gd" id="1_p440y"]
 [ext_resource type="Theme" uid="uid://cjb2bffjb0s4m" path="res://assets/arts_graphic/themes/debug_menu.tres" id="2_vaxdg"]
-[ext_resource type="Script" uid="uid://c1yeinae8irt7" path="res://assets/global/scripts/mobility_detection.gd" id="3_g23da"]
+[ext_resource type="Script" uid="uid://c1yeinae8irt7" path="res://assets/arts_graphic/ui/debug_menu/mobility_detection.gd" id="3_g23da"]
 [ext_resource type="Script" uid="uid://2y1d8bca5qh0" path="res://assets/arts_graphic/ui/player_ui/DisplayInput.gd" id="4_vffq7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki0n8"]
 bg_color = Color(0, 0, 0, 0.25098)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cvuxk"]
+
+[sub_resource type="Theme" id="Theme_xh1k8"]
+HSeparator/constants/separation = 5
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_cvuxk")
 
 [node name="DebugMenu" type="CanvasLayer" node_paths=PackedStringArray("fps", "frame_time", "frame_number", "frame_history_total_avg", "frame_history_total_min", "frame_history_total_max", "frame_history_total_last", "frame_history_cpu_avg", "frame_history_cpu_min", "frame_history_cpu_max", "frame_history_cpu_last", "frame_history_gpu_avg", "frame_history_gpu_min", "frame_history_gpu_max", "frame_history_gpu_last", "fps_graph", "total_graph", "cpu_graph", "gpu_graph", "information", "settings")]
 layer = 64
@@ -51,8 +57,9 @@ anchors_preset = -1
 anchor_left = 0.650588
 anchor_right = 1.0
 anchor_bottom = 0.790833
-offset_left = 264.859
-offset_bottom = -278.0
+offset_left = -56.1759
+offset_right = -10.0
+offset_bottom = -156.0
 grow_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 0
@@ -361,8 +368,9 @@ horizontal_alignment = 2
 
 [node name="MobilityDetection" type="VBoxContainer" parent="DebugMenuControl"]
 layout_mode = 1
-offset_right = 458.0
-offset_bottom = 232.0
+offset_left = 10.0
+offset_right = 501.0
+offset_bottom = 488.0
 mouse_filter = 2
 theme_override_constants/separation = 0
 script = ExtResource("3_g23da")
@@ -406,6 +414,10 @@ size_flags_vertical = 0
 theme = ExtResource("2_vaxdg")
 text = "Acceleration↓"
 
+[node name="HSeparator" type="HSeparator" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+theme = SubResource("Theme_xh1k8")
+
 [node name="GlobalPosition" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -427,6 +439,74 @@ size_flags_vertical = 1
 theme = ExtResource("2_vaxdg")
 text = "JumpingHeight: "
 
+[node name="HSeparator2" type="HSeparator" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+theme = SubResource("Theme_xh1k8")
+
+[node name="FloorFriction" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "FloorFriction: "
+
+[node name="MovementDecelerate" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "MovementDecelerate: "
+
+[node name="AirDamp" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "AirDamp: "
+
+[node name="WaterDecelerate" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "WaterDecelerate: "
+
+[node name="HSeparator3" type="HSeparator" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+theme = SubResource("Theme_xh1k8")
+
+[node name="MovementState" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "MovementState: "
+
+[node name="CameraState" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "CameraState: "
+
+[node name="Weapon" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "Weapon: "
+
+[node name="FloorAngle" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("2_vaxdg")
+text = "FloorAngle: "
+
+[node name="HSeparator4" type="HSeparator" parent="DebugMenuControl/MobilityDetection/Graphs"]
+layout_mode = 2
+theme = SubResource("Theme_xh1k8")
+
 [node name="DanmakuCount" type="Label" parent="DebugMenuControl/MobilityDetection/Graphs"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -445,9 +525,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
+theme = ExtResource("2_vaxdg")
 theme_override_font_sizes/normal_font_size = 20
 text = "这是输入记录
-"
+0123456字芜湖AaBbCcXYZxyz"
 scroll_following = true
 threaded = true
 script = ExtResource("4_vffq7")

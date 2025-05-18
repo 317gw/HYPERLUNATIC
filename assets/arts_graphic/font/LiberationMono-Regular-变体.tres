@@ -1,0 +1,13 @@
+[gd_resource type="FontVariation" load_steps=3 format=3 uid="uid://ch7c66fibecsi"]
+
+[ext_resource type="FontFile" uid="uid://6btq6lag7slv" path="res://assets/arts_graphic/font/liberation-fonts-ttf-2.00.1/LiberationMono-Regular.ttf" id="1_ltg10"]
+[ext_resource type="FontVariation" uid="uid://dim0kyx45dh48" path="res://assets/arts_graphic/font/smiley-sans-v2.0.1/SmileySans-Oblique-变体.tres" id="2_pbuq0"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("2_pbuq0")])
+base_font = ExtResource("1_ltg10")
+variation_embolden = 0.4
+variation_transform = Transform2D(1, 0, 0, 1.1, 0, 0)
+opentype_features = {
+0: 1
+}

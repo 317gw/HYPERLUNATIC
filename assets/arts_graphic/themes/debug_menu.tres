@@ -1,5 +1,7 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://cjb2bffjb0s4m"]
 
+[ext_resource type="FontVariation" uid="uid://ch7c66fibecsi" path="res://assets/arts_graphic/font/LiberationMono-Regular-变体.tres" id="1_texaq"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuyeg"]
 bg_color = Color(0.6, 0.6, 0.6, 0.5)
 border_width_left = 1
@@ -8,16 +10,14 @@ border_width_right = 1
 border_width_bottom = 1
 border_blend = true
 
-[sub_resource type="SystemFont" id="SystemFont_h7gg0"]
-generate_mipmaps = true
-force_autohinter = true
-subpixel_positioning = 0
-msdf_size = 96
-
 [resource]
-default_font = SubResource("SystemFont_h7gg0")
-Label/colors/font_shadow_color = Color(0, 0, 0, 1)
-Label/constants/line_spacing = -2
-Label/constants/paragraph_spacing = -2
+default_font = ExtResource("1_texaq")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.5)
+Label/constants/line_spacing = 0
+Label/constants/paragraph_spacing = -1
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_texaq")
 Label/styles/normal = SubResource("StyleBoxFlat_fuyeg")

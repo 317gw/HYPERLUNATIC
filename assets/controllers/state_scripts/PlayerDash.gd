@@ -68,12 +68,12 @@ func Physics_Update(_delta: float) -> void:
 			dashing_on_floor()
 		Dash_Type.DASH3D:
 			dashing_on_air()
-	
+
 	dash_on_wall(_delta)
 	dash_velocity_clamp()
 	#reset_dash_number()
 
-	PLAYER.apply_velocity(true, false)
+	PLAYER.apply_velocity(PLAYER.ApplyVelocityMode.MOVE_AND_SLIDE, false)
 
 	if dash_timer.time_left == 0:
 		dash_out()

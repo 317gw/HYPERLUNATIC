@@ -21,9 +21,9 @@ func Exit():
 func Physics_Update(_delta: float) -> void:
 	PLAYER.stop_movement(_delta)
 	PLAYER.movement_air(_delta)
-	PLAYER.swimming(_delta)
 	PLAYER.apply_gravity(-PLAYER.gravity_fall, _delta)
 	PLAYER.air_speed_clamp(_delta)
+	PLAYER.swimming(_delta)
 
 	PLAYER.apply_velocity()
 	#snap_stairs.snap_down_to_stairs_check(true)

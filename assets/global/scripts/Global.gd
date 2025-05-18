@@ -7,6 +7,7 @@ signal sky_limit_ready
 signal danmaku_manager_ready
 
 const explod_max_speed: float = 100.0 ## m
+const default_gravity: float = 9.8
 const Hl = preload("res://assets/global/scripts/HL.gd")
 
 
@@ -19,11 +20,12 @@ const FLUID_MECHANICS_MANAGER = preload("res://assets/systems/water_physics/flui
 const WAR_FOG = preload("res://assets/systems/marching_cubes/war_fog.tscn")
 const CHUNK_MANAGER = preload("res://assets/systems/chunk/chunk_manager.tscn")
 
-const DEBUG_MENU = preload("res://addons/debug_menu/debug_menu.tscn")
+const DEBUG_MENU = preload("res://assets/arts_graphic/ui/debug_menu/debug_menu.tscn")
 const PLAYER_FP_UI = preload("res://assets/arts_graphic/ui/player_ui/PlayerFP_UI.tscn")
 const MAIN_MENUS = preload("res://assets/arts_graphic/ui/menu/main_menus.tscn")
 
 const DANMAKU_MANAGER = preload("res://assets/danmaku/danmaku_manager.tscn")
+
 
 ###
 var GLOBAL_SCENES_LIST_START = "GLOBAL_SCENES_LIST_START"
@@ -220,6 +222,14 @@ static func get_dicts_between_start_end(dict_array: Array, start: String = "STAR
 			result.append(dict)
 
 	return result
+
+
+## 算液体阻力   空阻   0 -> 1
+static func get_water_friction(_density: float, _viscosity: float) -> float:
+		var _d: float = clampf(remap(_density, 1000, 10000, 0.1, 0.5) , 0.0, 0.5)
+		var _v: float = clampf(remap(_viscosity, 0, 20000, 0.0, 0.5) , 0.0, 0.5)
+		return snappedf(_d + _v, 0.001)
+
 
 
 # 获取指定文件夹下特定类型的随机资源

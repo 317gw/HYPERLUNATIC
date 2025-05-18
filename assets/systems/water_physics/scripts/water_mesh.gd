@@ -1,9 +1,15 @@
 extends MeshInstance3D
 
 
-@export var density: float = 1000.0 # 水的密度，单位：kg/m³
-@export var viscosity: float = 0.001 # kg/(m*s)
+@export var density: float = 1000.0 ## 水的密度，单位：kg/m³  1~10000
+@export var viscosity: float = 0.001 ## 黏性 kg/(m*s)  0.001~20000
+var friction: float = 1.0 - Global.get_water_friction(density, viscosity):
+	get():
+		friction = 1.0 - Global.get_water_friction(density, viscosity)
+		return friction
+
 """
+viscosity
 20.2°c
 水	0.001
 空气	0.0000178

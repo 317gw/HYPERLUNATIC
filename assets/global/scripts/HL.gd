@@ -39,7 +39,7 @@ const Propertie = preload("res://assets/arts_graphic/ui/menu/propertie.gd")
 const PlayerFP_UI = preload("res://assets/arts_graphic/ui/player_ui/player_fp_ui.gd")
 const FrontSight = preload("res://assets/arts_graphic/ui/player_ui/front_sight.gd")
 const ToolUi = preload("res://assets/arts_graphic/ui/player_ui/tool_ui.gd")
-const DebugMenu = preload("res://addons/debug_menu/debug_menu.gd")
+const DebugMenu = preload("res://assets/arts_graphic/ui/debug_menu/debug_menu.gd")
 
 # 弹幕
 const DanmakuManager = preload("res://assets/danmaku/scripts/danmaku_manager.gd")
@@ -99,7 +99,7 @@ static func _true(value) -> bool: return true
 static func _nop(_arg = null): pass
 
 
-# 用于代替lerp在 _process 等中每帧调用平滑数据  4.6秒到达99%  x乘delta缩短x倍时间 __By 317GW 2024 8 31 半夜
+## 用于代替lerp在 _process 等中每帧调用平滑数据  4.6秒到达99%  x乘delta缩短x倍时间 __By 317GW 2024 8 31 半夜
 static func exponential_decay(from: float, to: float, delta: float) -> float:
 	var x0 = log(abs(to - from) )
 	return to - exp(x0 - delta) * sign(to - from)
@@ -335,27 +335,40 @@ static func format_array_recursive(array: Array, indent_level := 0) -> String:
 	return result
 
 
+static func string_num_pad_decimals(number: float, decimals: int = 1, sign: String = "") -> String:
+	var _num: String = String.num(number, decimals).pad_decimals(decimals)
+	if sign == "":
+		return _num
+	else:
+		if int(number) >= 0 or is_zero_approx(number):
+			return sign + _num.replacen("-", "")
+		else:
+			return _num
+
+	#return "+" + _num if (sign and (int(number) >= 0 or is_zero_approx(number))) else _num
+
+
 static func format_vector(vector, decimals: int = 3) -> Dictionary:
 	if vector is Vector2:
 		var vector2: Vector2 = vector
 		return {
-			"x": String.num(vector2.x, decimals).pad_decimals(decimals),
-			"y": String.num(vector2.y, decimals).pad_decimals(decimals)
+			"x": string_num_pad_decimals(vector2.x, decimals),
+			"y": string_num_pad_decimals(vector2.y, decimals)
 		}
 	elif vector is Vector3:
 		var vector3: Vector3 = vector
 		return {
-			"x": String.num(vector3.x, decimals).pad_decimals(decimals),
-			"y": String.num(vector3.y, decimals).pad_decimals(decimals),
-			"z": String.num(vector3.z, decimals).pad_decimals(decimals)
+			"x": string_num_pad_decimals(vector3.x, decimals),
+			"y": string_num_pad_decimals(vector3.y, decimals),
+			"z": string_num_pad_decimals(vector3.z, decimals)
 		}
 	elif vector is Vector4:
 		var vector4: Vector4 = vector
 		return {
-			"x": String.num(vector4.x, decimals).pad_decimals(decimals),
-			"y": String.num(vector4.y, decimals).pad_decimals(decimals),
-			"z": String.num(vector4.z, decimals).pad_decimals(decimals),
-			"w": String.num(vector4.w, decimals).pad_decimals(decimals)
+			"x": string_num_pad_decimals(vector4.x, decimals),
+			"y": string_num_pad_decimals(vector4.y, decimals),
+			"z": string_num_pad_decimals(vector4.z, decimals),
+			"w": string_num_pad_decimals(vector4.w, decimals)
 		}
 	else:
 		return {}
@@ -379,3 +392,51 @@ static func format_vector_extended(vector, decimals: int = 3) -> Dictionary:
 		result["tuple"] = "(%s, %s, %s, %s)" % [result["x"], result["y"], result["z"], result["w"]]
 
 	return result
+
+
+# 最接近给定整数的2的次方数，大的那个
+static func next_power_of_two(n: int) -> int:
+	if n <= 0:
+		return 1
+	var power := 1
+	while power < n:
+		power <<= 1
+	return power
+
+
+# 最接近给定整数的2的次方数
+static func nearest_power_of_two(n: int) -> int:
+	var power := next_power_of_two(n)
+	# 检查哪个更接近
+	var lower := power >> 1
+	if (n - lower) < (power - n):
+		return lower
+	return power
+
+
+# 最近步长函数   没大用  用 snapped() 即可
+static func round_to_step(value: float, step: float) -> float:
+	if step <= 0:
+		push_error("步长必须大于0")
+		return value
+
+	var rounded = round(value / step) * step
+	# 处理浮点数精度问题，保留小数点后足够位数
+	return snapped(rounded, step)
+
+
+# 将两个向量的点积转换为它们的夹角（弧度）
+static func dot_product_to_angle(dot_product: float, magnitude_a: float = 1.0, magnitude_b: float = 1.0) -> float:
+	if magnitude_a == 0.0 or magnitude_b == 0.0:
+		return 0.0
+	var cosine = dot_product / (magnitude_a * magnitude_b)
+	cosine = clamp(cosine, -1.0, 1.0)  # 避免数值误差导致反余弦错误
+	return acos(cosine)
+
+# 将夹角（弧度）转换为两个向量的点积
+static func angle_to_dot_product(angle_rad: float, magnitude_a: float = 1.0, magnitude_b: float = 1.0) -> float:
+	return magnitude_a * magnitude_b * cos(angle_rad)
+
+
+static func power(base: float, exponent: float) -> float:
+	return pow(abs(base), exponent) * sign(base)

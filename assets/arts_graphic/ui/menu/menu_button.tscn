@@ -9,7 +9,8 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="Theme" id="Theme_rai0o"]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_focus_color = Color(0.9, 0.9, 0.9, 1)
-Button/constants/outline_size = 6
+Button/colors/font_outline_color = Color(0, 0, 0, 0.5)
+Button/constants/outline_size = 10
 Button/font_sizes/font_size = 36
 Button/fonts/font = null
 Button/styles/disabled = SubResource("StyleBoxFlat_m14cg")

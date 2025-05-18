@@ -1,3 +1,4 @@
+class_name WeaponStateMachine
 extends Node3D
 
 @export var PLAYER: HL.Player
@@ -26,6 +27,7 @@ func _ready() -> void:
 		initial_weapon.Enter()
 		current_weapon = initial_weapon
 		initial_weapon._switch_visible(true)
+		_current = initial_weapon.name
 
 
 func _unhandled_input(event: InputEvent) -> void:

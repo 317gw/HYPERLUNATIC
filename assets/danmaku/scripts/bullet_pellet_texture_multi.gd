@@ -1,6 +1,10 @@
 
 extends Bullet
 
+#@onready var area_3d: Area3D = $Area3D
+#func _ready() -> void:
+	#area_3d.queue_free()
+
 
 func set_radius(_radius: float) -> void:
 	var ss: SphereShape3D = $Area3D/CollisionShape3D.shape

@@ -32,8 +32,7 @@ process_mode = 1
 script = SubResource("GDScript_t3vw4")
 
 [node name="Plat" type="AnimatableBody3D" parent="."]
-collision_layer = 2
-collision_mask = 5
+collision_mask = 30
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Plat"]
 mesh = SubResource("BoxMesh_yv353")

@@ -18,7 +18,7 @@ const EFFECTS = preload("res://assets/global/Effects.tscn")
 const POST_PROCESSING = preload("res://assets/global/post-processing.tscn")
 const FLUID_MECHANICS_MANAGER = preload("res://assets/systems/water_physics/fluid_mechanics_manager.tscn")
 const WAR_FOG = preload("res://assets/systems/marching_cubes/war_fog.tscn")
-const CHUNK_MANAGER = preload("res://assets/systems/chunk/chunk_manager.tscn")
+const CHUNK_MANAGER = preload("res://assets/systems/spatial_partition/chunk_manager.tscn")
 
 const DEBUG_MENU = preload("res://assets/arts_graphic/ui/debug_menu/debug_menu.tscn")
 const PLAYER_FP_UI = preload("res://assets/arts_graphic/ui/player_ui/PlayerFP_UI.tscn")
@@ -231,6 +231,36 @@ static func get_water_friction(_density: float, _viscosity: float) -> float:
 		return snappedf(_d + _v, 0.001)
 
 
+static func get_closest_aspect_ratio(size: Vector2) -> String:
+	var aspect_ratio: float = size.x / size.y
+
+	# 标准比例及其对应的宽高比值
+	var standard_ratios: Dictionary = {
+		"4:3": 4.0/3.0,
+		"5:4": 5.0/4.0,
+		"16:9": 16.0/9.0,
+		"16:10": 16.0/10.0,
+		"21:9": 21.0/9.0,
+		"32:9": 32.0/9.0
+	}
+
+	var closest_ratio := "16:9"  # 默认值
+	var min_diff := INF
+
+	# 找出最接近的标准比例
+	for ratio: String in standard_ratios:
+		var diff: float = abs(aspect_ratio - standard_ratios[ratio])
+		if diff < min_diff:
+			min_diff = diff
+			closest_ratio = ratio
+
+	return closest_ratio
+
+
+"""
+下边是弃用的 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+"""
+
 
 # 获取指定文件夹下特定类型的随机资源
 # folder_path: 文件夹路径（如"res://assets/sounds"）
@@ -282,7 +312,7 @@ func get_random_resource(folder_path: String, allowed_types: Array = []) -> Reso
 
 
 # 曲线救国创建碰撞 # 废了
-static func create_CollisionShape3D_from_mesh(collision_father: Node, source_mesh: Mesh, settings: MeshConvexDecompositionSettings = null) -> void:
+static func create_collision_shape3d_from_mesh(collision_father: Node, source_mesh: Mesh, settings: MeshConvexDecompositionSettings = null) -> void:
 	var mesh_instance_3d: MeshInstance3D = MeshInstance3D.new()
 	collision_father.add_child(mesh_instance_3d)
 	mesh_instance_3d.set_mesh(source_mesh)
@@ -290,6 +320,7 @@ static func create_CollisionShape3D_from_mesh(collision_father: Node, source_mes
 	var new_collision_shape_3d: CollisionShape3D = find_child_node_type(mesh_instance_3d, "CollisionShape3D").duplicate()
 	collision_father.add_child(new_collision_shape_3d, true)
 	mesh_instance_3d.queue_free()
+
 
 
 # 弹性碰撞的那个

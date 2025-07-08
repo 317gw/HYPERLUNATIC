@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://fwgx1tido4ym"]
+
+[ext_resource type="Script" uid="uid://b2l5msb03tt24" path="res://assets/models/mesh_3d_batch_creator.gd" id="1_yhdm5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wu5hb"]
+resource_local_to_scene = true
+
+[node name="Mesh3DBatchCreator" type="Node" node_paths=PackedStringArray("mesh_instance_3d_group")]
+script = ExtResource("1_yhdm5")
+mesh_instance_3d_group = NodePath(".")
+save_path = "res://assets/models/"
+cover_duplicate_items = true
+exhibition_scene_name = "exhibition_meshs"
+collision_mask = 30
+default_standard_material_3d = SubResource("StandardMaterial3D_wu5hb")
+
+[node name="StaticBodyTemp" type="Node" parent="."]
+
+[node name="ExhibitionTemp" type="Node" parent="."]

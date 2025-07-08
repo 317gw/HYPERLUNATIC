@@ -76,7 +76,7 @@ var water_viscosity: float
 # 滑翔 surf
 @export_range(0, 180, 0.01, "radians_as_degrees") var surf_min_angle: float = deg_to_rad(44.5)
 @export var surf_speed_max: float = 30.0 ## surf移动限制速度
-@export var surf_acc_time: float = 1.8 ## surf加速
+@export var surf_acc_time: float = 1.9 ## surf加速
 var surf_acc: float
 var is_surfing: bool = false
 

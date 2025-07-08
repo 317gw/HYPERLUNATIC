@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://de8gm47mcn3al"]
+
+[ext_resource type="Script" uid="uid://c0pt8ugathtsc" path="res://assets/arts_graphic/ui/menu/Properties/propertie_spin_box.gd" id="1_46mbe"]
+[ext_resource type="Texture2D" uid="uid://cg6kjc0fk5h1u" path="res://assets/arts_graphic/icon/godot icons/UndoRedo.svg" id="1_pbam1"]
+
+[node name="PropertieSpinBox" type="HBoxContainer"]
+custom_minimum_size = Vector2(300, 30)
+offset_right = 600.0
+offset_bottom = 30.0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+script = ExtResource("1_46mbe")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_font_sizes/font_size = 26
+text = "Name"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="SpinBox" type="SpinBox" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+metadata/_edit_use_anchors_ = true
+
+[node name="NumHintControl" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="ResetButtonControl" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="ResetButton" type="TextureButton" parent="ResetButtonControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.08
+texture_normal = ExtResource("1_pbam1")
+texture_pressed = ExtResource("1_pbam1")
+texture_hover = ExtResource("1_pbam1")
+ignore_texture_size = true
+stretch_mode = 4
+
+[connection signal="value_changed" from="Control/SpinBox" to="." method="_on_range_value_changed"]
+[connection signal="toggled" from="ResetButtonControl/ResetButton" to="." method="_on_reset_button_toggled"]

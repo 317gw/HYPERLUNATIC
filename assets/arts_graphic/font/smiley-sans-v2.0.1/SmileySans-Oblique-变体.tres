@@ -6,4 +6,3 @@
 base_font = ExtResource("1_c8ale")
 variation_transform = Transform2D(1.17, -0.125, 0, 0.9, 0, 0)
 spacing_glyph = 3
-baseline_offset = -0.03

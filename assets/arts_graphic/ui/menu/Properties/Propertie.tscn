@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=3 uid="uid://crynbkg8m246g"]
+
+[ext_resource type="Script" uid="uid://dn7s4gou84l3w" path="res://assets/arts_graphic/ui/menu/Properties/menu_propertie.gd" id="1_lewet"]
+[ext_resource type="Texture2D" uid="uid://cg6kjc0fk5h1u" path="res://assets/arts_graphic/icon/godot icons/UndoRedo.svg" id="2_h5i41"]
+
+[node name="Propertie" type="HBoxContainer"]
+custom_minimum_size = Vector2(300, 30)
+offset_right = 600.0
+offset_bottom = 30.0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+script = ExtResource("1_lewet")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_font_sizes/font_size = 26
+text = "Name"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="HSlider" type="HSlider" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+editable = false
+
+[node name="SpinBox" type="SpinBox" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+editable = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBox" type="CheckBox" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionButton" type="OptionButton" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+disabled = true
+item_count = 1
+popup/item_0/id = 0
+
+[node name="NumHintControl" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="NumHint" type="Label" parent="NumHintControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+text = "0.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NumHintLineEdit" type="LineEdit" parent="NumHintControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0.73"
+alignment = 1
+context_menu_enabled = false
+emoji_menu_enabled = false
+metadata/_edit_use_anchors_ = true
+
+[node name="ResetButtonControl" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="ResetButton" type="TextureButton" parent="ResetButtonControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.08
+disabled = true
+texture_normal = ExtResource("2_h5i41")
+texture_pressed = ExtResource("2_h5i41")
+texture_hover = ExtResource("2_h5i41")
+ignore_texture_size = true
+stretch_mode = 4
+
+[connection signal="value_changed" from="Control/HSlider" to="." method="_on_range_value_changed"]
+[connection signal="value_changed" from="Control/SpinBox" to="." method="_on_range_value_changed"]
+[connection signal="toggled" from="Control/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="item_selected" from="Control/OptionButton" to="." method="_on_option_button_selected"]
+[connection signal="editing_toggled" from="NumHintControl/NumHintLineEdit" to="." method="_on_num_hint_line_edit_editing_toggled"]
+[connection signal="text_changed" from="NumHintControl/NumHintLineEdit" to="." method="_on_num_hint_line_edit_text_changed"]
+[connection signal="text_submitted" from="NumHintControl/NumHintLineEdit" to="." method="_on_num_hint_line_edit_text_submitted"]
+[connection signal="toggled" from="ResetButtonControl/ResetButton" to="." method="_on_reset_button_toggled"]

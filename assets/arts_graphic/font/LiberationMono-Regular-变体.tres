@@ -11,3 +11,4 @@ variation_transform = Transform2D(1, 0, 0, 1.1, 0, 0)
 opentype_features = {
 0: 1
 }
+baseline_offset = 0.1

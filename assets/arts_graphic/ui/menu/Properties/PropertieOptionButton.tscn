@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://c35yjkk5vy3fi"]
+
+[ext_resource type="Texture2D" uid="uid://cg6kjc0fk5h1u" path="res://assets/arts_graphic/icon/godot icons/UndoRedo.svg" id="1_2fpxk"]
+[ext_resource type="Script" uid="uid://2g6ruplkkl1j" path="res://assets/arts_graphic/ui/menu/Properties/propertie_option_button.gd" id="1_agwl2"]
+
+[node name="PropertieOptionButton" type="HBoxContainer"]
+custom_minimum_size = Vector2(300, 30)
+offset_right = 600.0
+offset_bottom = 30.0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+script = ExtResource("1_agwl2")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_font_sizes/font_size = 26
+text = "Name"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="OptionButton" type="OptionButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+item_count = 1
+popup/item_0/id = 0
+
+[node name="NumHintControl" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="ResetButtonControl" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="ResetButton" type="TextureButton" parent="ResetButtonControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.08
+disabled = true
+texture_normal = ExtResource("1_2fpxk")
+texture_pressed = ExtResource("1_2fpxk")
+texture_hover = ExtResource("1_2fpxk")
+ignore_texture_size = true
+stretch_mode = 4
+
+[connection signal="item_selected" from="Control/OptionButton" to="." method="_on_option_button_selected"]
+[connection signal="toggled" from="ResetButtonControl/ResetButton" to="." method="_on_reset_button_toggled"]

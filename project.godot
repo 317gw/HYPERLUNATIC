@@ -44,9 +44,9 @@ goat_voice="*res://addons/goat/globals/goat_voice.gd"
 goat_settings="*res://addons/goat/globals/goat_settings.gd"
 Console="*res://addons/console/console.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-CoreSystem="*res://addons/godot_core_system/source/core_system.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 IndieBlueprintObjectPoolManager="*res://addons/ninetailsrabbit.indie_blueprint_pool/src/object_pool_manager.gd"
+CoreSystem="*res://addons/godot_core_system/source/core_system.gd"
 
 [debug]
 
@@ -55,7 +55,7 @@ settings/physics_interpolation/enable_warnings=false
 [display]
 
 window/size/viewport_width=2000
-window/size/viewport_height=1200
+window/size/viewport_height=960
 window/vsync/vsync_mode=0
 
 [dotnet]
@@ -101,6 +101,10 @@ Sign="告示牌一类"
 Probe="探针"
 BeStandBody=""
 danmaku="弹幕"
+
+[godot_core_system]
+
+config_system/auto_save=false
 
 [gui]
 

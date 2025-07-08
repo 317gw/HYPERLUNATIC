@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpi2fs8v3e21b"]
+
+[ext_resource type="Script" uid="uid://cdihwo6dj6hmo" path="res://scenes/system_scenes/config_scene/config_scene.gd" id="1_dkouq"]
+[ext_resource type="Script" uid="uid://c1qbunb6smq0v" path="res://scripts/control_custom/tab_container_custom.gd" id="2_s14ik"]
+[ext_resource type="Texture2D" uid="uid://dfxh1rqtgmaix" path="res://themes/textures/collect_star.svg" id="3_qpcxc"]
+[ext_resource type="Texture2D" uid="uid://dp7useiufp0wb" path="res://themes/textures/button_tick.svg" id="4_h8rua"]
+[ext_resource type="Script" uid="uid://ck7atbkftoo2h" path="res://scenes/system_scenes/config_scene/config_tab/configs/config_tab_audio.gd" id="5_a15vw"]
+[ext_resource type="Theme" uid="uid://c3breg3i5qun" path="res://scenes/system_scenes/config_scene/config_tab/config_tab.tres" id="5_komch"]
+[ext_resource type="Script" uid="uid://c2acd0tn3yccf" path="res://scenes/system_scenes/config_scene/config_tab/configs/config_tab_video.gd" id="6_h8rua"]
+
+[node name="ConfigScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_komch")
+script = ExtResource("1_dkouq")
+metadata/_edit_lock_ = true
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="Margin/Container"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TabContainer" type="TabContainer" parent="Margin/Container" node_paths=PackedStringArray("tab_bar")]
+custom_minimum_size = Vector2(936, 912)
+layout_mode = 2
+size_flags_vertical = 10
+current_tab = 0
+tabs_visible = false
+script = ExtResource("2_s14ik")
+tab_bar = NodePath("../TabBar")
+tab_name = Array[String](["音频设置", "画面设置"])
+tab_icon = Array[Texture2D]([ExtResource("3_qpcxc"), ExtResource("4_h8rua")])
+
+[node name="Audio" type="Control" parent="Margin/Container/TabContainer"]
+layout_mode = 2
+script = ExtResource("5_a15vw")
+metadata/_tab_index = 0
+
+[node name="Video" type="Control" parent="Margin/Container/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("6_h8rua")
+metadata/_tab_index = 1

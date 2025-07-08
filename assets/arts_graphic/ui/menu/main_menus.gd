@@ -239,6 +239,8 @@ func open_menu():
 	Global.set_mouse_mode()
 	if Global.player_fp_ui:
 		Global.player_fp_ui.front_sight.set_front_sight_visible()
+	option_window.reset_option_window()
+
 
 func close_menu():
 	get_tree().paused = false
@@ -248,6 +250,7 @@ func close_menu():
 	Global.set_mouse_mode()
 	if Global.player_fp_ui:
 		Global.player_fp_ui.front_sight.set_front_sight_visible()
+
 
 func switch_menu() -> void:
 	if self.visible:
@@ -310,8 +313,9 @@ func _on_to_Options_button_pressed() -> void:
 	if option_window.visible:
 		option_window.visible = false
 	else:
-		option_window.position = (menu_control.get_viewport_rect().size - Vector2(option_window.size) )*0.5
+		option_window.reset_option_window()
 		option_window.visible = true
+
 
 
 func _ready_process_mode() -> Node.ProcessMode:

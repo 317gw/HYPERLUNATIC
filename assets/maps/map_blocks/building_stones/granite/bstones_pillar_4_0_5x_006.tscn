@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=4 uid="uid://dbqsl7wij1331"]
+
+[ext_resource type="Texture2D" uid="uid://ehr6x55iyed1" path="res://assets/maps/map_blocks/building_stones/granite/textures/bstones_pillar_4_0_5x_006_Bake1_PBR_Diffuse.png" id="1_e11ov"]
+[ext_resource type="Texture2D" uid="uid://dn1ym8t463cgv" path="res://assets/maps/map_blocks/building_stones/granite/textures/bstones_pillar_4_0_5x_006_Bake1_PBR_Roughness.png" id="2_awg1s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70jua"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_e11ov")
+roughness_texture = ExtResource("2_awg1s")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1iov"]
+resource_name = "花岗岩"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.640164, 0.640164, 0.640164, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w632r"]
+_surfaces = [{
+"aabb": AABB(-0.25, -0.5, -0.25, 0.5, 1, 0.5),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAAAAQABAAAAAMABQACAAEAAwACAAUABAAGAAEAAQAGAAUAAwAHAAQABgAEAAcABQAHAAMABwAFAAYA"),
+"name": "花岗岩",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//9/vgAAAD8AAIA+AACAPgAAAD///38+AACAPgAAAL///38+//9/vgAAAL8AAIA+AACAvgAAAD///3++//9/PgAAAL8AAIC+//9/PgAAAD8AAIC+AACAvgAAAL///3++")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p16rj"]
+resource_name = "立方体_078"
+_surfaces = [{
+"aabb": AABB(-0.25, -0.5, -0.25, 0.5, 1, 0.5),
+"attribute_data": PackedByteArray("AAAAsgAAAD8AAIA+AAAAPwAAgD4AAIA/AAAAsgAAgD8AAEA/AABAPwAAQD8AAIA/AACAPgAAgD8AAIA+AABAPwAAQD8AAAA/AABAPwAAQD8AAIA+AABAPwAAgD4AAAA/AAAAsgAAAAAAAIA+AAAAAAAAgD4AAAA/AAAAsgAAAD8AAIA+/v//PgEAgD4AAIA+AAAAPwIAgD7///8+AAAAPwAAQD8AAAA/AAAAPwAAAD8AAAA/AACAPgAAQD8AAIA+"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_m1iov"),
+"name": "花岗岩",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//9/vgAAAD8AAIA+AACAPgAAAD///38+AACAPgAAAL///38+//9/vgAAAL8AAIA+AACAvgAAAD///3++//9/vgAAAD8AAIA+//9/vgAAAL8AAIA+AACAvgAAAL///3++//9/PgAAAD8AAIC+AACAvgAAAD///3++AACAvgAAAL///3++//9/PgAAAL8AAIC+AACAPgAAAD///38+//9/PgAAAD8AAIC+//9/PgAAAL8AAIC+AACAPgAAAL///38+//9/PgAAAL8AAIC+AACAvgAAAL///3++//9/vgAAAL8AAIA+AACAPgAAAL///38+AACAPgAAAD///38+//9/vgAAAD8AAIA+AACAvgAAAD///3++//9/PgAAAD8AAIC+/3//f////7//f/9/////v/9//3////+//3//f////78AAP9//3///wAA/3//f///AAD/f/9///8AAP9//3///wAA////f///AAD///9///8AAP///3///wAA////f///////f/////////9//////////3//////////f///////fwAA/3//v/9/AAD/f/+//38AAP9//7//fwAA/3//v/9///////+//3///////7//f///////v/9///////+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_w632r")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tf2ri"]
+data = PackedVector3Array(-0.25, 0.5, 0.25, 0.25, 0.5, 0.25, 0.25, -0.5, 0.25, 0.25, -0.5, 0.25, -0.25, -0.5, 0.25, -0.25, 0.5, 0.25, -0.25, 0.5, -0.25, -0.25, 0.5, 0.25, -0.25, -0.5, 0.25, -0.25, -0.5, 0.25, -0.25, -0.5, -0.25, -0.25, 0.5, -0.25, 0.25, 0.5, -0.25, -0.25, 0.5, -0.25, -0.25, -0.5, -0.25, -0.25, -0.5, -0.25, 0.25, -0.5, -0.25, 0.25, 0.5, -0.25, 0.25, 0.5, 0.25, 0.25, 0.5, -0.25, 0.25, -0.5, -0.25, 0.25, -0.5, -0.25, 0.25, -0.5, 0.25, 0.25, 0.5, 0.25, 0.25, -0.5, -0.25, -0.25, -0.5, -0.25, -0.25, -0.5, 0.25, -0.25, -0.5, 0.25, 0.25, -0.5, 0.25, 0.25, -0.5, -0.25, 0.25, 0.5, 0.25, -0.25, 0.5, 0.25, -0.25, 0.5, -0.25, -0.25, 0.5, -0.25, 0.25, 0.5, -0.25, 0.25, 0.5, 0.25)
+
+[node name="bstones_pillar_4_0_5x_006" type="StaticBody3D"]
+collision_mask = 30
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_70jua")
+mesh = SubResource("ArrayMesh_p16rj")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_tf2ri")

@@ -87,7 +87,7 @@ func _input(event: InputEvent) -> void:
 		self.visible = !self.visible
 		var debug_menu_control = Global.debug_menu.debug_menu_control
 		if self.visible:
-			self.mouse_filter = Control.MOUSE_FILTER_STOP
+			#self.mouse_filter = Control.MOUSE_FILTER_STOP
 			var sizey: float = h_box_container.size.y
 			debug_menu_control.size.y -= sizey
 			debug_menu_control.position.y = sizey

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://djbvwfd5m25rh"]
+[gd_scene load_steps=26 format=3 uid="uid://djbvwfd5m25rh"]
 
 [ext_resource type="Shader" uid="uid://cf1ljx74b0dtk" path="res://assets/arts_graphic/shaders/waters/CameraWaterOverlay.gdshader" id="1_8p2xh"]
 [ext_resource type="Script" uid="uid://c12lsxls2v0ex" path="res://assets/global/scripts/post_processing.gd" id="1_h61ip"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://ca5pn0w2s5u1h" path="res://assets/arts_graphic/shaders/other_author/High Quality Post Process Outline.gdshader" id="8_xuisv"]
 [ext_resource type="Shader" uid="uid://dg8mrqtfs0ig8" path="res://assets/arts_graphic/shaders/shadow_color_dither.gdshader" id="9_blbsa"]
 [ext_resource type="Texture2D" uid="uid://c5py6kcchxitl" path="res://assets/arts_graphic/textures/palettes/steam-lords.png" id="10_d84be"]
+[ext_resource type="Shader" uid="uid://c7cvtcn2l62p1" path="res://assets/arts_graphic/shaders/Adjustment.gdshader" id="11_ncr2o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_blbsa"]
 shader = ExtResource("2_s2f4l")
@@ -77,7 +78,18 @@ shader_parameter/dither_palette = ExtResource("10_d84be")
 shader_parameter/screen_lod = 1.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_5ohn2"]
+flip_faces = true
 size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ohn2"]
+render_priority = -2
+shader = ExtResource("11_ncr2o")
+shader_parameter/replace = Color(0.96, 0, 0.464, 1)
+shader_parameter/target = Color(1, 0, 0, 1)
+shader_parameter/hue_weight = 1.0
+shader_parameter/sat_weight = 0.2
+shader_parameter/val_weight = 0.01
+shader_parameter/replace_power = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d84be"]
 cull_mode = 2
@@ -157,12 +169,21 @@ top_level = true
 
 [node name="PostProcessOutline" type="MeshInstance3D" parent="SpatialMeshs"]
 material_override = SubResource("ShaderMaterial_ncr2o")
+cast_shadow = 0
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_6hjmq")
 
 [node name="ShadowColorDither" type="MeshInstance3D" parent="SpatialMeshs"]
 visible = false
 material_override = SubResource("ShaderMaterial_6hjmq")
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_5ohn2")
+
+[node name="Adjustment" type="MeshInstance3D" parent="SpatialMeshs"]
+visible = false
+material_override = SubResource("ShaderMaterial_5ohn2")
+cast_shadow = 0
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_5ohn2")
 

@@ -1,0 +1,528 @@
+[gd_scene load_steps=132 format=3 uid="uid://d15napaxeuxhs"]
+
+[ext_resource type="PackedScene" uid="uid://bbq7xht14qcn8" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_1.tscn" id="1_pv126"]
+[ext_resource type="PackedScene" uid="uid://c4c1mfo78qyew" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_2.tscn" id="2_l77ax"]
+[ext_resource type="PackedScene" uid="uid://fh03kadnasaj" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_3.tscn" id="3_jmjnj"]
+[ext_resource type="PackedScene" uid="uid://cm6g85lep3u4a" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_4.tscn" id="4_wexu7"]
+[ext_resource type="PackedScene" uid="uid://d2sqvxb61k77f" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_5.tscn" id="5_hn1sw"]
+[ext_resource type="PackedScene" uid="uid://dxdik1btl5up4" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_stairs_a_1.tscn" id="6_xbh8w"]
+[ext_resource type="PackedScene" uid="uid://ce64rp3c17e0w" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_stairs_a_2.tscn" id="7_8u7ef"]
+[ext_resource type="PackedScene" uid="uid://ckkvpou6dl32d" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_stairs_b_1.tscn" id="8_0ohvr"]
+[ext_resource type="PackedScene" uid="uid://dsrsl1au44rsk" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_stairs_b_2.tscn" id="9_5kgcn"]
+[ext_resource type="PackedScene" uid="uid://i7e30e3srxdy" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_stairs_c_1.tscn" id="10_v0uqd"]
+[ext_resource type="PackedScene" uid="uid://c3t8iipt0l2a1" path="res://assets/maps/map_blocks/building_stones/granite/bstones_0_5x_stairs_c_2.tscn" id="11_em7n8"]
+[ext_resource type="PackedScene" uid="uid://c7rlf8syj3il8" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_1.tscn" id="12_2tnd3"]
+[ext_resource type="PackedScene" uid="uid://171oi83xkr8p" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_2.tscn" id="13_hobvk"]
+[ext_resource type="PackedScene" uid="uid://dopjo75wl4u4q" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_3.tscn" id="14_og34a"]
+[ext_resource type="PackedScene" uid="uid://d34c8cytrw8wu" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_4.tscn" id="15_lkc18"]
+[ext_resource type="PackedScene" uid="uid://b0fteyhwmfxi" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_5.tscn" id="16_j5605"]
+[ext_resource type="PackedScene" uid="uid://c5d0uf7t4df46" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_stairs_a_1.tscn" id="17_7hfmy"]
+[ext_resource type="PackedScene" uid="uid://bl1kpvnci8o6y" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_stairs_a_2.tscn" id="18_kanwj"]
+[ext_resource type="PackedScene" uid="uid://mriqfgvjw6t7" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_stairs_b_1.tscn" id="19_ql3po"]
+[ext_resource type="PackedScene" uid="uid://dvnggse7koxs3" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_stairs_b_2.tscn" id="20_pxhm8"]
+[ext_resource type="PackedScene" uid="uid://cbfnvlxoyccca" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_stairs_c_1.tscn" id="21_ha43c"]
+[ext_resource type="PackedScene" uid="uid://dg4j567vbsx3l" path="res://assets/maps/map_blocks/building_stones/granite/bstones_1x_stairs_c_2.tscn" id="22_8neil"]
+[ext_resource type="PackedScene" uid="uid://uyyirp10dte6" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_4x_1_1.tscn" id="23_swyqe"]
+[ext_resource type="PackedScene" uid="uid://bqddau3i3ttli" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_4x_1_2.tscn" id="24_7axpd"]
+[ext_resource type="PackedScene" uid="uid://2eyfns78c301" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_4x_1_3.tscn" id="25_67mlx"]
+[ext_resource type="PackedScene" uid="uid://oww04ueljqva" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_1.tscn" id="26_b6w7n"]
+[ext_resource type="PackedScene" uid="uid://cgihruume5v54" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_2.tscn" id="27_xgfts"]
+[ext_resource type="PackedScene" uid="uid://6njtd4f5ax8v" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_3.tscn" id="28_5wjbq"]
+[ext_resource type="PackedScene" uid="uid://boksgx8lqopwa" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_stairs_a_1.tscn" id="29_yaoaf"]
+[ext_resource type="PackedScene" uid="uid://obahvn4cfgjx" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_stairs_a_2.tscn" id="30_lb4tt"]
+[ext_resource type="PackedScene" uid="uid://clb0dy7j3xuou" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_stairs_b_1.tscn" id="31_01ich"]
+[ext_resource type="PackedScene" uid="uid://cpwtawu0sl6uh" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_stairs_b_2.tscn" id="32_us4g7"]
+[ext_resource type="PackedScene" uid="uid://buiggad44bmay" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_stairs_c_1.tscn" id="33_noa43"]
+[ext_resource type="PackedScene" uid="uid://mku4c3kdie0s" path="res://assets/maps/map_blocks/building_stones/granite/bstones_2x_stairs_c_2.tscn" id="34_x520h"]
+[ext_resource type="PackedScene" uid="uid://c00hwqtiua7u5" path="res://assets/maps/map_blocks/building_stones/granite/bstones_4x_1.tscn" id="35_j2yc4"]
+[ext_resource type="PackedScene" uid="uid://8ssec58abf56" path="res://assets/maps/map_blocks/building_stones/granite/bstones_4x_2.tscn" id="36_siwd5"]
+[ext_resource type="PackedScene" uid="uid://dnoyptshhpduc" path="res://assets/maps/map_blocks/building_stones/granite/bstones_4x_3.tscn" id="37_ulbi2"]
+[ext_resource type="PackedScene" uid="uid://5h7idrmb6k5v" path="res://assets/maps/map_blocks/building_stones/granite/bstones_4x_stairs_a_1.tscn" id="38_bcgge"]
+[ext_resource type="PackedScene" uid="uid://datsmhksrep84" path="res://assets/maps/map_blocks/building_stones/granite/bstones_4x_stairs_b_1.tscn" id="39_4jkvw"]
+[ext_resource type="PackedScene" uid="uid://dxlgrxhfvp2hn" path="res://assets/maps/map_blocks/building_stones/granite/bstones_4x_stairs_c_1.tscn" id="40_6t6mn"]
+[ext_resource type="PackedScene" uid="uid://bid3qgsfpm6gy" path="res://assets/maps/map_blocks/building_stones/granite/bstones_4x_stairs_d_1.tscn" id="41_jhnn7"]
+[ext_resource type="PackedScene" uid="uid://dchm4u4m4ctx6" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_0_5x.tscn" id="42_i7u5i"]
+[ext_resource type="PackedScene" uid="uid://bl6pbryxgmvg5" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_0_5x_001.tscn" id="43_nqjb7"]
+[ext_resource type="PackedScene" uid="uid://2tjkg66lnssg" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_0_5x_002.tscn" id="44_b7gj6"]
+[ext_resource type="PackedScene" uid="uid://bhfyb1jsoxqtq" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_0_5x_003.tscn" id="45_qn55y"]
+[ext_resource type="PackedScene" uid="uid://u0tusjihtc1p" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_0_5x_004.tscn" id="46_uuqra"]
+[ext_resource type="PackedScene" uid="uid://b708s88s4eolo" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_0_5x_005.tscn" id="47_mqgxb"]
+[ext_resource type="PackedScene" uid="uid://cjfrbwhaxy8cv" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_0_5x_006.tscn" id="48_d7u5t"]
+[ext_resource type="PackedScene" uid="uid://csk1liim3ai2r" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1_5x.tscn" id="49_4ridn"]
+[ext_resource type="PackedScene" uid="uid://yxwud12551q7" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1_5x_001.tscn" id="50_acg28"]
+[ext_resource type="PackedScene" uid="uid://dwlcccoqfg8jb" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1_5x_002.tscn" id="51_mwifh"]
+[ext_resource type="PackedScene" uid="uid://cbomq06gd7g03" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1_5x_003.tscn" id="52_pyym6"]
+[ext_resource type="PackedScene" uid="uid://bvv8h33dg3xrk" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1_5x_004.tscn" id="53_wykaj"]
+[ext_resource type="PackedScene" uid="uid://cmomnlmkwce5p" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1_5x_005.tscn" id="54_fdjpf"]
+[ext_resource type="PackedScene" uid="uid://drw2lgh70fi1c" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1_5x_006.tscn" id="55_gnass"]
+[ext_resource type="PackedScene" uid="uid://c2b0lp4ptyudd" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1x.tscn" id="56_ee28w"]
+[ext_resource type="PackedScene" uid="uid://dyxvej4ss0m5d" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1x_001.tscn" id="57_sd5k5"]
+[ext_resource type="PackedScene" uid="uid://bbxwbi7jwcykq" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1x_002.tscn" id="58_8j6iw"]
+[ext_resource type="PackedScene" uid="uid://gfavr6inpwgv" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1x_003.tscn" id="59_hifno"]
+[ext_resource type="PackedScene" uid="uid://c31rlyaxmqwti" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1x_004.tscn" id="60_qdnda"]
+[ext_resource type="PackedScene" uid="uid://d2k7meg6unxii" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1x_005.tscn" id="61_sgcby"]
+[ext_resource type="PackedScene" uid="uid://bl8qg0f2h113g" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_1x_006.tscn" id="62_xtm6l"]
+[ext_resource type="PackedScene" uid="uid://dpvrkjpvvag08" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_2x.tscn" id="63_0nq80"]
+[ext_resource type="PackedScene" uid="uid://ccgflsfiyvogp" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_2x_001.tscn" id="64_aptrj"]
+[ext_resource type="PackedScene" uid="uid://cghubgy3kuyx4" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_2x_002.tscn" id="65_c5uba"]
+[ext_resource type="PackedScene" uid="uid://bpdt8bivubrgh" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_2x_003.tscn" id="66_is4e3"]
+[ext_resource type="PackedScene" uid="uid://bcli1umg3esg" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_2x_004.tscn" id="67_jvqta"]
+[ext_resource type="PackedScene" uid="uid://dargcdqvv44uu" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_2x_005.tscn" id="68_cjfq0"]
+[ext_resource type="PackedScene" uid="uid://d7rxwnaqqnk6" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_16_2x_006.tscn" id="69_2y4pi"]
+[ext_resource type="PackedScene" uid="uid://bydn7h108vyff" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_0_5x.tscn" id="70_ba307"]
+[ext_resource type="PackedScene" uid="uid://41pyjhtxvowp" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_0_5x_001.tscn" id="71_1atn2"]
+[ext_resource type="PackedScene" uid="uid://bdiehv13bsjg" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_0_5x_002.tscn" id="72_yrico"]
+[ext_resource type="PackedScene" uid="uid://ca44kyrux44be" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_0_5x_003.tscn" id="73_ytyxx"]
+[ext_resource type="PackedScene" uid="uid://ol2otxsc451o" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_0_5x_004.tscn" id="74_um34j"]
+[ext_resource type="PackedScene" uid="uid://bxvrqv5krm7g2" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_0_5x_005.tscn" id="75_q0cig"]
+[ext_resource type="PackedScene" uid="uid://dbqsl7wij1331" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_0_5x_006.tscn" id="76_cn6gh"]
+[ext_resource type="PackedScene" uid="uid://cp8g0p01ge6le" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1_5x.tscn" id="77_fcft1"]
+[ext_resource type="PackedScene" uid="uid://dcas0eft85ov" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1_5x_001.tscn" id="78_t3vqq"]
+[ext_resource type="PackedScene" uid="uid://c2rpq74v3ryfr" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1_5x_002.tscn" id="79_a5ia0"]
+[ext_resource type="PackedScene" uid="uid://chxntxvcsgnpr" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1_5x_003.tscn" id="80_f4yt7"]
+[ext_resource type="PackedScene" uid="uid://wrdu6l14ruwi" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1_5x_004.tscn" id="81_koqnk"]
+[ext_resource type="PackedScene" uid="uid://bv4kburlch4nh" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1_5x_005.tscn" id="82_4bl6u"]
+[ext_resource type="PackedScene" uid="uid://b8dbjlauxbdp7" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1_5x_006.tscn" id="83_uyjq1"]
+[ext_resource type="PackedScene" uid="uid://qp1rpo7v6ihb" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1x.tscn" id="84_1qgwx"]
+[ext_resource type="PackedScene" uid="uid://d1c1u2n1frywk" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1x_001.tscn" id="85_vavor"]
+[ext_resource type="PackedScene" uid="uid://d3wgrqp5v08jw" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1x_002.tscn" id="86_2806g"]
+[ext_resource type="PackedScene" uid="uid://bs3fw5jwls31i" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1x_003.tscn" id="87_e84hu"]
+[ext_resource type="PackedScene" uid="uid://b5dmlxujf6fg6" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1x_004.tscn" id="88_c5njy"]
+[ext_resource type="PackedScene" uid="uid://chimh5phv0xy3" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1x_005.tscn" id="89_2wamc"]
+[ext_resource type="PackedScene" uid="uid://qqtgbnhj5f30" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_1x_006.tscn" id="90_voa0v"]
+[ext_resource type="PackedScene" uid="uid://cpgjkmg74x2qx" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_2x.tscn" id="91_rckq2"]
+[ext_resource type="PackedScene" uid="uid://cl1oa5fj787fg" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_2x_001.tscn" id="92_y4rtp"]
+[ext_resource type="PackedScene" uid="uid://doso4c6fm6bna" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_2x_002.tscn" id="93_uojnf"]
+[ext_resource type="PackedScene" uid="uid://6grvl3dpadqf" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_2x_003.tscn" id="94_4ml53"]
+[ext_resource type="PackedScene" uid="uid://cytvyl5tkn2v4" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_2x_004.tscn" id="95_pmoet"]
+[ext_resource type="PackedScene" uid="uid://bsjx44sxw5x3g" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_2x_005.tscn" id="96_br2do"]
+[ext_resource type="PackedScene" uid="uid://yuxxbwp8sd5l" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_4_2x_006.tscn" id="97_mjkqp"]
+[ext_resource type="PackedScene" uid="uid://dre78l56na8eb" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_0_5x.tscn" id="98_fukg6"]
+[ext_resource type="PackedScene" uid="uid://3cnmaqts3dap" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_0_5x_001.tscn" id="99_xb2mx"]
+[ext_resource type="PackedScene" uid="uid://b1ytu7qo7kll6" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_0_5x_002.tscn" id="100_8eg3w"]
+[ext_resource type="PackedScene" uid="uid://et2gc7r66du4" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_0_5x_003.tscn" id="101_rpjur"]
+[ext_resource type="PackedScene" uid="uid://du6gmrhpwser7" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_0_5x_004.tscn" id="102_xq0n5"]
+[ext_resource type="PackedScene" uid="uid://b8p5xog8r387u" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_0_5x_005.tscn" id="103_p43fl"]
+[ext_resource type="PackedScene" uid="uid://b4jy1lsa0ncud" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_0_5x_006.tscn" id="104_utnqy"]
+[ext_resource type="PackedScene" uid="uid://cpph8wxahh52b" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1_5x.tscn" id="105_227a1"]
+[ext_resource type="PackedScene" uid="uid://0swa1cj8v37w" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1_5x_001.tscn" id="106_y58dt"]
+[ext_resource type="PackedScene" uid="uid://clk36k4v1qhqr" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1_5x_002.tscn" id="107_vcxad"]
+[ext_resource type="PackedScene" uid="uid://bhwx2kwmqc7j3" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1_5x_003.tscn" id="108_a3ci3"]
+[ext_resource type="PackedScene" uid="uid://dd8ieymppqk7n" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1_5x_004.tscn" id="109_a7p0v"]
+[ext_resource type="PackedScene" uid="uid://bdcyfr75l45ch" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1_5x_005.tscn" id="110_xkds3"]
+[ext_resource type="PackedScene" uid="uid://cv2kahs5lxirt" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1_5x_006.tscn" id="111_fwttl"]
+[ext_resource type="PackedScene" uid="uid://cuik115hp2wyu" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1x.tscn" id="112_cp75v"]
+[ext_resource type="PackedScene" uid="uid://b4ko203viv7hu" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1x_001.tscn" id="113_y322d"]
+[ext_resource type="PackedScene" uid="uid://ciertnua2tjp" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1x_002.tscn" id="114_6mt58"]
+[ext_resource type="PackedScene" uid="uid://cmoy3e1pt60wr" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1x_003.tscn" id="115_ad1do"]
+[ext_resource type="PackedScene" uid="uid://plufg7noq7c2" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1x_004.tscn" id="116_wq2ia"]
+[ext_resource type="PackedScene" uid="uid://cj267t5hxpa5l" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1x_005.tscn" id="117_y1kg1"]
+[ext_resource type="PackedScene" uid="uid://ds6l0odwpiojh" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_1x_006.tscn" id="118_57y7n"]
+[ext_resource type="PackedScene" uid="uid://b43e0wtksc4ba" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_2x.tscn" id="119_cisfy"]
+[ext_resource type="PackedScene" uid="uid://ce2okoydoyvhx" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_2x_001.tscn" id="120_jfcks"]
+[ext_resource type="PackedScene" uid="uid://kfw8fvbwetxi" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_2x_002.tscn" id="121_2dnnl"]
+[ext_resource type="PackedScene" uid="uid://b4xf1xt0opyjw" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_2x_003.tscn" id="122_bh23m"]
+[ext_resource type="PackedScene" uid="uid://cf46wx88adw7r" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_2x_004.tscn" id="123_h8o3g"]
+[ext_resource type="PackedScene" uid="uid://ixb0lk17qhi1" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_2x_005.tscn" id="124_6gel8"]
+[ext_resource type="PackedScene" uid="uid://8s252gqhnces" path="res://assets/maps/map_blocks/building_stones/granite/bstones_pillar_8_2x_006.tscn" id="125_6inca"]
+[ext_resource type="PackedScene" uid="uid://cgol80y1swxyh" path="res://assets/maps/map_blocks/building_stones/granite/bstones_sphere_1.tscn" id="126_bric4"]
+[ext_resource type="PackedScene" uid="uid://cx61wylk0hplo" path="res://assets/maps/map_blocks/building_stones/granite/bstones_sphere_2.tscn" id="127_fvhtr"]
+[ext_resource type="PackedScene" uid="uid://c04l3ax2xu446" path="res://assets/maps/map_blocks/building_stones/granite/bstones_sphere_3.tscn" id="128_6wwv0"]
+[ext_resource type="PackedScene" uid="uid://cvmnk51hilcei" path="res://assets/maps/map_blocks/building_stones/granite/bstones_sphere_4.tscn" id="129_ivpa2"]
+[ext_resource type="PackedScene" uid="uid://id107gwhqil4" path="res://assets/maps/map_blocks/building_stones/granite/bstones_stone_pillar_0_5.tscn" id="130_opai2"]
+[ext_resource type="PackedScene" uid="uid://c4nqhw25v5b4r" path="res://assets/maps/map_blocks/building_stones/granite/bstones_stone_pillar_1.tscn" id="131_4fdmb"]
+
+[node name="ExhibitionBstonesMarble" type="Node3D"]
+
+[node name="bstones_0_5x_1" parent="." instance=ExtResource("1_pv126")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_2" parent="." instance=ExtResource("2_l77ax")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_3" parent="." instance=ExtResource("3_jmjnj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_4" parent="." instance=ExtResource("4_wexu7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_5" parent="." instance=ExtResource("5_hn1sw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_stairs_a_1" parent="." instance=ExtResource("6_xbh8w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_stairs_a_2" parent="." instance=ExtResource("7_8u7ef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_stairs_b_1" parent="." instance=ExtResource("8_0ohvr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_stairs_b_2" parent="." instance=ExtResource("9_5kgcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_stairs_c_1" parent="." instance=ExtResource("10_v0uqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.25, 0.25, 18.25)
+
+[node name="bstones_0_5x_stairs_c_2" parent="." instance=ExtResource("11_em7n8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.25, 0.25, 18.25)
+
+[node name="bstones_1x_1" parent="." instance=ExtResource("12_2tnd3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 16.5)
+
+[node name="bstones_1x_2" parent="." instance=ExtResource("13_hobvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.5, 16.5)
+
+[node name="bstones_1x_3" parent="." instance=ExtResource("14_og34a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.5, 16.5)
+
+[node name="bstones_1x_4" parent="." instance=ExtResource("15_lkc18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0.5, 16.5)
+
+[node name="bstones_1x_5" parent="." instance=ExtResource("16_j5605")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0.5, 16.5)
+
+[node name="bstones_1x_stairs_a_1" parent="." instance=ExtResource("17_7hfmy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.5, 16.5)
+
+[node name="bstones_1x_stairs_a_2" parent="." instance=ExtResource("18_kanwj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5, 0.5, 16.5)
+
+[node name="bstones_1x_stairs_b_1" parent="." instance=ExtResource("19_ql3po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.5, 16.5)
+
+[node name="bstones_1x_stairs_b_2" parent="." instance=ExtResource("20_pxhm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 0.5, 16.5)
+
+[node name="bstones_1x_stairs_c_1" parent="." instance=ExtResource("21_ha43c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0.5, 16.5)
+
+[node name="bstones_1x_stairs_c_2" parent="." instance=ExtResource("22_8neil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0.5, 16.5)
+
+[node name="bstones_2x_4x_1_1" parent="." instance=ExtResource("23_swyqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 12.5)
+
+[node name="bstones_2x_4x_1_2" parent="." instance=ExtResource("24_7axpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5, 12.5)
+
+[node name="bstones_2x_4x_1_3" parent="." instance=ExtResource("25_67mlx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.5, 12.5)
+
+[node name="bstones_2x_1" parent="." instance=ExtResource("26_b6w7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.025, 8)
+
+[node name="bstones_2x_2" parent="." instance=ExtResource("27_xgfts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.025, 8)
+
+[node name="bstones_2x_3" parent="." instance=ExtResource("28_5wjbq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.025, 8)
+
+[node name="bstones_2x_stairs_a_1" parent="." instance=ExtResource("29_yaoaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 8)
+
+[node name="bstones_2x_stairs_a_2" parent="." instance=ExtResource("30_lb4tt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 8)
+
+[node name="bstones_2x_stairs_b_1" parent="." instance=ExtResource("31_01ich")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, 8)
+
+[node name="bstones_2x_stairs_b_2" parent="." instance=ExtResource("32_us4g7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 8)
+
+[node name="bstones_2x_stairs_c_1" parent="." instance=ExtResource("33_noa43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1, 8)
+
+[node name="bstones_2x_stairs_c_2" parent="." instance=ExtResource("34_x520h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1, 8)
+
+[node name="bstones_4x_1" parent="." instance=ExtResource("35_j2yc4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 4)
+
+[node name="bstones_4x_2" parent="." instance=ExtResource("36_siwd5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, 4)
+
+[node name="bstones_4x_3" parent="." instance=ExtResource("37_ulbi2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, 4)
+
+[node name="bstones_4x_stairs_a_1" parent="." instance=ExtResource("38_bcgge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, 4)
+
+[node name="bstones_4x_stairs_b_1" parent="." instance=ExtResource("39_4jkvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 1, 4)
+
+[node name="bstones_4x_stairs_c_1" parent="." instance=ExtResource("40_6t6mn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 1, 4)
+
+[node name="bstones_4x_stairs_d_1" parent="." instance=ExtResource("41_jhnn7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 2, 4)
+
+[node name="bstones_pillar_16_0_5x" parent="." instance=ExtResource("42_i7u5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 5, 39.75)
+
+[node name="bstones_pillar_16_0_5x_001" parent="." instance=ExtResource("43_nqjb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 3.5, 36.75)
+
+[node name="bstones_pillar_16_0_5x_002" parent="." instance=ExtResource("44_b7gj6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 2.5, 33.75)
+
+[node name="bstones_pillar_16_0_5x_003" parent="." instance=ExtResource("45_qn55y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 2, 30.75)
+
+[node name="bstones_pillar_16_0_5x_004" parent="." instance=ExtResource("46_uuqra")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 1.5, 27.75)
+
+[node name="bstones_pillar_16_0_5x_005" parent="." instance=ExtResource("47_mqgxb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 1, 24.75)
+
+[node name="bstones_pillar_16_0_5x_006" parent="." instance=ExtResource("48_d7u5t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.75, 0.5, 21.75)
+
+[node name="bstones_pillar_16_1_5x" parent="." instance=ExtResource("49_4ridn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, 5, 39.25)
+
+[node name="bstones_pillar_16_1_5x_001" parent="." instance=ExtResource("50_acg28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, 3.5, 36.25)
+
+[node name="bstones_pillar_16_1_5x_002" parent="." instance=ExtResource("51_mwifh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, 2.5, 33.25)
+
+[node name="bstones_pillar_16_1_5x_003" parent="." instance=ExtResource("52_pyym6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, 2, 30.25)
+
+[node name="bstones_pillar_16_1_5x_004" parent="." instance=ExtResource("53_wykaj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, 1.5, 27.25)
+
+[node name="bstones_pillar_16_1_5x_005" parent="." instance=ExtResource("54_fdjpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, 1, 24.25)
+
+[node name="bstones_pillar_16_1_5x_006" parent="." instance=ExtResource("55_gnass")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.75, 0.5, 21.25)
+
+[node name="bstones_pillar_16_1x" parent="." instance=ExtResource("56_ee28w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, 39.5)
+
+[node name="bstones_pillar_16_1x_001" parent="." instance=ExtResource("57_sd5k5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 3.5, 36.5)
+
+[node name="bstones_pillar_16_1x_002" parent="." instance=ExtResource("58_8j6iw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 2.5, 33.5)
+
+[node name="bstones_pillar_16_1x_003" parent="." instance=ExtResource("59_hifno")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 2, 30.5)
+
+[node name="bstones_pillar_16_1x_004" parent="." instance=ExtResource("60_qdnda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 1.5, 27.5)
+
+[node name="bstones_pillar_16_1x_005" parent="." instance=ExtResource("61_sgcby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 1, 24.5)
+
+[node name="bstones_pillar_16_1x_006" parent="." instance=ExtResource("62_xtm6l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0.5, 21.5)
+
+[node name="bstones_pillar_16_2x" parent="." instance=ExtResource("63_0nq80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 5, 39)
+
+[node name="bstones_pillar_16_2x_001" parent="." instance=ExtResource("64_aptrj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 3.5, 36)
+
+[node name="bstones_pillar_16_2x_002" parent="." instance=ExtResource("65_c5uba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2.5, 33)
+
+[node name="bstones_pillar_16_2x_003" parent="." instance=ExtResource("66_is4e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2, 30)
+
+[node name="bstones_pillar_16_2x_004" parent="." instance=ExtResource("67_jvqta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1.5, 27)
+
+[node name="bstones_pillar_16_2x_005" parent="." instance=ExtResource("68_cjfq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 24)
+
+[node name="bstones_pillar_16_2x_006" parent="." instance=ExtResource("69_2y4pi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.5, 21)
+
+[node name="bstones_pillar_4_0_5x" parent="." instance=ExtResource("70_ba307")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 5, 39.75)
+
+[node name="bstones_pillar_4_0_5x_001" parent="." instance=ExtResource("71_1atn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 3.5, 36.75)
+
+[node name="bstones_pillar_4_0_5x_002" parent="." instance=ExtResource("72_yrico")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 2.5, 33.75)
+
+[node name="bstones_pillar_4_0_5x_003" parent="." instance=ExtResource("73_ytyxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 2, 30.75)
+
+[node name="bstones_pillar_4_0_5x_004" parent="." instance=ExtResource("74_um34j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 1.5, 27.75)
+
+[node name="bstones_pillar_4_0_5x_005" parent="." instance=ExtResource("75_q0cig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 1, 24.75)
+
+[node name="bstones_pillar_4_0_5x_006" parent="." instance=ExtResource("76_cn6gh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 0.5, 21.75)
+
+[node name="bstones_pillar_4_1_5x" parent="." instance=ExtResource("77_fcft1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 5, 39.25)
+
+[node name="bstones_pillar_4_1_5x_001" parent="." instance=ExtResource("78_t3vqq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 3.5, 36.25)
+
+[node name="bstones_pillar_4_1_5x_002" parent="." instance=ExtResource("79_a5ia0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 2.5, 33.25)
+
+[node name="bstones_pillar_4_1_5x_003" parent="." instance=ExtResource("80_f4yt7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 2, 30.25)
+
+[node name="bstones_pillar_4_1_5x_004" parent="." instance=ExtResource("81_koqnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 1.5, 27.25)
+
+[node name="bstones_pillar_4_1_5x_005" parent="." instance=ExtResource("82_4bl6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 1, 24.25)
+
+[node name="bstones_pillar_4_1_5x_006" parent="." instance=ExtResource("83_uyjq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 0.5, 21.25)
+
+[node name="bstones_pillar_4_1x" parent="." instance=ExtResource("84_1qgwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 39.5)
+
+[node name="bstones_pillar_4_1x_001" parent="." instance=ExtResource("85_vavor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3.5, 36.5)
+
+[node name="bstones_pillar_4_1x_002" parent="." instance=ExtResource("86_2806g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.5, 33.5)
+
+[node name="bstones_pillar_4_1x_003" parent="." instance=ExtResource("87_e84hu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 30.5)
+
+[node name="bstones_pillar_4_1x_004" parent="." instance=ExtResource("88_c5njy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.5, 27.5)
+
+[node name="bstones_pillar_4_1x_005" parent="." instance=ExtResource("89_2wamc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 24.5)
+
+[node name="bstones_pillar_4_1x_006" parent="." instance=ExtResource("90_voa0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 21.5)
+
+[node name="bstones_pillar_4_2x" parent="." instance=ExtResource("91_rckq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, 39)
+
+[node name="bstones_pillar_4_2x_001" parent="." instance=ExtResource("92_y4rtp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.5, 36)
+
+[node name="bstones_pillar_4_2x_002" parent="." instance=ExtResource("93_uojnf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.5, 33)
+
+[node name="bstones_pillar_4_2x_003" parent="." instance=ExtResource("94_4ml53")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 30)
+
+[node name="bstones_pillar_4_2x_004" parent="." instance=ExtResource("95_pmoet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 27)
+
+[node name="bstones_pillar_4_2x_005" parent="." instance=ExtResource("96_br2do")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 24)
+
+[node name="bstones_pillar_4_2x_006" parent="." instance=ExtResource("97_mjkqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 21)
+
+[node name="bstones_pillar_8_0_5x" parent="." instance=ExtResource("98_fukg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 5, 39.75)
+
+[node name="bstones_pillar_8_0_5x_001" parent="." instance=ExtResource("99_xb2mx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 3.5, 36.75)
+
+[node name="bstones_pillar_8_0_5x_002" parent="." instance=ExtResource("100_8eg3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 2.5, 33.75)
+
+[node name="bstones_pillar_8_0_5x_003" parent="." instance=ExtResource("101_rpjur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 2, 30.75)
+
+[node name="bstones_pillar_8_0_5x_004" parent="." instance=ExtResource("102_xq0n5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 1.5, 27.75)
+
+[node name="bstones_pillar_8_0_5x_005" parent="." instance=ExtResource("103_p43fl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 1, 24.75)
+
+[node name="bstones_pillar_8_0_5x_006" parent="." instance=ExtResource("104_utnqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 0.5, 21.75)
+
+[node name="bstones_pillar_8_1_5x" parent="." instance=ExtResource("105_227a1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 5, 39.25)
+
+[node name="bstones_pillar_8_1_5x_001" parent="." instance=ExtResource("106_y58dt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 3.5, 36.25)
+
+[node name="bstones_pillar_8_1_5x_002" parent="." instance=ExtResource("107_vcxad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 2.5, 33.25)
+
+[node name="bstones_pillar_8_1_5x_003" parent="." instance=ExtResource("108_a3ci3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 2, 30.25)
+
+[node name="bstones_pillar_8_1_5x_004" parent="." instance=ExtResource("109_a7p0v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 1.5, 27.25)
+
+[node name="bstones_pillar_8_1_5x_005" parent="." instance=ExtResource("110_xkds3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 1, 24.25)
+
+[node name="bstones_pillar_8_1_5x_006" parent="." instance=ExtResource("111_fwttl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 0.5, 21.25)
+
+[node name="bstones_pillar_8_1x" parent="." instance=ExtResource("112_cp75v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 5, 39.5)
+
+[node name="bstones_pillar_8_1x_001" parent="." instance=ExtResource("113_y322d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, 36.5)
+
+[node name="bstones_pillar_8_1x_002" parent="." instance=ExtResource("114_6mt58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 2.5, 33.5)
+
+[node name="bstones_pillar_8_1x_003" parent="." instance=ExtResource("115_ad1do")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 2, 30.5)
+
+[node name="bstones_pillar_8_1x_004" parent="." instance=ExtResource("116_wq2ia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1.5, 27.5)
+
+[node name="bstones_pillar_8_1x_005" parent="." instance=ExtResource("117_y1kg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, 24.5)
+
+[node name="bstones_pillar_8_1x_006" parent="." instance=ExtResource("118_57y7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.5, 21.5)
+
+[node name="bstones_pillar_8_2x" parent="." instance=ExtResource("119_cisfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 5, 39)
+
+[node name="bstones_pillar_8_2x_001" parent="." instance=ExtResource("120_jfcks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.5, 36)
+
+[node name="bstones_pillar_8_2x_002" parent="." instance=ExtResource("121_2dnnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.5, 33)
+
+[node name="bstones_pillar_8_2x_003" parent="." instance=ExtResource("122_bh23m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 30)
+
+[node name="bstones_pillar_8_2x_004" parent="." instance=ExtResource("123_h8o3g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 27)
+
+[node name="bstones_pillar_8_2x_005" parent="." instance=ExtResource("124_6gel8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 24)
+
+[node name="bstones_pillar_8_2x_006" parent="." instance=ExtResource("125_6inca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, 21)
+
+[node name="bstones_sphere_1" parent="." instance=ExtResource("126_bric4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 2, 12)
+
+[node name="bstones_sphere_2" parent="." instance=ExtResource("127_fvhtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 1.5, 11.5)
+
+[node name="bstones_sphere_3" parent="." instance=ExtResource("128_6wwv0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 11)
+
+[node name="bstones_sphere_4" parent="." instance=ExtResource("129_ivpa2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0.5, 10.5)
+
+[node name="bstones_stone_pillar_0_5" parent="." instance=ExtResource("130_opai2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.25, 0.3, 10.25)
+
+[node name="bstones_stone_pillar_1" parent="." instance=ExtResource("131_4fdmb")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 25.5, 0.6, 10.5)

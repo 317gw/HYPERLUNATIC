@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://i8xq76r2y4gy"]
+[gd_scene load_steps=4 format=3 uid="uid://i8xq76r2y4gy"]
 
 [ext_resource type="Script" uid="uid://ve5233oqok2" path="res://assets/脚本测试.gd" id="1_dcph8"]
+[ext_resource type="Script" uid="uid://f5nskdt8p8m1" path="res://assets/systems/celestials/earth_astronomy_basic.gd" id="2_nj7ll"]
+[ext_resource type="Script" uid="uid://dwevfbman263u" path="res://addons/godot4-graph2d-main/graph_2d/graph_2d.gd" id="3_lvnap"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_dcph8")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_nj7ll")
+
+[node name="Graph2D" type="Control" parent="Node"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_lvnap")
+x_label = "x"
+y_label = "y"
+metadata/_custom_type_script = "uid://dwevfbman263u"
+metadata/_edit_use_anchors_ = true

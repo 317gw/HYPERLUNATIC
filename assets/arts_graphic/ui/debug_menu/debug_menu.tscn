@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cggqb75a8w8r"]
+[gd_scene load_steps=11 format=3 uid="uid://cggqb75a8w8r"]
 
 [ext_resource type="Script" uid="uid://c4055nctk6xmr" path="res://assets/arts_graphic/ui/debug_menu/debug_menu.gd" id="1_p440y"]
 [ext_resource type="Theme" uid="uid://cjb2bffjb0s4m" path="res://assets/arts_graphic/themes/debug_menu.tres" id="2_vaxdg"]
@@ -13,6 +13,12 @@ bg_color = Color(0, 0, 0, 0.25098)
 [sub_resource type="Theme" id="Theme_xh1k8"]
 HSeparator/constants/separation = 5
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_cvuxk")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xh1k8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qh56j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vepbk"]
 
 [node name="DebugMenu" type="CanvasLayer" node_paths=PackedStringArray("fps", "frame_time", "frame_number", "frame_history_total_avg", "frame_history_total_min", "frame_history_total_max", "frame_history_total_last", "frame_history_cpu_avg", "frame_history_cpu_min", "frame_history_cpu_max", "frame_history_cpu_last", "frame_history_gpu_avg", "frame_history_gpu_min", "frame_history_gpu_max", "frame_history_gpu_last", "fps_graph", "total_graph", "cpu_graph", "gpu_graph", "information", "settings")]
 layer = 64
@@ -57,9 +63,8 @@ anchors_preset = -1
 anchor_left = 0.650588
 anchor_right = 1.0
 anchor_bottom = 0.790833
-offset_left = -56.1759
-offset_right = -10.0
-offset_bottom = -156.0
+offset_left = -46.1759
+offset_bottom = 33.7999
 grow_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 0
@@ -368,9 +373,8 @@ horizontal_alignment = 2
 
 [node name="MobilityDetection" type="VBoxContainer" parent="DebugMenuControl"]
 layout_mode = 1
-offset_left = 10.0
-offset_right = 501.0
-offset_bottom = 488.0
+offset_right = 491.0
+offset_bottom = 604.0
 mouse_filter = 2
 theme_override_constants/separation = 0
 script = ExtResource("3_g23da")
@@ -514,7 +518,7 @@ size_flags_vertical = 1
 theme = ExtResource("2_vaxdg")
 text = "Danmaku: "
 
-[node name="DisplayInput" type="RichTextLabel" parent="DebugMenuControl"]
+[node name="DisplayInput" type="TextEdit" parent="DebugMenuControl"]
 process_mode = 1
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 1
@@ -522,27 +526,37 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -200.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
 theme = ExtResource("2_vaxdg")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xh1k8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qh56j")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_vepbk")
 text = "这是输入记录
 0123456字芜湖AaBbCcXYZxyz"
-scroll_following = true
-threaded = true
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
+wrap_mode = 1
 script = ExtResource("4_vffq7")
-paragraph_cap = 7
 
 [node name="LineFeedTimer" type="Timer" parent="DebugMenuControl/DisplayInput"]
 wait_time = 0.5
 one_shot = true
 
 [node name="ClearUpTimer" type="Timer" parent="DebugMenuControl/DisplayInput"]
-wait_time = 30.0
+process_callback = 0
+wait_time = 20.0
 one_shot = true
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="timeout" from="DebugMenuControl/DisplayInput/LineFeedTimer" to="DebugMenuControl/DisplayInput" method="_on_line_feed_timer_timeout"]
-[connection signal="timeout" from="DebugMenuControl/DisplayInput/LineFeedTimer" to="DebugMenuControl/DisplayInput" method="_on_timer_timeout"]
-[connection signal="timeout" from="DebugMenuControl/DisplayInput/ClearUpTimer" to="DebugMenuControl/DisplayInput" method="_on_clear_up_timer_timeout"]

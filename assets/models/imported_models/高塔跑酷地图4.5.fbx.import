@@ -1,0 +1,44 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cvbh6jh1s8csw"
+path="res://.godot/imported/高塔跑酷地图4.5.fbx-895a89aa73082dafd2d999130870f565.scn"
+
+[deps]
+
+source_file="res://assets/models/imported_models/高塔跑酷地图4.5.fbx"
+dest_files=["res://.godot/imported/高塔跑酷地图4.5.fbx-895a89aa73082dafd2d999130870f565.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=false
+animation/import=false
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:球体": {
+"physics/mask": 30
+}
+}
+}
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1

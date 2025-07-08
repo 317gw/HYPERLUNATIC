@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c3breg3i5qun"]
+
+[ext_resource type="StyleBox" uid="uid://c70gmjx6dojh2" path="res://themes/styleboxs/stylebox_flat/flat/flat_f4.tres" id="2_b2tk4"]
+[ext_resource type="StyleBox" uid="uid://28i11niky81i" path="res://themes/styleboxs/stylebox_flat/flat/flat_00.tres" id="3_2pu6w"]
+
+[resource]
+HBoxContainer/constants/separation = 12
+MarginContainer/constants/margin_bottom = 30
+MarginContainer/constants/margin_left = 30
+MarginContainer/constants/margin_right = 30
+MarginContainer/constants/margin_top = 30
+PanelContainer/styles/panel = ExtResource("2_b2tk4")
+TabContainer/styles/panel = ExtResource("3_2pu6w")
+VBoxContainer/constants/separation = 12

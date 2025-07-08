@@ -1,6 +1,6 @@
 extends Node3D
 
-const FOG_CHUNK = preload("res://assets/systems/chunk/fog_chunk.tscn")
+const FOG_CHUNK = preload("res://assets/systems/spatial_partition/fog_chunk.tscn")
 
 @export var visible_range: float = 3.0
 @export var resolution: float = 1.0  # 单位立方体边长
@@ -39,7 +39,7 @@ func _ready() -> void:
 #
 	#_track_object()# 位置记录
 
-	
+
 	#build_density_field(visited_cells_latest)
 
 	#if t > 1.0:
@@ -58,8 +58,8 @@ func _ready() -> void:
 func _track_object() -> void:
 	visited_chunk_latest.clear()
 	if not tracked_object: return
-	if tracked_object.size() < 1: return 
-	
+	if tracked_object.size() < 1: return
+
 	for obj: Node3D in tracked_object:
 		if obj.has_method("is_stationary"):
 			if obj.is_stationary(): continue
@@ -69,8 +69,8 @@ func _track_object() -> void:
 			cell = Vector3i(obj.get_centre_pos().floor())
 		else:
 			cell = Vector3i(obj.global_position.floor())
-		
-		
+
+
 		#for chunk in chunk_manager.get_intersecting_chunks(cell, ceil(visible_range+0.01)):
 		var chunk := chunk_manager.get_chunk_position(Vector3(cell))
 		if not visited_chunk_latest.has(chunk):
@@ -81,8 +81,8 @@ func _track_object() -> void:
 		#var v_g: MarchingTable.VoxelGrid = voxel_grids[chunk]
 		#var last_v = v_g.read(cell.x, cell.y, cell.z)
 		#v_g.write(cell.x, cell.y, cell.z, last_v+0.01)
-		
-		
+
+
 		if not visited_cells.has(cell):# 哈希搜索？
 			visited_cells[cell] = true
 			visited_cells_latest.append(cell)
@@ -93,11 +93,11 @@ func _track_object() -> void:
 #voxel_grid = MarchingTable.VoxelGrid.new(RESOLUTION, 0.0)
 func build_density_field(points: Array):
 	visible_range = max(visible_range, 0.0)
-	
-	
-	
-	
-	
+
+
+
+
+
 	# 并行计算密度场
 	var temp_density_field = {}
 	for p in points:
@@ -105,7 +105,7 @@ func build_density_field(points: Array):
 		var range = Vector3i(_r, _r, _r) + Vector3i.ONE
 		var min_corner = Vector3i(floor(p / resolution)) - range
 		var max_corner = Vector3i(floor(p / resolution)) + range
-		
+
 		for x in range(min_corner.x-1, max_corner.x+1):
 			for y in range(min_corner.y-1, max_corner.y+1):
 				for z in range(min_corner.z-1, max_corner.z+1):
@@ -115,7 +115,7 @@ func build_density_field(points: Array):
 					var contribution: float = visible_range / (1.0 + dist)
 					#contribution = float("%0.2f" % contribution)
 					# * pos.normalized().dot(Vector3.ONE)
-					
+
 					#if key.clamp(min_corner, max_corner) == key:
 						#temp_density_field[key] = "go"
 					if temp_density_field.has(key):

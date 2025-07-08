@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg24r2642jpyw"]
+[gd_scene load_steps=13 format=3 uid="uid://bg24r2642jpyw"]
 
 [ext_resource type="Script" uid="uid://b4pxiysdjl6cg" path="res://assets/arts_graphic/ui/menu/main_menus.gd" id="1_slv7n"]
 [ext_resource type="Shader" uid="uid://2426lu58r8do" path="res://assets/arts_graphic/shaders/dual_kawase_blur_downsample.gdshader" id="2_gho6j"]
 [ext_resource type="PackedScene" uid="uid://3dac3f7s7tk" path="res://assets/arts_graphic/ui/menu/menu_button.tscn" id="2_gn2qf"]
-[ext_resource type="PackedScene" uid="uid://crynbkg8m246g" path="res://assets/arts_graphic/ui/menu/Propertie.tscn" id="3_bv7pn"]
+[ext_resource type="PackedScene" uid="uid://crynbkg8m246g" path="res://assets/arts_graphic/ui/menu/Properties/Propertie.tscn" id="3_bv7pn"]
 [ext_resource type="Shader" uid="uid://bm4xb8ba5ispy" path="res://assets/arts_graphic/shaders/dual_kawase_blur_upsample.gdshader" id="3_p7o8j"]
 [ext_resource type="Script" uid="uid://bbcfelb2s8jd2" path="res://assets/arts_graphic/ui/menu/option_window.gd" id="3_xuyqn"]
 [ext_resource type="PackedScene" uid="uid://d2aioktb3sqfc" path="res://assets/arts_graphic/ui/menu/scroll_label.tscn" id="3_ysg1o"]
+[ext_resource type="Script" uid="uid://jipj3bpgw2p0" path="res://assets/arts_graphic/ui/menu/settings.gd" id="6_fe7ho"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p7o8j"]
 shader = ExtResource("2_gho6j")
@@ -257,9 +258,11 @@ offset_right = 300.0
 offset_bottom = 420.0
 size_flags_horizontal = 1
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="MenuControl"]
+[node name="OptionWindowCancelConfirm" type="ConfirmationDialog" parent="MenuControl"]
 initial_position = 1
-dialog_autowrap = true
+size = Vector2i(298, 100)
+max_size = Vector2i(400, 140)
+dialog_text = "还有未应用的设置，确定要取消更改吗？"
 
 [node name="OptionWindow" type="Window" parent="MenuControl"]
 disable_3d = true
@@ -267,12 +270,15 @@ snap_2d_transforms_to_pixel = true
 snap_2d_vertices_to_pixel = true
 title = "Options"
 initial_position = 1
-size = Vector2i(700, 1000)
+size = Vector2i(750, 800)
 transient = true
 mouse_passthrough = true
 min_size = Vector2i(300, 300)
 keep_title_visible = true
 script = ExtResource("3_xuyqn")
+
+[node name="Settings" type="Node" parent="MenuControl/OptionWindow"]
+script = ExtResource("6_fe7ho")
 
 [node name="PanelContainer" type="PanelContainer" parent="MenuControl/OptionWindow"]
 anchors_preset = 15
@@ -358,37 +364,55 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="PanelContainer" type="PanelContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionLabel" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 26
+text = "屏幕 16:9 1920,1200
+窗口 1:1 2000,2000"
+horizontal_alignment = 1
+
 [node name="DisplayMode" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 unique_name_in_owner = true
 layout_mode = 2
 propertie_name = "显示模式"
-control_mode = 2
+control_mode = 3
 
 [node name="AspectRatios" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 unique_name_in_owner = true
 layout_mode = 2
 propertie_name = "纵横比"
-control_mode = 2
+control_mode = 3
 
 [node name="Resolutions" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 unique_name_in_owner = true
 layout_mode = 2
 propertie_name = "分辨率"
-control_mode = 2
+control_mode = 3
 
 [node name="VerticalSync" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
+unique_name_in_owner = true
 layout_mode = 2
 propertie_name = "垂直同步"
 
 [node name="FOV" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
 propertie_name = "视野"
-control_mode = 0
+control_mode = 1
+default_value = 90.0
+num_hint_end = 180.0
+num_hint_decimals = 0
 
-[node name="Gamma" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
+[node name="Exposure" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
-propertie_name = "伽玛"
+propertie_name = "曝光"
 control_mode = 0
+default_value = 0.8
+num_hint_end = 16.0
 
 [node name="Label2" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -402,22 +426,22 @@ layout_mode = 2
 [node name="AnisotropicFiltering" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
 propertie_name = "各向异性过滤"
-control_mode = 2
+control_mode = 3
 
 [node name="MSAA 2D" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
 propertie_name = "MSAA 2D"
-control_mode = 2
+control_mode = 3
 
 [node name="MSAA 3D" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
 propertie_name = "MSAA 3D"
-control_mode = 2
+control_mode = 3
 
 [node name="ScreenSpaceAA" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
 propertie_name = "屏幕空间抗锯齿"
-control_mode = 2
+control_mode = 3
 
 [node name="TAA" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
@@ -426,6 +450,9 @@ propertie_name = "时间抗锯齿"
 [node name="SSR" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
 propertie_name = "屏幕空间反射"
+control_mode = 1
+num_hint_end = 256.0
+num_hint_decimals = 0
 
 [node name="SSAO" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
 layout_mode = 2
@@ -514,23 +541,26 @@ size_flags_horizontal = 3
 alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl"]
-custom_minimum_size = Vector2(80, 20)
+[node name="Confirm" type="Button" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl"]
+custom_minimum_size = Vector2(100, 40)
 layout_direction = 2
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "确定"
 
-[node name="Button2" type="Button" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl"]
-custom_minimum_size = Vector2(80, 20)
+[node name="Apply" type="Button" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl"]
+custom_minimum_size = Vector2(100, 40)
 layout_direction = 2
 layout_mode = 2
-text = "取消"
-
-[node name="Button3" type="Button" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl"]
-custom_minimum_size = Vector2(80, 20)
-layout_direction = 2
-layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "应用"
+
+[node name="Cancel" type="Button" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl"]
+custom_minimum_size = Vector2(100, 40)
+layout_direction = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "取消"
 
 [node name="ScrollLabelTimer" type="Timer" parent="MenuControl"]
 wait_time = 10.0
@@ -560,5 +590,13 @@ theme_override_font_sizes/font_size = 32
 text = "前方到站：东冰港电子科技无限公司  想要下车的乘客请提前准备下车"
 metadata/_edit_use_anchors_ = true
 
+[connection signal="about_to_popup" from="MenuControl/OptionWindow" to="MenuControl/OptionWindow" method="_on_about_to_popup"]
 [connection signal="close_requested" from="MenuControl/OptionWindow" to="MenuControl/OptionWindow" method="_on_close_requested"]
+[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/DisplayMode" to="MenuControl/OptionWindow" method="_on_display_mode_option_selected"]
+[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/AspectRatios" to="MenuControl/OptionWindow" method="_on_aspect_ratios_option_selected"]
+[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/Resolutions" to="MenuControl/OptionWindow" method="_on_resolutions_option_selected"]
+[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/VerticalSync" to="MenuControl/OptionWindow" method="_on_vertical_sync_option_selected"]
+[connection signal="pressed" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl/Confirm" to="MenuControl/OptionWindow" method="_on_confirm_pressed"]
+[connection signal="pressed" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl/Apply" to="MenuControl/OptionWindow" method="_on_apply_pressed"]
+[connection signal="pressed" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl/Cancel" to="MenuControl/OptionWindow" method="_on_cancel_pressed"]
 [connection signal="timeout" from="MenuControl/ScrollLabelTimer" to="." method="_on_scroll_label_timer_timeout"]

@@ -166,8 +166,8 @@ func _ready():
 	var legend = _Graph2DLegend.new()
 	plot_area.add_child(legend)
 
-	#var coordinate = _Graph2DCoord.new()
-	#plot_area.add_child(coordinate)
+	var coordinate = _Graph2DCoord.new()
+	plot_area.add_child(coordinate)
 
 	resized.connect(_on_Graph_resized)
 	plot_area.resized.connect(_on_plot_area_resized)

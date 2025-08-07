@@ -4,21 +4,22 @@
 [ext_resource type="Script" uid="uid://bqqrr2x22y2k4" path="res://assets/arts_graphic/ui/scale_mark_line.gd" id="2_iu2h4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ckt3o"]
+resource_local_to_scene = true
 shader = ExtResource("1_ggxva")
 shader_parameter/up_color = Color(0.745098, 0.745098, 0.745098, 1)
 shader_parameter/up_count = 5
-shader_parameter/up_width = 0.01
-shader_parameter/up_margin_left = 0.025
-shader_parameter/up_margin_right = 0.025
+shader_parameter/up_width = 2.0
+shader_parameter/up_margin_left = 2.0
+shader_parameter/up_margin_right = 2.0
 shader_parameter/up_margin_top = 0.0
 shader_parameter/up_margin_bottom = 0.0
 shader_parameter/below_color = Color(1, 1, 1, 1)
 shader_parameter/below_count = 21
-shader_parameter/below_width = 0.005
-shader_parameter/below_margin_left = 0.0275
-shader_parameter/below_margin_right = 0.0275
-shader_parameter/below_margin_top = 0.5
-shader_parameter/below_margin_bottom = 0.0
+shader_parameter/below_width = 1.0
+shader_parameter/below_margin_left = 2.5
+shader_parameter/below_margin_right = 2.5
+shader_parameter/below_margin_top = 0.0
+shader_parameter/below_margin_bottom = 0.5
 
 [node name="ScaleMarkLine" type="ColorRect"]
 material = SubResource("ShaderMaterial_ckt3o")

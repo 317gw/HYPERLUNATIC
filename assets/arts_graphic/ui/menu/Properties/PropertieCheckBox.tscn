@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm4k17v5d18rv"]
 
 [ext_resource type="Texture2D" uid="uid://cg6kjc0fk5h1u" path="res://assets/arts_graphic/icon/godot icons/UndoRedo.svg" id="1_26s5q"]
-[ext_resource type="Script" uid="uid://dyy7hiqlm5uti" path="res://assets/arts_graphic/ui/menu/Properties/propertie_check_box.gd" id="1_yshmt"]
+[ext_resource type="Script" uid="uid://dyy7hiqlm5uti" path="res://assets/arts_graphic/ui/menu/properties/propertie_check_box.gd" id="1_yshmt"]
 
 [node name="PropertieCheckBox" type="HBoxContainer"]
 custom_minimum_size = Vector2(300, 30)
@@ -42,6 +42,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
 [node name="ResetButton" type="TextureButton" parent="ResetButtonControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,13 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://bg24r2642jpyw"]
+[gd_scene load_steps=16 format=3 uid="uid://bg24r2642jpyw"]
 
 [ext_resource type="Script" uid="uid://b4pxiysdjl6cg" path="res://assets/arts_graphic/ui/menu/main_menus.gd" id="1_slv7n"]
 [ext_resource type="Shader" uid="uid://2426lu58r8do" path="res://assets/arts_graphic/shaders/dual_kawase_blur_downsample.gdshader" id="2_gho6j"]
 [ext_resource type="PackedScene" uid="uid://3dac3f7s7tk" path="res://assets/arts_graphic/ui/menu/menu_button.tscn" id="2_gn2qf"]
-[ext_resource type="PackedScene" uid="uid://crynbkg8m246g" path="res://assets/arts_graphic/ui/menu/Properties/Propertie.tscn" id="3_bv7pn"]
 [ext_resource type="Shader" uid="uid://bm4xb8ba5ispy" path="res://assets/arts_graphic/shaders/dual_kawase_blur_upsample.gdshader" id="3_p7o8j"]
 [ext_resource type="Script" uid="uid://bbcfelb2s8jd2" path="res://assets/arts_graphic/ui/menu/option_window.gd" id="3_xuyqn"]
 [ext_resource type="PackedScene" uid="uid://d2aioktb3sqfc" path="res://assets/arts_graphic/ui/menu/scroll_label.tscn" id="3_ysg1o"]
-[ext_resource type="Script" uid="uid://jipj3bpgw2p0" path="res://assets/arts_graphic/ui/menu/settings.gd" id="6_fe7ho"]
+[ext_resource type="PackedScene" uid="uid://c35yjkk5vy3fi" path="res://assets/arts_graphic/ui/menu/properties/PropertieOptionButton.tscn" id="7_4gxic"]
+[ext_resource type="Script" uid="uid://c8kou5vmdmemq" path="res://assets/arts_graphic/ui/menu/option_tabs/graphics.gd" id="7_kjysk"]
+[ext_resource type="PackedScene" uid="uid://b4jgw78qmlh6b" path="res://assets/arts_graphic/ui/menu/properties/PropertieHSlider.tscn" id="8_3vlx0"]
+[ext_resource type="PackedScene" uid="uid://cm4k17v5d18rv" path="res://assets/arts_graphic/ui/menu/properties/PropertieCheckBox.tscn" id="8_kjysk"]
+[ext_resource type="PackedScene" uid="uid://de8gm47mcn3al" path="res://assets/arts_graphic/ui/menu/properties/PropertieSpinBox.tscn" id="9_wsx4b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p7o8j"]
 shader = ExtResource("2_gho6j")
@@ -277,9 +280,6 @@ min_size = Vector2i(300, 300)
 keep_title_visible = true
 script = ExtResource("3_xuyqn")
 
-[node name="Settings" type="Node" parent="MenuControl/OptionWindow"]
-script = ExtResource("6_fe7ho")
-
 [node name="PanelContainer" type="PanelContainer" parent="MenuControl/OptionWindow"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -305,12 +305,12 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/panel = SubResource("StyleBoxFlat_lckfm")
 current_tab = 2
 
-[node name="常规" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
+[node name="General" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/常规"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/General"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -319,15 +319,15 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/常规/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/General/MarginContainer"]
 layout_mode = 2
 
-[node name="游戏" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
+[node name="InGame" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/游戏"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/InGame"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -336,14 +336,15 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/游戏/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/InGame/MarginContainer"]
 layout_mode = 2
 
-[node name="图形" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
+[node name="Graphics" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
+script = ExtResource("7_kjysk")
 metadata/_tab_index = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -352,143 +353,141 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "general"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionLabel" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 26
+text = "screen 16:9 1920,1200
+window 1:1 2000,2000"
+horizontal_alignment = 1
+
+[node name="DisplayMode" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "display_mode"
+
+[node name="ResolutionMode" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "resolution_mode"
+
+[node name="AspectRatios" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "aspect_ratios"
+
+[node name="Resolutions" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "resolutions"
+
+[node name="VerticalSync" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "vertical_sync"
+
+[node name="FOV" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("9_wsx4b")]
+layout_mode = 2
+propertie_name = "fov"
+
+[node name="Exposure" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("8_3vlx0")]
+layout_mode = 2
+num_hint_end = 16.0
+propertie_name = "exposure"
+
+[node name="Label2" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "post_processing"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnisotropicFiltering" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "anisotropic_filtering"
+
+[node name="MSAA2D" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "MSAA 2D"
+
+[node name="MSAA3D" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "MSAA 3D"
+
+[node name="SSAA" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("7_4gxic")]
+layout_mode = 2
+propertie_name = "ssaa"
+
+[node name="TAA" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("8_kjysk")]
+layout_mode = 2
+propertie_name = "taa"
+
+[node name="SSR" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("9_wsx4b")]
+layout_mode = 2
+num_hint_end = 512.0
+num_hint_decimals = 0
+propertie_name = "ssr"
+
+[node name="SSAO" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("8_kjysk")]
+layout_mode = 2
+propertie_name = "ssao"
+
+[node name="SSIL" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("8_kjysk")]
+layout_mode = 2
+propertie_name = "ssil"
+
+[node name="Glow" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Graphics/MarginContainer/VBoxContainer" instance=ExtResource("8_kjysk")]
+layout_mode = 2
+propertie_name = "glow"
+
+[node name="Audio" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Audio/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "常规"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
+[node name="PropertieHSlider" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VBoxContainer" instance=ExtResource("8_3vlx0")]
 layout_mode = 2
 
-[node name="ResolutionLabel" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/PanelContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 26
-text = "屏幕 16:9 1920,1200
-窗口 1:1 2000,2000"
-horizontal_alignment = 1
-
-[node name="DisplayMode" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-unique_name_in_owner = true
-layout_mode = 2
-propertie_name = "显示模式"
-control_mode = 3
-
-[node name="AspectRatios" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-unique_name_in_owner = true
-layout_mode = 2
-propertie_name = "纵横比"
-control_mode = 3
-
-[node name="Resolutions" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-unique_name_in_owner = true
-layout_mode = 2
-propertie_name = "分辨率"
-control_mode = 3
-
-[node name="VerticalSync" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-unique_name_in_owner = true
-layout_mode = 2
-propertie_name = "垂直同步"
-
-[node name="FOV" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "视野"
-control_mode = 1
-default_value = 90.0
-num_hint_end = 180.0
-num_hint_decimals = 0
-
-[node name="Exposure" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "曝光"
-control_mode = 0
-default_value = 0.8
-num_hint_end = 16.0
-
-[node name="Label2" type="Label" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "画面后期"
-horizontal_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="AnisotropicFiltering" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "各向异性过滤"
-control_mode = 3
-
-[node name="MSAA 2D" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "MSAA 2D"
-control_mode = 3
-
-[node name="MSAA 3D" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "MSAA 3D"
-control_mode = 3
-
-[node name="ScreenSpaceAA" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "屏幕空间抗锯齿"
-control_mode = 3
-
-[node name="TAA" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "时间抗锯齿"
-
-[node name="SSR" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "屏幕空间反射"
-control_mode = 1
-num_hint_end = 256.0
-num_hint_decimals = 0
-
-[node name="SSAO" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "屏幕空间环境光遮蔽"
-
-[node name="SSIL" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "屏幕空间间接照明"
-
-[node name="Glow" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer" instance=ExtResource("3_bv7pn")]
-layout_mode = 2
-propertie_name = "辉光"
-
-[node name="音频" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/音频"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/音频/MarginContainer"]
-layout_mode = 2
-
-[node name="输入" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
+[node name="Controls" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/输入"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -497,15 +496,15 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/输入/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Controls/MarginContainer"]
 layout_mode = 2
 
-[node name="模组" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
+[node name="Mod" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/模组"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Mod"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -514,15 +513,15 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/模组/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Mod/MarginContainer"]
 layout_mode = 2
 
-[node name="其他" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
+[node name="Misc" type="ScrollContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/其他"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Misc"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -531,7 +530,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/其他/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/Misc/MarginContainer"]
 layout_mode = 2
 
 [node name="ButtonControl" type="HBoxContainer" parent="MenuControl/OptionWindow/PanelContainer/VBoxContainer"]
@@ -592,10 +591,6 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="about_to_popup" from="MenuControl/OptionWindow" to="MenuControl/OptionWindow" method="_on_about_to_popup"]
 [connection signal="close_requested" from="MenuControl/OptionWindow" to="MenuControl/OptionWindow" method="_on_close_requested"]
-[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/DisplayMode" to="MenuControl/OptionWindow" method="_on_display_mode_option_selected"]
-[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/AspectRatios" to="MenuControl/OptionWindow" method="_on_aspect_ratios_option_selected"]
-[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/Resolutions" to="MenuControl/OptionWindow" method="_on_resolutions_option_selected"]
-[connection signal="option_selected" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/TabContainer/图形/MarginContainer/VBoxContainer/VerticalSync" to="MenuControl/OptionWindow" method="_on_vertical_sync_option_selected"]
 [connection signal="pressed" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl/Confirm" to="MenuControl/OptionWindow" method="_on_confirm_pressed"]
 [connection signal="pressed" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl/Apply" to="MenuControl/OptionWindow" method="_on_apply_pressed"]
 [connection signal="pressed" from="MenuControl/OptionWindow/PanelContainer/VBoxContainer/ButtonControl/Cancel" to="MenuControl/OptionWindow" method="_on_cancel_pressed"]

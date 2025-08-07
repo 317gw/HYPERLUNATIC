@@ -876,28 +876,28 @@ c菜单可呼出
 
 *github推送
 插件:
-添加DragNDropNodes
-添加godot_core_system
-添加SignalVisualizer
-添加theme_gen
-后处理
-添加菜单模糊
-添加High Quality Post Process Outline高质量边缘线着色器
+　　添加DragNDropNodes
+　　添加godot_core_system
+　　添加SignalVisualizer
+　　添加theme_gen
+　　后处理
+　　添加菜单模糊
+　　添加High Quality Post Process Outline高质量边缘线着色器
 c菜单:
-c键可呼出
-鼠标投影射线检查信息
-鼠标投影改变瞄准位置
-鼠标中键移动摄像机
+　　c键可呼出
+　　鼠标投影射线检查信息
+　　鼠标投影改变瞄准位置
+　　鼠标中键移动摄像机
 其他:
-调整场景材质
-制作ChainSkyLimit，锁链自动寻找并悬挂到SkyLimit
-制作GetReady，用于一次性在_process搜索条件并执行函数，后删除
-添加脚本animated_number
-添加low_prefabricate文件夹预制库，方便复用资源
-制作程序化生成的梯子，StaticBody3D地图部件
-制作经典的 ERROR 模型和着色器
-调整ui显示顺序
-调整文件结构
+　　调整场景材质
+　　制作ChainSkyLimit，锁链自动寻找并悬挂到SkyLimit
+　　制作GetReady，用于一次性在_process搜索条件并执行函数，后删除
+　　添加脚本animated_number
+　　添加low_prefabricate文件夹预制库，方便复用资源
+　　制作程序化生成的梯子，StaticBody3D地图部件
+　　制作经典的 ERROR 模型和着色器
+　　调整ui显示顺序
+　　调整文件结构
 
 4.3
 半重做了自瞄准星
@@ -1020,32 +1020,87 @@ DebugMenu:
 
 7.8 （5.18提交至今）
 插件：
-更新godot_core_system 到0.0.3
-修改一部分readme
-
+　　更新godot_core_system 到0.0.3
+　　修改一部分readme
 素材：
-添加godot icons 为godot引擎仓库复制而来
-制作从blender到godot的批量3d网格场景资产管线
-添加石料模型场景库，分场景保存（132个），带有碰撞，有大理石和花岗岩两套材质
-更新高塔场景模型
-为高塔场景添加简易材质和纹理
-添加上述模型的相关纹理
-
+　　添加godot icons 为godot引擎仓库复制而来
+　　制作从blender到godot的批量3d网格场景资产管线
+　　添加石料模型场景库，分场景保存（132个），带有碰撞，有大理石和花岗岩两套材质
+　　更新高塔场景模型
+　　为高塔场景添加简易材质和纹理
+　　添加上述模型的相关纹理
 ui：
-正在制作ui选项卡框架
-制作双层刻度条着色器
-
+　　正在制作ui选项卡框架
+　　制作双层刻度条着色器
 工具&其他脚本：
-制作从地球经纬度和日期计算天文数据的算法 *未完工
-制作测试数学函数的函数
-制作从随机英文字符串的单词分割算法
-整理并移动数据层的粒子混合物算法 *未完工
-
+　　制作从地球经纬度和日期计算天文数据的算法 *未完工
+　　制作测试数学函数的函数
+　　制作从随机英文字符串的单词分割算法
+　　整理并移动数据层的粒子混合物算法 *未完工
 主readme：
-调整敌人英文译名
-添加卡牌策划
-调整其他文本
-
+　　调整敌人英文译名
+　　添加卡牌策划
+　　调整其他文本
 其他：
-整理文件目录
-修改各类readme后缀为.md
+　　整理文件目录
+　　修改各类readme后缀为.md
+
+
+7.9
+实装ScaleMarkLine作为PropertieHSlider的刻度，并添加实时刷新
+为TabContainer的选项卡添加语言支持，节点名称改为英文
+调整音频总线布局，禁用全局goat_audio_bus脚本，md这玩意给我加了138个音频总线
+
+7.10
+禁用了goat插件关于goat_audio_bus的代码，tmd这玩意自动全局加载，又给我加了200+个音频总线，卡的编辑器进不去出不来
+更新了localizations.csv
+准备重做设置菜单
+调整HSlider的主题
+分离了option_window.gd脚本中关于具体设置类别选项卡的代码
+
+7.11
+为设置菜单的窗口比例计算添加了前0补位，现在频繁刷新不会因字位变化抖动了
+去掉设置菜单的窗口显示尺寸的小数部分
+调整4个Propertie组件信号的实现，现在需要直接获取到对应节点到代码中连接信号
+将ScaleMarkLine材质资源本地化到场景，现在可以正常刷新了
+分离了option_window.gd脚本中关于配置文件的部分到全局脚本settings_config_manager.gd
+
+7.14
+调整和增加了分辨率选项
+
+7.16 ~ 7.18
+重构设置菜单与配置管理架构
+
+~ 8.5
+重构设置菜单与配置管理架构, 基本完成（自己研究的，真的很难）
+基本完成图形设置菜单
+
+8.7（git推送）
+重构设置菜单与配置管理：
+　　分离了option_window.gd脚本中关于具体设置类别选项卡的代码
+　　分离了option_window.gd脚本中关于配置文件的部分到全局脚本settings_config_manager.gd
+　　重新设计数据格式，数据更集中，现在支持统一循环处理
+　　配套更新了四个 Propertie
+　　在 OptionTab 中 增加关于数据的检查和获取函数
+　　基本完成图形设置菜单
+Readme：
+　　更新 README.md
+　　将 “## 🎮目前的进度 & 接下来要做的：” 部分单独转为 TodoPlan.md 并进行更新
+　　在 TodoPlan.md 添加了条目 发射器与弹射物 
+　　在 TodoPlan.md 添加了条目 近期任务 
+插件：
+　　新增 debug_draw_3d
+　　禁用goat插件关于goat_audio_bus的代码，和它的自动全局加载，调整音频总线布局
+ui：
+　　实装ScaleMarkLine作为PropertieHSlider的刻度，并添加实时刷新
+　　为TabContainer的选项卡添加语言支持，节点名称改为英文
+　　调整HSlider的主题
+　　为设置菜单的窗口比例计算添加了前0补位，现在频繁刷新不会因字位变化抖动了
+　　去掉设置菜单的窗口显示尺寸的小数部分
+　　调整4个Propertie组件信号的实现，现在需要直接获取到对应节点到代码中连接信号
+　　将ScaleMarkLine材质资源本地化到场景，现在可以正常刷新了
+　　调整和增加了分辨率选项
+本地化：
+　　更新了localizations.csv
+工具&其他脚本：
+　　添加 call_once_when_needed.gd 用于呼叫和需要时调用函数一次

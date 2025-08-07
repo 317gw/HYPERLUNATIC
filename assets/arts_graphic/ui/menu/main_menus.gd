@@ -15,7 +15,7 @@ enum LabelMode {ONE_SCROLL_LABEL, TILE_SCROLL_LABEL}
 
 @onready var menu_control: Control = $MenuControl
 @onready var back_ground: Control = $MenuControl/BackGround
-@onready var option_window: Window = $MenuControl/OptionWindow
+@onready var option_window: HL.OptionWindow = $MenuControl/OptionWindow
 @onready var button_container: Control = $MenuControl/ButtonContainer
 @onready var text_timer: Timer = $MenuControl/TextTimer
 @onready var scroll_label_timer: Timer = $MenuControl/ScrollLabelTimer

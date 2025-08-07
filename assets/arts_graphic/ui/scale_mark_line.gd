@@ -28,12 +28,23 @@ extends ColorRect
 @onready var shader_material: ShaderMaterial = self.material
 
 
-func _ready() -> void:
-	force_update()
+#func _ready() -> void:
+	#if not Engine.is_editor_hint():
+		#add_child(GetReady.new(func(): return self.draw, force_update))
+
+
+#func _process(delta: float) -> void:
+	#if Engine.is_editor_hint():
+		#force_update()
+	#if self.visible:
+		#force_update()
 
 
 func _physics_process(delta: float) -> void:
+	#force_update()
 	if Engine.is_editor_hint():
+		force_update()
+	if self.visible:
 		force_update()
 
 

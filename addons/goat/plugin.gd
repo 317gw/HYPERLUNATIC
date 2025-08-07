@@ -12,9 +12,9 @@ func _enter_tree():
 	prepare_goat_project_settings()
 
 	add_goat_actions()
-	add_goat_audio_buses()
+	#add_goat_audio_buses()
 
-	add_autoload_singleton("goat_audio_bus", "res://addons/goat/autoload/audio_bus.gd")
+	#add_autoload_singleton("goat_audio_bus", "res://addons/goat/autoload/audio_bus.gd")
 	add_autoload_singleton("goat_locale", "res://addons/goat/autoload/locale.gd")
 
 	add_autoload_singleton("goat_utils", "res://addons/goat/globals/goat_utils.gd")
@@ -41,9 +41,9 @@ func _exit_tree():
 	remove_autoload_singleton("goat_utils")
 
 	remove_autoload_singleton("goat_locale")
-	remove_autoload_singleton("goat_audio_bus")
+	#remove_autoload_singleton("goat_audio_bus")
 
-	remove_goat_audio_buses()
+	#remove_goat_audio_buses()
 	remove_goat_actions()
 
 	clear_plugins()

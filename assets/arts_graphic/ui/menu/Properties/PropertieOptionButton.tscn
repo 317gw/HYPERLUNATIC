@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c35yjkk5vy3fi"]
 
 [ext_resource type="Texture2D" uid="uid://cg6kjc0fk5h1u" path="res://assets/arts_graphic/icon/godot icons/UndoRedo.svg" id="1_2fpxk"]
-[ext_resource type="Script" uid="uid://2g6ruplkkl1j" path="res://assets/arts_graphic/ui/menu/Properties/propertie_option_button.gd" id="1_agwl2"]
+[ext_resource type="Script" uid="uid://2g6ruplkkl1j" path="res://assets/arts_graphic/ui/menu/properties/propertie_option_button.gd" id="1_agwl2"]
 
 [node name="PropertieOptionButton" type="HBoxContainer"]
 custom_minimum_size = Vector2(300, 30)
@@ -10,6 +10,7 @@ offset_bottom = 30.0
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 script = ExtResource("1_agwl2")
+options = PackedStringArray()
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 2
@@ -61,5 +62,5 @@ texture_hover = ExtResource("1_2fpxk")
 ignore_texture_size = true
 stretch_mode = 4
 
-[connection signal="item_selected" from="Control/OptionButton" to="." method="_on_option_button_selected"]
+[connection signal="item_selected" from="Control/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="toggled" from="ResetButtonControl/ResetButton" to="." method="_on_reset_button_toggled"]

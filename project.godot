@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="HYPERLUNATIC"
-config/version="0.01"
+config/version="v0.1.0-dev.2"
 config/tags=PackedStringArray("master")
 run/main_scene="res://assets/maps/levels/level_001_test_sandbox.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
@@ -33,7 +33,8 @@ FreezeTickManager="*res://assets/global/scripts/FreezeTickManager.gd"
 BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 Global="*res://assets/global/global.tscn"
-goat_audio_bus="*res://addons/goat/autoload/audio_bus.gd"
+SettingsConfigManager="*res://assets/global/scripts/settings_config_manager.gd"
+goat_audio_bus="res://addons/goat/autoload/audio_bus.gd"
 goat_locale="*res://addons/goat/autoload/locale.gd"
 goat_utils="*res://addons/goat/globals/goat_utils.gd"
 goat="*res://addons/goat/globals/goat.gd"
@@ -51,6 +52,10 @@ CoreSystem="*res://addons/godot_core_system/source/core_system.gd"
 [debug]
 
 settings/physics_interpolation/enable_warnings=false
+
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [display]
 
@@ -323,7 +328,8 @@ goat_rotate_inventory={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/localization/localizations.en.translation", "res://assets/localization/localizations.zh.translation")
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://assets/localization/localizations.en.translation", "res://assets/localization/localizations.zh_CN.translation")
 
 [layer_names]
 

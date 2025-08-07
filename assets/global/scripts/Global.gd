@@ -14,6 +14,7 @@ const Hl = preload("res://assets/global/scripts/HL.gd")
 ###
 # 自动场景初始化
 # 注意大小写对应
+#const SETTINGS_CONFIG_MANAGER = preload("res://assets/global/settings_config_manager.tscn")
 const EFFECTS = preload("res://assets/global/Effects.tscn")
 const POST_PROCESSING = preload("res://assets/global/post-processing.tscn")
 const FLUID_MECHANICS_MANAGER = preload("res://assets/systems/water_physics/fluid_mechanics_manager.tscn")
@@ -27,9 +28,11 @@ const MAIN_MENUS = preload("res://assets/arts_graphic/ui/menu/main_menus.tscn")
 const DANMAKU_MANAGER = preload("res://assets/danmaku/danmaku_manager.tscn")
 
 
+
 ###
 var GLOBAL_SCENES_LIST_START = "GLOBAL_SCENES_LIST_START"
 #
+#var settings_config_manager: HL.SettingsConfigManager
 var effects: Node3D
 var fluid_mechanics_manager: HL.FluidMechanicsManager
 var war_fog: Node3D
@@ -75,6 +78,8 @@ func _ready() -> void:
 
 	ready_global_scenes()
 	add_child(GetReady.new(func(): return get_tree().current_scene, _global_scenes_ready))
+
+
 
 
 func _process(_delta: float) -> void:

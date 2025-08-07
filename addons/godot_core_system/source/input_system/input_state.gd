@@ -17,10 +17,10 @@ class ActionState:
 	var last_press_time: float = 0.0
 	## 上次释放时间
 	var last_release_time: float = 0.0
-	
+
 	func _init() -> void:
 		reset()
-	
+
 	## 重置状态
 	func reset() -> void:
 		pressed = false
@@ -30,21 +30,21 @@ class ActionState:
 		press_time = 0.0
 		last_press_time = 0.0
 		last_release_time = 0.0
-	
+
 	## 更新状态
 	## [param is_pressed] 是否按下
 	## [param input_strength] 输入强度
 	func update(is_pressed: bool, input_strength: float) -> void:
 		var current_time = Time.get_ticks_msec() / 1000.0
-		
+
 		# 更新按下/释放状态
 		just_pressed = is_pressed and not pressed
 		just_released = not is_pressed and pressed
 		pressed = is_pressed
-		
+
 		# 更新强度
 		strength = input_strength if pressed else 0.0
-		
+
 		# 更新时间
 		if just_pressed:
 			last_press_time = press_time
@@ -62,7 +62,7 @@ var _action_states: Dictionary = {}
 func update_action(action_name: String, is_pressed: bool, strength: float) -> void:
 	if not _action_states.has(action_name):
 		_action_states[action_name] = ActionState.new()
-	
+
 	_action_states[action_name].update(is_pressed, strength)
 
 ## 获取动作状态
@@ -71,7 +71,7 @@ func update_action(action_name: String, is_pressed: bool, strength: float) -> vo
 func get_action_state(action_name: String) -> ActionState:
 	if not _action_states.has(action_name):
 		_action_states[action_name] = ActionState.new()
-	
+
 	return _action_states[action_name]
 
 ## 检查动作是否按下

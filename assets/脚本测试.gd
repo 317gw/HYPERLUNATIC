@@ -6,6 +6,13 @@ extends Node3D
 @onready var graph: Graph2D = $Node/Graph2D
 
 
+var DisplayMode: Dictionary = {
+	"Windowed": Window.Mode.MODE_WINDOWED,
+	"Fullscreen": Window.Mode.MODE_FULLSCREEN,
+	"Exclusive Fullscreen": Window.Mode.MODE_EXCLUSIVE_FULLSCREEN,
+}
+
+
 func _ready() -> void:
 	print()
 	print("Script testing: 脚本测试：")
@@ -63,18 +70,24 @@ func _ready() -> void:
 	#var booool = 1 < 2 < 3
 
 	#print(HL.parse_time("60?0000000000*wdf~36/99"), " CCCCCC")
+
+	#var rs: String = HL.random_string(100, HL.LowercaseAlphabet)
+	#var ad:= AlphabetDivision.split_like_english_words(rs, 4, 8)
+	#prints("输入： ", rs, " 输出： ", ad)
+	#var rs2: String = "helloingworldbeautifulstrength"
+	#var ad2:= AlphabetDivision.split_like_english_words(rs2, 3, 8)
+	#prints("输入： ", rs2, " 输出： ", ad2)
+	#var rs3: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis."
+	#var ad3:= AlphabetDivision.split_like_english_words(rs3, 2, 12)
+	#prints("输入： ", rs3, " 输出： ", ad3)
+
 #endregion
 
-	var rs: String = HL.random_string(100, HL.LowercaseAlphabet)
-	var ad:= AlphabetDivision.split_like_english_words(rs, 4, 8)
-	prints("输入： ", rs, " 输出： ", ad)
-	var rs2: String = "helloingworldbeautifulstrength"
-	var ad2:= AlphabetDivision.split_like_english_words(rs2, 3, 8)
-	prints("输入： ", rs2, " 输出： ", ad2)
-	var rs3: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis."
-	var ad3:= AlphabetDivision.split_like_english_words(rs3, 2, 12)
-	prints("输入： ", rs3, " 输出： ", ad3)
 
+
+	#print(DisplayMode.keys().find("Fullscreen"))
+
+	print(str(Vector2(111, 223)))
 
 
 #var ttt = 0

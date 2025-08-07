@@ -20,7 +20,7 @@ const FOV_CHANGE: float = 1.5
 @export var tilt_target_angle_multiply : float = 0.5
 
 @export_group("FOV&Zoom")
-@export var fov_base: float = 75.0
+@export var fov_base: float = 90.0
 @export var fov_zoom: float = 5.0
 @export var fov_clamp_max: float = 1.2
 @export_range(0, 1) var fov_sensitivity : float = 0.1

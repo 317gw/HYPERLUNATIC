@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://crynbkg8m246g"]
 
-[ext_resource type="Script" uid="uid://dn7s4gou84l3w" path="res://assets/arts_graphic/ui/menu/Properties/menu_propertie.gd" id="1_lewet"]
+[ext_resource type="Script" uid="uid://dn7s4gou84l3w" path="res://assets/arts_graphic/ui/menu/properties/menu_propertie.gd" id="1_lewet"]
 [ext_resource type="Texture2D" uid="uid://cg6kjc0fk5h1u" path="res://assets/arts_graphic/icon/godot icons/UndoRedo.svg" id="2_h5i41"]
 
 [node name="Propertie" type="HBoxContainer"]

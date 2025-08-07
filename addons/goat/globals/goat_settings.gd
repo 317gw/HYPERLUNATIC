@@ -30,7 +30,7 @@ var _settings_file := ConfigFile.new()
 
 func _ready():
 	_settings_file.load(SETTINGS_FILE_NAME)
-	
+
 	for entry in DEFAULT_VALUES:
 		var section =  entry[0]
 		var key = entry[1]
@@ -41,9 +41,9 @@ func _ready():
 		# add it with the default value
 		if not _settings_file.has_section_key(section, key):
 			_settings_file.set_value(section, key, value)
-	
+
 	_settings_file.save(SETTINGS_FILE_NAME)
-	
+
 	# Connect settings to global handlers
 	var settings_signals_handlers = {
 		"value_changed_graphics_shadows_enabled": "_on_shadows_settings_changed",
@@ -55,13 +55,13 @@ func _ready():
 		"value_changed_sound_effects_volume": "_on_effects_settings_changed",
 		"value_changed_gui_language": "_on_gui_language_changed",
 	}
-	
+
 	for key in settings_signals_handlers:
 		connect(key, Callable(self, settings_signals_handlers[key]))
-	
+
 	# Make sure that settings are applied to new nodes
 	get_tree().connect("node_added", self._on_node_added)
-	
+
 	# Make sure that initial values are loaded correctly
 	_on_fullscreen_settings_changed()
 	_on_music_settings_changed()
@@ -97,22 +97,22 @@ func find_matching_loaded_locale() -> String:
 	var current_locale = TranslationServer.get_locale()
 	var loaded_locales = TranslationServer.get_loaded_locales()
 	var fallback_locale = ProjectSettings.get("internationalization/locale/fallback")
-	
+
 	# If no translations are provided, return fallback locale
 	if loaded_locales.is_empty():
 		return fallback_locale
-	
+
 	# If the exact locale is loaded, return it
 	if current_locale in loaded_locales:
 		return current_locale
-	
+
 	# Look for partial matches, e.g. current is "en_US", loaded is "en"
 	# Try the current locale first, then the fallback locale
 	for locale in [current_locale, fallback_locale]:
 		for loaded_locale in loaded_locales:
 			if locale.substr(0, 2) == loaded_locale.substr(0, 2):
 				return loaded_locale
-	
+
 	# If nothing matches, return first provided translation
 	return loaded_locales[0]
 

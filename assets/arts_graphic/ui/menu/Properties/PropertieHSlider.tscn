@@ -1,11 +1,77 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4jgw78qmlh6b"]
+[gd_scene load_steps=13 format=3 uid="uid://b4jgw78qmlh6b"]
 
-[ext_resource type="Script" uid="uid://b6pchbjcrm2lx" path="res://assets/arts_graphic/ui/menu/Properties/propertie_h_slider.gd" id="1_o131y"]
+[ext_resource type="Script" uid="uid://b6pchbjcrm2lx" path="res://assets/arts_graphic/ui/menu/properties/propertie_h_slider.gd" id="1_o131y"]
 [ext_resource type="Texture2D" uid="uid://cg6kjc0fk5h1u" path="res://assets/arts_graphic/icon/godot icons/UndoRedo.svg" id="1_sqdl3"]
+[ext_resource type="PackedScene" uid="uid://epp0qwajcmel" path="res://assets/arts_graphic/ui/scale_mark_line.tscn" id="2_08mpo"]
+[ext_resource type="Texture2D" uid="uid://c37d0lsqle6xj" path="res://assets/arts_graphic/ui/menu/properties/grabber.png" id="2_gdrdx"]
+[ext_resource type="Texture2D" uid="uid://bwmg6vrp6gfpd" path="res://assets/arts_graphic/ui/menu/properties/grabber_disabled.png" id="3_2kcb6"]
+[ext_resource type="Texture2D" uid="uid://cgxjxy3c6jefk" path="res://assets/arts_graphic/ui/menu/properties/grabber_highlight.png" id="4_37my5"]
+[ext_resource type="Shader" uid="uid://cjdn5ce8vfobe" path="res://assets/arts_graphic/shaders/scale_mark_line.gdshader" id="6_2kcb6"]
 
-[sub_resource type="Curve" id="Curve_o131y"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdrdx"]
+bg_color = Color(0.601224, 0.601223, 0.601223, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+anti_aliasing_size = 0.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37my5"]
+bg_color = Color(0.796243, 0.796243, 0.796243, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+anti_aliasing_size = 0.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2kcb6"]
+bg_color = Color(0.262933, 0.262932, 0.262932, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.450648, 0.450648, 0.450648, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+anti_aliasing_size = 0.5
+
+[sub_resource type="Theme" id="Theme_fp5o2"]
+HSlider/icons/grabber = ExtResource("2_gdrdx")
+HSlider/icons/grabber_disabled = ExtResource("3_2kcb6")
+HSlider/icons/grabber_highlight = ExtResource("4_37my5")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_gdrdx")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_37my5")
+HSlider/styles/slider = SubResource("StyleBoxFlat_2kcb6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37my5"]
+resource_local_to_scene = true
+shader = ExtResource("6_2kcb6")
+shader_parameter/up_color = Color(0.745098, 0.745098, 0.745098, 1)
+shader_parameter/up_count = 5
+shader_parameter/up_width = 0.00833333
+shader_parameter/up_margin_left = 0.00833333
+shader_parameter/up_margin_right = 0.00833333
+shader_parameter/up_margin_top = 0.0
+shader_parameter/up_margin_bottom = 0.0
+shader_parameter/below_color = Color(1, 1, 1, 1)
+shader_parameter/below_count = 21
+shader_parameter/below_width = 0.00416667
+shader_parameter/below_margin_left = 0.0104167
+shader_parameter/below_margin_right = 0.0104167
+shader_parameter/below_margin_top = 0.0
+shader_parameter/below_margin_bottom = 0.5
 
 [node name="PropertieHSlider" type="HBoxContainer"]
 custom_minimum_size = Vector2(300, 30)
@@ -31,16 +97,30 @@ size_flags_stretch_ratio = 0.4
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 16.0
+offset_top = 7.5
+offset_bottom = 23.5
 grow_horizontal = 2
+theme = SubResource("Theme_fp5o2")
 max_value = 1.0
 step = 0.01
+ticks_on_borders = true
 
-[node name="Line2D" type="Line2D" parent="Control"]
-position = Vector2(0, 18.03)
-points = PackedVector2Array(0, 0, 43.385, 0)
-width = 19.68
-width_curve = SubResource("Curve_o131y")
+[node name="ScaleMarkLine" parent="Control" instance=ExtResource("2_08mpo")]
+material = SubResource("ShaderMaterial_37my5")
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+margin_left = 2.0
+margin_right = 2.0
+below_margin_top = 0.0
+below_margin_bottom = 0.5
 
 [node name="NumHintControl" type="Control" parent="."]
 layout_mode = 2
@@ -66,6 +146,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.1
 
 [node name="ResetButton" type="TextureButton" parent="ResetButtonControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,13 +155,14 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.08
+disabled = true
 texture_normal = ExtResource("1_sqdl3")
 texture_pressed = ExtResource("1_sqdl3")
 texture_hover = ExtResource("1_sqdl3")
 ignore_texture_size = true
 stretch_mode = 4
 
-[connection signal="value_changed" from="Control/HSlider" to="." method="_on_range_value_changed"]
+[connection signal="value_changed" from="Control/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="editing_toggled" from="NumHintControl/NumHintLineEdit" to="." method="_on_num_hint_line_edit_editing_toggled"]
 [connection signal="text_changed" from="NumHintControl/NumHintLineEdit" to="." method="_on_num_hint_line_edit_text_changed"]
 [connection signal="text_submitted" from="NumHintControl/NumHintLineEdit" to="." method="_on_num_hint_line_edit_text_submitted"]

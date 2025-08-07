@@ -1,18 +1,18 @@
 #extends Node
 
-	
+
 # 	#Movement(delta)
-	
+
 # 	#Current_Max_Speed
 
-	
+
 # 	#var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward") # 获取输入方向
 # 	#if input_dir and is_on_floor():
 # 		#var moveVector := transform.basis * Vector3(input_dir.x, 0, input_dir.y) * Current_Max_Speed
 # 		#Do_Movement(moveVector)
 # 		#Do_Accelerate(moveVector)
 # 		#Do_Apply_Friction()
-	
+
 
 # func Movement(delta):
 # 	# 获取输入方向并处理移动/减速
@@ -25,13 +25,13 @@
 # 			#var weight = Speed_Curve.sample(direction_Similarity)
 # 			#var lerps = clamp(
 # 				#lerp(
-# 					#Acceleration_Normal, 
+# 					#Acceleration_Normal,
 # 					#lerp(
-# 						#Acceleration_Normal, 
-# 						#Acceleration_Max, 
-# 						#weight), 
-# 					#velocity2D.length()/Normal_Speed), 
-# 				#Acceleration_Max, 
+# 						#Acceleration_Normal,
+# 						#Acceleration_Max,
+# 						#weight),
+# 					#velocity2D.length()/Normal_Speed),
+# 				#Acceleration_Max,
 # 				#Acceleration_Normal)
 # 			#
 # 			#velocity2D = velocity2D.move_toward(direction2D * Max_Speed, lerps * delta)
@@ -51,8 +51,8 @@
 # 		velocity2D = velocity2D.move_toward(direction2D * Air_Speed, Air_Acceleration * delta)
 # 	elif is_on_floor(): # 地上
 # 		velocity2D = velocity2D.move_toward(Vector2.ZERO, Normal_Speed) # x轴速度减速到0
-	
-	
+
+
 # 	velocity.x = velocity2D.x
 # 	velocity.z = velocity2D.y
 
@@ -115,18 +115,18 @@
 # 	var speed = Velocity.length() # 计算速度大小
 # 	if speed < 0.1: # 如果速度小于0.1
 # 		return Velocity # 返回速度
-	
+
 # 	# 减少一些速度，但如果速度小于减速阈值，就减少阈值的量。
 # 	var control: float = StopSpeed if speed < StopSpeed else speed # 控制速度
 # 	var drop = control * get_physics_process_delta_time() * frictionAmount # 计算减速量
-	
+
 # 	# 缩放速度
 # 	var newspeed: float = speed - drop # 计算新速度
 # 	if newspeed < 0: # 如果新速度小于0
 # 		newspeed = 0 # 新速度设为0
 # 	if newspeed == speed: # 如果新速度等于原速度
 # 		return Velocity # 返回速度
-	
+
 # 	newspeed /= speed # 计算新速度比例
 # 	Velocity *= newspeed # 缩放速度
 # 	return Velocity # 返回速度
@@ -140,23 +140,23 @@
 # 	var speed = Velocity.length() # 计算速度大小
 # 	if speed < 0.1: # 如果速度小于0.1
 # 		return Velocity # 返回速度
-	
+
 # 	# 减少一些速度，但如果速度小于减速阈值，就减少阈值的量。
 # 	var control: float # 控制速度
 # 	if speed < StopSpeed:
-# 		control = StopSpeed 
+# 		control = StopSpeed
 # 	else:
 # 		control = speed
 # 	frictionAmount = clamp(frictionAmount, 0, Current_Speed_Max)
 # 	var drop = control * get_physics_process_delta_time() * 5 # 计算减速量
-	
+
 # 	# 缩放速度
 # 	var newspeed: float = speed - drop # 计算新速度
 # 	if newspeed < 0: # 如果新速度小于0
 # 		newspeed = 0 # 新速度设为0
 # 	if newspeed == speed: # 如果新速度等于原速度
 # 		return Velocity # 返回速度
-	
+
 # 	Velocity *= newspeed / speed #  计算新速度比例 缩放速度
 # 	return Velocity # 返回速度
 
@@ -169,10 +169,10 @@
 # func Look_back_and_Turn_round2():
 # 	if is_look_back:
 # 		look_back_rotation = lerp(look_back_rotation, PI*angle_sign, PI*DELTA / LookTurn_Time) # Q键回头
-	
+
 # 	if not is_look_back and is_turn_round:
 # 		look_back_rotation = lerp(look_back_rotation, 0.0, PI*DELTA / LookTurn_Time)
-	
+
 # 	if is_turn_round:
 # 		turn_round_rotation = lerp(turn_round_rotation, PI*angle_sign, PI*DELTA / LookTurn_Time)
 # 		if is_equal_approx(turn_round_rotation, PI):
@@ -191,10 +191,10 @@
 # 				is_look_back = true
 # 	if look_back_timer.is_stopped() and not Input.is_action_pressed("look_back"):
 # 		is_look_back = false
-	
-	
-	
-	
+
+
+
+
 
 
 
@@ -213,27 +213,27 @@
 
 # func _Look_back_and_Turn_round():
 # 	var can_look_back = 0
-	
+
 # 	var camera2D := CAMERA_CONTROLLER.global_rotation.y
 # 	var forward2D := Vector2(transform.basis.z.z, transform.basis.z.x)
 # 	print(
 # 		str(rad_to_deg(forward2D.angle()))  + " - " +
 # 		str(rad_to_deg(camera2D)) +  " = " +
 # 		str(rad_to_deg(forward2D.angle() - camera2D)))
-	
+
 # 	if Input.is_action_just_pressed("look_back_and_turn_round"):
 # 		if abs(Velocity2D.angle_to(forward2D)) < deg_to_rad(15):
 # 			angle_sign = 1 if _rotation_input >= 0 else -1
 # 		else:
 # 			angle_sign = 1 if forward2D.angle() >= camera2D else -1
-	
-	
+
+
 # 	if Input.is_action_pressed("look_back_and_turn_round"):
 # 		is_look_back = true
 # 	else:
 # 		is_look_back = false
-	
-	
+
+
 # 	if is_look_back:
 # 		look_back_rotation = lerp(look_back_rotation, PI, PI*DELTA / LookTurn_Time) # 回头
 # 	else:
@@ -273,7 +273,7 @@
 
 
 
-	
+
 
 
 
@@ -971,10 +971,10 @@ func is_point_inside_mesh_axis(space_state: PhysicsDirectSpaceState3D, point: Ve
 		var result = space_state.intersect_ray(ray_params)
 		if not result:
 			return false
-		
+
 		if not result.collider == _parent_rigid_body:
 			return false
-	
+
 	return true
 
 
@@ -1200,7 +1200,7 @@ class VoxelChunk:
 		data.resize(size * size * size)
 		data.fill(1.0)
 
-	
+
 	if data is Callable:
 		# 按分块遍历优化
 		#for chunk_pos in voxel_grid.chunks.keys():
@@ -1217,7 +1217,7 @@ class VoxelChunk:
 							continue
 						#voxel_grid.write(global_x, global_y, global_z, data.call(global_x, global_y, global_z))
 						voxel_grid.write(x, y, z, data.call(x, y, z))
-		
+
 		# Marching Cubes 分块处理
 		for chunk_pos in voxel_grid.chunks.keys():
 			var chunk = voxel_grid.chunks[chunk_pos]
@@ -1229,7 +1229,7 @@ class VoxelChunk:
 						var global_z = chunk_pos.z * CHUNK_SIZE + z
 						#_march_cube(global_x, global_y, global_z, voxel_grid, vertices)
 						_march_cube(x, y, z, voxel_grid, vertices)
-	
+
 
 
 
@@ -1248,7 +1248,7 @@ func generate_mesh(field_points: Dictionary) -> ArrayMesh:
 	for cell in field_points:
 		var cube_index = 0b00000000
 		var cell_density = []
-		
+
 		# 计算8个顶点的密度值
 		for i in range(8):
 			var sample_pos = cell + MarchingTable.POINTS[i]
@@ -1274,7 +1274,7 @@ func generate_mesh(field_points: Dictionary) -> ArrayMesh:
 			#vertices.append(pos)
 			#vertices.append(LinearInterp(p1, p2, threshold))
 			vertices.append(p1+p2)
-	
+
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	st.set_smooth_group(-1)
@@ -1308,9 +1308,9 @@ func LinearInterp(p1: Vector3, p2: Vector3, value: float ) -> Vector3:
 
 func update_chunks():
 	var chunks_to_load = {}
-	
+
 	var max_chunks_in_view: int = floori(view_distance / chunk_size)
-	
+
 	for x in range(-max_chunks_in_view, max_chunks_in_view + 1):
 		for y in range(-max_chunks_in_view, max_chunks_in_view + 1):
 			for z in range(-max_chunks_in_view, max_chunks_in_view + 1):
@@ -1319,12 +1319,12 @@ func update_chunks():
 				if chunk_pos in loaded_chunks:
 					continue
 				loaded_chunks[chunk_pos] = true
-				
+
 				#if chunk_exists_on_disk(chunk_pos):
 					#load_chunk(chunk_pos)
 				#else:
 					#create_chunk(chunk_pos)
-	
+
 	for chunk_pos in loaded_chunks.keys():
 		if not chunk_pos in chunks_to_load:
 			loaded_chunks.erase(chunk_pos)
@@ -1412,9 +1412,148 @@ func _draw_loaded_chunks():
 			#DebugDraw.draw_line_cube_canvas(tran, Color.WEB_MAROON, 3)
 		#else:
 			#DebugDraw.draw_line_cube_canvas(tran, Color.LIGHT_SKY_BLUE)
-		
+
 	#DebugDraw.draw_chunks(loaded_chunks, chunk_size)
 	DebugDraw.draw_multi_line_cube(transforms)
+
+
+
+
+
+# 分辨率
+	if display_mode_dic.key == "Windowed":
+
+		if resolution_mode_dic.key == "Default":
+			aspect_ratios_config = CoreSystem.config_manager.get_value(GRAPHICS, WINDOWED_DEFAULT_ASPECT_RATIOS, MATCHING_NATIVE)
+			resolutions_config = CoreSystem.config_manager.get_value(GRAPHICS, WINDOWED_DEFAULT_RESOLUTIONS, MATCHING_NATIVE)
+			aspect_ratios_dic = get_value_in_dic(WINDOWED_DEFAULT_ASPECT_RATIOS, Resolutions, aspect_ratios_config)
+			resolutions_dic = get_value_in_dic(WINDOWED_DEFAULT_RESOLUTIONS, aspect_ratios_dic.value, resolutions_config)
+			default_aspect_ratios_key = WINDOWED_DEFAULT_ASPECT_RATIOS
+			default_resolutions_key = WINDOWED_DEFAULT_RESOLUTIONS
+
+
+		elif resolution_mode_dic.key == "Custom":
+			pass
+
+
+	elif display_mode_dic.key == "Fullscreen" or display_mode_dic.key == "Exclusive Fullscreen":
+		if resolution_mode_dic.key == "Default":
+			aspect_ratios_dic = get_value_in_dic(ASPECT_RATIOS, Resolutions, aspect_ratios_config, null, FULLSCREEN_DEFAULT_ASPECT_RATIOS)
+			resolutions_dic = get_value_in_dic(RESOLUTIONS, aspect_ratios_dic.value, resolutions_config, null, FULLSCREEN_DEFAULT_RESOLUTIONS)
+			default_aspect_ratios_key = FULLSCREEN_DEFAULT_ASPECT_RATIOS
+			default_resolutions_key = FULLSCREEN_DEFAULT_RESOLUTIONS
+		elif resolution_mode_dic.key == "Native":
+			main_window.size = main_screen_size
+
+
+
+
+
+
+## 包装，简单获取值或默认值
+func config_get_value_graphics(
+option_key: String,
+p_default_key: String = option_key,
+p_default_dic: Dictionary = graphics_p_default_dic
+):
+	return CoreSystem.config_manager.get_value(GRAPHICS, option_key, p_default_dic[p_default_key])
+
+
+## 包装，获取值在字典内，没有则默认值
+#func config_get_value_in_range_graphics(
+#option_key: String,
+#dic: Dictionary,
+#child_key = null,
+#p_default_key: String = option_key,
+#p_default_dic: Dictionary = graphics_p_default_dic
+#):
+	#return get_value_in_dic(
+		#option_key,
+		#dic,
+		#CoreSystem.config_manager.get_value(GRAPHICS, option_key, p_default_dic[p_default_key]),
+		#child_key,
+		#p_default_dic)
+
+
+
+
+
+
+
+
+
+# native custom NATIVE CUSTOM
+# 2:1, 4:3, 5:4, 16:9, 16:10, 21:9, 21:9 Precise, 32:9
+var Ratios: Array = ["2:1", "4:3", "5:4", "16:9", "16:10", "21:9", "21:9 Precise", "32:9"]
+var Resolutions: Dictionary = {
+	"2:1": { # 2.0
+		"640, 320": {"size": Vector2i(640, 320), "hint": ""},
+		"960, 480": {"size": Vector2i(960, 480), "hint": ""},
+		"1280, 640": {"size": Vector2i(1280, 640), "hint": ""},
+		"1920, 960": {"size": Vector2i(1920, 960), "hint": ""},
+		"2560, 1280": {"size": Vector2i(2560, 1280), "hint": ""},
+		"3840, 1920": {"size": Vector2i(3840, 1920), "hint": ""},
+		"4096, 2048": {"size": Vector2i(4096, 2048), "hint": ""},
+	},
+	"4:3": { # 1.333
+		"800, 600": {"size": Vector2i(800, 600), "hint": ""},
+		"1024, 768": {"size": Vector2i(1024, 768), "hint": ""},
+		"1152, 864": {"size": Vector2i(1152, 864), "hint": ""},
+		"1280, 960": {"size": Vector2i(1280, 960), "hint": ""},
+		"1400, 1050": {"size": Vector2i(1400, 1050), "hint": ""},
+		"1600, 1200": {"size": Vector2i(1600, 1200), "hint": ""},
+		"2048, 1536": {"size": Vector2i(2048, 1536), "hint": ""},
+	},
+	"5:4": { # 1.25
+		"1280, 1024": {"size": Vector2i(1280, 1024), "hint": ""},
+		"2560, 2048": {"size": Vector2i(2560, 2048), "hint": ""},
+		"3200, 2560": {"size": Vector2i(3200, 2560), "hint": ""},
+	},
+	"16:9": { # 1.777）
+		"640, 360": {"size": Vector2i(640, 360), "hint": "nHD"},
+		"854, 480": {"size": Vector2i(854, 480), "hint": "FWVGA 427:240"},
+		"960, 540": {"size": Vector2i(960, 540), "hint": "qHD"},
+		"1024, 576": {"size": Vector2i(1024, 576), "hint": "WSVGA"},
+		"1280, 720": {"size": Vector2i(1280, 720), "hint": "HD"},
+		"1366, 768": {"size": Vector2i(1366, 768), "hint": "FWXGA 683:384"},
+		"1600, 900": {"size": Vector2i(1600, 900), "hint": "HD+"},
+		"1920, 1080": {"size": Vector2i(1920, 1080), "hint": "FHD"},
+		"2560, 1440": {"size": Vector2i(2560, 1440), "hint": "2K QHD"},
+		"3840, 2160": {"size": Vector2i(3840, 2160), "hint": "4K UHD"},
+		"4096, 2304": {"size": Vector2i(4096, 2304), "hint": "4K DCI"},
+		"5120, 2880": {"size": Vector2i(5120, 2880), "hint": "5K"},
+	},
+	"16:10": { # 1.6
+		"1280, 800": {"size": Vector2i(1280, 800), "hint": "WXGA"},
+		"1440, 900": {"size": Vector2i(1440, 900), "hint": "WXGA+"},
+		"1680, 1050": {"size": Vector2i(1680, 1050), "hint": "WSXGA+"},
+		"1920, 1200": {"size": Vector2i(1920, 1200), "hint": "WUXGA"},
+		"2560, 1600": {"size": Vector2i(2560, 1600), "hint": "WQXGA"},
+		"3840, 2400": {"size": Vector2i(3840, 2400), "hint": "WQUXGA"},
+	},
+	"21:9": { # 64:27 2.370
+		"1280, 540": {"size": Vector2i(1280, 540), "hint": "UWqHD 64:27"},
+		"1920, 810": {"size": Vector2i(1920, 810), "hint": "UWHD 64:27"},
+		"2560, 1080": {"size": Vector2i(2560, 1080), "hint": "UW-FHD 64:27"},
+		"3440, 1440": {"size": Vector2i(3440, 1440), "hint": "UWQHD 43:18 "},
+		"3840, 1600": {"size": Vector2i(3840, 1600), "hint": "4K UltraWide 12:5"},
+		"5120, 2160": {"size": Vector2i(5120, 2160), "hint": "5K UltraWide 64:27"},
+	},
+	"21:9 Precise": { # 2.333
+		"840, 360": {"size": Vector2i(840, 360), "hint": ""},
+		"1260, 540": {"size": Vector2i(1260, 540), "hint": ""},
+		"1680, 720": {"size": Vector2i(1680, 720), "hint": ""},
+		"1890, 810": {"size": Vector2i(1890, 810), "hint": ""},
+		"2520, 1080": {"size": Vector2i(2520, 1080), "hint": ""},
+		"3360, 1440": {"size": Vector2i(3360, 1440), "hint": ""},
+		"3780, 1620": {"size": Vector2i(3780, 1620), "hint": ""},
+		"5040, 2160": {"size": Vector2i(5040, 2160), "hint": ""},
+	},
+	"32:9": { # 3.55555
+		"3840, 1080": {"size": Vector2i(3840, 1080), "hint": "2xFHD"},
+		"5120, 1440": {"size": Vector2i(5120, 1440), "hint": "2xQHD"},
+	},
+}
 
 
 """

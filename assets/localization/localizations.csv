@@ -1,2 +1,44 @@
-keys,zh,en
-MUS,博物馆,Museum
+# keys use snake_case and lowercase abbreviations
+
+keys,zh_CN,en
+
+museum,博物馆,Museum
+
+# OptionWindow 设置选项
+general,常规,General
+ingame,游戏,InGame
+graphics,图形,Graphics
+audio,音频,Audio
+controls,输入,Controls
+mod,模组,Mod
+misc,杂项,Misc
+
+post_processing,画面后期,Post Processing
+
+screen,屏幕,Screen
+window,窗口,Window
+
+display_mode,显示模式,Display Mode
+aspect_ratios,纵横比,Aspect Ratios
+resolutions,分辨率,Resolutions
+vertical_sync,垂直同步,Vertical Sync
+fov,视野,Field of View
+exposure,曝光,Exposure
+anisotropic_filtering,各向异性过滤,Anisotropic Filtering
+
+# aa,抗锯齿,Anti Aliasing
+taa,时间抗锯齿,Temporal Anti Aliasing
+msaa,多重采样抗锯齿,Multi Sampling Anti Aliasing
+ssaa,屏幕空间抗锯齿,Screen Space Anti Aliasing
+
+# ss,屏幕空间,Screen Space
+ssr,屏幕空间反射,Screen Space Reflection
+ssao,屏幕空间环境光遮蔽,Screen Space Ambient Occlusion
+ssil,屏幕空间间接照明,Screen Space Indirect Lighting
+glow,辉光,Glow
+
+
+
+
+
+

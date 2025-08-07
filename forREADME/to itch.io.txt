@@ -1,0 +1,108 @@
+A First-Person 3D Action Adventure Game
+Explore a retro game server with platforming, puzzles, bullet hell, and cosmic journeys
+探索复古游戏的服务器，体验平台跳跃、解密、弹幕地狱和宇宙之旅
+
+Developer: AlbedoHummingbird / 317gw
+Engine: Godot Engine
+
+
+Story
+In 2077, Karole Kate discovers that the server for a super old game is still running while sorting through an old computer. After upgrading the hardware and installing mods, she enters this server world, which has been operational since 2000.
+
+Game World
+A cosmic journey from Earth to the Sun! Different regions feature unique scene styles and gameplay, such as the Sky, Moon, Mercury, etc.
+
+Explore hidden connections between game servers by falling out of the map or finding deliberate teleportation points.
+
+
+Core Mechanics & Completion Progress
+
+Movement System:
+Complex physics including friction coefficients, slope sliding, water, and environmental interaction.
+*Basic implementation complete.
+*Water physics performance is poor, and objects often fail to stabilize on water surfaces.
+
+Bullet Hell:
+A bullet system redesigned specifically for 3D games, inspired by Touhou Project.
+*Bullet system framework under construction; behavior scripts cannot be written normally yet.
+
+Enemies & Combat:
+Focuses on weapons and enemies with mutual interaction.
+*Incomplete. Currently implemented: simple shooting and a fishing rod. Only a half-finished flying fish enemy exists.
+
+Level Selection:
+Level selection interface presented as a game server list.
+*Incomplete.
+
+Flow Control:
+Structure of Areas, Game Servers, Routes, and scene components.
+*Incomplete. There's a simple jumping and climbing flow, but no complete levels yet.
+
+Visual Style
+Experience the unique atmosphere of an old game server after installing mods. Style inspired by the Source Engine (especially Garry's Mod) and Minecraft servers.
+Low-resolution textures and low-poly models.
+Selective use of PBR materials based on object properties.
+Minimalist lighting effects paired with cool shader-based post-processing.
+
+Notes
+Open-source project licensed under GPL-3.0.
+Currently in early development; many features are not yet implemented.
+
+
+
+剧情
+2077年，Karole Kate在整理老电脑时，发现一款超级老游戏的服务器仍在运行。经过硬件升级和打MOD后，她进入了这个从2000年便开始计划的服务器世界。
+
+游戏世界
+从地球到太阳的宇宙之旅！不同区域具有独特的场景风格和玩法，如天空、月球、水星等。
+
+通过掉出地图或寻找刻意传送点等方式，探索游戏服务器之间的隐藏连接。
+
+
+核心机制与完成进度
+
+移动系统
+复杂的物理效果，包含摩擦系数、斜坡滑动、水体和环境互动
+*基本完成
+*水物理性能差，且物体通常不易稳定到水面
+
+弹幕地狱
+专为3D游戏重新设计的弹幕系统，灵感来自东方Project
+*弹幕系统框架施工中，还不能正常编写行为脚本
+
+敌人与战斗
+注重互相交互的武器、敌人
+*未完工，目前实现的简单的射击与钓鱼竿，敌人仅有半成品飞鱼
+
+关卡选择
+以游戏服务器列表形式呈现的选关界面
+*未完工
+
+流程控制
+区域(Area)、游戏服务器(Game Server)、线路(Route)和场景组件结构
+*未完工，有一个简单的跳跃与攀爬流程，还没有完整的关卡
+
+画面风格
+体验老游戏服务器打MOD后的独特氛围，风格灵感来自起源引擎(特别是Garry's Mod)和Minecraft服务器
+低分辨率贴图和低面数模型
+基于物体性质的PBR材质选择性使用
+简约的光照效果搭配酷炫的着色器后处理
+
+注意事项
+开源项目，采用GPL-3.0协议
+目前为早期开发阶段，很多功能都没有实现
+
+
+作者邮箱：<wo3178216379@outlook.com>
+github开源地址 -> (https://github.com/317gw/HYPERLUNATIC)
+INDIENOVA主页 -> (https://indienova.com/g/hyperlunatic)
+bilibili -> [白色蜂鸟的个人空间] (https://space.bilibili.com/32704272)
+*Sponsorship 爱发电赞助: -> [白色蜂鸟主页] (https://ifdian.net/a/AlbedoHummingbird)
+QQ讨论群 -> [白色蜂鸟&FireKami讨论] (https://qm.qq.com/q/zh3svlXTBm) 705304831
+Discord聊天室 -> [FireKami Game&Fiction] (https://discord.gg/c9v67xuuQR)
+
+
+
+Developed by 白色蜂鸟(AlbedoHummingbird / 317gw) using Godot Engine
+
+© 2023-2024 AlbedoHummingbird. All rights reserved.

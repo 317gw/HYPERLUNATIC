@@ -1,5 +1,5 @@
 @tool
-class_name MenuPropertie
+#class_name MenuPropertie
 extends HBoxContainer
 
 signal range_value_changed(value: float)

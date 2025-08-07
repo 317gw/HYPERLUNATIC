@@ -272,6 +272,15 @@
 - [ ] mc的声音文字提示
 
 
+## 设置菜单与配置管理系统  
+* 配置管理：SettingsConfigManager 负责配置文件的加载/保存/备份
+* UI框架：
+  * OptionWindow - 设置窗口容器
+  * OptionTab - 选项卡基类
+  * Propertie - 设置项控件基类
+    * 具体设置项控件（CheckBox/HSlider/OptionButton/SpinBox）
+
+
 ## 计分  
 记录线路、行为、受伤等事件，用来代替玩家生命值，用来作为完成关卡之外的目标  
 用于一部分，轻度的，进度解锁管理  

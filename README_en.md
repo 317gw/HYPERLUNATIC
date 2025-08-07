@@ -49,34 +49,34 @@ This is an open-source *head-view* 3D game featuring platforming, adventure puzz
 > Or perhaps just observe the world you're in...
 
 #### 📜Story
-In 2077, Karole Kate returns to her hometown on vacation. While sorting through her old computer, she discovers that one of the servers for a *super old* game she used to play is still online. After tinkering with hardware, software, upgrades, modifications, and installing mods, she logs into this server—a server that was first planned back in 2000.  
-And for the record: she's playing a game, not time-traveling. 😡
+    In 2077, Karole Kate returns to her hometown on vacation. While sorting through her old computer, she discovers that one of the servers for a *super old* game she used to play is still online. After tinkering with hardware, software, upgrades, modifications, and installing mods, she logs into this server—a server that was first planned back in 2000.  
+    And for the record: she's playing a game, not time-traveling. 😡
 
  * #### 🗺Map Design & Game Flow
-A cosmic journey from Earth🌏 to the Sun☀️! Or perhaps a nod to Dante's Divine Comedy?  
-Regions differentiate scene styles and gameplay—such as the sky, Moon, and Mercury.
+    A cosmic journey from Earth🌏 to the Sun☀️! Or perhaps a nod to Dante's Divine Comedy?  
+    Regions differentiate scene styles and gameplay—such as the sky, Moon, and Mercury.
 
-Gameplay takes place within "game servers" (which are actually offline). Internally, it uses a route-based level system. Scene components like invisible walls, play areas, and collision boxes are clearly defined.  
-Background models in scenes are complete and fully accessible.
+    Gameplay takes place within "game servers" (which are actually offline). Internally, it uses a route-based level system. Scene components like invisible walls, play areas, and collision boxes are clearly defined.  
+    Background models in scenes are complete and fully accessible.
 
-Subtle connections exist between game servers. You can switch between them by falling off the map or finding deliberate teleport points.  
-Level selection is also available via the main menu, disguised as a game server list.
+    Subtle connections exist between game servers. You can switch between them by falling off the map or finding deliberate teleport points.  
+    Level selection is also available via the main menu, disguised as a game server list.
 
-Beyond the main storyline, there are challenge missions with clear rule restrictions. Achievement progress reflects overall progression. Puzzles are intertwined with levels, servers, challenges, and achievements. Unnecessary ARG elements (not yet implemented).
+    Beyond the main storyline, there are challenge missions with clear rule restrictions. Achievement progress reflects overall progression. Puzzles are intertwined with levels, servers, challenges, and achievements. Unnecessary ARG elements (not yet implemented).
 
  * #### 🖼Graphics
-The atmosphere of an old game server room with modded aesthetics. Not cyberpunk.  
-Features low-resolution textures, low-poly models, selective use of PBR materials based on object properties, minimalist lighting, and尽可能 impressive shader post-processing.
+    The atmosphere of an old game server room with modded aesthetics. Not cyberpunk.  
+    Features low-resolution textures, low-poly models, selective use of PBR materials based on object properties, minimalist lighting, and尽可能 impressive shader post-processing.
 
-You'll be able to see your own body! (Sorry, not yet implemented)
+    You'll be able to see your own body! (Sorry, not yet implemented)
 
  * #### Primary Gameplay References (highly recommended)
-ULTRAKILL, Celeste, Mirror's Edge, Garry's Mod, Half-Life 2, Neon White, VOIN, Touhou Project, Minecraft, Touhou Luna Nights, 沙雕之路, Deadlock, DEATH STRANDING DIRECTOR'S CUT, Antimatter Dimensions, NGU IDLE  
-...and other great games.
+    ULTRAKILL, Celeste, Mirror's Edge, Garry's Mod, Half-Life 2, Neon White, VOIN, Touhou Project, Minecraft, Touhou Luna Nights, 沙雕之路, Deadlock, DEATH STRANDING DIRECTOR'S CUT, Antimatter Dimensions, NGU IDLE  
+    ...and other great games.
 
-Style inspiration comes from the Source Engine (primarily GMod) and Minecraft servers.
+    Style inspiration comes from the Source Engine (primarily GMod) and Minecraft servers.
 
-Note: All the above concepts are still in development.
+    Note: All the above concepts are still in development.
 
 
 ## 🛠️Core Mechanics

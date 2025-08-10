@@ -23,7 +23,7 @@ func Physics_Update(_delta: float) -> void:
 		water_physics.buoyancy_centre_clamp()
 	else:
 		no_surface = true
-		water_physics.liquid_discharged_volume = HL.exponential_decay(water_physics.liquid_discharged_volume, water_physics.volume * 0.5, _delta*20)
+		water_physics.liquid_discharged_volume = MathUtils.exponential_decay(water_physics.liquid_discharged_volume, water_physics.volume * 0.5, _delta*20)
 		water_physics.buoyancy_centre = Vector3.ZERO
 
 	#water_physics.simple_simulations(_delta)

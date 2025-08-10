@@ -47,7 +47,7 @@ func _ready() -> void:
 		add_child(bullets_multi_mesh_instance, true)
 		# 计算预计数量
 		bullet_count = max_bullet + (disk_count * stripe_count) + 1
-		bullet_count = HL.next_power_of_two(bullet_count)
+		bullet_count = MathUtilsnext_power_of_two(bullet_count)
 
 		# 初始化对象池
 		bullet_pool = IndieBlueprintObjectPool.new()
@@ -179,6 +179,6 @@ func set_bullet_scale_and_radius(wrapper: IndieBlueprintObjectPoolWrapper, _scal
 	var bullet_radius = _radius * 0.25
 	multi_bullet_radius[index] = bullet_radius
 
-	var collisionshape3d: CollisionShape3D = Global.find_child_node_type(bullet, "CollisionShape3D")
+	var collisionshape3d: CollisionShape3D = GeneralUtils.find_child_node_type(bullet, "CollisionShape3D")
 	var ss: SphereShape3D = collisionshape3d.shape
 	ss.radius = bullet_radius * 0.8

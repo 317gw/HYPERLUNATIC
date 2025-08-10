@@ -809,9 +809,9 @@ Roughness: 0.50028812448435
 
 				#mesh_instance_3d.global_position.x = global_position.x
 				#mesh_instance_3d.global_position.z = global_position.z
-				#mesh_instance_3d.global_position.y = HL.exponential_decay(mesh_instance_3d.global_position.y, global_position.y, delta)
+				#mesh_instance_3d.global_position.y = MathUtils.exponential_decay(mesh_instance_3d.global_position.y, global_position.y, delta)
 				#mesh_instance_3d.global_position = lerp(global_position, mesh_instance_3d.global_position, high_diff_0_1)
-				#mesh_instance_3d.global_rotation = HL.exponential_decay_vec3(mesh_instance_3d.global_rotation, global_rotation, delta)
+				#mesh_instance_3d.global_rotation = MathUtils.exponential_decay_vec3(mesh_instance_3d.global_rotation, global_rotation, delta)
 				#mesh_instance_3d.global_rotation = lerp(global_rotation, mesh_instance_3d.global_rotation, high_diff_0_1)
 				#var current_error = mesh_instance_3d.global_position - global_position
 				#var derivative: Vector3 = (current_error - last_error) / delta # 微分项是误差变化率

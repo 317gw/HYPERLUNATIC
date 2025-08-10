@@ -126,13 +126,13 @@ func _up_title(delta: float) -> void:
 
 	# speed_title
 	speed_title.text = ("Speed: length up hor\n"
-		+ HL.string_num_pad_decimals(player_velocity_mas, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.vel_up, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.vel_hor.length(), num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player_velocity_mas, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.vel_up, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.vel_hor.length(), num_string_decimals, " ") + interval
 		+ "\n"
-		+ HL.string_num_pad_decimals(player_velocity_pos, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.velocity_up_pos, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.velocity_hor_pos.length(), num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player_velocity_pos, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.velocity_up_pos, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.velocity_hor_pos.length(), num_string_decimals, " ") + interval
 		)
 	var frame_time_color := gradient.sample(remap(
 		player_velocity_mas,
@@ -152,13 +152,13 @@ func _up_title(delta: float) -> void:
 		if not player_acceleration_pos_history.is_empty() and player_acceleration_pos_history[- x] != 0:
 			_player_acceleration_pos_temp = player_acceleration_pos_history[- x]
 	acceleration_title.text = ("Acceleration: length up hor\n"
-		+ HL.string_num_pad_decimals(_player_acceleration_mas_temp, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.acceleration_up_mas, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.acceleration_hor_mas.length(), num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(_player_acceleration_mas_temp, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.acceleration_up_mas, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.acceleration_hor_mas.length(), num_string_decimals, " ") + interval
 		+ "\n"
-		+ HL.string_num_pad_decimals(_player_acceleration_pos_temp, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.acceleration_up_pos, num_string_decimals, " ") + interval
-		+ HL.string_num_pad_decimals(player.acceleration_hor_pos.length(), num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(_player_acceleration_pos_temp, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.acceleration_up_pos, num_string_decimals, " ") + interval
+		+ FormatUtils.string_num_pad_decimals(player.acceleration_hor_pos.length(), num_string_decimals, " ") + interval
 		)
 	frame_time_color = gradient.sample(remap(
 		player_acceleration_mas.length(),
@@ -169,12 +169,12 @@ func _up_title(delta: float) -> void:
 
 
 	# pos！！！！！！
-	player_global_position.text = HL.format_vector_extended(player.global_position).all
+	player_global_position.text = FormatUtils.format_vector_extended(player.global_position).all
 
 	# jumping_time
 	jumping_time.text = "JumpingTime:"
-	jumping_time.text += HL.string_num_pad_decimals(player.jumpingtimer.get_time_left(), 2) if player.jumpingtimer else "0.00"
-	jumping_height.text = "JumpingHeight:" + HL.string_num_pad_decimals(player.jumping_height, 2)
+	jumping_time.text += FormatUtils.string_num_pad_decimals(player.jumpingtimer.get_time_left(), 2) if player.jumpingtimer else "0.00"
+	jumping_height.text = "JumpingHeight:" + FormatUtils.string_num_pad_decimals(player.jumping_height, 2)
 
 	floor_friction.text = "FloorFriction:" + str(player.floor_friction)
 	movement_decelerate.text = "MovementDecelerate:" + str(player.movement_decelerate)
@@ -185,7 +185,7 @@ func _up_title(delta: float) -> void:
 	movement_state.text = "MovementState:" + player.movement_state_machine._current
 	camera_state.text = "CameraState:" + player.camera_state_machine._current
 	weapon.text = "Weapon:" + player.weapon_manager._current
-	var _floor_angle: String = str(HL.string_num_pad_decimals(rad_to_deg(player.get_floor_angle(player.up_direction)), 3)) + "°" if player.is_on_floor() else forbidden
+	var _floor_angle: String = str(FormatUtils.string_num_pad_decimals(rad_to_deg(player.get_floor_angle(player.up_direction)), 3)) + "°" if player.is_on_floor() else forbidden
 	floor_angle.text = "FloorAngle:" + _floor_angle
 
 	danmaku_count.text = "Danmaku:" + str(get_tree().get_node_count_in_group("danmaku"))

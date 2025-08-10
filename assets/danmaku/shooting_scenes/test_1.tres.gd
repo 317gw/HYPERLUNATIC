@@ -16,6 +16,6 @@ func _bullet_event(_delta: float) -> void:
 	#spherical_count += _delta * 20
 	#ratio += _delta * 0.01
 	#bullet_scale_multi = sin(Global.paused_time_physics_process) * 0.5 + 1.0
-	var color:=  HL.rainbow_color_custom(Global.paused_time_physics_process)
+	var color:=  ColorUtils.rainbow_color_custom(Global.paused_time_physics_process)
 	bullet_color1 = color
 	bullet_color2 = Color(color, 0.5)

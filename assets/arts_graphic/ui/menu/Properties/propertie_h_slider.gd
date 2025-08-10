@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 		set_ui()
 		#_connect_signals()
 	if num_hint_line_edit.visible:
-		num_hint_line_edit.text = HL.string_num_pad_decimals(h_slider.value, num_hint_decimals) + num_hint_units
+		num_hint_line_edit.text = FormatUtils.string_num_pad_decimals(h_slider.value, num_hint_decimals) + num_hint_units
 
 
 func set_option_data() -> void:

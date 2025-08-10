@@ -41,9 +41,9 @@ func Physics_Update(_delta: float) -> void:
 	var speed = 20 * _delta
 	var self_rotation_before = self.rotation
 	self.look_at(PLAYER.look_at_target)
-	target_rotation.x = HL.exponential_decay(self_rotation_before.x, self.rotation.x, speed)
-	target_rotation.y = HL.exponential_decay(self_rotation_before.y, self.rotation.y, speed)
-	target_rotation.z = HL.exponential_decay(self_rotation_before.z, self.rotation.z, speed)
+	target_rotation.x = MathUtils.exponential_decay(self_rotation_before.x, self.rotation.x, speed)
+	target_rotation.y = MathUtils.exponential_decay(self_rotation_before.y, self.rotation.y, speed)
+	target_rotation.z = MathUtils.exponential_decay(self_rotation_before.z, self.rotation.z, speed)
 	self.rotation = target_rotation
 
 	self.position = self_position_origin

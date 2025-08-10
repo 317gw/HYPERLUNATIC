@@ -22,7 +22,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if player.is_swimming():
 		visible = should_draw_camera_underwater_effect()
-		wrosp_trg = HL.exponential_decay(wrosp_trg, wrosp_ori, delta*1.5333)
+		wrosp_trg = MathUtils.exponential_decay(wrosp_trg, wrosp_ori, delta*1.5333)
 		material.set_shader_parameter("value_all", wrosp_trg)
 
 

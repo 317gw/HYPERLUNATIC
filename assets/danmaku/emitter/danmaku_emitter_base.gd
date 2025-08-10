@@ -350,7 +350,7 @@ func _save_properties() -> void:
 	#reset_data = get_property_list()
 	var property_list:= self.get_property_list()
 	#print(" ")
-	#print(HL.format_array_recursive(property_list))
+	#print(FormatUtils.format_array_recursive(property_list))
 	#print(" ")
 
 	#.duplicate()
@@ -385,7 +385,7 @@ func _save_properties() -> void:
 
 	print(" ")
 	#print(reset_data)
-	print(HL.format_dict_recursive(reset_data))
+	print(FormatUtils.format_dict_recursive(reset_data))
 	print(" ")
 
 	## 可选杀了继承的

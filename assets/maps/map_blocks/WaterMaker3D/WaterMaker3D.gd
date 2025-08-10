@@ -101,7 +101,7 @@ func _physics_process(delta: float) -> void:
 			water_ripple_overlay.visible = false
 			water_ripple_overlay.process_mode = Node.PROCESS_MODE_DISABLED
 
-		wrosp_trg = HL.exponential_decay(wrosp_trg, wrosp_ori, delta*1.53333)
+		wrosp_trg = MathUtils.exponential_decay(wrosp_trg, wrosp_ori, delta*1.53333)
 		in_water_material.set_shader_parameter("value_all", wrosp_trg)
 
 

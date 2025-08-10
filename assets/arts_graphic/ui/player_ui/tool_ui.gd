@@ -66,11 +66,11 @@ func _physics_process(delta: float) -> void:
 
 		if collider:
 			infor_label.text = collider.name + "\n"
-			infor_label.text += "pos " + HL.format_vector_extended(collider.global_position).tuple + "\n"
+			infor_label.text += "pos " + FormatUtils.format_vector_extended(collider.global_position).tuple + "\n"
 			#infor_label.text += str(collider.get_aabb()) + "\n"
 
 		if ray_cast_3d.is_colliding():
-			ray_point_label.text = "hit pos " + HL.format_vector_extended(ray_cast_3d.get_collision_point()).tuple
+			ray_point_label.text = "hit pos " + FormatUtils.format_vector_extended(ray_cast_3d.get_collision_point()).tuple
 
 		infor_label.size = infor_label.get_minimum_size()
 		infor_label.position = mouse_position

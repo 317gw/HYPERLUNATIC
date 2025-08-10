@@ -199,7 +199,7 @@ func check_option_data_dic(dic: Dictionary) -> bool:
 	# 打印所有错误
 	if not errors.is_empty():
 		print()
-		print("dic: ", HL.format_dict_recursive(dic))
+		print("dic: ", FormatUtils.format_dict_recursive(dic))
 		for error in errors:
 			print_debug(error)
 

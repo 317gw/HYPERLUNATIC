@@ -1,0 +1,10 @@
+
+
+
+
+// 定义需要替换的字符串列表（用 | 分隔）
+strings = "next_power_of_two|nearest_power_of_two|dot_product_to_angle|angle_to_dot_product|gcd|lcm|array_gcd|array_lcm|get_gcd_and_lcm|simplify_ratio"
+
+// 正则表达式匹配：searchPrefix + 任意字符串
+replace-regex "HL\.(%{strings})"
+with "MathUtils.$1"

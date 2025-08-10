@@ -156,60 +156,6 @@ func tool_ui_visible() -> bool:
 	return player_fp_ui and player_fp_ui.tool_ui and player_fp_ui.tool_ui.visible
 
 
-# 计算mesh体积
-static func calculate_mesh_volume(mesh: Mesh) -> float:
-	var arrays = mesh.surface_get_arrays(0)
-	var vertices = arrays[Mesh.ARRAY_VERTEX]
-	var indices = arrays[Mesh.ARRAY_INDEX]
-
-	var volume = 0.0
-
-	for i in range(0, indices.size(), 3):
-		var v1 = vertices[indices[i]]
-		var v2 = vertices[indices[i + 1]]
-		var v3 = vertices[indices[i + 2]]
-
-		var cross_product = v2.cross(v3)
-		var dot_product = v1.dot(cross_product)
-		var triangle_volume = abs(dot_product)
-
-		volume += triangle_volume
-
-	return volume / 6.0
-
-
-static func children_queue_free(node: Node) -> void:
-	if node:
-		if node.get_child_count() > 0:
-			for child in node.get_children():
-				child.queue_free()
-
-
-static func clamping_accuracy(n: float, precision: int = 6) -> float:
-	if precision < 1:
-		return n
-	return int(n * precision) / float(precision)
-
-
-static func clamping_accuracy_vector3(vector3: Vector3, precision: int = 6) -> Vector3:
-	if precision < 1:
-		return vector3
-	vector3.x = clamping_accuracy(vector3.x, precision)
-	vector3.y = clamping_accuracy(vector3.y, precision)
-	vector3.z = clamping_accuracy(vector3.z, precision)
-	return vector3
-
-
-#递归查找节点下特定类型的子节点
-static func find_child_node_type(node: Node, child_type: String) -> Node:
-	if node.get_class() == child_type:
-		return node
-	for i in range(node.get_child_count()):
-		var child_node = node.get_child(i)
-		var result = find_child_node_type(child_node, child_type)
-		if result:
-			return result
-	return null
 
 
 # 返回两个标识名称(键"name"为"START"和"END")中间字典的数组
@@ -227,39 +173,6 @@ static func get_dicts_between_start_end(dict_array: Array, start: String = "STAR
 			result.append(dict)
 
 	return result
-
-
-## 算液体阻力   空阻   0 -> 1
-static func get_water_friction(_density: float, _viscosity: float) -> float:
-		var _d: float = clampf(remap(_density, 1000, 10000, 0.1, 0.5) , 0.0, 0.5)
-		var _v: float = clampf(remap(_viscosity, 0, 20000, 0.0, 0.5) , 0.0, 0.5)
-		return snappedf(_d + _v, 0.001)
-
-
-static func get_closest_aspect_ratio(size: Vector2) -> String:
-	var aspect_ratio: float = size.x / size.y
-
-	# 标准比例及其对应的宽高比值
-	var standard_ratios: Dictionary = {
-		"4:3": 4.0/3.0,
-		"5:4": 5.0/4.0,
-		"16:9": 16.0/9.0,
-		"16:10": 16.0/10.0,
-		"21:9": 21.0/9.0,
-		"32:9": 32.0/9.0
-	}
-
-	var closest_ratio := "16:9"  # 默认值
-	var min_diff := INF
-
-	# 找出最接近的标准比例
-	for ratio: String in standard_ratios:
-		var diff: float = abs(aspect_ratio - standard_ratios[ratio])
-		if diff < min_diff:
-			min_diff = diff
-			closest_ratio = ratio
-
-	return closest_ratio
 
 
 """
@@ -316,21 +229,6 @@ func get_random_resource(folder_path: String, allowed_types: Array = []) -> Reso
 
 
 
-# 曲线救国创建碰撞 # 废了
-static func create_collision_shape3d_from_mesh(collision_father: Node, source_mesh: Mesh, settings: MeshConvexDecompositionSettings = null) -> void:
-	var mesh_instance_3d: MeshInstance3D = MeshInstance3D.new()
-	collision_father.add_child(mesh_instance_3d)
-	mesh_instance_3d.set_mesh(source_mesh)
-	mesh_instance_3d.create_multiple_convex_collisions(settings)
-	var new_collision_shape_3d: CollisionShape3D = find_child_node_type(mesh_instance_3d, "CollisionShape3D").duplicate()
-	collision_father.add_child(new_collision_shape_3d, true)
-	mesh_instance_3d.queue_free()
-
-
-
-# 弹性碰撞的那个
-static func impact_velocity(m1:float, m2:float, v1:float, v2:float) -> float:
-	return (m1-m2)/(m1+m2)*v1 + 2*m2/(m1+m2)*v2
 
 
 #func

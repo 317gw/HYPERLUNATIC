@@ -244,7 +244,7 @@ func _apply_head_tilt(_delta) -> void:
 	_target_tilt = deg_to_rad(tilt_angle) * _lr_tilt # 重置目标倾斜角度
 	if movement_state_machine.current_state is PlayerDash: # 冲刺状态下不歪头
 		_target_tilt = deg_to_rad(tilt_angle) * _left_right_tilt_dash  * 3
-	_target_z  = HL.exponential_decay(_target_z , _target_tilt, lr_tilt_speed) # 计算目标摄像机的z轴旋转
+	_target_z  = MathUtils.exponential_decay(_target_z , _target_tilt, lr_tilt_speed) # 计算目标摄像机的z轴旋转
 	rotation.z = _target_z  + deg_to_rad(mouse_tilt_angle)
 
 
@@ -255,11 +255,11 @@ func _update_fov(_delta) -> void: # FOV
 	#var dot = PLAYER.vel_hor.normalized().dot(plaFaceDir)
 
 	var lerp_weight = fov_lerp if is_zoom else 0.0
-	var target_fov_base: float = HL.exponential_decay(fov_base, fov_zoom, lerp_weight)
+	var target_fov_base: float = MathUtils.exponential_decay(fov_base, fov_zoom, lerp_weight)
 	var target_fov: float = target_fov_base
 	target_fov += FOV_CHANGE# * velocity_clamped * dot
 	target_fov = clamp(target_fov, target_fov_base, fov_base * fov_clamp_max)
-	fov = HL.exponential_decay(fov, target_fov, fov_lerp_speed)
+	fov = MathUtils.exponential_decay(fov, target_fov, fov_lerp_speed)
 
 
 func _adjust_zoom_level():
@@ -395,10 +395,10 @@ func slide_camera_smooth_back_to_origin(delta: float, y_only: bool = false) -> v
 		_smooth_target_pos.z = clampf(_smooth_target_pos.z, -CROUCH_TRANSLATE_XZ, CROUCH_TRANSLATE_XZ)  # 新增z坐标限制
 
 	var move_amount = max(player.velocity.length(), player.speed_normal) * delta * 10
-	_smooth_target_pos.y = HL.exponential_decay(_smooth_target_pos.y, 0.0, move_amount*4.6)
+	_smooth_target_pos.y = MathUtils.exponential_decay(_smooth_target_pos.y, 0.0, move_amount*4.6)
 	if not y_only:
-		_smooth_target_pos.x = HL.exponential_decay(_smooth_target_pos.x, 0.0, move_amount*4.6)  # 新增x坐标平滑
-		_smooth_target_pos.z = HL.exponential_decay(_smooth_target_pos.z, 0.0, move_amount*4.6)  # 新增z坐标平滑
+		_smooth_target_pos.x = MathUtils.exponential_decay(_smooth_target_pos.x, 0.0, move_amount*4.6)  # 新增x坐标平滑
+		_smooth_target_pos.z = MathUtils.exponential_decay(_smooth_target_pos.z, 0.0, move_amount*4.6)  # 新增z坐标平滑
 
 	head.position =  head.position.lerp(_smooth_target_pos + head_pos_original, 0.5)
 	#prints("head smooth_", head.position)

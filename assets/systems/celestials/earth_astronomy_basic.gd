@@ -39,7 +39,7 @@ const PRESSURE_MAX: float = 1080.0    # 最高气压 (低海拔)
 func _ready():
 
 #region 示例使用
-	test(parse_latitude("40 33 31"), parse_longitude("111 49 1"), 1036, HL.parse_date("2025 6 2 22 15 35"))#和林格尔
+	test(parse_latitude("40 33 31"), parse_longitude("111 49 1"), 1036, ParseUtils.parse_date("2025 6 2 22 15 35"))#和林格尔
 	"""
 	和林格尔这天这时天气预报
 	日出 05:04
@@ -284,9 +284,9 @@ func format_time(time: float) -> String:
 #func latitude_humidity(latitude: float) -> float:
 	## 核心函数（双峰叠加）
 	#var humidity: float = (
-		#0.7 * HL.gaussian(abs(latitude), 0, 25) + # 赤道峰 (σ=25°)
-		#0.3 * HL.gaussian(abs(latitude), 60, 15) - # 中纬峰 (σ=15°)
-		#0.15 * HL.gaussian(abs(latitude), 30, 10) # 副热带干谷 (σ=10°)
+		#0.7 * MathUtils.gaussian(abs(latitude), 0, 25) + # 赤道峰 (σ=25°)
+		#0.3 * MathUtils.gaussian(abs(latitude), 60, 15) - # 中纬峰 (σ=15°)
+		#0.15 * MathUtils.gaussian(abs(latitude), 30, 10) # 副热带干谷 (σ=10°)
 	#)
 #
 	#humidity *= (1 - abs(latitude)/200)
@@ -330,15 +330,15 @@ func test(latitude: float, longitude: float, elevation: float, date: Dictionary)
 
 ## 解析 度分秒 格式角度
 func parse_latitude(latitude_str: String) -> float:
-	var _latitude: float = HL.parse_degrees_minutes_seconds(latitude_str)
+	var _latitude: float = ParseUtils.parse_degrees_minutes_seconds(latitude_str)
 	return clampf(_latitude, -90.0, 90.0)
 
 
 func parse_longitude(longitude_str: String) -> float:
-	var _longitude: float = HL.parse_degrees_minutes_seconds(longitude_str)
+	var _longitude: float = ParseUtils.parse_degrees_minutes_seconds(longitude_str)
 	return clampf(_longitude, -180.0, 180.0)
 
-# HL.parse_date()
+# ParseUtils.parse_date()
 
 """
 和林格尔这天这时天气预报

@@ -34,7 +34,7 @@ func _ready() -> void:
 		add_child(bullets_multi_mesh_instance, true)
 		# 计算预计数量
 		bullet_count = max_bullet + (disk_count * stripe_count) + 1
-		bullet_count = HL.next_power_of_two(bullet_count)
+		bullet_count = MathUtils.next_power_of_two(bullet_count)
 
 		_save_properties()
 		_emitter_ready()

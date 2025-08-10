@@ -116,7 +116,7 @@ func _ready() -> void:
 	create_resistance_probe(_mesh_vertices, _mesh_indices, min(20 * volume, max_probe) )
 	# 如果无法生成足够的探针，则使用简单模拟
 	if buoyancy_probe_child_count < 6:
-		Global.children_queue_free(buoyancy_probe)
+		GeneralUtils.children_queue_free(buoyancy_probe)
 		using_simple_simulations = true
 	# 初始化时间
 	sleeping_time = sleeping_wait_time
@@ -147,7 +147,7 @@ func _physics_process(delta: float) -> void:
 			at_surface_time = at_surface_wait_time
 			should_at_surface = false
 		if at_surface_time <= 0:
-			#buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
+			#buoyancy_centre = MathUtils.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
 			should_at_surface = true
 
 		#mesh_instance_3d.global_position = buoyancy_centre + global_position
@@ -173,7 +173,7 @@ func probe_simulations(delta: float, speed: float = 30, power: float = 1, use_hi
 
 	if buoyancy_probe_count > 0:
 		if buoyancy_centre_in_water_ratio == 1:
-			buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta)
+			buoyancy_centre = MathUtils.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta)
 		else:
 			var target_buoyancy_centre = Vector3.ZERO
 			if buoyancy_centre_in_water_ratio != 1:
@@ -182,8 +182,8 @@ func probe_simulations(delta: float, speed: float = 30, power: float = 1, use_hi
 				target_buoyancy_centre /= float(buoyancy_probe_count)
 				target_buoyancy_centre -= global_position
 			buoyancy_centre_lest_frame = buoyancy_centre
-			buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, target_buoyancy_centre, delta)
-		liquid_discharged_volume = HL.exponential_decay(liquid_discharged_volume, volume * (buoyancy_centre_in_water_ratio ** 2) * power, delta)
+			buoyancy_centre = MathUtils.exponential_decay_vec3(buoyancy_centre, target_buoyancy_centre, delta)
+		liquid_discharged_volume = MathUtils.exponential_decay(liquid_discharged_volume, volume * (buoyancy_centre_in_water_ratio ** 2) * power, delta)
 	else:
 		buoyancy_centre = Vector3.ZERO
 		liquid_discharged_volume = 0.0
@@ -191,11 +191,11 @@ func probe_simulations(delta: float, speed: float = 30, power: float = 1, use_hi
 
 func simple_simulations(delta: float, smoothly: bool = false) -> void:
 	sleeping = false
-	#buoyancy_centre = HL.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
+	#buoyancy_centre = MathUtils.exponential_decay_vec3(buoyancy_centre, Vector3.ZERO, delta*46)
 	buoyancy_centre = Vector3.ZERO
 	if smoothly:
 		var target_volume: float = volume * clamp(max(high_diff, 0.0) / max(_mesh_volume_sphere_radius, 0.001), 0.0, 1.0)
-		liquid_discharged_volume = HL.exponential_decay(liquid_discharged_volume, target_volume, delta*20)
+		liquid_discharged_volume = MathUtils.exponential_decay(liquid_discharged_volume, target_volume, delta*20)
 	else:
 		liquid_discharged_volume = volume * clamp(max(high_diff, 0.0) / max(_mesh_volume_sphere_radius, 0.001), 0.0, 1.0)
 	#if should_at_surface:

@@ -159,7 +159,7 @@ func _on_hooking(_delta: float) -> void:
 	if not is_hooked:
 		return
 
-	hook.global_position = HL.exponential_decay_vec3(hook.global_position, hooked_obj.global_position, _delta*46)
+	hook.global_position = MathUtils.exponential_decay_vec3(hook.global_position, hooked_obj.global_position, _delta*46)
 
 
 # 绘制鱼线

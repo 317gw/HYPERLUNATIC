@@ -184,7 +184,7 @@ func generate_voxel_points() -> void:
 func _get_probe_buoy_fcc(_range: int) -> void:
 	_range = max(_range, 2)
 	probe_buoy_pos.clear()
-	probe_buoy_pos = HL.generate_FCC_lattice(
+	probe_buoy_pos = LatticeUtils.generate_FCC_lattice(
 		_range,
 		func(p): return (p - Vector3.ONE * (_range-1) * 0.5) * (_mesh_aabb.size * 1/(_range-1)) * 0.95,
 		func(p): return is_point_intersect_mesh(global_basis * p + global_position)
@@ -233,9 +233,9 @@ func batch_query_points(points: Array) -> Array:
 # 根据物体形状使用更合适的阻力系数
 func get_drag_coefficient(reynold: float, shape: String = "sphere") -> float:
 	match shape:
-		"sphere": return HL.sphere_Cd_by_reynold(reynold)
+		"sphere": return PhysicsUtils.sphere_Cd_by_reynold(reynold)
 		"cube": return 1.05  # 立方体的典型阻力系数
-		_: return HL.sphere_Cd_by_reynold(reynold)
+		_: return PhysicsUtils.sphere_Cd_by_reynold(reynold)
 
 
 func apply_force(_delta: float) -> void:
@@ -296,7 +296,7 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 	discharged_volume_ratio = move_toward(
 		discharged_volume_ratio,
 		in_water_ratio,
-		HL.sigmoid(_velocity.length() - 4),
+		MathUtils.sigmoid(_velocity.length() - 4),
 		)
 
 	density_add /= max(probe_buoy_pos.size(), 1)
@@ -309,9 +309,9 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 	var resistance: Vector3 = Vector3.ZERO
 	if not _parent_rigid_body.get_meta("be_picked_up"): # using_simple_resistance and
 		#resistance = 18.8496 * viscosity * volume_sphere_radius * _velocity
-		var Re: float = HL.reynold(density_add, _velocity.length(), volume_sphere_radius * 2, viscosity_add)
-		var Cd: float = HL.sphere_Cd_by_reynold(Re)
-		resistance = HL.drag_force(Cd, density_add, _velocity, PI*volume_sphere_radius**2)
+		var Re: float = PhysicsUtils.reynold(density_add, _velocity.length(), volume_sphere_radius * 2, viscosity_add)
+		var Cd: float = PhysicsUtils.sphere_Cd_by_reynold(Re)
+		resistance = PhysicsUtils.drag_force(Cd, density_add, _velocity, PI*volume_sphere_radius**2)
 
 
 	var _force: Vector3 = -g * body_volume * density_add
@@ -319,12 +319,12 @@ func _apply_force(_delta: float, g: Vector3) -> void:
 	#print(_force)
 
 	# 受力平衡
-	#target_pos = HL.exponential_decay_vec3(target_pos, global_position, _delta)
+	#target_pos = MathUtils.exponential_decay_vec3(target_pos, global_position, _delta)
 	#current_error = target_pos - global_position
 	#if is_in_water() and (body_density < density_add or body_density < rezt0[0]):
 		#var _convergence_index = current_error.length()
-		#_force = lerp(-g * body_mass, _force, HL.sigmoid(_convergence_index))
-		#m = lerp(Vector3.ZERO, m, HL.sigmoid(_convergence_index))
+		#_force = lerp(-g * body_mass, _force, MathUtils.sigmoid(_convergence_index))
+		#m = lerp(Vector3.ZERO, m, MathUtils.sigmoid(_convergence_index))
 
 	# 应用
 	_parent_rigid_body.call_deferred("apply_central_force", _force)

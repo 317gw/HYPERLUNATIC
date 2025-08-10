@@ -439,16 +439,16 @@ func initialize_option_control() -> void:
 func _get_window_and_screen() -> void:
 	window_id = DisplayServer.SCREEN_OF_MAIN_WINDOW
 	main_screen_size = Vector2(DisplayServer.screen_get_size(window_id))
-	main_screen_closest_ratio = Global.get_closest_aspect_ratio(main_screen_size)
+	main_screen_closest_ratio = MathUtils.get_closest_aspect_ratio(main_screen_size)
 	game_window_size = Vector2(DisplayServer.window_get_size())
 
-	custom_resolution[0] = HL.simplify_ratio(game_window_size.x, game_window_size.y) + "*"
+	custom_resolution[0] = MathUtils.simplify_ratio(game_window_size.x, game_window_size.y) + "*"
 	custom_resolution[1] = str(game_window_size.x) + ", " + str(game_window_size.y) + "*"
 	#print(custom_resolution)
 	#aspect_ratios.option_button.set_item_text(0, custom_resolution[0])
 	#resolutions.option_button.set_item_text(0, custom_resolution[1])
 	resolution_label.text = "screen " + main_screen_closest_ratio + " " + str(int(main_screen_size.x)) + "," + str(int(main_screen_size.y)) + "\n"
-	resolution_label.text += "window " + HL.simplify_ratio(game_window_size.x, game_window_size.y, ":", 4, 3) + " " + str(int(game_window_size.x)) + "," + str(int(game_window_size.y))
+	resolution_label.text += "window " + MathUtils.simplify_ratio(game_window_size.x, game_window_size.y, ":", 4, 3) + " " + str(int(game_window_size.x)) + "," + str(int(game_window_size.y))
 
 
 
@@ -457,7 +457,7 @@ func _get_window_and_screen() -> void:
 ## 应用配置   prepare_apply
 func apply_config(apply_all: bool = false, reset_ui: bool = false) -> void:
 	# 默认设置通常的选项
-	var c_regular_option_datas: Array = regular_option_datas if apply_all else HL.array_intersection(prepare_apply_arr, regular_option_datas)
+	var c_regular_option_datas: Array = regular_option_datas if apply_all else GeneralUtils.array_intersection(prepare_apply_arr, regular_option_datas)
 	if reset_ui:
 		for i in c_regular_option_datas:
 			var _value_dic: Dictionary = get_config_value_in_dic(i, i["config_keys"].keys()[0])

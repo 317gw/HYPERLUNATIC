@@ -385,7 +385,7 @@ func calculate_air_speed(target_distance: float, target_time: float, is_normal_j
 func air_speed_clamp(_delta) -> void:
 	if air_speed > vel_hor.length() and acceleration_hor_mas.length() < 0:
 		#air_speed = lerp(air_speed, vel_hor.length(), 0.2)
-		air_speed = HL.exponential_decay(air_speed, vel_hor.length(), 4.6)
+		air_speed = MathUtils.exponential_decay(air_speed, vel_hor.length(), 4.6)
 	air_speed = clampf(air_speed, jump_distance_min / jump_time, max_current_speed_hor * 1.5)
 
 
@@ -420,16 +420,16 @@ func movement_floor(delta: float) -> void: # 有方向输入 地上
 		#vel_hor += _add_vel_hor * clampf(remap(dir_hor_dot_floor_normal, -1.0, 0.0, 0.0, 1.0), 0.0, 1.0)
 		var _speed_multi: float = clampf(remap(dir_hor_dot_floor_normal, -1.0, 0.0, 0.0, 1.0), 0.0, 1.0)
 		#vel_hor += (_add_vel_hor - _add_vel_hor.dot(-_ray_normal_hor) * -_ray_normal_hor)
-		vel_hor += (input_direction - HL.power(input_direction.dot(-_ray_normal_hor), 0.5) * -_ray_normal_hor) * _add_speed
+		vel_hor += (input_direction - MathUtils.power(input_direction.dot(-_ray_normal_hor), 0.5) * -_ray_normal_hor) * _add_speed
 
-		#prints(input_direction.dot(-_ray_normal_hor), _add_vel_hor.dot(-_ray_normal_hor), HL.power(_add_vel_hor.dot(-_ray_normal_hor), 1.0))
+		#prints(input_direction.dot(-_ray_normal_hor), _add_vel_hor.dot(-_ray_normal_hor), MathUtils.power(_add_vel_hor.dot(-_ray_normal_hor), 1.0))
 
 		#vel_hor += (dir_hor - dir_hor.dot(-_ray_normal_hor) * -_ray_normal_hor)
 		#prints(input_direction.dot(-_ray_normal_hor), (dir_hor - dir_hor.dot(-_ray_normal_hor) * -_ray_normal_hor).length())
 
 	elif vel_hor.length() >= speed_normal - 0.005 and Input.is_action_pressed("move_forward") and movement_decelerate >= 0.999: # 加速跑
 		var _ratio = 30 if vel_hor.length() > speed_max else 1 # 速度比例, 如果超速会快减速
-		vel_hor = (HL.exponential_decay_vec3(vel_hor.normalized(), dir_hor, speed_max / acc_max_time * 0.1)
+		vel_hor = (MathUtils.exponential_decay_vec3(vel_hor.normalized(), dir_hor, speed_max / acc_max_time * 0.1)
 			* move_toward(vel_hor.length(), speed_max, acc_max * _ratio * delta))
 	else:
 		var _current_speed: float = max(speed_normal * movement_decelerate, 1) # 最小速度
@@ -509,13 +509,13 @@ func stop_movement(delta: float) -> void: # 地面&空中
 		relative_movement_on_floor()
 		if is_slow():
 			t *= 2
-		vel_hor = HL.exponential_decay(vel_hor.length(), 0, t * delta) * vel_hor.normalized()
+		vel_hor = MathUtils.exponential_decay(vel_hor.length(), 0, t * delta) * vel_hor.normalized()
 	else:
 		vel_hor *= (1-(1-air_damp)*delta)
 		if not is_swimming():
 			vel_up *= (1-(1-air_damp)*delta)
 		if is_slow():
-			vel_hor = HL.exponential_decay(vel_hor.length(), 0, t * delta) * vel_hor.normalized()
+			vel_hor = MathUtils.exponential_decay(vel_hor.length(), 0, t * delta) * vel_hor.normalized()
 
 
 	#vel_up = move_toward(vel_up, 0.0, 1.2 * delta)
@@ -604,7 +604,7 @@ func _calculate_swim() -> void:
 		water_density /= water_meshs.size()
 		water_viscosity /= water_meshs.size()
 
-		water_decelerate = Global.get_water_friction(water_density, water_viscosity)
+		water_decelerate = PhysicsUtils.get_water_friction(water_density, water_viscosity)
 		#var water_decelerate: float = clampf(
 			#remap(water_density, 0, 15000, 0, 1) + remap(water_viscosity, 0, 400, 0, 1)
 			#, 0, 0.9)
@@ -812,7 +812,7 @@ func slow_movement_on_floor(delta: float) -> void:
 
 	var speed = 0.1 if stairs_below_edge_colliding_last_frame else 0.5 * acc_normal
 	speed *= delta
-	vel_hor = HL.exponential_decay(vel_hor.length(), speed_slow, speed) * dir_hor
+	vel_hor = MathUtils.exponential_decay(vel_hor.length(), speed_slow, speed) * dir_hor
 
 	stairs_below_edge_colliding_last_frame = false
 

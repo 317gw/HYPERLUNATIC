@@ -32,11 +32,11 @@ func _ready() -> void:
 	#print(aaaa)
 
 	#var aaaa
-	##aaaa = HL.next_power_of_two(2001)
-	#aaaa = HL.nearest_power_of_two(5)
+	##aaaa = MathUtilsnext_power_of_two(2001)
+	#aaaa = MathUtilsnearest_power_of_two(5)
 #
-	#prints(-4 ** 0.5, HL.power(-4, 0.5))
-	#prints(0 ** 0, pow(0, 0), HL.power(0, 0))
+	#prints(-4 ** 0.5, MathUtils.power(-4, 0.5))
+	#prints(0 ** 0, pow(0, 0), MathUtils.power(0, 0))
 
 
 	#for i in 24:
@@ -101,7 +101,7 @@ func _ready() -> void:
 	#ttt += 2
 	#prints("_physics_process", get_tree().get_frame(), ttt)
 
-	#var t = HL.exponential_decay(0, 100, delta)
+	#var t = MathUtils.exponential_decay(0, 100, delta)
 	#print("")
 	#print(Global.paused_time_process, t)
 
